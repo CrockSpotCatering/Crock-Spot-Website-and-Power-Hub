@@ -1,0 +1,158 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800&display=swap');
+
+@layer base {
+  body {
+    @apply bg-white text-crock-dark font-body;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+  }
+
+  * {
+    -webkit-tap-highlight-color: rgba(244, 146, 32, 0.2);
+  }
+
+  input,
+  textarea,
+  select {
+    font-size: 16px;
+  }
+
+  button,
+  a {
+    touch-action: manipulation;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold;
+  }
+}
+
+@layer utilities {
+  .text-gradient-orange {
+    @apply bg-gradient-to-r from-crock-orange to-crock-orange-light bg-clip-text text-transparent;
+  }
+
+  .text-gradient-purple {
+    @apply bg-gradient-to-r from-crock-purple to-crock-purple-light bg-clip-text text-transparent;
+  }
+
+  .glass-effect {
+    @apply bg-white/10 backdrop-blur-lg border border-white/20;
+  }
+
+  .touch-target {
+    @apply min-h-[44px] min-w-[44px];
+  }
+
+  .safe-top {
+    padding-top: env(safe-area-inset-top);
+  }
+
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  /* Steam animation for bowls */
+  .steam-line {
+    @apply absolute w-1 bg-white/60 rounded-full;
+    animation: steam 2s ease-in-out infinite;
+  }
+
+  .steam-line:nth-child(2) {
+    animation-delay: 0.3s;
+  }
+
+  .steam-line:nth-child(3) {
+    animation-delay: 0.6s;
+  }
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+/* Custom scrollbar */
+@media (min-width: 768px) {
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #C7C8CA;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #F49220;
+    border-radius: 5px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #D97D0E;
+  }
+}
+
+/* Hide scrollbar on mobile */
+@media (max-width: 767px) {
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  * {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  * {
+    scroll-behavior: smooth;
+  }
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Better focus states for accessibility */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid #F49220;
+  outline-offset: 2px;
+}
+
+/* Food photography overlay for hero images */
+.food-overlay {
+  background: linear-gradient(
+    to bottom,
+    rgba(47, 39, 68, 0.7) 0%,
+    rgba(47, 39, 68, 0.5) 50%,
+    rgba(47, 39, 68, 0.8) 100%
+  );
+}
+
+/* Card hover effects */
+.card-hover {
+  @apply transition-all duration-300;
+}
+
+.card-hover:hover {
+  @apply transform -translate-y-2 shadow-2xl;
+}
