@@ -1,127 +1,117 @@
-# 🚀 Deployment Guide for Crock Spot Website
+# 🚀 Crock Spot Deployment Guide
 
-## Step 1: Push to GitHub
+## ✅ Current Status (March 11, 2026)
 
-The code is ready and committed locally. You need to push it to the Crock Spot GitHub account.
+| Service | URL | Status |
+|---------|-----|--------|
+| **Live Site** | https://crockspot1.vercel.app | ✅ LIVE |
+| **GitHub** | https://github.com/CrockSpotCatering/Crock-Spot-Website-and-Power-Hub | ✅ Synced |
+| **Local Path** | `/Users/brettlechtenberg/Documents/agent-girl/crockspot1` | ✅ Ready |
 
-### Option A: Push from Terminal (Recommended)
+## 📁 Project Structure
 
-1. Open Terminal
-2. Navigate to the project:
-   ```bash
-   cd /Users/brettlechtenberg/Documents/agent-girl/chat-55abaeda
-   ```
+```
+crockspot1/
+├── app/
+│   ├── page.tsx              # Home
+│   ├── layout.tsx            # Root layout + SEO
+│   ├── globals.css           # Global styles
+│   ├── about/page.tsx        # About us
+│   ├── catering/page.tsx     # Catering services
+│   ├── menus/page.tsx        # Full menu
+│   ├── contact/page.tsx      # Contact form
+│   ├── government-capabilities/page.tsx
+│   ├── community-partners/page.tsx
+│   ├── privacy/page.tsx
+│   └── terms/page.tsx
+├── components/
+│   ├── Navigation.tsx
+│   ├── Footer.tsx
+│   ├── CTASection.tsx
+│   ├── ContactForm.tsx
+│   ├── FAQ.tsx
+│   └── Testimonials.tsx
+├── public/images/            # Add images here
+├── CLAUDE.md
+├── DEPLOYMENT.md
+├── README.md
+├── package.json
+├── tailwind.config.ts
+├── tsconfig.json
+└── next.config.js
+```
 
-3. Log into GitHub CLI with Crock Spot credentials:
-   ```bash
-   gh auth login
-   ```
-   - Choose GitHub.com
-   - Choose HTTPS
-   - Enter credentials:
-     - Email: CrockSpotCatering@gmail.com
-     - Password: CrockSpotCateringIs#1
-
-4. Push to GitHub:
-   ```bash
-   git push -u origin main
-   ```
-
-### Option B: Upload via GitHub Web
-
-1. Go to: https://github.com/CrockSpotCatering/Crock-Spot-Website-and-Power-Hub
-2. Click "uploading an existing file" or use the "Add file" dropdown
-3. Drag and drop all files from this folder
-4. Commit the changes
-
----
-
-## Step 2: Connect to Vercel
-
-1. Go to: https://vercel.com/new?teamSlug=crockspotcaterings-projects
-2. Sign in with GitHub (CrockSpotCatering account)
-3. Import the "Crock-Spot-Website-and-Power-Hub" repository
-4. Vercel will auto-detect Next.js - use these settings:
-   - **Framework Preset:** Next.js
-   - **Root Directory:** ./
-   - **Build Command:** next build
-   - **Output Directory:** .next
-5. Click "Deploy"
-
----
-
-## Step 3: Configure Domain (Optional)
-
-After deployment, configure your custom domain:
-
-1. In Vercel dashboard, go to your project
-2. Click "Settings" > "Domains"
-3. Add "thecrockspot.com" and follow DNS instructions
-
----
-
-## Step 4: Add Images
-
-Don't forget to add images to `/public/images/`:
-
-1. Create the `/public/images/` directory
-2. Add these images:
-   - `hero-bowl.jpg` - Hero section background (recommended: 1920x1080)
-   - `crock-spot-logo.png` - Logo file
-   - `food-truck.jpg` - Food truck photo
-   - `team.jpg` - Founders/team photo
-   - Various food photos for the gallery sections
-
-3. Commit and push the images:
-   ```bash
-   git add public/images/
-   git commit -m "Add images"
-   git push
-   ```
-
----
-
-## Account Credentials (for reference)
-
-### GitHub
-- Email: CrockSpotCatering@gmail.com
-- Password: CrockSpotCateringIs#1
-- Username: CrockSpotCatering
-- Repo: https://github.com/CrockSpotCatering/Crock-Spot-Website-and-Power-Hub
-
-### Vercel
-- Connect via GitHub OAuth
-- Team: crockspotcaterings-projects
-
-### Supabase (if needed later for forms)
-- Email: CrockSpotCatering@gmail.com
-- Password: CrockSpotCateringIs#1
-- Project URL: https://ptmcisouwmkqiowmxttq.supabase.co
-
----
-
-## Quick Start Commands
+## 🔧 Quick Commands
 
 ```bash
+# Navigate to project
+cd /Users/brettlechtenberg/Documents/agent-girl/crockspot1
+
 # Install dependencies
 npm install
 
-# Run development server
+# Run dev server
 npm run dev
 
 # Build for production
 npm run build
 
-# Start production server
-npm start
+# Deploy to Vercel
+vercel --prod --yes
+
+# Push to GitHub (use PAT)
+git push https://CrockSpotCatering:<PAT>@github.com/CrockSpotCatering/Crock-Spot-Website-and-Power-Hub.git main
 ```
+
+## 🔑 Account Credentials
+
+### GitHub
+- **Username:** CrockSpotCatering
+- **Email:** CrockSpotCatering@gmail.com
+- **Password:** CrockSpotCateringIs#1
+- **Repo:** https://github.com/CrockSpotCatering/Crock-Spot-Website-and-Power-Hub
+
+> ⚠️ **Note:** GitHub requires a Personal Access Token (PAT) for git push. Create one at: https://github.com/settings/tokens/new (select `repo` scope)
+
+### Vercel
+- **Team:** bretts-projects-121b69cc
+- **Project:** crockspot1
+- **URL:** https://crockspot1.vercel.app
+
+### Supabase (for future forms)
+- **Email:** CrockSpotCatering@gmail.com
+- **Password:** CrockSpotCateringIs#1
+- **Project URL:** https://ptmcisouwmkqiowmxttq.supabase.co
+
+## 🎨 Brand Colors
+
+| Color | Hex | Usage |
+|-------|-----|-------|
+| Orange | `#F49220` | Primary accent |
+| Maroon | `#8C2D2E` | Secondary |
+| Green | `#667934` | Success/dietary |
+| Purple | `#614B8A` | Accent |
+| Dark Purple | `#2F2744` | Dark backgrounds |
+| Yellow | `#F0DB9C` | Highlights |
+
+## 🖼️ Images Needed
+
+Add to `/public/images/`:
+- `hero-bowl.jpg` - Hero background (1920x1080)
+- `crock-spot-logo.png` - Logo
+- `food-truck.jpg` - Food truck photo
+- `team.jpg` - Steven & Mandy photo
+- Food photos for gallery sections
+
+## 📞 Crock Spot Contact Info
+
+- **Email:** steven@thecrockspot.com
+- **Website:** thecrockspot.com
+- **Facebook:** facebook.com/104226646277525
+- **Instagram:** @thecrockspot
+- **Founded:** 2010 by Steven & Mandy
+- **Location:** Denver, Colorado
 
 ---
 
-## 🎉 That's It!
-
-Once deployed, your site will be live at:
-- Vercel URL: `https://crock-spot-website-and-power-hub.vercel.app` (or similar)
-- Custom domain: `https://thecrockspot.com` (after DNS configuration)
-
-Let Us Crock Your World! 🎸🍲
+*Let Us Crock Your World!* 🎸🍲
