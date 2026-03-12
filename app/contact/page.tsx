@@ -1,31 +1,22 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaFacebook, FaInstagram, FaClock } from 'react-icons/fa';
+import { FaEnvelope, FaMapMarkerAlt, FaFacebook, FaInstagram, FaClock } from 'react-icons/fa';
 import ContactForm from '@/components/ContactForm';
 import CTASection from '@/components/CTASection';
 
+// Import content from JSON
+import contactContent from '@/content/contact.json';
+
+// Icon mapping for contact info
+const contactIcons: Record<string, React.ReactNode> = {
+  'email': <FaEnvelope size={24} />,
+  'location': <FaMapMarkerAlt size={24} />,
+  'clock': <FaClock size={24} />,
+};
+
 export default function Contact() {
-  const contactInfo = [
-    {
-      icon: <FaEnvelope size={24} />,
-      title: 'Email Us',
-      content: 'steven@thecrockspot.com',
-      link: 'mailto:steven@thecrockspot.com',
-    },
-    {
-      icon: <FaMapMarkerAlt size={24} />,
-      title: 'Service Area',
-      content: 'Denver Metro, Front Range & Mountain Regions',
-      link: null,
-    },
-    {
-      icon: <FaClock size={24} />,
-      title: 'Response Time',
-      content: 'Within 24 hours',
-      link: null,
-    },
-  ];
+  const { hero, contactInfo, formSection, contactInfoSection, social, quickFacts, faqSection, cta } = contactContent;
 
   return (
     <div className="min-h-screen pt-20">
@@ -42,10 +33,14 @@ export default function Contact() {
             transition={{ duration: 0.8 }}
           >
             <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
-              Let&apos;s <span className="text-crock-orange">Connect</span>
+              {hero.headline.includes('Connect') ? (
+                <>Let&apos;s <span className="text-crock-orange">Connect</span></>
+              ) : (
+                hero.headline
+              )}
             </h1>
             <p className="text-xl text-crock-gray-light mb-8 max-w-3xl mx-auto">
-              Ready to rock your next event? Get in touch and let&apos;s make it happen.
+              {hero.subheadline}
             </p>
           </motion.div>
         </div>
@@ -62,10 +57,14 @@ export default function Contact() {
               viewport={{ once: true }}
             >
               <h2 className="text-3xl font-bold text-crock-dark mb-6">
-                Get Your <span className="text-crock-orange">Free Quote</span>
+                {formSection.headline.includes('Free Quote') ? (
+                  <>Get Your <span className="text-crock-orange">Free Quote</span></>
+                ) : (
+                  formSection.headline
+                )}
               </h2>
               <p className="text-crock-gray mb-8">
-                Fill out the form below and we&apos;ll get back to you within 24 hours with a custom quote for your event.
+                {formSection.description}
               </p>
               <div className="bg-crock-gray-light/20 p-8 rounded-2xl shadow-lg">
                 <ContactForm />
@@ -79,10 +78,14 @@ export default function Contact() {
               viewport={{ once: true }}
             >
               <h2 className="text-3xl font-bold text-crock-dark mb-6">
-                Contact <span className="text-crock-orange">Information</span>
+                {contactInfoSection.headline.includes('Information') ? (
+                  <>Contact <span className="text-crock-orange">Information</span></>
+                ) : (
+                  contactInfoSection.headline
+                )}
               </h2>
               <p className="text-crock-gray mb-8">
-                Prefer to reach out directly? Here&apos;s how you can connect with us.
+                {contactInfoSection.description}
               </p>
 
               <div className="space-y-6 mb-10">
@@ -96,7 +99,7 @@ export default function Contact() {
                     className="flex items-start gap-4"
                   >
                     <div className="bg-crock-orange/10 p-4 rounded-full text-crock-orange">
-                      {item.icon}
+                      {contactIcons[item.icon] || <FaEnvelope size={24} />}
                     </div>
                     <div>
                       <h3 className="font-bold text-crock-dark">{item.title}</h3>
@@ -114,13 +117,13 @@ export default function Contact() {
 
               {/* Social Links */}
               <div className="bg-crock-dark p-8 rounded-2xl">
-                <h3 className="text-xl font-bold text-white mb-4">Follow Us</h3>
+                <h3 className="text-xl font-bold text-white mb-4">{social.headline}</h3>
                 <p className="text-crock-gray-light mb-6">
-                  Stay connected and see our latest events, food photos, and updates!
+                  {social.description}
                 </p>
                 <div className="flex gap-4">
                   <a
-                    href="https://www.facebook.com/104226646277525"
+                    href={social.facebook}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="bg-crock-orange/20 p-4 rounded-full text-crock-orange hover:bg-crock-orange hover:text-white transition-all"
@@ -128,7 +131,7 @@ export default function Contact() {
                     <FaFacebook size={24} />
                   </a>
                   <a
-                    href="https://www.instagram.com/thecrockspot"
+                    href={social.instagram}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="bg-crock-orange/20 p-4 rounded-full text-crock-orange hover:bg-crock-orange hover:text-white transition-all"
@@ -140,13 +143,11 @@ export default function Contact() {
 
               {/* Quick Facts */}
               <div className="mt-10 bg-crock-orange/10 p-6 rounded-xl border border-crock-orange/30">
-                <h3 className="font-bold text-crock-dark mb-4">Quick Facts</h3>
+                <h3 className="font-bold text-crock-dark mb-4">{quickFacts.headline}</h3>
                 <ul className="space-y-2 text-crock-gray">
-                  <li>✓ Minimum 10 guests for most events</li>
-                  <li>✓ Book 2-4 weeks ahead for best availability</li>
-                  <li>✓ Weddings: Book 3-6 months ahead</li>
-                  <li>✓ Custom menus available for any event</li>
-                  <li>✓ Dietary accommodations always available</li>
+                  {quickFacts.items.map((item, index) => (
+                    <li key={index}>✓ {item}</li>
+                  ))}
                 </ul>
               </div>
             </motion.div>
@@ -163,24 +164,24 @@ export default function Contact() {
             viewport={{ once: true }}
           >
             <h2 className="text-3xl font-bold text-crock-dark mb-4">
-              Have Questions?
+              {faqSection.headline}
             </h2>
             <p className="text-xl text-crock-gray mb-8">
-              Check out our frequently asked questions for quick answers.
+              {faqSection.description}
             </p>
             <a
-              href="/#faq"
+              href={faqSection.buttonLink}
               className="inline-block bg-crock-orange text-white px-8 py-4 rounded-full font-semibold hover:bg-crock-orange-dark transition-all"
             >
-              View FAQ
+              {faqSection.buttonText}
             </a>
           </motion.div>
         </div>
       </section>
 
       <CTASection
-        title="Ready to Rock?"
-        subtitle="Let's create something delicious together."
+        title={cta.headline}
+        subtitle={cta.description}
         variant="dark"
       />
     </div>

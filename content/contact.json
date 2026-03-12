@@ -7,17 +7,20 @@
     {
       "title": "Email Us",
       "content": "steven@thecrockspot.com",
-      "link": "mailto:steven@thecrockspot.com"
+      "link": "mailto:steven@thecrockspot.com",
+      "icon": "email"
     },
     {
       "title": "Service Area",
       "content": "Denver Metro, Front Range & Mountain Regions",
-      "link": null
+      "link": null,
+      "icon": "location"
     },
     {
       "title": "Response Time",
       "content": "Within 24 hours",
-      "link": null
+      "link": null,
+      "icon": "clock"
     }
   ],
   "formSection": {

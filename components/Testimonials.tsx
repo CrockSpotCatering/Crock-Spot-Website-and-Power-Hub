@@ -3,28 +3,12 @@
 import { motion } from 'framer-motion';
 import { FaStar, FaQuoteLeft } from 'react-icons/fa';
 
-const testimonials = [
-  {
-    quote: "The Crock Spot made our corporate event unforgettable. The food was incredible, and our team couldn't stop raving about the build-your-own bowl concept. Served 200+ people in under an hour!",
-    author: "Sarah M.",
-    title: "Event Coordinator, Tech Startup",
-    rating: 5,
-  },
-  {
-    quote: "We hired The Crock Spot for our wedding reception and it was the best decision we made. The food truck added such a unique touch, and guests are STILL talking about those rice bowls!",
-    author: "Jake & Emily",
-    title: "Wedding Clients",
-    rating: 5,
-  },
-  {
-    quote: "As someone with dietary restrictions, I was blown away by how accommodating they were. Gluten-free, vegan-friendly, and absolutely delicious. Best catering experience I've ever had!",
-    author: "Michael R.",
-    title: "Corporate Client",
-    rating: 5,
-  },
-];
+// Import content from JSON
+import sharedContent from '@/content/shared.json';
 
 const Testimonials = () => {
+  const { testimonials } = sharedContent;
+
   return (
     <section className="py-16 md:py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -36,15 +20,15 @@ const Testimonials = () => {
           className="text-center mb-12"
         >
           <h2 className="text-3xl md:text-4xl font-bold text-crock-dark mb-4">
-            What Our Clients Say
+            {testimonials.headline}
           </h2>
           <p className="text-lg text-crock-gray">
-            Don&apos;t just take our word for it - hear from our happy customers
+            {testimonials.subheadline}
           </p>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {testimonials.map((testimonial, index) => (
+          {testimonials.items.map((testimonial, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 30 }}

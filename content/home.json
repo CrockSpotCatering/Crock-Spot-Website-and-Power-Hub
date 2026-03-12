@@ -3,11 +3,12 @@
     "badge": "Best Food Truck in Denver - 5280 Magazine",
     "headline": "Let Us Crock Your World",
     "subheadline": "Award-winning food truck catering in Denver. Slow-cooked gourmet cuisine that's always fresh, never reheated.",
-    "tagline": "Serving Denver Since 2010 • 15+ Years of Excellence",
+    "tagline": "Serving Denver Since 2010 - 15+ Years of Excellence",
     "ctaPrimary": "Get a Free Quote",
     "ctaPrimaryLink": "/contact",
     "ctaSecondary": "View Our Menus",
-    "ctaSecondaryLink": "/menus"
+    "ctaSecondaryLink": "/menus",
+    "backgroundImage": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
   },
   "eventTypes": [
     "Corporate Events",
@@ -42,7 +43,16 @@
   ],
   "whyChooseUs": {
     "headline": "Why Choose The Crock Spot?",
-    "description": "With 15+ years serving Denver, we've perfected the art of event catering. Our food truck advantage means your food is always fresh, cooked on-site, and never bagged, boxed, or reheated."
+    "description": "With 15+ years serving Denver, we've perfected the art of event catering. Our food truck advantage means your food is always fresh, cooked on-site, and never bagged, boxed, or reheated.",
+    "image": "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1287&q=80"
+  },
+  "stats": {
+    "years": "15+",
+    "yearsLabel": "Years",
+    "events": "10K+",
+    "eventsLabel": "Events",
+    "serviceTime": "25s",
+    "serviceTimeLabel": "Service"
   },
   "buildYourBowl": {
     "headline": "Build Your Own Bowl",
@@ -51,51 +61,53 @@
       {
         "step": "1",
         "title": "Choose Your Base",
-        "items": "Sesame Rice, Quinoa, Couscous, Barley, Potatoes"
+        "items": "Sesame Rice, Quinoa, Couscous, Barley, Potatoes",
+        "icon": "bowl"
       },
       {
         "step": "2",
         "title": "Pick Your Protein",
-        "items": "Pulled Pork, Chicken, Beef, Duck, Lamb, Vegan Options"
+        "items": "Pulled Pork, Chicken, Beef, Duck, Lamb, Vegan Options",
+        "icon": "meat"
       },
       {
         "step": "3",
         "title": "Add Your Sauce",
-        "items": "Chimichurri, Tzatziki, Miso Honey, Sriracha Cream"
+        "items": "Chimichurri, Tzatziki, Miso Honey, Sriracha Cream",
+        "icon": "sauce"
       },
       {
         "step": "4",
         "title": "Top It Off",
-        "items": "Corn Salad, Asian Slaw, Garden Gravy & More"
+        "items": "Corn Salad, Asian Slaw, Garden Gravy & More",
+        "icon": "salad"
       }
     ]
   },
   "quickServiceStats": [
     {
       "value": "25 Seconds or Less",
-      "description": "Every guest served quickly"
+      "description": "Every guest served quickly",
+      "icon": "clock"
     },
     {
       "value": "Dietary Friendly",
-      "description": "GF, Vegan, Vegetarian options"
+      "description": "GF, Vegan, Vegetarian options",
+      "icon": "leaf"
     },
     {
       "value": "100+ Per Hour",
-      "description": "Efficient event service"
+      "description": "Efficient event service",
+      "icon": "users"
     }
   ],
-  "stats": {
-    "years": "15+",
-    "events": "10K+",
-    "serviceTime": "25s"
-  },
   "cta": {
     "headline": "Ready to Crock Your Event?",
-    "description": "Fill out the form below and we'll get back to you within 24 hours",
-    "buttonText": "Get Your Free Quote"
+    "description": "Fill out the form below and we'll get back to you within 24 hours"
   },
   "finalCta": {
     "headline": "For Those About to Crock, We Salute You",
-    "description": "Join the thousands of happy customers who've trusted The Crock Spot for their most important events."
+    "description": "Join the thousands of happy customers who've trusted The Crock Spot for their most important events.",
+    "buttonText": "Get Your Free Quote"
   }
 }

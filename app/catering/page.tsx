@@ -5,7 +5,6 @@ import Link from 'next/link';
 import {
   FaTruck,
   FaUtensils,
-  FaUsers,
   FaArrowRight,
   FaCheckCircle,
   FaCalendar,
@@ -14,64 +13,33 @@ import {
   FaHeart,
   FaBirthdayCake,
   FaMountain,
+  FaUsers,
 } from 'react-icons/fa';
 import CTASection from '@/components/CTASection';
 import ContactForm from '@/components/ContactForm';
 
-export default function Catering() {
-  const cateringOptions = [
-    {
-      icon: <FaTruck size={48} />,
-      title: 'Food Truck Service',
-      description: 'Our gourmet food trucks bring the full kitchen experience to your event. Fresh, hot meals cooked on-site.',
-      price: '$16-18 per person',
-      features: [
-        'On-site cooking - never reheated',
-        'Serve 100+ guests per hour',
-        '25-second average service time',
-        'Custom menu design',
-        'Professional Crock Star crew',
-      ],
-      ideal: 'Outdoor events, festivals, corporate gatherings',
-    },
-    {
-      icon: <FaUtensils size={48} />,
-      title: 'Buffet Style Service',
-      description: 'Elegant indoor buffet setup with our full menu selection. Perfect for formal occasions.',
-      price: '$18-20 per person',
-      features: [
-        'Full service setup',
-        'Chafing dishes included',
-        'Dietary labels provided',
-        'Customizable menu options',
-        'Staff assistance available',
-      ],
-      ideal: 'Weddings, corporate dinners, private parties',
-    },
-    {
-      icon: <FaGlassCheers size={48} />,
-      title: 'Themed Bars',
-      description: 'Interactive food stations that let guests customize their experience. Taco bars, chili bars, and more!',
-      price: '$19-22 per person',
-      features: [
-        'Taco Bar - $19/person',
-        'Tostada Bar - $19/person',
-        'Chili Bar - $19/person',
-        'Mac n Cheese Bar - $22/person',
-        'Nacho Bar - $19/person',
-      ],
-      ideal: 'Casual events, team building, celebrations',
-    },
-  ];
+// Import content from JSON
+import cateringContent from '@/content/catering.json';
 
-  const eventTypes = [
-    { icon: <FaBriefcase />, title: 'Corporate Events', desc: 'Team lunches, company parties, client appreciation' },
-    { icon: <FaHeart />, title: 'Weddings', desc: 'Rehearsal dinners, receptions, day-after brunches' },
-    { icon: <FaBirthdayCake />, title: 'Private Parties', desc: 'Birthdays, graduations, family reunions' },
-    { icon: <FaUsers />, title: 'Large Events', desc: 'Festivals, concerts, community gatherings' },
-    { icon: <FaMountain />, title: 'Mountain Events', desc: 'Destination catering throughout Colorado' },
-    { icon: <FaCalendar />, title: 'Recurring Events', desc: 'Weekly lunches, monthly meetings' },
-  ];
+// Icon mapping for catering options
+const optionIcons: Record<string, React.ReactNode> = {
+  'truck': <FaTruck size={48} />,
+  'utensils': <FaUtensils size={48} />,
+  'glass': <FaGlassCheers size={48} />,
+};
+
+// Icon mapping for event types
+const eventIcons: Record<string, React.ReactNode> = {
+  'briefcase': <FaBriefcase />,
+  'heart': <FaHeart />,
+  'cake': <FaBirthdayCake />,
+  'users': <FaUsers />,
+  'mountain': <FaMountain />,
+  'calendar': <FaCalendar />,
+};
+
+export default function Catering() {
+  const { hero, optionsSection, cateringOptions, eventsSection, eventTypes, process, cta, finalCta } = cateringContent;
 
   return (
     <div className="min-h-screen pt-20">
@@ -80,7 +48,7 @@ export default function Catering() {
         <div
           className="absolute inset-0 bg-cover bg-center opacity-30"
           style={{
-            backgroundImage: 'url(https://images.unsplash.com/photo-1555244162-803834f70033?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80)',
+            backgroundImage: `url(${hero.backgroundImage})`,
           }}
         ></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -90,28 +58,32 @@ export default function Catering() {
             transition={{ duration: 0.8 }}
           >
             <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
-              Catering That <span className="text-crock-orange">Rocks</span>
+              {hero.headline.includes('Rocks') ? (
+                <>Catering That <span className="text-crock-orange">Rocks</span></>
+              ) : (
+                hero.headline
+              )}
             </h1>
             <p className="text-xl text-crock-gray-light mb-8 max-w-3xl mx-auto">
-              From intimate gatherings to large-scale events, we bring award-winning cuisine and unforgettable experiences to every occasion.
+              {hero.subheadline}
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <Link href="#options">
+              <Link href={hero.ctaPrimaryLink}>
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="bg-crock-orange text-white px-8 py-4 rounded-full font-semibold text-lg"
                 >
-                  View Options <FaArrowRight className="inline ml-2" />
+                  {hero.ctaPrimary} <FaArrowRight className="inline ml-2" />
                 </motion.button>
               </Link>
-              <Link href="#quote">
+              <Link href={hero.ctaSecondaryLink}>
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="border-2 border-white text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white hover:text-crock-dark transition-all"
                 >
-                  Get a Quote
+                  {hero.ctaSecondary}
                 </motion.button>
               </Link>
             </div>
@@ -129,10 +101,10 @@ export default function Catering() {
             className="text-center mb-16"
           >
             <h2 className="text-4xl md:text-5xl font-bold text-crock-dark mb-4">
-              Catering Options
+              {optionsSection.headline}
             </h2>
             <p className="text-xl text-crock-gray max-w-2xl mx-auto">
-              Choose the service style that fits your event perfectly
+              {optionsSection.subheadline}
             </p>
           </motion.div>
 
@@ -147,7 +119,9 @@ export default function Catering() {
                 className="bg-white rounded-2xl shadow-xl overflow-hidden border border-crock-gray-light/50"
               >
                 <div className="bg-gradient-to-r from-crock-dark to-crock-purple p-6 text-white">
-                  <div className="text-crock-orange mb-4">{option.icon}</div>
+                  <div className="text-crock-orange mb-4">
+                    {optionIcons[option.icon] || <FaUtensils size={48} />}
+                  </div>
                   <h3 className="text-2xl font-bold mb-2">{option.title}</h3>
                   <p className="text-crock-orange text-2xl font-bold">{option.price}</p>
                 </div>
@@ -183,10 +157,10 @@ export default function Catering() {
             className="text-center mb-16"
           >
             <h2 className="text-4xl md:text-5xl font-bold text-crock-dark mb-4">
-              Events We Cater
+              {eventsSection.headline}
             </h2>
             <p className="text-xl text-crock-gray max-w-2xl mx-auto">
-              Whatever the occasion, we bring the flavor
+              {eventsSection.subheadline}
             </p>
           </motion.div>
 
@@ -201,10 +175,12 @@ export default function Catering() {
                 whileHover={{ y: -5 }}
                 className="bg-white p-6 rounded-xl shadow-md flex items-start gap-4"
               >
-                <div className="text-crock-orange text-3xl">{event.icon}</div>
+                <div className="text-crock-orange text-3xl">
+                  {eventIcons[event.icon] || <FaUsers />}
+                </div>
                 <div>
                   <h3 className="text-lg font-bold text-crock-dark">{event.title}</h3>
-                  <p className="text-crock-gray text-sm">{event.desc}</p>
+                  <p className="text-crock-gray text-sm">{event.description}</p>
                 </div>
               </motion.div>
             ))}
@@ -222,20 +198,19 @@ export default function Catering() {
             className="text-center mb-16"
           >
             <h2 className="text-4xl md:text-5xl font-bold mb-4">
-              How It <span className="text-crock-orange">Works</span>
+              {process.headline.includes('Works') ? (
+                <>How It <span className="text-crock-orange">Works</span></>
+              ) : (
+                process.headline
+              )}
             </h2>
             <p className="text-xl text-crock-gray-light max-w-2xl mx-auto">
-              Booking your catering is simple and stress-free
+              {process.subheadline}
             </p>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            {[
-              { step: '1', title: 'Reach Out', desc: 'Fill out our form or give us a call to discuss your event' },
-              { step: '2', title: 'Custom Quote', desc: "We'll create a personalized menu and pricing for your needs" },
-              { step: '3', title: 'Book & Relax', desc: 'Confirm your date and let us handle all the details' },
-              { step: '4', title: 'Enjoy!', desc: "We show up, cook fresh, and rock your event!" },
-            ].map((item, index) => (
+            {process.steps.map((item, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 30 }}
@@ -248,7 +223,7 @@ export default function Catering() {
                   {item.step}
                 </div>
                 <h3 className="text-xl font-bold mb-2">{item.title}</h3>
-                <p className="text-crock-gray-light">{item.desc}</p>
+                <p className="text-crock-gray-light">{item.description}</p>
               </motion.div>
             ))}
           </div>
@@ -265,10 +240,14 @@ export default function Catering() {
             className="text-center mb-12"
           >
             <h2 className="text-4xl md:text-5xl font-bold text-crock-dark mb-4">
-              Get Your <span className="text-crock-orange">Free Quote</span>
+              {cta.headline.includes('Free Quote') ? (
+                <>Get Your <span className="text-crock-orange">Free Quote</span></>
+              ) : (
+                cta.headline
+              )}
             </h2>
             <p className="text-xl text-crock-gray">
-              Tell us about your event and we&apos;ll create a custom proposal
+              {cta.description}
             </p>
           </motion.div>
 
@@ -285,8 +264,8 @@ export default function Catering() {
 
       {/* CTA */}
       <CTASection
-        title="We Will, We Will Crock You!"
-        subtitle="Let's create an unforgettable culinary experience for your next event."
+        title={finalCta.headline}
+        subtitle={finalCta.description}
         variant="orange"
       />
     </div>

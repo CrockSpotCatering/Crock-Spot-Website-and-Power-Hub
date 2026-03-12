@@ -6,86 +6,31 @@ import { FaLeaf, FaBreadSlice, FaArrowRight } from 'react-icons/fa';
 import CTASection from '@/components/CTASection';
 import ContactForm from '@/components/ContactForm';
 
+// Import content from JSON
+import menusContent from '@/content/menus.json';
+
 export default function Menus() {
-  const bases = [
-    { name: 'Steamed Sesame Rice', tags: ['GF', 'V'] },
-    { name: 'Fluffy Couscous', tags: [] },
-    { name: 'Hearty Pearled Barley', tags: [] },
-    { name: 'Quinoa', tags: ['GF', 'V'] },
-    { name: 'Cilantro Lime Rice', tags: ['GF', 'V'] },
-    { name: 'Caraway Roasted Potatoes', tags: ['GF', 'V'] },
-    { name: 'Healthy Grain Combo', tags: [] },
-  ];
-
-  const proteins = [
-    { name: 'Southwest Chicken', tags: ['GF'], desc: 'Tender chicken with southwest spices' },
-    { name: 'Salt-N-Pepa Chicken', tags: ['GF'], desc: 'Classic seasoned chicken' },
-    { name: 'Tuscan Chicken', tags: ['GF'], desc: 'Italian herb-marinated chicken' },
-    { name: 'Savory Pulled Pork', tags: ['GF'], desc: 'Slow-cooked to perfection' },
-    { name: 'Apple Braised Pork', tags: ['GF'], desc: 'Sweet and savory pork' },
-    { name: 'Jalapeño Shredded Beef', tags: ['GF'], desc: 'Bold and flavorful beef' },
-    { name: 'Turkey Cardamom Meatballs', tags: [], desc: 'Aromatic turkey meatballs' },
-    { name: 'Herb Roasted Lamb', tags: ['GF'], desc: '+$4 upgrade' },
-    { name: 'Duck Confit', tags: ['GF'], desc: '+$5 upgrade' },
-    { name: 'Irish Corned Beef', tags: ['GF'], desc: '+$4 upgrade' },
-    { name: 'Coconut Root Veggie Curry', tags: ['GF', 'V', 'VG'], desc: 'Rich coconut curry with root vegetables' },
-    { name: 'Curried Lentils with Hominy', tags: ['GF', 'V', 'VG'], desc: 'Hearty plant-based protein' },
-    { name: 'Southwestern Bean Medley', tags: ['GF', 'V', 'VG'], desc: 'Flavorful bean mix' },
-    { name: 'Beet Nut Balls', tags: ['V', 'VG'], desc: 'Creative vegan meatball alternative' },
-    { name: 'Celtic White Bean Stew', tags: ['GF', 'V', 'VG'], desc: 'Comforting bean stew' },
-    { name: 'Sautéed Tofu with Bok Choy', tags: ['GF', 'V', 'VG'], desc: 'Asian-inspired tofu dish' },
-  ];
-
-  const sauces = [
-    { name: 'Chimichurri', heat: 'Mild', tags: ['GF', 'V'] },
-    { name: 'Fresh Basil Tzatziki', heat: 'Mild', tags: ['GF', 'V'] },
-    { name: 'Avocado Velvet', heat: 'Mild', tags: ['GF', 'V', 'VG'] },
-    { name: 'Cuban Mojo', heat: 'Mild', tags: ['GF', 'V'] },
-    { name: 'Boursin Cheese', heat: 'Mild', tags: ['GF', 'V'] },
-    { name: 'Tangy Herb Mustard', heat: 'Mild', tags: ['GF', 'V'] },
-    { name: 'Cranberry Wasabi', heat: 'Medium', tags: ['GF', 'V'] },
-    { name: 'Gado Gado', heat: 'Medium', tags: ['GF', 'V', 'VG'] },
-    { name: 'Miso Honey', heat: 'Medium', tags: ['GF', 'V'] },
-    { name: 'Sriracha Sour Cream', heat: 'Medium', tags: ['GF', 'V'] },
-    { name: 'Playa Fire', heat: 'Hot', tags: ['GF', 'V', 'VG'] },
-    { name: "Esteban's Yucatan Fire", heat: 'Hot', tags: ['GF', 'V', 'VG'] },
-  ];
-
-  const toppers = [
-    { name: 'Fresh Basil Corn Salad', tags: ['GF', 'V', 'VG'] },
-    { name: 'Asian Slaw', tags: ['GF', 'V', 'VG'] },
-    { name: 'Garden Gravy', tags: ['GF', 'V'] },
-    { name: 'Summer Slaw', tags: ['GF', 'V', 'VG'] },
-    { name: 'Sweet Corn Salad', tags: ['GF', 'V', 'VG'] },
-    { name: 'Sautéed Veggies', tags: ['GF', 'V', 'VG'] },
-    { name: 'Mixed Green Salad', tags: ['GF', 'V', 'VG'] },
-    { name: 'Roasted Sweet Potatoes', tags: ['GF', 'V', 'VG'] },
-  ];
-
-  const appetizers = [
-    { name: 'Artisan Grazing Table', price: '$13.75-$20.25/person', desc: 'Cheese, fruits, vegetables, crackers, dips, nuts' },
-    { name: 'Caprese Skewers', price: '$5/person', desc: 'Fresh mozzarella, grape tomato, basil (2 per guest)' },
-    { name: 'Meatballs in Carolina BBQ', price: '$5/person', desc: 'Beef and pork in tangy BBQ sauce (2 per guest)' },
-    { name: 'Potato Cheddar Pierogies', price: '$6/person', desc: 'Locally made, fried, with crema dips (2 per guest)' },
-    { name: 'Sliders', price: '$6/person', desc: 'Pulled pork or meatballs on Hawaiian buns' },
-    { name: 'Crudité & Hummus', price: '$4-6/person', desc: 'Fresh cut veggies with hummus or spicy ranch' },
-  ];
-
-  const themedBars = [
-    { name: 'Taco Bar', price: '$19/person' },
-    { name: 'Tostada Bar', price: '$19/person' },
-    { name: 'Nacho Bar', price: '$19/person' },
-    { name: 'Chili Bar', price: '$19/person' },
-    { name: 'Mac n Cheese Bar', price: '$22/person' },
-  ];
-
-  const breakfast = [
-    { name: 'English Style Buffet', price: '$15-17/person', desc: 'Eggs, sausage, roasted potatoes, beans, mushrooms' },
-    { name: 'Colorado Style Buffet', price: '$15-17/person', desc: 'Cheesy eggs, sausage, green chili potatoes, tortillas' },
-    { name: 'Continental Board', price: '$14-16/person', desc: 'Croissants, egg bites, fruits, yogurts, pastries' },
-    { name: 'Bagel Board', price: '$14-16/person', desc: 'Bagels, cream cheeses, peanut butter, jam, ham' },
-    { name: 'Breakfast Burrito Board', price: '$14-16/person', desc: 'Meat and vegetarian burritos, salsa, sour cream' },
-  ];
+  const {
+    hero,
+    buildYourBowl,
+    basesSection,
+    bases,
+    proteinsSection,
+    proteins,
+    saucesSection,
+    sauces,
+    toppersSection,
+    toppers,
+    appetizersSection,
+    appetizers,
+    themedBarsSection,
+    themedBars,
+    breakfastSection,
+    breakfast,
+    dietaryLegend,
+    cta,
+    finalCta
+  } = menusContent;
 
   const TagBadge = ({ tag }: { tag: string }) => {
     const colors: Record<string, string> = {
@@ -93,13 +38,8 @@ export default function Menus() {
       V: 'bg-crock-purple text-white',
       VG: 'bg-crock-maroon text-white',
     };
-    const labels: Record<string, string> = {
-      GF: 'Gluten-Free',
-      V: 'Vegetarian',
-      VG: 'Vegan',
-    };
     return (
-      <span className={`text-xs px-2 py-0.5 rounded-full ${colors[tag]} font-medium`} title={labels[tag]}>
+      <span className={`text-xs px-2 py-0.5 rounded-full ${colors[tag]} font-medium`} title={dietaryLegend[tag as keyof typeof dietaryLegend]}>
         {tag}
       </span>
     );
@@ -112,7 +52,7 @@ export default function Menus() {
         <div
           className="absolute inset-0 bg-cover bg-center opacity-30"
           style={{
-            backgroundImage: 'url(https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2080&q=80)',
+            backgroundImage: `url(${hero.backgroundImage})`,
           }}
         ></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -122,20 +62,24 @@ export default function Menus() {
             transition={{ duration: 0.8 }}
           >
             <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
-              Our <span className="text-crock-orange">Menus</span>
+              {hero.headline.includes('Menus') ? (
+                <>Our <span className="text-crock-orange">Menus</span></>
+              ) : (
+                hero.headline
+              )}
             </h1>
             <p className="text-xl text-crock-gray-light mb-8 max-w-3xl mx-auto">
-              Build your own bowl with our signature bases, proteins, sauces, and toppers. Everything made fresh, never reheated.
+              {hero.subheadline}
             </p>
             <div className="flex flex-wrap justify-center gap-4 text-sm">
               <span className="flex items-center gap-2 bg-crock-green/20 text-crock-green px-4 py-2 rounded-full">
-                <FaBreadSlice /> GF = Gluten-Free
+                <FaBreadSlice /> GF = {dietaryLegend.GF}
               </span>
               <span className="flex items-center gap-2 bg-crock-purple/20 text-crock-purple-light px-4 py-2 rounded-full">
-                <FaLeaf /> V = Vegetarian
+                <FaLeaf /> V = {dietaryLegend.V}
               </span>
               <span className="flex items-center gap-2 bg-crock-maroon/20 text-crock-maroon px-4 py-2 rounded-full">
-                <FaLeaf /> VG = Vegan
+                <FaLeaf /> VG = {dietaryLegend.VG}
               </span>
             </div>
           </motion.div>
@@ -152,17 +96,21 @@ export default function Menus() {
             className="text-center mb-12"
           >
             <h2 className="text-4xl md:text-5xl font-bold text-crock-dark mb-4">
-              Build Your Own <span className="text-crock-orange">Bowl</span>
+              {buildYourBowl.headline.includes('Bowl') ? (
+                <>Build Your Own <span className="text-crock-orange">Bowl</span></>
+              ) : (
+                buildYourBowl.headline
+              )}
             </h2>
             <p className="text-xl text-crock-gray">
-              Food Truck Service: $16-18/person | Buffet Style: $18-20/person
+              {buildYourBowl.subheadline}
             </p>
           </motion.div>
 
           {/* Bases */}
           <div className="mb-16">
             <h3 className="text-2xl font-bold text-crock-dark mb-6 text-center">
-              🍚 Step 1: Choose Your Base
+              {basesSection.emoji} {basesSection.title}
             </h3>
             <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4">
               {bases.map((item, index) => (
@@ -188,7 +136,7 @@ export default function Menus() {
           {/* Proteins */}
           <div className="mb-16">
             <h3 className="text-2xl font-bold text-crock-dark mb-6 text-center">
-              🍖 Step 2: Pick Your Protein
+              {proteinsSection.emoji} {proteinsSection.title}
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
               {proteins.map((item, index) => (
@@ -201,7 +149,7 @@ export default function Menus() {
                   className="bg-crock-gray-light/30 p-4 rounded-lg"
                 >
                   <p className="font-bold text-crock-dark">{item.name}</p>
-                  <p className="text-sm text-crock-gray">{item.desc}</p>
+                  <p className="text-sm text-crock-gray">{item.description}</p>
                   <div className="flex gap-1 mt-2">
                     {item.tags.map((tag) => (
                       <TagBadge key={tag} tag={tag} />
@@ -215,7 +163,7 @@ export default function Menus() {
           {/* Sauces */}
           <div className="mb-16">
             <h3 className="text-2xl font-bold text-crock-dark mb-6 text-center">
-              🥣 Step 3: Add Your Sauce
+              {saucesSection.emoji} {saucesSection.title}
             </h3>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
               {sauces.map((item, index) => (
@@ -248,7 +196,7 @@ export default function Menus() {
           {/* Toppers */}
           <div>
             <h3 className="text-2xl font-bold text-crock-dark mb-6 text-center">
-              🥗 Step 4: Top It Off
+              {toppersSection.emoji} {toppersSection.title}
             </h3>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {toppers.map((item, index) => (
@@ -283,7 +231,11 @@ export default function Menus() {
             className="text-center mb-12"
           >
             <h2 className="text-4xl font-bold text-crock-dark mb-4">
-              Appetizers & <span className="text-crock-orange">Small Bites</span>
+              {appetizersSection.headline.includes('Small Bites') ? (
+                <>Appetizers & <span className="text-crock-orange">Small Bites</span></>
+              ) : (
+                appetizersSection.headline
+              )}
             </h2>
           </motion.div>
 
@@ -301,7 +253,7 @@ export default function Menus() {
                   <h3 className="font-bold text-crock-dark">{item.name}</h3>
                   <span className="text-crock-orange font-bold">{item.price}</span>
                 </div>
-                <p className="text-crock-gray text-sm">{item.desc}</p>
+                <p className="text-crock-gray text-sm">{item.description}</p>
               </motion.div>
             ))}
           </div>
@@ -318,9 +270,13 @@ export default function Menus() {
             className="text-center mb-12"
           >
             <h2 className="text-4xl font-bold mb-4">
-              BYO <span className="text-crock-orange">Themed Bars</span>
+              {themedBarsSection.headline.includes('Themed Bars') ? (
+                <>BYO <span className="text-crock-orange">Themed Bars</span></>
+              ) : (
+                themedBarsSection.headline
+              )}
             </h2>
-            <p className="text-crock-gray-light">Interactive food stations for your guests</p>
+            <p className="text-crock-gray-light">{themedBarsSection.subheadline}</p>
           </motion.div>
 
           <div className="flex flex-wrap justify-center gap-6">
@@ -351,7 +307,11 @@ export default function Menus() {
             className="text-center mb-12"
           >
             <h2 className="text-4xl font-bold text-crock-dark mb-4">
-              Breakfast <span className="text-crock-orange">Options</span>
+              {breakfastSection.headline.includes('Options') ? (
+                <>Breakfast <span className="text-crock-orange">Options</span></>
+              ) : (
+                breakfastSection.headline
+              )}
             </h2>
           </motion.div>
 
@@ -369,7 +329,7 @@ export default function Menus() {
                   <h3 className="font-bold text-crock-dark">{item.name}</h3>
                   <span className="text-crock-orange font-bold">{item.price}</span>
                 </div>
-                <p className="text-crock-gray text-sm">{item.desc}</p>
+                <p className="text-crock-gray text-sm">{item.description}</p>
               </motion.div>
             ))}
           </div>
@@ -386,10 +346,14 @@ export default function Menus() {
             className="text-center mb-12"
           >
             <h2 className="text-4xl font-bold text-crock-dark mb-4">
-              Request a <span className="text-crock-orange">Custom Menu</span>
+              {cta.headline.includes('Custom Menu') ? (
+                <>Request a <span className="text-crock-orange">Custom Menu</span></>
+              ) : (
+                cta.headline
+              )}
             </h2>
             <p className="text-xl text-crock-gray">
-              Let us design the perfect menu for your event
+              {cta.description}
             </p>
           </motion.div>
 
@@ -405,8 +369,8 @@ export default function Menus() {
       </section>
 
       <CTASection
-        title="Crock Hard & Crock Often"
-        subtitle="Ready to build the perfect menu for your event? Let's talk!"
+        title={finalCta.headline}
+        subtitle={finalCta.description}
         variant="orange"
       />
     </div>

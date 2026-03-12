@@ -19,53 +19,51 @@ import FAQ from '@/components/FAQ';
 import CTASection from '@/components/CTASection';
 import ContactForm from '@/components/ContactForm';
 
+// Import content from JSON
+import homeContent from '@/content/home.json';
+
+// Icon mapping for services
+const serviceIcons: Record<string, React.ReactNode> = {
+  'Food Truck Catering': <FaTruck size={40} />,
+  'Buffet Style Service': <FaUtensils size={40} />,
+  'Corporate Events': <FaUsers size={40} />,
+};
+
+// Icon mapping for event types
+const eventTypeIcons: Record<string, React.ReactNode> = {
+  'Corporate Events': <FaUsers />,
+  'Weddings': <FaHeart />,
+  'Private Parties': <FaStar />,
+  'Festivals': <FaTruck />,
+};
+
+// Emoji mapping for build your bowl steps
+const bowlStepEmojis: Record<string, string> = {
+  'bowl': '🍚',
+  'meat': '🍖',
+  'sauce': '🥣',
+  'salad': '🥗',
+};
+
+// Icon mapping for quick service stats
+const quickStatIcons: Record<string, React.ReactNode> = {
+  'clock': <FaClock className="text-5xl" />,
+  'leaf': <FaLeaf className="text-5xl" />,
+  'users': <FaUsers className="text-5xl" />,
+};
+
 export default function Home() {
-  const services = [
-    {
-      icon: <FaTruck size={40} />,
-      title: 'Food Truck Catering',
-      description: 'Our gourmet food trucks bring the full kitchen to your event. Fresh, hot, and served in 25 seconds or less.',
-      price: 'From $16/person',
-    },
-    {
-      icon: <FaUtensils size={40} />,
-      title: 'Buffet Style Service',
-      description: 'Elegant buffet setup with all our signature dishes. Perfect for indoor events and formal occasions.',
-      price: 'From $18/person',
-    },
-    {
-      icon: <FaUsers size={40} />,
-      title: 'Corporate Events',
-      description: 'Quick-serve perfection for busy teams. We can serve 100+ people per hour with minimal wait times.',
-      price: 'Custom Pricing',
-    },
-  ];
-
-  const benefits = [
-    'Fresh, Never Reheated',
-    '25-Second Service',
-    'Customizable Bowls',
-    'Dietary Friendly',
-    '15+ Years Experience',
-    'Award-Winning Food',
-  ];
-
-  const eventTypes = [
-    { icon: <FaUsers />, name: 'Corporate Events' },
-    { icon: <FaHeart />, name: 'Weddings' },
-    { icon: <FaStar />, name: 'Private Parties' },
-    { icon: <FaTruck />, name: 'Festivals' },
-  ];
+  const { hero, eventTypes, services, benefits, whyChooseUs, stats, buildYourBowl, quickServiceStats, cta, finalCta } = homeContent;
 
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center bg-crock-dark overflow-hidden">
-        {/* Background Image Placeholder */}
+        {/* Background Image */}
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{
-            backgroundImage: 'url(https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80)',
+            backgroundImage: `url(${hero.backgroundImage})`,
           }}
         >
           <div className="absolute inset-0 bg-gradient-to-b from-crock-dark/80 via-crock-dark/60 to-crock-dark/90"></div>
@@ -90,38 +88,38 @@ export default function Home() {
               transition={{ delay: 0.3 }}
               className="inline-flex items-center gap-2 bg-crock-orange/20 border border-crock-orange/40 text-crock-orange px-4 py-2 rounded-full mb-6"
             >
-              <FaAward /> Best Food Truck in Denver - 5280 Magazine
+              <FaAward /> {hero.badge}
             </motion.div>
 
             <h1 className="text-5xl md:text-7xl font-bold text-white mb-6">
-              Let Us{' '}
-              <span className="text-crock-orange">Crock</span>{' '}
-              Your World
+              {hero.headline.split('Crock')[0]}
+              <span className="text-crock-orange">Crock</span>
+              {hero.headline.split('Crock')[1]}
             </h1>
             <p className="text-xl md:text-2xl text-crock-gray-light mb-4 max-w-3xl mx-auto">
-              Award-winning food truck catering in Denver. Slow-cooked gourmet cuisine that&apos;s always fresh, never reheated.
+              {hero.subheadline}
             </p>
             <p className="text-lg text-crock-orange mb-8 font-semibold">
-              Serving Denver Since 2010 • 15+ Years of Excellence
+              {hero.tagline}
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/contact">
+              <Link href={hero.ctaPrimaryLink}>
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="bg-crock-orange text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-crock-orange-dark transition-all duration-300 flex items-center justify-center gap-2 shadow-lg"
                 >
-                  Get a Free Quote <FaArrowRight />
+                  {hero.ctaPrimary} <FaArrowRight />
                 </motion.button>
               </Link>
-              <Link href="/menus">
+              <Link href={hero.ctaSecondaryLink}>
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="border-2 border-white text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white hover:text-crock-dark transition-all duration-300"
                 >
-                  View Our Menus
+                  {hero.ctaSecondary}
                 </motion.button>
               </Link>
             </div>
@@ -149,7 +147,7 @@ export default function Home() {
       <section className="bg-crock-orange py-6">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-wrap justify-center gap-8 text-white">
-            {eventTypes.map((event, index) => (
+            {eventTypes.map((eventType, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
@@ -158,8 +156,8 @@ export default function Home() {
                 transition={{ delay: index * 0.1 }}
                 className="flex items-center gap-2 text-lg font-medium"
               >
-                {event.icon}
-                <span>{event.name}</span>
+                {eventTypeIcons[eventType] || <FaStar />}
+                <span>{eventType}</span>
               </motion.div>
             ))}
           </div>
@@ -195,7 +193,9 @@ export default function Home() {
                 whileHover={{ y: -10 }}
                 className="bg-gradient-to-br from-crock-dark to-crock-purple p-8 rounded-2xl shadow-xl text-white"
               >
-                <div className="text-crock-orange mb-4">{service.icon}</div>
+                <div className="text-crock-orange mb-4">
+                  {serviceIcons[service.title] || <FaUtensils size={40} />}
+                </div>
                 <h3 className="text-2xl font-bold mb-4">{service.title}</h3>
                 <p className="text-crock-gray-light mb-4">{service.description}</p>
                 <p className="text-crock-orange font-bold text-lg">{service.price}</p>
@@ -219,11 +219,11 @@ export default function Home() {
               transition={{ duration: 0.6 }}
             >
               <h2 className="text-4xl md:text-5xl font-bold text-crock-dark mb-6">
-                Why Choose{' '}
+                {whyChooseUs.headline.split('The Crock Spot')[0]}
                 <span className="text-crock-orange">The Crock Spot?</span>
               </h2>
               <p className="text-lg text-crock-gray mb-8">
-                With 15+ years serving Denver, we&apos;ve perfected the art of event catering. Our food truck advantage means your food is always fresh, cooked on-site, and never bagged, boxed, or reheated.
+                {whyChooseUs.description}
               </p>
               <div className="grid grid-cols-2 gap-4">
                 {benefits.map((benefit, index) => (
@@ -249,27 +249,27 @@ export default function Home() {
               transition={{ duration: 0.6 }}
               className="relative"
             >
-              {/* Image placeholder with stats */}
+              {/* Image with stats */}
               <div
                 className="rounded-2xl shadow-2xl aspect-[4/3] bg-cover bg-center relative overflow-hidden"
                 style={{
-                  backgroundImage: 'url(https://images.unsplash.com/photo-1555939594-58d7cb561ad1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1287&q=80)',
+                  backgroundImage: `url(${whyChooseUs.image})`,
                 }}
               >
                 <div className="absolute inset-0 bg-gradient-to-t from-crock-dark/80 to-transparent"></div>
                 <div className="absolute bottom-0 left-0 right-0 p-6">
                   <div className="grid grid-cols-3 gap-4 text-white text-center">
                     <div>
-                      <p className="text-3xl font-bold text-crock-orange">15+</p>
-                      <p className="text-sm">Years</p>
+                      <p className="text-3xl font-bold text-crock-orange">{stats.years}</p>
+                      <p className="text-sm">{stats.yearsLabel}</p>
                     </div>
                     <div>
-                      <p className="text-3xl font-bold text-crock-orange">10K+</p>
-                      <p className="text-sm">Events</p>
+                      <p className="text-3xl font-bold text-crock-orange">{stats.events}</p>
+                      <p className="text-sm">{stats.eventsLabel}</p>
                     </div>
                     <div>
-                      <p className="text-3xl font-bold text-crock-orange">25s</p>
-                      <p className="text-sm">Service</p>
+                      <p className="text-3xl font-bold text-crock-orange">{stats.serviceTime}</p>
+                      <p className="text-sm">{stats.serviceTimeLabel}</p>
                     </div>
                   </div>
                 </div>
@@ -294,20 +294,15 @@ export default function Home() {
             className="text-center mb-12"
           >
             <h2 className="text-4xl md:text-5xl font-bold mb-4">
-              Build Your Own <span className="text-crock-orange">Bowl</span>
+              {buildYourBowl.headline.split('Bowl')[0]}<span className="text-crock-orange">Bowl</span>
             </h2>
             <p className="text-xl text-crock-gray-light max-w-2xl mx-auto">
-              Our signature concept lets every guest customize their perfect meal
+              {buildYourBowl.subheadline}
             </p>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            {[
-              { step: '1', title: 'Choose Your Base', items: 'Sesame Rice, Quinoa, Couscous, Barley, Potatoes', icon: '🍚' },
-              { step: '2', title: 'Pick Your Protein', items: 'Pulled Pork, Chicken, Beef, Duck, Lamb, Vegan Options', icon: '🍖' },
-              { step: '3', title: 'Add Your Sauce', items: 'Chimichurri, Tzatziki, Miso Honey, Sriracha Cream', icon: '🥣' },
-              { step: '4', title: 'Top It Off', items: 'Corn Salad, Asian Slaw, Garden Gravy & More', icon: '🥗' },
-            ].map((item, index) => (
+            {buildYourBowl.steps.map((item, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 30 }}
@@ -316,7 +311,7 @@ export default function Home() {
                 transition={{ duration: 0.5, delay: index * 0.15 }}
                 className="text-center"
               >
-                <div className="text-5xl mb-4">{item.icon}</div>
+                <div className="text-5xl mb-4">{bowlStepEmojis[item.icon] || '🍽️'}</div>
                 <div className="bg-crock-orange text-white w-10 h-10 rounded-full flex items-center justify-center font-bold mx-auto mb-3">
                   {item.step}
                 </div>
@@ -344,42 +339,21 @@ export default function Home() {
       <section className="py-16 bg-crock-orange text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="flex items-center gap-4"
-            >
-              <FaClock className="text-5xl" />
-              <div>
-                <h3 className="text-3xl font-bold">25 Seconds or Less</h3>
-                <p className="text-white/80">Every guest served quickly</p>
-              </div>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="flex items-center gap-4"
-            >
-              <FaLeaf className="text-5xl" />
-              <div>
-                <h3 className="text-3xl font-bold">Dietary Friendly</h3>
-                <p className="text-white/80">GF, Vegan, Vegetarian options</p>
-              </div>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="flex items-center gap-4"
-            >
-              <FaUsers className="text-5xl" />
-              <div>
-                <h3 className="text-3xl font-bold">100+ Per Hour</h3>
-                <p className="text-white/80">Efficient event service</p>
-              </div>
-            </motion.div>
+            {quickServiceStats.map((stat, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, x: index === 0 ? -20 : 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                className="flex items-center gap-4"
+              >
+                {quickStatIcons[stat.icon] || <FaStar className="text-5xl" />}
+                <div>
+                  <h3 className="text-3xl font-bold">{stat.value}</h3>
+                  <p className="text-white/80">{stat.description}</p>
+                </div>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
@@ -400,10 +374,10 @@ export default function Home() {
             className="text-center mb-12"
           >
             <h2 className="text-4xl md:text-5xl font-bold text-crock-dark mb-4">
-              Ready to <span className="text-crock-orange">Crock</span> Your Event?
+              {cta.headline.split('Crock')[0]}<span className="text-crock-orange">Crock</span>{cta.headline.split('Crock')[1]}
             </h2>
             <p className="text-xl text-crock-gray">
-              Fill out the form below and we&apos;ll get back to you within 24 hours
+              {cta.description}
             </p>
           </motion.div>
 
@@ -420,9 +394,9 @@ export default function Home() {
 
       {/* Final CTA */}
       <CTASection
-        title="For Those About to Crock, We Salute You"
-        subtitle="Join the thousands of happy customers who've trusted The Crock Spot for their most important events."
-        buttonText="Get Your Free Quote"
+        title={finalCta.headline}
+        subtitle={finalCta.description}
+        buttonText={finalCta.buttonText}
         variant="dark"
       />
     </div>

@@ -1,56 +1,29 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import Link from 'next/link';
 import {
   FaAward,
   FaUsers,
   FaHeart,
   FaTruck,
-  FaArrowRight,
   FaQuoteLeft,
 } from 'react-icons/fa';
 import CTASection from '@/components/CTASection';
 import ContactForm from '@/components/ContactForm';
 
+// Import content from JSON
+import aboutContent from '@/content/about.json';
+
+// Icon mapping for values
+const valueIcons: Record<string, React.ReactNode> = {
+  'heart': <FaHeart size={40} />,
+  'users': <FaUsers size={40} />,
+  'truck': <FaTruck size={40} />,
+  'award': <FaAward size={40} />,
+};
+
 export default function About() {
-  const milestones = [
-    { year: '2010', title: 'The Beginning', desc: 'Started at Cherry Creek Farmers Market with a 10x10 tent and a dream.' },
-    { year: '2011', title: 'First Food Truck', desc: 'Expanded to our first gourmet food truck, bringing mobile cuisine to Denver.' },
-    { year: '2015', title: 'Award Winners', desc: 'Named Best Food Truck in Denver by 5280 Magazine.' },
-    { year: '2017', title: 'Growing Team', desc: 'Peter joins as co-partner, expanding our multi-truck operation.' },
-    { year: '2020', title: 'National Recognition', desc: 'Featured in Business Insider\'s 50 Coolest Small Businesses in America.' },
-    { year: '2025', title: 'Today', desc: '15+ years strong, serving thousands of events across Colorado.' },
-  ];
-
-  const values = [
-    {
-      icon: <FaHeart size={40} />,
-      title: 'People First',
-      desc: 'Our mission is simple: make people happy with amazing food — and have a blast doing it!',
-    },
-    {
-      icon: <FaUsers size={40} />,
-      title: 'Team Spirit',
-      desc: 'Our Crock Stars are a tight-knit, dynamic, loyal, and downright fun group.',
-    },
-    {
-      icon: <FaTruck size={40} />,
-      title: 'Fresh Always',
-      desc: 'Food truck advantage means fresh cooking on-site. Never bagged, boxed, or reheated.',
-    },
-    {
-      icon: <FaAward size={40} />,
-      title: 'Excellence',
-      desc: 'Award-winning cuisine and service that makes every event memorable.',
-    },
-  ];
-
-  const awards = [
-    { title: 'Best Food Truck in Denver', source: '5280 Magazine' },
-    { title: 'Best Meals on Wheels', source: 'Westword Magazine' },
-    { title: '50 Coolest Small Businesses in America', source: 'Business Insider' },
-  ];
+  const { hero, founders, timeline, milestones, valuesSection, values, awardsSection, awards, cta, finalCta } = aboutContent;
 
   return (
     <div className="min-h-screen pt-20">
@@ -67,10 +40,14 @@ export default function About() {
             transition={{ duration: 0.8 }}
           >
             <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
-              Our <span className="text-crock-orange">Story</span>
+              {hero.headline.includes('Story') ? (
+                <>Our <span className="text-crock-orange">Story</span></>
+              ) : (
+                hero.headline
+              )}
             </h1>
             <p className="text-xl text-crock-gray-light mb-8 max-w-3xl mx-auto">
-              From a humble 10x10 tent at Cherry Creek Farmers Market to Denver&apos;s award-winning catering company — this is The Crock Spot story.
+              {hero.subheadline}
             </p>
           </motion.div>
         </div>
@@ -88,7 +65,7 @@ export default function About() {
               <div
                 className="rounded-2xl shadow-xl aspect-[4/3] bg-cover bg-center"
                 style={{
-                  backgroundImage: 'url(https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80)',
+                  backgroundImage: `url(${founders.image})`,
                 }}
               ></div>
             </motion.div>
@@ -99,20 +76,24 @@ export default function About() {
               viewport={{ once: true }}
             >
               <h2 className="text-4xl font-bold text-crock-dark mb-6">
-                Meet the <span className="text-crock-orange">Founders</span>
+                {founders.headline.includes('Founders') ? (
+                  <>Meet the <span className="text-crock-orange">Founders</span></>
+                ) : (
+                  founders.headline
+                )}
               </h2>
               <p className="text-lg text-crock-gray mb-6">
-                In May 2010, Steven and Mandy set up a humble 10x10 tent at the Cherry Creek Farmers Market with one mission: <strong>deliver gourmet, fast-casual meals that are 100% customizable to every guest&apos;s taste.</strong>
+                <strong>{founders.description.split(':')[0]}:</strong>{founders.description.split(':')[1]}
               </p>
               <p className="text-lg text-crock-gray mb-6">
-                What started as a weekend passion project quickly grew into something bigger. By 2011, they had their first food truck. By 2017, they welcomed co-partner Peter and expanded to a multi-truck operation serving events across Colorado.
+                {founders.story}
               </p>
               <div className="bg-crock-orange/10 p-6 rounded-xl border-l-4 border-crock-orange">
                 <FaQuoteLeft className="text-crock-orange mb-2" />
                 <p className="text-crock-dark italic">
-                  &quot;Our guiding principle has remained the same since day one: make people happy with amazing food — and have a blast doing it!&quot;
+                  &quot;{founders.quote}&quot;
                 </p>
-                <p className="text-crock-orange font-semibold mt-2">— Steven & Mandy, Founders</p>
+                <p className="text-crock-orange font-semibold mt-2">— {founders.quoteAuthor}</p>
               </div>
             </motion.div>
           </div>
@@ -129,9 +110,9 @@ export default function About() {
             className="text-center mb-16"
           >
             <h2 className="text-4xl md:text-5xl font-bold text-crock-dark mb-4">
-              Our Journey
+              {timeline.headline}
             </h2>
-            <p className="text-xl text-crock-gray">15+ years of serving Denver with love</p>
+            <p className="text-xl text-crock-gray">{timeline.subheadline}</p>
           </motion.div>
 
           <div className="relative">
@@ -154,7 +135,7 @@ export default function About() {
                     <div className="bg-white p-6 rounded-xl shadow-md inline-block">
                       <span className="text-crock-orange font-bold text-2xl">{milestone.year}</span>
                       <h3 className="text-xl font-bold text-crock-dark mt-2">{milestone.title}</h3>
-                      <p className="text-crock-gray">{milestone.desc}</p>
+                      <p className="text-crock-gray">{milestone.description}</p>
                     </div>
                   </div>
                   <div className="hidden md:flex w-4 h-4 bg-crock-orange rounded-full z-10"></div>
@@ -176,7 +157,11 @@ export default function About() {
             className="text-center mb-16"
           >
             <h2 className="text-4xl md:text-5xl font-bold text-crock-dark mb-4">
-              What We <span className="text-crock-orange">Stand For</span>
+              {valuesSection.headline.includes('Stand For') ? (
+                <>What We <span className="text-crock-orange">Stand For</span></>
+              ) : (
+                valuesSection.headline
+              )}
             </h2>
           </motion.div>
 
@@ -190,9 +175,11 @@ export default function About() {
                 transition={{ delay: index * 0.15 }}
                 className="text-center p-6"
               >
-                <div className="text-crock-orange mb-4 flex justify-center">{value.icon}</div>
+                <div className="text-crock-orange mb-4 flex justify-center">
+                  {valueIcons[value.icon] || <FaAward size={40} />}
+                </div>
                 <h3 className="text-xl font-bold text-crock-dark mb-2">{value.title}</h3>
-                <p className="text-crock-gray">{value.desc}</p>
+                <p className="text-crock-gray">{value.description}</p>
               </motion.div>
             ))}
           </div>
@@ -209,7 +196,11 @@ export default function About() {
             className="text-center mb-16"
           >
             <h2 className="text-4xl md:text-5xl font-bold mb-4">
-              Awards & <span className="text-crock-orange">Recognition</span>
+              {awardsSection.headline.includes('Recognition') ? (
+                <>Awards & <span className="text-crock-orange">Recognition</span></>
+              ) : (
+                awardsSection.headline
+              )}
             </h2>
           </motion.div>
 
@@ -242,10 +233,14 @@ export default function About() {
             className="text-center mb-12"
           >
             <h2 className="text-4xl md:text-5xl font-bold text-crock-dark mb-4">
-              Let&apos;s <span className="text-crock-orange">Connect</span>
+              {cta.headline.includes('Connect') ? (
+                <>Let&apos;s <span className="text-crock-orange">Connect</span></>
+              ) : (
+                cta.headline
+              )}
             </h2>
             <p className="text-xl text-crock-gray">
-              Ready to work with Denver&apos;s favorite catering team?
+              {cta.description}
             </p>
           </motion.div>
 
@@ -262,8 +257,8 @@ export default function About() {
 
       {/* CTA */}
       <CTASection
-        title="I Wanna Crock!"
-        subtitle="Join our family of satisfied customers and let us crock your next event."
+        title={finalCta.headline}
+        subtitle={finalCta.description}
         variant="purple"
       />
     </div>

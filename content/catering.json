@@ -5,13 +5,19 @@
     "ctaPrimary": "View Options",
     "ctaPrimaryLink": "#options",
     "ctaSecondary": "Get a Quote",
-    "ctaSecondaryLink": "#quote"
+    "ctaSecondaryLink": "#quote",
+    "backgroundImage": "https://images.unsplash.com/photo-1555244162-803834f70033?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
+  },
+  "optionsSection": {
+    "headline": "Catering Options",
+    "subheadline": "Choose the service style that fits your event perfectly"
   },
   "cateringOptions": [
     {
       "title": "Food Truck Service",
       "description": "Our gourmet food trucks bring the full kitchen experience to your event. Fresh, hot meals cooked on-site.",
       "price": "$16-18 per person",
+      "icon": "truck",
       "features": [
         "On-site cooking - never reheated",
         "Serve 100+ guests per hour",
@@ -25,6 +31,7 @@
       "title": "Buffet Style Service",
       "description": "Elegant indoor buffet setup with our full menu selection. Perfect for formal occasions.",
       "price": "$18-20 per person",
+      "icon": "utensils",
       "features": [
         "Full service setup",
         "Chafing dishes included",
@@ -38,6 +45,7 @@
       "title": "Themed Bars",
       "description": "Interactive food stations that let guests customize their experience. Taco bars, chili bars, and more!",
       "price": "$19-22 per person",
+      "icon": "glass",
       "features": [
         "Taco Bar - $19/person",
         "Tostada Bar - $19/person",
@@ -48,30 +56,40 @@
       "ideal": "Casual events, team building, celebrations"
     }
   ],
+  "eventsSection": {
+    "headline": "Events We Cater",
+    "subheadline": "Whatever the occasion, we bring the flavor"
+  },
   "eventTypes": [
     {
       "title": "Corporate Events",
-      "description": "Team lunches, company parties, client appreciation"
+      "description": "Team lunches, company parties, client appreciation",
+      "icon": "briefcase"
     },
     {
       "title": "Weddings",
-      "description": "Rehearsal dinners, receptions, day-after brunches"
+      "description": "Rehearsal dinners, receptions, day-after brunches",
+      "icon": "heart"
     },
     {
       "title": "Private Parties",
-      "description": "Birthdays, graduations, family reunions"
+      "description": "Birthdays, graduations, family reunions",
+      "icon": "cake"
     },
     {
       "title": "Large Events",
-      "description": "Festivals, concerts, community gatherings"
+      "description": "Festivals, concerts, community gatherings",
+      "icon": "users"
     },
     {
       "title": "Mountain Events",
-      "description": "Destination catering throughout Colorado"
+      "description": "Destination catering throughout Colorado",
+      "icon": "mountain"
     },
     {
       "title": "Recurring Events",
-      "description": "Weekly lunches, monthly meetings"
+      "description": "Weekly lunches, monthly meetings",
+      "icon": "calendar"
     }
   ],
   "process": {

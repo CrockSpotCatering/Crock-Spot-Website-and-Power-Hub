@@ -1,14 +1,19 @@
 {
   "hero": {
     "headline": "Our Story",
-    "subheadline": "From a humble 10x10 tent at Cherry Creek Farmers Market to Denver's award-winning catering company — this is The Crock Spot story."
+    "subheadline": "From a humble 10x10 tent at Cherry Creek Farmers Market to Denver's award-winning catering company - this is The Crock Spot story."
   },
   "founders": {
     "headline": "Meet the Founders",
     "description": "In May 2010, Steven and Mandy set up a humble 10x10 tent at the Cherry Creek Farmers Market with one mission: deliver gourmet, fast-casual meals that are 100% customizable to every guest's taste.",
     "story": "What started as a weekend passion project quickly grew into something bigger. By 2011, they had their first food truck. By 2017, they welcomed co-partner Peter and expanded to a multi-truck operation serving events across Colorado.",
-    "quote": "Our guiding principle has remained the same since day one: make people happy with amazing food — and have a blast doing it!",
-    "quoteAuthor": "Steven & Mandy, Founders"
+    "quote": "Our guiding principle has remained the same since day one: make people happy with amazing food - and have a blast doing it!",
+    "quoteAuthor": "Steven & Mandy, Founders",
+    "image": "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
+  },
+  "timeline": {
+    "headline": "Our Journey",
+    "subheadline": "15+ years of serving Denver with love"
   },
   "milestones": [
     {
@@ -42,24 +47,34 @@
       "description": "15+ years strong, serving thousands of events across Colorado."
     }
   ],
+  "valuesSection": {
+    "headline": "What We Stand For"
+  },
   "values": [
     {
       "title": "People First",
-      "description": "Our mission is simple: make people happy with amazing food — and have a blast doing it!"
+      "description": "Our mission is simple: make people happy with amazing food - and have a blast doing it!",
+      "icon": "heart"
     },
     {
       "title": "Team Spirit",
-      "description": "Our Crock Stars are a tight-knit, dynamic, loyal, and downright fun group."
+      "description": "Our Crock Stars are a tight-knit, dynamic, loyal, and downright fun group.",
+      "icon": "users"
     },
     {
       "title": "Fresh Always",
-      "description": "Food truck advantage means fresh cooking on-site. Never bagged, boxed, or reheated."
+      "description": "Food truck advantage means fresh cooking on-site. Never bagged, boxed, or reheated.",
+      "icon": "truck"
     },
     {
       "title": "Excellence",
-      "description": "Award-winning cuisine and service that makes every event memorable."
+      "description": "Award-winning cuisine and service that makes every event memorable.",
+      "icon": "award"
     }
   ],
+  "awardsSection": {
+    "headline": "Awards & Recognition"
+  },
   "awards": [
     {
       "title": "Best Food Truck in Denver",

@@ -1,7 +1,38 @@
 {
   "hero": {
     "headline": "Our Menus",
-    "subheadline": "Build your own bowl with our signature bases, proteins, sauces, and toppers. Everything made fresh, never reheated."
+    "subheadline": "Build your own bowl with our signature bases, proteins, sauces, and toppers. Everything made fresh, never reheated.",
+    "backgroundImage": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2080&q=80"
+  },
+  "buildYourBowl": {
+    "headline": "Build Your Own Bowl",
+    "subheadline": "Food Truck Service: $16-18/person | Buffet Style: $18-20/person"
+  },
+  "basesSection": {
+    "title": "Step 1: Choose Your Base",
+    "emoji": "🍚"
+  },
+  "proteinsSection": {
+    "title": "Step 2: Pick Your Protein",
+    "emoji": "🍖"
+  },
+  "saucesSection": {
+    "title": "Step 3: Add Your Sauce",
+    "emoji": "🥣"
+  },
+  "toppersSection": {
+    "title": "Step 4: Top It Off",
+    "emoji": "🥗"
+  },
+  "appetizersSection": {
+    "headline": "Appetizers & Small Bites"
+  },
+  "themedBarsSection": {
+    "headline": "BYO Themed Bars",
+    "subheadline": "Interactive food stations for your guests"
+  },
+  "breakfastSection": {
+    "headline": "Breakfast Options"
   },
   "pricing": {
     "foodTruck": "$16-18/person",
