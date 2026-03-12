@@ -28,33 +28,65 @@
 ```
 crockspot1/
 ├── app/
-│   ├── page.tsx              # Home
+│   ├── page.tsx              # Home (uses home.json)
 │   ├── layout.tsx            # Root layout + SEO
 │   ├── globals.css           # Global styles
-│   ├── about/page.tsx        # About us
-│   ├── catering/page.tsx     # Catering services
-│   ├── menus/page.tsx        # Full menu
-│   ├── contact/page.tsx      # Contact form
+│   ├── about/page.tsx        # About (uses about.json)
+│   ├── catering/page.tsx     # Catering (uses catering.json)
+│   ├── menus/page.tsx        # Menu (uses menus.json)
+│   ├── contact/page.tsx      # Contact (uses contact.json)
 │   ├── government-capabilities/page.tsx
 │   ├── community-partners/page.tsx
 │   ├── privacy/page.tsx
-│   └── terms/page.tsx
+│   ├── terms/page.tsx
+│   ├── power-hub/            # 🔐 CMS Dashboard
+│   │   ├── page.tsx          # Login
+│   │   └── dashboard/        # Dashboard pages
+│   └── api/power-hub/        # 🔌 API Routes
+│       ├── content/route.ts  # JSON read/write
+│       ├── media/route.ts    # Image listing
+│       ├── upload/route.ts   # Image upload/delete
+│       ├── ai/route.ts       # AI generation
+│       └── parse-document/route.ts  # PDF/Word parsing
 ├── components/
 │   ├── Navigation.tsx
 │   ├── Footer.tsx
 │   ├── CTASection.tsx
 │   ├── ContactForm.tsx
-│   ├── FAQ.tsx
-│   └── Testimonials.tsx
-├── public/images/            # Add images here
+│   ├── FAQ.tsx               # Uses shared.json
+│   ├── Testimonials.tsx      # Uses shared.json
+│   └── power-hub/            # CMS components
+├── content/                  # 📄 JSON Content Files
+│   ├── home.json
+│   ├── about.json
+│   ├── catering.json
+│   ├── menus.json
+│   ├── contact.json
+│   └── shared.json
+├── public/images/
+│   └── uploads/              # User-uploaded images
 ├── CLAUDE.md
 ├── DEPLOYMENT.md
 ├── README.md
+├── RESTART_PROMPT.md
 ├── package.json
 ├── tailwind.config.ts
 ├── tsconfig.json
 └── next.config.js
 ```
+
+## 🔐 Power Hub CMS
+
+| URL | Feature |
+|-----|---------|
+| `/power-hub` | Login page |
+| `/power-hub/dashboard` | Main dashboard |
+| `/power-hub/dashboard/content` | Edit page content (JSON) |
+| `/power-hub/dashboard/media` | Upload/manage images |
+| `/power-hub/dashboard/ai` | AI writing assistant |
+| `/power-hub/dashboard/settings` | Configuration |
+
+**Login:** `crockspot` / `letusrock2024`
 
 ## 🔧 Quick Commands
 

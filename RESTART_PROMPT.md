@@ -4,9 +4,9 @@
 
 ---
 
-## Project: The Crock Spot Website
+## Project: The Crock Spot Website & Power Hub
 
-I'm working on **The Crock Spot** website - a food truck catering company in Denver, Colorado.
+I'm working on **The Crock Spot** website & CMS - a food truck catering company in Denver, Colorado.
 
 ### 📍 Project Location
 ```
@@ -15,6 +15,7 @@ I'm working on **The Crock Spot** website - a food truck catering company in Den
 
 ### 🔗 URLs
 - **Live Site:** https://crock-spot-website-and-power-hub.vercel.app
+- **Power Hub CMS:** https://crock-spot-website-and-power-hub.vercel.app/power-hub
 - **GitHub:** https://github.com/CrockSpotCatering/Crock-Spot-Website-and-Power-Hub
 - **Vercel Dashboard:** https://vercel.com/crockspotcaterings-projects
 
@@ -23,7 +24,27 @@ I'm working on **The Crock Spot** website - a food truck catering company in Den
 - Tailwind CSS 3.4
 - Framer Motion
 - TypeScript
+- JSON-powered CMS (content stored in `/content/*.json`)
+- GitHub API for image storage
+- pdf-parse + mammoth for document parsing
 - Vercel deployment (via GitHub integration)
+
+### 🔐 Power Hub CMS
+| URL | Feature |
+|-----|---------|
+| `/power-hub` | Login (`crockspot` / `letusrock2024`) |
+| `/power-hub/dashboard/content` | Edit page content (JSON files) |
+| `/power-hub/dashboard/media` | Upload/manage images |
+| `/power-hub/dashboard/ai` | AI writing (supports PDF/Word upload) |
+
+### 📄 Content JSON Files
+All pages read from JSON in `/content/`:
+- `home.json` - Homepage content
+- `about.json` - About page
+- `catering.json` - Catering services
+- `menus.json` - Menu items
+- `contact.json` - Contact info
+- `shared.json` - Testimonials, FAQ
 
 ### ⚠️ CRITICAL DEPLOYMENT RULES
 ```
@@ -58,10 +79,13 @@ Read these first for context:
 
 ### 📋 Current Status (March 12, 2026)
 - ✅ Website fully built with all pages
-- ✅ Pushed to GitHub
+- ✅ Power Hub CMS complete (Content, Media, AI Assist)
+- ✅ JSON content system wired to all pages
+- ✅ AI Assist supports PDF/Word document upload
+- ✅ Media Library with GitHub storage
+- ✅ Pushed to GitHub (local commits ready)
 - ✅ Deployed to correct Vercel account (auto-deploy enabled)
-- ⏳ Images needed in `/public/images/`
-- ⏳ Contact form backend not connected yet
+- ⏳ Need CrockSpotCatering GitHub credentials to push latest
 
 ### 🚀 Quick Commands (NO VERCEL CLI!)
 ```bash

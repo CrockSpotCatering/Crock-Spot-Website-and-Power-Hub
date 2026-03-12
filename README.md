@@ -14,9 +14,12 @@
 - **Framework:** Next.js 16 with App Router
 - **Styling:** Tailwind CSS 3.4
 - **Animations:** Framer Motion
-- **Icons:** React Icons
+- **Icons:** React Icons & Lucide React
 - **Language:** TypeScript
-- **Deployment:** Vercel
+- **Content:** JSON-powered CMS (editable via Power Hub)
+- **Image Storage:** GitHub API
+- **Document Parsing:** pdf-parse, mammoth
+- **Deployment:** Vercel (auto-deploy via GitHub)
 
 ## 🎨 Brand Colors
 
@@ -29,30 +32,85 @@
 | Dark Purple | `#2F2744` | Dark backgrounds |
 | Yellow | `#F0DB9C` | Highlights |
 
+## 🔐 Power Hub CMS
+
+The Power Hub is a full content management system at `/power-hub`:
+
+| Feature | URL | Description |
+|---------|-----|-------------|
+| **Dashboard** | `/power-hub/dashboard` | Main CMS interface |
+| **Content Editor** | `/power-hub/dashboard/content` | Edit all page content via JSON |
+| **Media Library** | `/power-hub/dashboard/media` | Upload/manage images (GitHub storage) |
+| **AI Assist** | `/power-hub/dashboard/ai` | AI-powered content writing (PDF/Word upload) |
+| **Settings** | `/power-hub/dashboard/settings` | Portal configuration |
+
+**Power Hub Login:** `crockspot` / `letusrock2024`
+
+## 📄 JSON Content System
+
+All page content is stored in `/content/*.json` files and can be edited via the Power Hub:
+
+| File | Controls |
+|------|----------|
+| `home.json` | Homepage hero, features, build-your-bowl |
+| `about.json` | About page, founders, timeline, awards |
+| `catering.json` | Catering services, pricing, process |
+| `menus.json` | Full menu items (bases, proteins, etc.) |
+| `contact.json` | Contact info, hours, form settings |
+| `shared.json` | Testimonials, FAQ (used across pages) |
+
+**How it works:** Pages import JSON → render content dynamically → edit JSON in Power Hub → changes appear on site.
+
 ## 📁 Project Structure
 
 ```
 ├── app/
-│   ├── page.tsx              # Home page
+│   ├── page.tsx              # Home (imports home.json)
 │   ├── layout.tsx            # Root layout with SEO
 │   ├── globals.css           # Global styles
-│   ├── catering/page.tsx     # Catering services
-│   ├── about/page.tsx        # About us
-│   ├── menus/page.tsx        # Full menu
-│   ├── contact/page.tsx      # Contact form
-│   ├── government-capabilities/  # Gov't services
-│   ├── community-partners/   # Partnerships
-│   ├── privacy/page.tsx      # Privacy policy
-│   └── terms/page.tsx        # Terms of service
+│   ├── about/page.tsx        # About (imports about.json)
+│   ├── catering/page.tsx     # Catering (imports catering.json)
+│   ├── menus/page.tsx        # Menus (imports menus.json)
+│   ├── contact/page.tsx      # Contact (imports contact.json)
+│   ├── government-capabilities/
+│   ├── community-partners/
+│   ├── privacy/page.tsx
+│   ├── terms/page.tsx
+│   ├── power-hub/            # 🆕 CMS Dashboard
+│   │   ├── page.tsx          # Login page
+│   │   └── dashboard/
+│   │       ├── page.tsx      # Dashboard home
+│   │       ├── content/      # Content editor
+│   │       ├── media/        # Media library
+│   │       ├── ai/           # AI assistant
+│   │       └── settings/     # Settings
+│   └── api/power-hub/        # 🆕 API Routes
+│       ├── content/route.ts  # Read/write JSON
+│       ├── media/route.ts    # List images from GitHub
+│       ├── upload/route.ts   # Upload/delete images
+│       ├── ai/route.ts       # AI content generation
+│       └── parse-document/route.ts  # PDF/Word parsing
 ├── components/
-│   ├── Navigation.tsx        # Header navigation
-│   ├── Footer.tsx            # Site footer
-│   ├── CTASection.tsx        # Call-to-action sections
-│   ├── ContactForm.tsx       # Contact form component
-│   ├── FAQ.tsx               # FAQ accordion
-│   └── Testimonials.tsx      # Testimonials section
+│   ├── Navigation.tsx
+│   ├── Footer.tsx
+│   ├── CTASection.tsx
+│   ├── ContactForm.tsx
+│   ├── FAQ.tsx               # (imports shared.json)
+│   ├── Testimonials.tsx      # (imports shared.json)
+│   └── power-hub/            # 🆕 CMS Components
+│       ├── Header.tsx
+│       ├── Sidebar.tsx
+│       └── JsonEditor.tsx
+├── content/                  # 🆕 JSON Content Files
+│   ├── home.json
+│   ├── about.json
+│   ├── catering.json
+│   ├── menus.json
+│   ├── contact.json
+│   └── shared.json
 └── public/
-    └── images/               # Add images here
+    └── images/
+        └── uploads/          # 🆕 User-uploaded images
 ```
 
 ## 🖼️ Images Needed
