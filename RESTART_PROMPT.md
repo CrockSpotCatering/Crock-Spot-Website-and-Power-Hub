@@ -13,27 +13,38 @@ I'm working on **The Crock Spot** website - a food truck catering company in Den
 /Users/brettlechtenberg/Documents/agent-girl/crockspot1
 ```
 
-### 🔗 Live URLs
-- **Website:** https://crockspot1.vercel.app
+### 🔗 URLs
 - **GitHub:** https://github.com/CrockSpotCatering/Crock-Spot-Website-and-Power-Hub
+- **Vercel Dashboard:** https://vercel.com/crockspotcaterings-projects
 
 ### 🛠️ Tech Stack
 - Next.js 16 with App Router
 - Tailwind CSS 3.4
 - Framer Motion
 - TypeScript
-- Vercel deployment
+- Vercel deployment (via GitHub integration)
+
+### ⚠️ CRITICAL DEPLOYMENT RULES
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│  🚫 NEVER USE VERCEL CLI (vercel, vercel --prod, etc.)              │
+│  ✅ ONLY deploy via Vercel Dashboard + GitHub Integration          │
+│                                                                     │
+│  Push to GitHub → Vercel auto-deploys. No CLI. Ever.                │
+└─────────────────────────────────────────────────────────────────────┘
+```
 
 ### 📁 Key Files
 Read these first for context:
 1. `DEPLOYMENT.md` - Full deployment guide, credentials, and status
 2. `README.md` - Project overview and structure
-3. `CLAUDE.md` - AI assistant guidelines
 
-### 🔑 Account Info
-- **GitHub:** CrockSpotCatering / CrockSpotCateringIs#1
-- **Vercel:** Connected via bretts-projects-121b69cc
-- **Supabase:** ptmcisouwmkqiowmxttq.supabase.co (for future forms)
+### 🔑 Account Info (Keep Separate!)
+| Service | Account | NOT This |
+|---------|---------|----------|
+| **GitHub** | CrockSpotCatering | ❌ Not Brett's personal |
+| **Vercel** | crockspotcaterings-projects | ❌ Not bretts-projects |
+| **Supabase** | CrockSpotCatering@gmail.com | ❌ Not Brett's personal |
 
 > ⚠️ GitHub requires a **classic Personal Access Token** for git push. Create at: https://github.com/settings/tokens/new (select `repo` scope)
 
@@ -44,19 +55,21 @@ Read these first for context:
 - Purple: #614B8A
 - Dark Purple: #2F2744
 
-### 📋 Current Status (March 11, 2026)
+### 📋 Current Status (March 12, 2026)
 - ✅ Website fully built with all pages
-- ✅ Deployed to Vercel and LIVE
 - ✅ Pushed to GitHub
+- ⏳ **NEEDS:** Import GitHub repo into correct Vercel account
 - ⏳ Images needed in `/public/images/`
-- ⏳ Contact form backend (Supabase) not connected yet
+- ⏳ Contact form backend not connected yet
 
-### 🚀 Quick Commands
+### 🚀 Quick Commands (NO VERCEL CLI!)
 ```bash
 cd /Users/brettlechtenberg/Documents/agent-girl/crockspot1
 npm run dev        # Start dev server
-npm run build      # Build for production
-vercel --prod --yes  # Deploy to Vercel
+npm run build      # Local build test
+
+# Deploy = push to GitHub (auto-deploys via Vercel integration)
+git add . && git commit -m "message" && git push origin main
 ```
 
 ### 📞 Business Info

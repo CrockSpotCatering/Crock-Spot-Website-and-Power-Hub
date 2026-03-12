@@ -1,11 +1,24 @@
 # 🚀 Crock Spot Deployment Guide
 
-## ✅ Current Status (March 11, 2026)
+## ⚠️ CRITICAL DEPLOYMENT RULES
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│  🚫 NEVER USE VERCEL CLI (vercel, vercel --prod, etc.)              │
+│  ✅ ONLY deploy via Vercel Dashboard + GitHub Integration          │
+│                                                                     │
+│  This project uses AUTO-DEPLOY: Push to GitHub → Vercel deploys    │
+│  No CLI needed. No CLI allowed. Ever.                               │
+└─────────────────────────────────────────────────────────────────────┘
+```
+
+## ✅ Current Status (March 12, 2026)
 
 | Service | URL | Status |
 |---------|-----|--------|
-| **Live Site** | https://crockspot1.vercel.app | ✅ LIVE |
+| **Live Site** | ⏳ NEEDS REDEPLOYMENT | See instructions below |
 | **GitHub** | https://github.com/CrockSpotCatering/Crock-Spot-Website-and-Power-Hub | ✅ Synced |
+| **Vercel Account** | https://vercel.com/crockspotcaterings-projects | ⏳ Needs import |
 | **Local Path** | `/Users/brettlechtenberg/Documents/agent-girl/crockspot1` | ✅ Ready |
 
 ## 📁 Project Structure
@@ -53,15 +66,27 @@ npm install
 # Run dev server
 npm run dev
 
-# Build for production
+# Build for production (local test only)
 npm run build
 
-# Deploy to Vercel
-vercel --prod --yes
-
-# Push to GitHub (use PAT)
-git push https://CrockSpotCatering:<PAT>@github.com/CrockSpotCatering/Crock-Spot-Website-and-Power-Hub.git main
+# Push to GitHub → This auto-deploys to Vercel!
+git add .
+git commit -m "Your message"
+git push origin main
 ```
+
+## 🚀 How Deployment Works (GitHub Integration)
+
+1. You push code to GitHub
+2. Vercel automatically detects the push
+3. Vercel builds and deploys automatically
+4. Done! No CLI commands needed
+
+**To set this up (one-time):**
+1. Go to https://vercel.com/crockspotcaterings-projects
+2. Click "Add New..." → "Project"
+3. Import: `CrockSpotCatering/Crock-Spot-Website-and-Power-Hub`
+4. Click Deploy
 
 ## 🔑 Account Credentials
 
@@ -73,10 +98,13 @@ git push https://CrockSpotCatering:<PAT>@github.com/CrockSpotCatering/Crock-Spot
 
 > ⚠️ **Note:** GitHub requires a Personal Access Token (PAT) for git push. Create one at: https://github.com/settings/tokens/new (select `repo` scope)
 
-### Vercel
-- **Team:** bretts-projects-121b69cc
-- **Project:** crockspot1
-- **URL:** https://crockspot1.vercel.app
+### Vercel (CrockSpot Account - NOT Brett's personal!)
+- **Account:** crockspotcaterings-projects
+- **Dashboard:** https://vercel.com/crockspotcaterings-projects
+- **Project:** Crock-Spot-Website-and-Power-Hub (import from GitHub)
+- **URL:** Will be assigned after proper deployment
+
+> 🚫 **NEVER use Vercel CLI** - Always deploy via GitHub integration only!
 
 ### Supabase (for future forms)
 - **Email:** CrockSpotCatering@gmail.com
