@@ -1,152 +1,148 @@
 'use client';
 
-import { useState } from 'react';
-import Header from '@/components/power-hub/Header';
-import { FileText, Save, RefreshCw, ChevronDown, ChevronRight } from 'lucide-react';
+//==============================================================================
+// POWER HUB CMS - Content List Page
+//==============================================================================
+// Lists all content JSON files from GitHub repository.
+// Click on a file to edit and deploy.
+//==============================================================================
 
-interface ContentSection {
-  id: string;
-  name: string;
-  page: string;
-  content: string;
+import { useState, useEffect } from 'react';
+import Link from 'next/link';
+import Header from '@/components/power-hub/Header';
+import { FileJson, Edit3, Loader2, AlertCircle, Github } from 'lucide-react';
+
+interface ContentFile {
+  filename: string;
+  sha: string;
+  size: number;
 }
 
-const initialSections: ContentSection[] = [
-  {
-    id: 'hero-title',
-    name: 'Hero Title',
-    page: 'Home',
-    content: 'Let Us Crock Your World',
-  },
-  {
-    id: 'hero-subtitle',
-    name: 'Hero Subtitle',
-    page: 'Home',
-    content: 'Award-winning slow-cooked gourmet cuisine for your next event',
-  },
-  {
-    id: 'about-intro',
-    name: 'About Introduction',
-    page: 'About',
-    content: 'Founded in 2010 by Steven & Mandy, The Crock Spot brings comfort food to the streets of Denver.',
-  },
-  {
-    id: 'catering-intro',
-    name: 'Catering Introduction',
-    page: 'Catering',
-    content: 'From corporate events to weddings, we bring the flavor to your celebration.',
-  },
-];
+export default function ContentListPage() {
+  const [contentFiles, setContentFiles] = useState<ContentFile[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
 
-export default function ContentPage() {
-  const [sections, setSections] = useState<ContentSection[]>(initialSections);
-  const [expandedSection, setExpandedSection] = useState<string | null>(null);
-  const [saving, setSaving] = useState(false);
-  const [saved, setSaved] = useState(false);
+  useEffect(() => {
+    fetchContent();
+  }, []);
 
-  const handleSave = () => {
-    setSaving(true);
-    // Simulate save
-    setTimeout(() => {
-      setSaving(false);
-      setSaved(true);
-      localStorage.setItem('crockspot_content', JSON.stringify(sections));
-      setTimeout(() => setSaved(false), 2000);
-    }, 1000);
+  const fetchContent = async () => {
+    try {
+      setError('');
+      const response = await fetch('/api/power-hub/content');
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to fetch content');
+      }
+
+      setContentFiles(data.files || []);
+    } catch (err) {
+      console.error('Failed to fetch content:', err);
+      setError(err instanceof Error ? err.message : 'Failed to load content files');
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const updateContent = (id: string, newContent: string) => {
-    setSections(sections.map(s =>
-      s.id === id ? { ...s, content: newContent } : s
-    ));
+  const formatFileSize = (bytes: number) => {
+    if (bytes < 1024) return `${bytes} B`;
+    return `${(bytes / 1024).toFixed(1)} KB`;
   };
 
-  const groupedSections = sections.reduce((acc, section) => {
-    if (!acc[section.page]) acc[section.page] = [];
-    acc[section.page].push(section);
-    return acc;
-  }, {} as Record<string, ContentSection[]>);
+  // Format filename to display name
+  const formatDisplayName = (filename: string) => {
+    return filename
+      .replace('.json', '')
+      .split('-')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
+  };
 
   return (
     <div>
-      <Header title="Content Editor" subtitle="Edit your website text content" />
+      <Header title="Content" subtitle="Edit your website content" />
 
       <div className="p-8">
-        {/* Action Bar */}
-        <div className="flex items-center justify-between mb-6">
-          <div className="flex items-center gap-2 text-sm text-gray-500">
-            <FileText size={16} />
-            <span>{sections.length} content sections</span>
-          </div>
-          <div className="flex items-center gap-3">
-            <button
-              onClick={() => window.location.reload()}
-              className="flex items-center gap-2 px-4 py-2 text-gray-600 hover:text-gray-900 transition-colors"
-            >
-              <RefreshCw size={16} />
-              Reset
-            </button>
-            <button
-              onClick={handleSave}
-              disabled={saving}
-              className="flex items-center gap-2 px-4 py-2 bg-[#F49220] text-white rounded-lg hover:bg-[#e08519] transition-colors disabled:opacity-50"
-            >
-              <Save size={16} />
-              {saving ? 'Saving...' : saved ? 'Saved!' : 'Save Changes'}
-            </button>
-          </div>
-        </div>
-
-        {/* Content Sections by Page */}
-        <div className="space-y-4">
-          {Object.entries(groupedSections).map(([page, pageSections]) => (
-            <div key={page} className="bg-white rounded-xl border border-gray-200 overflow-hidden">
-              <button
-                onClick={() => setExpandedSection(expandedSection === page ? null : page)}
-                className="w-full flex items-center justify-between p-4 hover:bg-gray-50 transition-colors"
-              >
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 bg-[#F49220]/10 rounded-lg flex items-center justify-center">
-                    <FileText className="text-[#F49220]" size={16} />
-                  </div>
-                  <span className="font-semibold text-gray-900">{page} Page</span>
-                  <span className="text-xs text-gray-400 bg-gray-100 px-2 py-1 rounded-full">
-                    {pageSections.length} sections
-                  </span>
-                </div>
-                {expandedSection === page ? (
-                  <ChevronDown className="text-gray-400" size={20} />
-                ) : (
-                  <ChevronRight className="text-gray-400" size={20} />
-                )}
-              </button>
-
-              {expandedSection === page && (
-                <div className="border-t border-gray-100 p-4 space-y-4">
-                  {pageSections.map((section) => (
-                    <div key={section.id} className="space-y-2">
-                      <label className="block text-sm font-medium text-gray-700">
-                        {section.name}
-                      </label>
-                      <textarea
-                        value={section.content}
-                        onChange={(e) => updateContent(section.id, e.target.value)}
-                        rows={3}
-                        className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F49220]/20 focus:border-[#F49220] transition-all text-gray-900 resize-none"
-                      />
-                    </div>
-                  ))}
-                </div>
-              )}
+        <div className="">
+          {/* Info Banner */}
+          <div className="flex items-center gap-3 p-4 bg-[#F49220]/10 border border-[#F49220]/20 rounded-xl text-[#F49220] mb-6">
+            <Github size={20} />
+            <div>
+              <p className="font-medium">GitHub-Powered CMS</p>
+              <p className="text-sm text-gray-600">
+                Edit content here → Save & Deploy → Changes go live automatically via Vercel
+              </p>
             </div>
-          ))}
-        </div>
+          </div>
 
-        {/* Info */}
-        <div className="mt-6 p-4 bg-blue-50 rounded-lg">
-          <p className="text-sm text-blue-600">
-            <strong>Note:</strong> Content changes are saved locally. For production, connect to a database like Supabase.
-          </p>
+          {/* Error Display */}
+          {error && (
+            <div className="flex items-center gap-3 p-4 bg-red-50 border border-red-200 rounded-xl text-red-700 mb-6">
+              <AlertCircle size={20} />
+              <div>
+                <p className="font-medium">Failed to load content</p>
+                <p className="text-sm">{error}</p>
+              </div>
+            </div>
+          )}
+
+          {/* Content Files */}
+          <div className="bg-white rounded-2xl border border-gray-200">
+            <div className="p-6 border-b border-gray-200">
+              <h2 className="text-lg font-semibold text-gray-900 flex items-center gap-2">
+                <FileJson className="w-5 h-5 text-[#F49220]" />
+                Content Files
+              </h2>
+              <p className="text-sm text-gray-500 mt-1">
+                Click on a file to edit its content
+              </p>
+            </div>
+
+            {loading ? (
+              <div className="p-8 text-center">
+                <Loader2 className="w-8 h-8 text-[#F49220] animate-spin mx-auto" />
+                <p className="text-sm text-gray-500 mt-2">Loading from GitHub...</p>
+              </div>
+            ) : contentFiles.length === 0 ? (
+              <div className="p-8 text-center text-gray-500">
+                No content files found in the <code className="bg-gray-100 px-2 py-1 rounded">content/</code> directory
+              </div>
+            ) : (
+              <div className="divide-y divide-gray-100">
+                {contentFiles.map((file) => (
+                  <Link
+                    key={file.filename}
+                    href={`/power-hub/dashboard/content/${file.filename.replace('.json', '')}`}
+                    className="flex items-center justify-between p-5 hover:bg-[#F49220]/5 transition-colors group"
+                  >
+                    <div className="flex items-center gap-4">
+                      <div className="w-12 h-12 rounded-xl bg-[#F49220]/10 flex items-center justify-center group-hover:bg-[#F49220] transition-colors">
+                        <FileJson className="w-6 h-6 text-[#F49220] group-hover:text-white transition-colors" />
+                      </div>
+                      <div>
+                        <p className="font-semibold text-gray-900">
+                          {formatDisplayName(file.filename)} Page
+                        </p>
+                        <p className="text-sm text-gray-500 flex items-center gap-2 mt-0.5">
+                          <span>{formatFileSize(file.size)}</span>
+                          <span className="text-gray-300">•</span>
+                          <span className="font-mono text-xs">{file.sha.slice(0, 7)}</span>
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2 text-[#F49220]">
+                      <span className="text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity">
+                        Edit
+                      </span>
+                      <Edit3 className="w-5 h-5" />
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>

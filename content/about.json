@@ -1,0 +1,85 @@
+{
+  "hero": {
+    "headline": "Our Story",
+    "subheadline": "From a humble 10x10 tent at Cherry Creek Farmers Market to Denver's award-winning catering company — this is The Crock Spot story."
+  },
+  "founders": {
+    "headline": "Meet the Founders",
+    "description": "In May 2010, Steven and Mandy set up a humble 10x10 tent at the Cherry Creek Farmers Market with one mission: deliver gourmet, fast-casual meals that are 100% customizable to every guest's taste.",
+    "story": "What started as a weekend passion project quickly grew into something bigger. By 2011, they had their first food truck. By 2017, they welcomed co-partner Peter and expanded to a multi-truck operation serving events across Colorado.",
+    "quote": "Our guiding principle has remained the same since day one: make people happy with amazing food — and have a blast doing it!",
+    "quoteAuthor": "Steven & Mandy, Founders"
+  },
+  "milestones": [
+    {
+      "year": "2010",
+      "title": "The Beginning",
+      "description": "Started at Cherry Creek Farmers Market with a 10x10 tent and a dream."
+    },
+    {
+      "year": "2011",
+      "title": "First Food Truck",
+      "description": "Expanded to our first gourmet food truck, bringing mobile cuisine to Denver."
+    },
+    {
+      "year": "2015",
+      "title": "Award Winners",
+      "description": "Named Best Food Truck in Denver by 5280 Magazine."
+    },
+    {
+      "year": "2017",
+      "title": "Growing Team",
+      "description": "Peter joins as co-partner, expanding our multi-truck operation."
+    },
+    {
+      "year": "2020",
+      "title": "National Recognition",
+      "description": "Featured in Business Insider's 50 Coolest Small Businesses in America."
+    },
+    {
+      "year": "2025",
+      "title": "Today",
+      "description": "15+ years strong, serving thousands of events across Colorado."
+    }
+  ],
+  "values": [
+    {
+      "title": "People First",
+      "description": "Our mission is simple: make people happy with amazing food — and have a blast doing it!"
+    },
+    {
+      "title": "Team Spirit",
+      "description": "Our Crock Stars are a tight-knit, dynamic, loyal, and downright fun group."
+    },
+    {
+      "title": "Fresh Always",
+      "description": "Food truck advantage means fresh cooking on-site. Never bagged, boxed, or reheated."
+    },
+    {
+      "title": "Excellence",
+      "description": "Award-winning cuisine and service that makes every event memorable."
+    }
+  ],
+  "awards": [
+    {
+      "title": "Best Food Truck in Denver",
+      "source": "5280 Magazine"
+    },
+    {
+      "title": "Best Meals on Wheels",
+      "source": "Westword Magazine"
+    },
+    {
+      "title": "50 Coolest Small Businesses in America",
+      "source": "Business Insider"
+    }
+  ],
+  "cta": {
+    "headline": "Let's Connect",
+    "description": "Ready to work with Denver's favorite catering team?"
+  },
+  "finalCta": {
+    "headline": "I Wanna Crock!",
+    "description": "Join our family of satisfied customers and let us crock your next event."
+  }
+}

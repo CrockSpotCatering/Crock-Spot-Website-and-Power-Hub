@@ -1,0 +1,110 @@
+{
+  "hero": {
+    "badge": "Government & Municipal Services",
+    "headline": "Government Capabilities",
+    "subheadline": "Trusted catering partner for government agencies, municipalities, and public sector organizations throughout Colorado.",
+    "ctaText": "Request Government Quote",
+    "ctaLink": "#contact"
+  },
+  "capabilities": [
+    {
+      "title": "Large-Scale Events",
+      "description": "Serve 100+ guests per hour with our efficient quick-serve concept."
+    },
+    {
+      "title": "Flexible Scheduling",
+      "description": "Available for recurring events, one-time gatherings, or multi-day conferences."
+    },
+    {
+      "title": "Dietary Compliance",
+      "description": "Extensive gluten-free, vegetarian, and vegan options clearly labeled."
+    },
+    {
+      "title": "Fully Insured",
+      "description": "Comprehensive liability coverage for peace of mind."
+    },
+    {
+      "title": "Contract Ready",
+      "description": "Experience working with government purchasing requirements."
+    },
+    {
+      "title": "Proven Track Record",
+      "description": "15+ years serving Denver with award-winning service."
+    }
+  ],
+  "serviceTypes": [
+    "Municipal Employee Appreciation Events",
+    "City Council & Board Meetings",
+    "Government Training Sessions",
+    "Public Works Crew Meals",
+    "First Responder Appreciation",
+    "Community Outreach Events",
+    "Multi-Day Conferences",
+    "Emergency Response Support",
+    "Holiday Celebrations",
+    "Retirement Parties"
+  ],
+  "pricingTiers": [
+    {
+      "name": "Food Truck Service",
+      "price": "$16-18/person",
+      "features": [
+        "On-site fresh cooking",
+        "Full menu customization",
+        "Quick 25-second service",
+        "All equipment included",
+        "Professional crew"
+      ]
+    },
+    {
+      "name": "Buffet Style",
+      "price": "$18-20/person",
+      "features": [
+        "Elegant setup",
+        "Chafing dishes included",
+        "Dietary labels",
+        "Staff assistance",
+        "Indoor/outdoor options"
+      ]
+    },
+    {
+      "name": "Boxed Meals",
+      "price": "$17.50/person",
+      "features": [
+        "Individual portions",
+        "Easy distribution",
+        "No service staff needed",
+        "Grab-and-go friendly",
+        "Great for meetings"
+      ]
+    }
+  ],
+  "pricingNote": "Volume discounts available for recurring contracts and large events",
+  "whyTrustUs": {
+    "headline": "Why Government Agencies Trust Us",
+    "reasons": [
+      "15+ years of proven experience in Denver",
+      "Efficient service: 100+ guests per hour",
+      "Comprehensive dietary accommodations",
+      "Fully licensed, insured, and compliant",
+      "Flexible scheduling for any event type",
+      "Transparent pricing with no hidden fees",
+      "Award-winning food quality",
+      "Professional, uniformed staff"
+    ]
+  },
+  "stats": {
+    "years": "15+",
+    "events": "10K+",
+    "guestsPerHour": "100+",
+    "serviceTime": "25s"
+  },
+  "cta": {
+    "headline": "Request a Government Quote",
+    "description": "We'll provide a detailed proposal tailored to your agency's needs"
+  },
+  "finalCta": {
+    "headline": "Serving Those Who Serve",
+    "description": "Let us take care of the food so you can focus on your mission."
+  }
+}

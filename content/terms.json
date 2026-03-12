@@ -1,0 +1,37 @@
+{
+  "hero": {
+    "headline": "Terms of Service",
+    "lastUpdated": "March 2026"
+  },
+  "sections": [
+    {
+      "title": "Catering Services",
+      "content": "The Crock Spot provides food truck catering, buffet-style catering, and related food services for events throughout the Denver metro area and Colorado. All services are subject to availability and confirmation."
+    },
+    {
+      "title": "Booking & Deposits",
+      "content": "A deposit may be required to secure your event date. Specific deposit amounts and payment terms will be outlined in your catering agreement."
+    },
+    {
+      "title": "Cancellation Policy",
+      "content": "Cancellation policies vary based on event size and timing. Please refer to your catering agreement for specific terms. We recommend notifying us as soon as possible if you need to cancel or reschedule."
+    },
+    {
+      "title": "Guest Count",
+      "content": "Final guest counts are typically due 5-7 days before your event. You may be charged for the guaranteed minimum if actual attendance is lower."
+    },
+    {
+      "title": "Dietary Accommodations",
+      "content": "We offer gluten-free, vegetarian, and vegan options. Please inform us of any allergies or dietary restrictions when booking. While we take precautions, we cannot guarantee a completely allergen-free environment."
+    },
+    {
+      "title": "Liability",
+      "content": "The Crock Spot carries comprehensive liability insurance. However, we are not responsible for injuries or damages caused by third parties, venue conditions, or circumstances beyond our control."
+    },
+    {
+      "title": "Contact",
+      "content": "For questions about these terms, please contact us at",
+      "contactEmail": "steven@thecrockspot.com"
+    }
+  ]
+}

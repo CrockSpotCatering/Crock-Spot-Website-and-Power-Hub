@@ -1,0 +1,101 @@
+{
+  "hero": {
+    "badge": "Best Food Truck in Denver - 5280 Magazine",
+    "headline": "Let Us Crock Your World",
+    "subheadline": "Award-winning food truck catering in Denver. Slow-cooked gourmet cuisine that's always fresh, never reheated.",
+    "tagline": "Serving Denver Since 2010 • 15+ Years of Excellence",
+    "ctaPrimary": "Get a Free Quote",
+    "ctaPrimaryLink": "/contact",
+    "ctaSecondary": "View Our Menus",
+    "ctaSecondaryLink": "/menus"
+  },
+  "eventTypes": [
+    "Corporate Events",
+    "Weddings",
+    "Private Parties",
+    "Festivals"
+  ],
+  "services": [
+    {
+      "title": "Food Truck Catering",
+      "description": "Our gourmet food trucks bring the full kitchen to your event. Fresh, hot, and served in 25 seconds or less.",
+      "price": "From $16/person"
+    },
+    {
+      "title": "Buffet Style Service",
+      "description": "Elegant buffet setup with all our signature dishes. Perfect for indoor events and formal occasions.",
+      "price": "From $18/person"
+    },
+    {
+      "title": "Corporate Events",
+      "description": "Quick-serve perfection for busy teams. We can serve 100+ people per hour with minimal wait times.",
+      "price": "Custom Pricing"
+    }
+  ],
+  "benefits": [
+    "Fresh, Never Reheated",
+    "25-Second Service",
+    "Customizable Bowls",
+    "Dietary Friendly",
+    "15+ Years Experience",
+    "Award-Winning Food"
+  ],
+  "whyChooseUs": {
+    "headline": "Why Choose The Crock Spot?",
+    "description": "With 15+ years serving Denver, we've perfected the art of event catering. Our food truck advantage means your food is always fresh, cooked on-site, and never bagged, boxed, or reheated."
+  },
+  "buildYourBowl": {
+    "headline": "Build Your Own Bowl",
+    "subheadline": "Our signature concept lets every guest customize their perfect meal",
+    "steps": [
+      {
+        "step": "1",
+        "title": "Choose Your Base",
+        "items": "Sesame Rice, Quinoa, Couscous, Barley, Potatoes"
+      },
+      {
+        "step": "2",
+        "title": "Pick Your Protein",
+        "items": "Pulled Pork, Chicken, Beef, Duck, Lamb, Vegan Options"
+      },
+      {
+        "step": "3",
+        "title": "Add Your Sauce",
+        "items": "Chimichurri, Tzatziki, Miso Honey, Sriracha Cream"
+      },
+      {
+        "step": "4",
+        "title": "Top It Off",
+        "items": "Corn Salad, Asian Slaw, Garden Gravy & More"
+      }
+    ]
+  },
+  "quickServiceStats": [
+    {
+      "value": "25 Seconds or Less",
+      "description": "Every guest served quickly"
+    },
+    {
+      "value": "Dietary Friendly",
+      "description": "GF, Vegan, Vegetarian options"
+    },
+    {
+      "value": "100+ Per Hour",
+      "description": "Efficient event service"
+    }
+  ],
+  "stats": {
+    "years": "15+",
+    "events": "10K+",
+    "serviceTime": "25s"
+  },
+  "cta": {
+    "headline": "Ready to Crock Your Event?",
+    "description": "Fill out the form below and we'll get back to you within 24 hours",
+    "buttonText": "Get Your Free Quote"
+  },
+  "finalCta": {
+    "headline": "For Those About to Crock, We Salute You",
+    "description": "Join the thousands of happy customers who've trusted The Crock Spot for their most important events."
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "hero": {
+    "headline": "Let's Connect",
+    "subheadline": "Ready to rock your next event? Get in touch and let's make it happen."
+  },
+  "contactInfo": [
+    {
+      "title": "Email Us",
+      "content": "steven@thecrockspot.com",
+      "link": "mailto:steven@thecrockspot.com"
+    },
+    {
+      "title": "Service Area",
+      "content": "Denver Metro, Front Range & Mountain Regions",
+      "link": null
+    },
+    {
+      "title": "Response Time",
+      "content": "Within 24 hours",
+      "link": null
+    }
+  ],
+  "formSection": {
+    "headline": "Get Your Free Quote",
+    "description": "Fill out the form below and we'll get back to you within 24 hours with a custom quote for your event."
+  },
+  "contactInfoSection": {
+    "headline": "Contact Information",
+    "description": "Prefer to reach out directly? Here's how you can connect with us."
+  },
+  "social": {
+    "headline": "Follow Us",
+    "description": "Stay connected and see our latest events, food photos, and updates!",
+    "facebook": "https://www.facebook.com/104226646277525",
+    "instagram": "https://www.instagram.com/thecrockspot"
+  },
+  "quickFacts": {
+    "headline": "Quick Facts",
+    "items": [
+      "Minimum 10 guests for most events",
+      "Book 2-4 weeks ahead for best availability",
+      "Weddings: Book 3-6 months ahead",
+      "Custom menus available for any event",
+      "Dietary accommodations always available"
+    ]
+  },
+  "faqSection": {
+    "headline": "Have Questions?",
+    "description": "Check out our frequently asked questions for quick answers.",
+    "buttonText": "View FAQ",
+    "buttonLink": "/#faq"
+  },
+  "cta": {
+    "headline": "Ready to Rock?",
+    "description": "Let's create something delicious together."
+  }
+}

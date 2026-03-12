@@ -1,0 +1,96 @@
+{
+  "hero": {
+    "headline": "Our Menus",
+    "subheadline": "Build your own bowl with our signature bases, proteins, sauces, and toppers. Everything made fresh, never reheated."
+  },
+  "pricing": {
+    "foodTruck": "$16-18/person",
+    "buffet": "$18-20/person"
+  },
+  "bases": [
+    { "name": "Steamed Sesame Rice", "tags": ["GF", "V"] },
+    { "name": "Fluffy Couscous", "tags": [] },
+    { "name": "Hearty Pearled Barley", "tags": [] },
+    { "name": "Quinoa", "tags": ["GF", "V"] },
+    { "name": "Cilantro Lime Rice", "tags": ["GF", "V"] },
+    { "name": "Caraway Roasted Potatoes", "tags": ["GF", "V"] },
+    { "name": "Healthy Grain Combo", "tags": [] }
+  ],
+  "proteins": [
+    { "name": "Southwest Chicken", "tags": ["GF"], "description": "Tender chicken with southwest spices" },
+    { "name": "Salt-N-Pepa Chicken", "tags": ["GF"], "description": "Classic seasoned chicken" },
+    { "name": "Tuscan Chicken", "tags": ["GF"], "description": "Italian herb-marinated chicken" },
+    { "name": "Savory Pulled Pork", "tags": ["GF"], "description": "Slow-cooked to perfection" },
+    { "name": "Apple Braised Pork", "tags": ["GF"], "description": "Sweet and savory pork" },
+    { "name": "Jalapeno Shredded Beef", "tags": ["GF"], "description": "Bold and flavorful beef" },
+    { "name": "Turkey Cardamom Meatballs", "tags": [], "description": "Aromatic turkey meatballs" },
+    { "name": "Herb Roasted Lamb", "tags": ["GF"], "description": "+$4 upgrade" },
+    { "name": "Duck Confit", "tags": ["GF"], "description": "+$5 upgrade" },
+    { "name": "Irish Corned Beef", "tags": ["GF"], "description": "+$4 upgrade" },
+    { "name": "Coconut Root Veggie Curry", "tags": ["GF", "V", "VG"], "description": "Rich coconut curry with root vegetables" },
+    { "name": "Curried Lentils with Hominy", "tags": ["GF", "V", "VG"], "description": "Hearty plant-based protein" },
+    { "name": "Southwestern Bean Medley", "tags": ["GF", "V", "VG"], "description": "Flavorful bean mix" },
+    { "name": "Beet Nut Balls", "tags": ["V", "VG"], "description": "Creative vegan meatball alternative" },
+    { "name": "Celtic White Bean Stew", "tags": ["GF", "V", "VG"], "description": "Comforting bean stew" },
+    { "name": "Sauteed Tofu with Bok Choy", "tags": ["GF", "V", "VG"], "description": "Asian-inspired tofu dish" }
+  ],
+  "sauces": [
+    { "name": "Chimichurri", "heat": "Mild", "tags": ["GF", "V"] },
+    { "name": "Fresh Basil Tzatziki", "heat": "Mild", "tags": ["GF", "V"] },
+    { "name": "Avocado Velvet", "heat": "Mild", "tags": ["GF", "V", "VG"] },
+    { "name": "Cuban Mojo", "heat": "Mild", "tags": ["GF", "V"] },
+    { "name": "Boursin Cheese", "heat": "Mild", "tags": ["GF", "V"] },
+    { "name": "Tangy Herb Mustard", "heat": "Mild", "tags": ["GF", "V"] },
+    { "name": "Cranberry Wasabi", "heat": "Medium", "tags": ["GF", "V"] },
+    { "name": "Gado Gado", "heat": "Medium", "tags": ["GF", "V", "VG"] },
+    { "name": "Miso Honey", "heat": "Medium", "tags": ["GF", "V"] },
+    { "name": "Sriracha Sour Cream", "heat": "Medium", "tags": ["GF", "V"] },
+    { "name": "Playa Fire", "heat": "Hot", "tags": ["GF", "V", "VG"] },
+    { "name": "Esteban's Yucatan Fire", "heat": "Hot", "tags": ["GF", "V", "VG"] }
+  ],
+  "toppers": [
+    { "name": "Fresh Basil Corn Salad", "tags": ["GF", "V", "VG"] },
+    { "name": "Asian Slaw", "tags": ["GF", "V", "VG"] },
+    { "name": "Garden Gravy", "tags": ["GF", "V"] },
+    { "name": "Summer Slaw", "tags": ["GF", "V", "VG"] },
+    { "name": "Sweet Corn Salad", "tags": ["GF", "V", "VG"] },
+    { "name": "Sauteed Veggies", "tags": ["GF", "V", "VG"] },
+    { "name": "Mixed Green Salad", "tags": ["GF", "V", "VG"] },
+    { "name": "Roasted Sweet Potatoes", "tags": ["GF", "V", "VG"] }
+  ],
+  "appetizers": [
+    { "name": "Artisan Grazing Table", "price": "$13.75-$20.25/person", "description": "Cheese, fruits, vegetables, crackers, dips, nuts" },
+    { "name": "Caprese Skewers", "price": "$5/person", "description": "Fresh mozzarella, grape tomato, basil (2 per guest)" },
+    { "name": "Meatballs in Carolina BBQ", "price": "$5/person", "description": "Beef and pork in tangy BBQ sauce (2 per guest)" },
+    { "name": "Potato Cheddar Pierogies", "price": "$6/person", "description": "Locally made, fried, with crema dips (2 per guest)" },
+    { "name": "Sliders", "price": "$6/person", "description": "Pulled pork or meatballs on Hawaiian buns" },
+    { "name": "Crudite & Hummus", "price": "$4-6/person", "description": "Fresh cut veggies with hummus or spicy ranch" }
+  ],
+  "themedBars": [
+    { "name": "Taco Bar", "price": "$19/person" },
+    { "name": "Tostada Bar", "price": "$19/person" },
+    { "name": "Nacho Bar", "price": "$19/person" },
+    { "name": "Chili Bar", "price": "$19/person" },
+    { "name": "Mac n Cheese Bar", "price": "$22/person" }
+  ],
+  "breakfast": [
+    { "name": "English Style Buffet", "price": "$15-17/person", "description": "Eggs, sausage, roasted potatoes, beans, mushrooms" },
+    { "name": "Colorado Style Buffet", "price": "$15-17/person", "description": "Cheesy eggs, sausage, green chili potatoes, tortillas" },
+    { "name": "Continental Board", "price": "$14-16/person", "description": "Croissants, egg bites, fruits, yogurts, pastries" },
+    { "name": "Bagel Board", "price": "$14-16/person", "description": "Bagels, cream cheeses, peanut butter, jam, ham" },
+    { "name": "Breakfast Burrito Board", "price": "$14-16/person", "description": "Meat and vegetarian burritos, salsa, sour cream" }
+  ],
+  "dietaryLegend": {
+    "GF": "Gluten-Free",
+    "V": "Vegetarian",
+    "VG": "Vegan"
+  },
+  "cta": {
+    "headline": "Request a Custom Menu",
+    "description": "Let us design the perfect menu for your event"
+  },
+  "finalCta": {
+    "headline": "Crock Hard & Crock Often",
+    "description": "Ready to build the perfect menu for your event? Let's talk!"
+  }
+}

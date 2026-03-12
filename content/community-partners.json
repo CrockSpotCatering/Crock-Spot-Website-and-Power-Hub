@@ -1,0 +1,76 @@
+{
+  "hero": {
+    "badge": "Community & Partnerships",
+    "headline": "Community Partners",
+    "subheadline": "We believe in the power of community. From our humble beginnings at Cherry Creek Farmers Market to today, partnerships have been at the heart of everything we do."
+  },
+  "partnerships": [
+    {
+      "type": "Event Venues",
+      "description": "We partner with event centers, breweries, and unique venues throughout Colorado."
+    },
+    {
+      "type": "Corporate Clients",
+      "description": "Recurring partnerships with businesses for employee appreciation and client events."
+    },
+    {
+      "type": "Non-Profits",
+      "description": "Supporting local charities and community organizations with special pricing."
+    },
+    {
+      "type": "Farmers Markets",
+      "description": "Where it all began! Still serving our community at local markets."
+    }
+  ],
+  "featuredPartners": [
+    { "name": "Church Ranch Event Center", "type": "Venue Partner" },
+    { "name": "Table Mountain Event Center", "type": "Venue Partner" },
+    { "name": "Cherry Creek Farmers Market", "type": "Market Partner" },
+    { "name": "Local Breweries", "type": "Beverage Partners" },
+    { "name": "New Terrain Brewing", "type": "Event Partner" }
+  ],
+  "communityInvolvement": [
+    {
+      "title": "Local Sourcing",
+      "description": "We partner with local farms and vendors whenever possible to support our community."
+    },
+    {
+      "title": "Charity Events",
+      "description": "Discounted catering for non-profit fundraisers and community benefit events."
+    },
+    {
+      "title": "Food Donations",
+      "description": "Excess food from events is donated to local shelters and food banks."
+    },
+    {
+      "title": "Youth Employment",
+      "description": "Providing job opportunities and training for young people in our community."
+    }
+  ],
+  "becomePartner": {
+    "headline": "Become a Partner",
+    "description": "We're always looking for great partners who share our values of quality, community, and exceptional service. Whether you're a venue, business, or organization, let's explore how we can work together.",
+    "partnershipTypes": [
+      {
+        "title": "Venue Partnerships",
+        "description": "Preferred catering arrangements for your events"
+      },
+      {
+        "title": "Corporate Programs",
+        "description": "Recurring catering with volume benefits"
+      },
+      {
+        "title": "Non-Profit Support",
+        "description": "Special pricing for charitable organizations"
+      }
+    ]
+  },
+  "testimonial": {
+    "quote": "The Crock Spot has been our go-to catering partner for years. Their food is consistently amazing, and they truly care about our community.",
+    "author": "Local Event Partner"
+  },
+  "cta": {
+    "headline": "Let's Crock Together",
+    "description": "Join our community of partners and let's create something special."
+  }
+}

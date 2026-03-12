@@ -1,0 +1,35 @@
+{
+  "hero": {
+    "headline": "Privacy Policy",
+    "lastUpdated": "March 2026"
+  },
+  "sections": [
+    {
+      "title": "Information We Collect",
+      "content": "When you submit a catering inquiry through our website, we collect your name, email address, phone number, event details, and any other information you choose to provide. This information is used solely to respond to your inquiry and provide our catering services."
+    },
+    {
+      "title": "How We Use Your Information",
+      "content": "We use the information you provide to:",
+      "listItems": [
+        "Respond to your catering inquiries",
+        "Provide quotes and event planning assistance",
+        "Communicate about your events",
+        "Send occasional updates about our services (with your consent)"
+      ]
+    },
+    {
+      "title": "Information Sharing",
+      "content": "We do not sell, trade, or otherwise transfer your personal information to third parties. Your information is kept confidential and is only used for the purposes stated above."
+    },
+    {
+      "title": "Data Security",
+      "content": "We implement appropriate security measures to protect your personal information. However, no method of transmission over the internet is 100% secure."
+    },
+    {
+      "title": "Contact Us",
+      "content": "If you have questions about this privacy policy, please contact us at",
+      "contactEmail": "steven@thecrockspot.com"
+    }
+  ]
+}

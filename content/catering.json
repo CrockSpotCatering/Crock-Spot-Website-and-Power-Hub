@@ -1,0 +1,111 @@
+{
+  "hero": {
+    "headline": "Catering That Rocks",
+    "subheadline": "From intimate gatherings to large-scale events, we bring award-winning cuisine and unforgettable experiences to every occasion.",
+    "ctaPrimary": "View Options",
+    "ctaPrimaryLink": "#options",
+    "ctaSecondary": "Get a Quote",
+    "ctaSecondaryLink": "#quote"
+  },
+  "cateringOptions": [
+    {
+      "title": "Food Truck Service",
+      "description": "Our gourmet food trucks bring the full kitchen experience to your event. Fresh, hot meals cooked on-site.",
+      "price": "$16-18 per person",
+      "features": [
+        "On-site cooking - never reheated",
+        "Serve 100+ guests per hour",
+        "25-second average service time",
+        "Custom menu design",
+        "Professional Crock Star crew"
+      ],
+      "ideal": "Outdoor events, festivals, corporate gatherings"
+    },
+    {
+      "title": "Buffet Style Service",
+      "description": "Elegant indoor buffet setup with our full menu selection. Perfect for formal occasions.",
+      "price": "$18-20 per person",
+      "features": [
+        "Full service setup",
+        "Chafing dishes included",
+        "Dietary labels provided",
+        "Customizable menu options",
+        "Staff assistance available"
+      ],
+      "ideal": "Weddings, corporate dinners, private parties"
+    },
+    {
+      "title": "Themed Bars",
+      "description": "Interactive food stations that let guests customize their experience. Taco bars, chili bars, and more!",
+      "price": "$19-22 per person",
+      "features": [
+        "Taco Bar - $19/person",
+        "Tostada Bar - $19/person",
+        "Chili Bar - $19/person",
+        "Mac n Cheese Bar - $22/person",
+        "Nacho Bar - $19/person"
+      ],
+      "ideal": "Casual events, team building, celebrations"
+    }
+  ],
+  "eventTypes": [
+    {
+      "title": "Corporate Events",
+      "description": "Team lunches, company parties, client appreciation"
+    },
+    {
+      "title": "Weddings",
+      "description": "Rehearsal dinners, receptions, day-after brunches"
+    },
+    {
+      "title": "Private Parties",
+      "description": "Birthdays, graduations, family reunions"
+    },
+    {
+      "title": "Large Events",
+      "description": "Festivals, concerts, community gatherings"
+    },
+    {
+      "title": "Mountain Events",
+      "description": "Destination catering throughout Colorado"
+    },
+    {
+      "title": "Recurring Events",
+      "description": "Weekly lunches, monthly meetings"
+    }
+  ],
+  "process": {
+    "headline": "How It Works",
+    "subheadline": "Booking your catering is simple and stress-free",
+    "steps": [
+      {
+        "step": "1",
+        "title": "Reach Out",
+        "description": "Fill out our form or give us a call to discuss your event"
+      },
+      {
+        "step": "2",
+        "title": "Custom Quote",
+        "description": "We'll create a personalized menu and pricing for your needs"
+      },
+      {
+        "step": "3",
+        "title": "Book & Relax",
+        "description": "Confirm your date and let us handle all the details"
+      },
+      {
+        "step": "4",
+        "title": "Enjoy!",
+        "description": "We show up, cook fresh, and rock your event!"
+      }
+    ]
+  },
+  "cta": {
+    "headline": "Get Your Free Quote",
+    "description": "Tell us about your event and we'll create a custom proposal"
+  },
+  "finalCta": {
+    "headline": "We Will, We Will Crock You!",
+    "description": "Let's create an unforgettable culinary experience for your next event."
+  }
+}
