@@ -1,8 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import Link from 'next/link';
-import { FaLeaf, FaBreadSlice, FaArrowRight } from 'react-icons/fa';
+import { FaLeaf, FaBreadSlice, FaStar, FaSnowflake, FaGlassWhiskey, FaCookie } from 'react-icons/fa';
 import CTASection from '@/components/CTASection';
 import ContactForm from '@/components/ContactForm';
 
@@ -27,6 +26,11 @@ export default function Menus() {
     themedBars,
     breakfastSection,
     breakfast,
+    softDrinksSection,
+    softDrinks,
+    dessertsSection,
+    desserts,
+    dessertNote,
     dietaryLegend,
     cta,
     finalCta
@@ -41,6 +45,19 @@ export default function Menus() {
     return (
       <span className={`text-xs px-2 py-0.5 rounded-full ${colors[tag]} font-medium`} title={dietaryLegend[tag as keyof typeof dietaryLegend]}>
         {tag}
+      </span>
+    );
+  };
+
+  const HeatBadge = ({ heat }: { heat: string }) => {
+    const getColor = () => {
+      if (heat === 'Mild') return 'text-crock-green';
+      if (heat === 'Medium' || heat === 'Mild/Medium') return 'text-crock-orange';
+      return 'text-red-500';
+    };
+    return (
+      <span className={`text-xs font-medium ${getColor()}`}>
+        🌶️ {heat}
       </span>
     );
   };
@@ -62,11 +79,7 @@ export default function Menus() {
             transition={{ duration: 0.8 }}
           >
             <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
-              {hero.headline.includes('Menus') ? (
-                <>Our <span className="text-crock-orange">Menus</span></>
-              ) : (
-                hero.headline
-              )}
+              Our <span className="text-crock-orange">Menus</span>
             </h1>
             <p className="text-xl text-crock-gray-light mb-8 max-w-3xl mx-auto">
               {hero.subheadline}
@@ -96,15 +109,19 @@ export default function Menus() {
             className="text-center mb-12"
           >
             <h2 className="text-4xl md:text-5xl font-bold text-crock-dark mb-4">
-              {buildYourBowl.headline.includes('Bowl') ? (
-                <>Build Your Own <span className="text-crock-orange">Bowl</span></>
-              ) : (
-                buildYourBowl.headline
-              )}
+              Build Your Own <span className="text-crock-orange">Bowl</span>
             </h2>
-            <p className="text-xl text-crock-gray">
+            <p className="text-xl text-crock-gray mb-6">
               {buildYourBowl.subheadline}
             </p>
+            <div className="max-w-3xl mx-auto">
+              <p className="text-lg text-crock-gray mb-4">
+                {buildYourBowl.intro}
+              </p>
+              <p className="text-lg text-crock-gray bg-crock-orange/10 p-4 rounded-xl border-l-4 border-crock-orange">
+                {buildYourBowl.customNote}
+              </p>
+            </div>
           </motion.div>
 
           {/* Bases */}
@@ -112,7 +129,7 @@ export default function Menus() {
             <h3 className="text-2xl font-bold text-crock-dark mb-6 text-center">
               {basesSection.emoji} {basesSection.title}
             </h3>
-            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
               {bases.map((item, index) => (
                 <motion.div
                   key={index}
@@ -120,10 +137,11 @@ export default function Menus() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.05 }}
-                  className="bg-crock-gray-light/30 p-4 rounded-lg text-center"
+                  className="bg-crock-gray-light/30 p-4 rounded-lg"
                 >
-                  <p className="font-medium text-crock-dark">{item.name}</p>
-                  <div className="flex gap-1 justify-center mt-2">
+                  <p className="font-bold text-crock-dark">{item.name}</p>
+                  <p className="text-sm text-crock-gray mt-1">{item.description}</p>
+                  <div className="flex gap-1 mt-2">
                     {item.tags.map((tag) => (
                       <TagBadge key={tag} tag={tag} />
                     ))}
@@ -138,7 +156,7 @@ export default function Menus() {
             <h3 className="text-2xl font-bold text-crock-dark mb-6 text-center">
               {proteinsSection.emoji} {proteinsSection.title}
             </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {proteins.map((item, index) => (
                 <motion.div
                   key={index}
@@ -146,10 +164,24 @@ export default function Menus() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.03 }}
-                  className="bg-crock-gray-light/30 p-4 rounded-lg"
+                  className={`bg-crock-gray-light/30 p-4 rounded-lg ${item.premium ? 'ring-2 ring-crock-orange' : ''} ${item.seasonal ? 'ring-2 ring-crock-purple' : ''}`}
                 >
-                  <p className="font-bold text-crock-dark">{item.name}</p>
-                  <p className="text-sm text-crock-gray">{item.description}</p>
+                  <div className="flex items-start justify-between">
+                    <p className="font-bold text-crock-dark">{item.name}</p>
+                    <div className="flex gap-1">
+                      {item.premium && (
+                        <span className="text-crock-orange text-xs flex items-center gap-1" title="Premium">
+                          <FaStar /> Premium
+                        </span>
+                      )}
+                      {item.seasonal && (
+                        <span className="text-crock-purple text-xs flex items-center gap-1" title="Seasonal">
+                          <FaSnowflake /> Seasonal
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                  <p className="text-sm text-crock-gray mt-1">{item.description}</p>
                   <div className="flex gap-1 mt-2">
                     {item.tags.map((tag) => (
                       <TagBadge key={tag} tag={tag} />
@@ -165,7 +197,7 @@ export default function Menus() {
             <h3 className="text-2xl font-bold text-crock-dark mb-6 text-center">
               {saucesSection.emoji} {saucesSection.title}
             </h3>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {sauces.map((item, index) => (
                 <motion.div
                   key={index}
@@ -175,14 +207,11 @@ export default function Menus() {
                   transition={{ delay: index * 0.03 }}
                   className="bg-crock-gray-light/30 p-4 rounded-lg"
                 >
-                  <p className="font-bold text-crock-dark">{item.name}</p>
-                  <p className={`text-sm ${
-                    item.heat === 'Mild' ? 'text-crock-green' :
-                    item.heat === 'Medium' ? 'text-crock-orange' :
-                    'text-crock-maroon'
-                  }`}>
-                    🌶️ {item.heat}
-                  </p>
+                  <div className="flex items-center justify-between mb-1">
+                    <p className="font-bold text-crock-dark">{item.name}</p>
+                    <HeatBadge heat={item.heat} />
+                  </div>
+                  <p className="text-sm text-crock-gray">{item.description}</p>
                   <div className="flex gap-1 mt-2">
                     {item.tags.map((tag) => (
                       <TagBadge key={tag} tag={tag} />
@@ -195,10 +224,11 @@ export default function Menus() {
 
           {/* Toppers */}
           <div>
-            <h3 className="text-2xl font-bold text-crock-dark mb-6 text-center">
+            <h3 className="text-2xl font-bold text-crock-dark mb-2 text-center">
               {toppersSection.emoji} {toppersSection.title}
             </h3>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <p className="text-center text-crock-gray mb-6">{toppersSection.note}</p>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
               {toppers.map((item, index) => (
                 <motion.div
                   key={index}
@@ -206,10 +236,11 @@ export default function Menus() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.05 }}
-                  className="bg-crock-gray-light/30 p-4 rounded-lg text-center"
+                  className="bg-crock-gray-light/30 p-4 rounded-lg"
                 >
-                  <p className="font-medium text-crock-dark">{item.name}</p>
-                  <div className="flex gap-1 justify-center mt-2">
+                  <p className="font-bold text-crock-dark">{item.name}</p>
+                  <p className="text-sm text-crock-gray mt-1">{item.description}</p>
+                  <div className="flex gap-1 mt-2">
                     {item.tags.map((tag) => (
                       <TagBadge key={tag} tag={tag} />
                     ))}
@@ -230,13 +261,11 @@ export default function Menus() {
             viewport={{ once: true }}
             className="text-center mb-12"
           >
-            <h2 className="text-4xl font-bold text-crock-dark mb-4">
-              {appetizersSection.headline.includes('Small Bites') ? (
-                <>Appetizers & <span className="text-crock-orange">Small Bites</span></>
-              ) : (
-                appetizersSection.headline
-              )}
+            <h2 className="text-4xl font-bold text-crock-dark mb-2">
+              <span className="text-crock-orange">{appetizersSection.headline}</span>
             </h2>
+            <p className="text-xl text-crock-orange font-semibold mb-4">{appetizersSection.subheadline}</p>
+            <p className="text-lg text-crock-gray max-w-3xl mx-auto">{appetizersSection.intro}</p>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -249,8 +278,8 @@ export default function Menus() {
                 transition={{ delay: index * 0.1 }}
                 className="bg-white p-6 rounded-xl shadow-md"
               >
-                <h3 className="font-bold text-crock-dark mb-2">{item.name}</h3>
-                <p className="text-crock-gray text-sm">{item.description}</p>
+                <h3 className="font-bold text-crock-dark text-lg mb-2">{item.name}</h3>
+                <p className="text-crock-gray">{item.description}</p>
               </motion.div>
             ))}
           </div>
@@ -267,11 +296,7 @@ export default function Menus() {
             className="text-center mb-12"
           >
             <h2 className="text-4xl font-bold mb-4">
-              {themedBarsSection.headline.includes('Themed Bars') ? (
-                <>BYO <span className="text-crock-orange">Themed Bars</span></>
-              ) : (
-                themedBarsSection.headline
-              )}
+              BYO <span className="text-crock-orange">Themed Bars</span>
             </h2>
             <p className="text-crock-gray-light">{themedBarsSection.subheadline}</p>
           </motion.div>
@@ -287,7 +312,7 @@ export default function Menus() {
                 className="bg-crock-purple/30 px-8 py-6 rounded-xl border border-crock-orange/30 text-center"
               >
                 <h3 className="text-xl font-bold">{item.name}</h3>
-                {item.description && <p className="text-crock-gray-light text-sm mt-1">{item.description}</p>}
+                <p className="text-crock-gray-light text-sm mt-1">{item.description}</p>
               </motion.div>
             ))}
           </div>
@@ -304,11 +329,7 @@ export default function Menus() {
             className="text-center mb-12"
           >
             <h2 className="text-4xl font-bold text-crock-dark mb-4">
-              {breakfastSection.headline.includes('Options') ? (
-                <>Breakfast <span className="text-crock-orange">Options</span></>
-              ) : (
-                breakfastSection.headline
-              )}
+              Breakfast <span className="text-crock-orange">Options</span>
             </h2>
           </motion.div>
 
@@ -330,8 +351,64 @@ export default function Menus() {
         </div>
       </section>
 
-      {/* Contact Form */}
+      {/* Soft Drinks & Desserts */}
       <section className="py-20 bg-crock-gray-light/30">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            {/* Soft Drinks */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <FaGlassWhiskey className="text-crock-orange text-3xl" />
+                <h2 className="text-3xl font-bold text-crock-dark">
+                  {softDrinksSection.headline}
+                </h2>
+              </div>
+              <p className="text-crock-gray mb-6">{softDrinksSection.intro}</p>
+              <div className="space-y-4">
+                {softDrinks.map((item, index) => (
+                  <div key={index} className="bg-white p-4 rounded-lg shadow-sm">
+                    <h3 className="font-bold text-crock-dark">{item.name}</h3>
+                    <p className="text-crock-gray text-sm">{item.description}</p>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* Desserts */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <FaCookie className="text-crock-orange text-3xl" />
+                <h2 className="text-3xl font-bold text-crock-dark">
+                  {dessertsSection.headline}
+                </h2>
+              </div>
+              <p className="text-crock-gray mb-6">{dessertsSection.intro}</p>
+              <div className="grid grid-cols-2 gap-3">
+                {desserts.map((item, index) => (
+                  <div key={index} className="bg-white p-4 rounded-lg shadow-sm">
+                    <h3 className="font-bold text-crock-dark">{item.name}</h3>
+                    <p className="text-crock-gray text-sm">{item.description}</p>
+                  </div>
+                ))}
+              </div>
+              <p className="text-crock-orange font-medium mt-4 text-center italic">
+                {dessertNote}
+              </p>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Form */}
+      <section className="py-20 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -340,11 +417,7 @@ export default function Menus() {
             className="text-center mb-12"
           >
             <h2 className="text-4xl font-bold text-crock-dark mb-4">
-              {cta.headline.includes('Custom Menu') ? (
-                <>Request a <span className="text-crock-orange">Custom Menu</span></>
-              ) : (
-                cta.headline
-              )}
+              Request a <span className="text-crock-orange">Custom Menu</span>
             </h2>
             <p className="text-xl text-crock-gray">
               {cta.description}
@@ -355,7 +428,7 @@ export default function Menus() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="bg-white p-8 rounded-2xl shadow-lg"
+            className="bg-crock-gray-light/20 p-8 rounded-2xl shadow-lg"
           >
             <ContactForm />
           </motion.div>
