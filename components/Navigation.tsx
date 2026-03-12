@@ -69,19 +69,21 @@ const Navigation = () => {
           {/* Logo */}
           <Link
             href="/"
-            className="flex items-center space-x-3"
+            className="flex items-center"
             onClick={handleClose}
           >
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
-              className="flex items-center space-x-2"
             >
-              {/* Logo text styling to match brand */}
-              <span className="text-xl sm:text-2xl font-bold">
-                <span className="text-white">CROCK</span>
-                <span className="text-crock-orange" style={{ fontStyle: 'italic' }}>Spot</span>
-              </span>
+              <Image
+                src="/images/crock-spot-logo-white.png"
+                alt="The Crock Spot"
+                width={150}
+                height={50}
+                className="h-10 sm:h-12 w-auto"
+                priority
+              />
             </motion.div>
           </Link>
 
