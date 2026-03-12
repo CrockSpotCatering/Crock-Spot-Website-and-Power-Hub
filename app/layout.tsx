@@ -11,36 +11,38 @@ const mulish = Mulish({
   variable: '--font-muli',
 });
 
-// Viewport configuration
+// Viewport configuration - Google Mobile Optimization Standards 2025
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   maximumScale: 5,
   userScalable: true,
   themeColor: '#2F2744',
+  viewportFit: 'cover', // Support for notched devices
+  interactiveWidget: 'resizes-content', // Prevents layout shift when keyboard appears
 };
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://thecrockspot.com'),
   title: {
-    default: 'The Crock Spot - Denver\'s Premier Food Truck Catering | Slow Cooked Gourmet Cuisine',
+    default: 'The Crock Spot - Denver\'s Premier Event Caterer | Corporate Catering & Weddings',
     template: '%s | The Crock Spot',
   },
   description:
-    'Award-winning food truck catering in Denver. Voted Best Food Truck by 5280 Magazine. Customizable gourmet rice bowls, event catering, corporate events, and weddings. 15+ years of experience.',
+    'Denver\'s award-winning event caterer for corporate events, weddings, and private gatherings. Customizable gourmet rice bowls, buffet service, and food truck catering. 15+ years serving Colorado.',
   keywords: [
     'Denver catering',
-    'food truck catering Denver',
     'corporate catering Denver',
+    'event catering Denver',
     'wedding catering Denver',
+    'buffet catering Colorado',
     'gourmet rice bowls',
     'Crock Spot',
-    'best food truck Denver',
-    'event catering Colorado',
-    'customizable catering',
-    'slow cooked cuisine',
-    'build your own bowl',
-    'Denver food truck',
+    'corporate event food',
+    'Denver caterer',
+    'customizable catering menus',
+    'professional catering service',
+    'Colorado event catering',
   ],
   authors: [
     { name: 'Steven & Mandy' },
@@ -61,23 +63,23 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: 'https://thecrockspot.com',
     siteName: 'The Crock Spot',
-    title: 'The Crock Spot - Denver\'s Premier Food Truck Catering',
+    title: 'The Crock Spot - Denver\'s Premier Event Caterer',
     description:
-      'Award-winning food truck catering serving Denver since 2010. Customizable gourmet rice bowls, event catering, weddings, and corporate events.',
+      'Award-winning catering for corporate events, weddings, and private gatherings. Customizable gourmet rice bowls and buffet service. Serving Colorado since 2010.',
     images: [
       {
         url: '/images/hero-bowl.jpg',
         width: 1200,
         height: 630,
-        alt: 'The Crock Spot - Delicious Gourmet Rice Bowls',
+        alt: 'The Crock Spot - Award-Winning Event Catering',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'The Crock Spot - Denver\'s Premier Food Truck Catering',
+    title: 'The Crock Spot - Denver\'s Premier Event Caterer',
     description:
-      'Award-winning food truck catering serving Denver since 2010. Customizable gourmet rice bowls for any event.',
+      'Award-winning catering for corporate events, weddings, and private gatherings. Customizable gourmet cuisine.',
     images: ['/images/hero-bowl.jpg'],
   },
   robots: {
@@ -154,7 +156,7 @@ const organizationSchema = {
   ],
 };
 
-// Service Schema
+// Service Schema - Corporate catering focus
 const serviceSchema = {
   '@context': 'https://schema.org',
   '@type': 'ItemList',
@@ -162,21 +164,21 @@ const serviceSchema = {
     {
       '@type': 'FoodService',
       position: 1,
-      name: 'Food Truck Catering',
+      name: 'Corporate Catering',
       description:
-        'On-site food truck catering for events. Fresh, customizable rice bowls served directly from our gourmet food trucks.',
+        'Professional catering for corporate events, team lunches, and business gatherings. Serve 100+ guests per hour with customizable menus.',
       provider: {
         '@type': 'Organization',
         name: 'The Crock Spot',
       },
-      serviceType: 'Food Truck Catering',
+      serviceType: 'Corporate Catering',
     },
     {
       '@type': 'FoodService',
       position: 2,
-      name: 'Buffet Style Catering',
+      name: 'Buffet Style Service',
       description:
-        'Traditional buffet setup with our signature slow-cooked proteins, bases, sauces, and toppings.',
+        'Elegant buffet presentations with signature slow-cooked proteins, bases, sauces, and toppings. Perfect for weddings and formal occasions.',
       provider: {
         '@type': 'Organization',
         name: 'The Crock Spot',
@@ -186,18 +188,6 @@ const serviceSchema = {
     {
       '@type': 'FoodService',
       position: 3,
-      name: 'Corporate Event Catering',
-      description:
-        'Quick-serve concept perfect for corporate events. Serve 100+ people per hour with customizable options.',
-      provider: {
-        '@type': 'Organization',
-        name: 'The Crock Spot',
-      },
-      serviceType: 'Corporate Catering',
-    },
-    {
-      '@type': 'FoodService',
-      position: 4,
       name: 'Wedding Catering',
       description:
         'Design specialty bowls or themed bars for your special day. Memorable food experiences for you and your guests.',
@@ -206,6 +196,18 @@ const serviceSchema = {
         name: 'The Crock Spot',
       },
       serviceType: 'Wedding Catering',
+    },
+    {
+      '@type': 'FoodService',
+      position: 4,
+      name: 'Food Truck Option',
+      description:
+        'On-site food truck catering for outdoor events and festivals. Fresh, customizable rice bowls served directly from our mobile kitchen.',
+      provider: {
+        '@type': 'Organization',
+        name: 'The Crock Spot',
+      },
+      serviceType: 'Food Truck Catering',
     },
   ],
 };
@@ -275,6 +277,18 @@ export default function RootLayout({
         <meta name="format-detection" content="telephone=no" />
         <link rel="canonical" href="https://thecrockspot.com" />
         <link rel="icon" href="/favicon.ico" />
+
+        {/* Preconnect hints for better Core Web Vitals (LCP improvement) */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://images.unsplash.com" />
+        <link rel="dns-prefetch" href="https://images.unsplash.com" />
+
+        {/* Mobile app manifest */}
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
         {/* Organization Schema */}
         <Script

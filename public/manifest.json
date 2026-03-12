@@ -1,0 +1,26 @@
+{
+  "name": "The Crock Spot",
+  "short_name": "Crock Spot",
+  "description": "Denver's Premier Event Caterer - Corporate Events, Weddings & Private Gatherings",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#2F2744",
+  "theme_color": "#2F2744",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/images/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/images/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["food", "business", "lifestyle"],
+  "lang": "en-US"
+}

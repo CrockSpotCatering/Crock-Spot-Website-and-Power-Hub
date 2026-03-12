@@ -27,35 +27,35 @@ const Footer = () => {
           {/* Quick Links */}
           <div>
             <h4 className="text-lg font-semibold mb-4 text-crock-orange">Quick Links</h4>
-            <ul className="space-y-2">
+            <ul className="space-y-1">
               <li>
-                <Link href="/" className="text-crock-gray-light hover:text-crock-orange transition-colors">
+                <Link href="/" className="text-crock-gray-light hover:text-crock-orange transition-colors block py-2 min-h-[44px] flex items-center">
                   Home
                 </Link>
               </li>
               <li>
-                <Link href="/catering" className="text-crock-gray-light hover:text-crock-orange transition-colors">
+                <Link href="/catering" className="text-crock-gray-light hover:text-crock-orange transition-colors block py-2 min-h-[44px] flex items-center">
                   Catering
                 </Link>
               </li>
               <li>
-                <Link href="/about" className="text-crock-gray-light hover:text-crock-orange transition-colors">
+                <Link href="/about" className="text-crock-gray-light hover:text-crock-orange transition-colors block py-2 min-h-[44px] flex items-center">
                   About Us
                 </Link>
               </li>
               <li>
-                <Link href="/menus" className="text-crock-gray-light hover:text-crock-orange transition-colors">
+                <Link href="/menus" className="text-crock-gray-light hover:text-crock-orange transition-colors block py-2 min-h-[44px] flex items-center">
                   Menus
                 </Link>
               </li>
               <li>
-                <Link href="/government-capabilities" className="text-crock-gray-light hover:text-crock-orange transition-colors">
-                  Government Capabilities
+                <Link href="/government-capabilities" className="text-crock-gray-light hover:text-crock-orange transition-colors block py-2 min-h-[44px] flex items-center">
+                  Government
                 </Link>
               </li>
               <li>
-                <Link href="/community-partners" className="text-crock-gray-light hover:text-crock-orange transition-colors">
-                  Community Partners
+                <Link href="/community-partners" className="text-crock-gray-light hover:text-crock-orange transition-colors block py-2 min-h-[44px] flex items-center">
+                  Community
                 </Link>
               </li>
             </ul>
@@ -77,25 +77,26 @@ const Footer = () => {
           {/* Contact */}
           <div>
             <h4 className="text-lg font-semibold mb-4 text-crock-orange">Connect With Us</h4>
-            <div className="space-y-3">
+            <div className="space-y-2">
               <a
                 href="mailto:steven@thecrockspot.com"
-                className="flex items-center space-x-2 text-crock-gray-light hover:text-crock-orange transition-colors"
+                className="flex items-center space-x-2 text-crock-gray-light hover:text-crock-orange transition-colors py-2 min-h-[44px]"
               >
-                <FaEnvelope />
-                <span>steven@thecrockspot.com</span>
+                <FaEnvelope className="flex-shrink-0" />
+                <span className="text-sm sm:text-base break-all">steven@thecrockspot.com</span>
               </a>
-              <div className="flex items-center space-x-2 text-crock-gray-light">
-                <FaMapMarkerAlt />
+              <div className="flex items-center space-x-2 text-crock-gray-light py-2">
+                <FaMapMarkerAlt className="flex-shrink-0" />
                 <span>Denver, Colorado</span>
               </div>
-              <div className="flex space-x-4 mt-4">
+              {/* Social links with Google-recommended 48px touch targets */}
+              <div className="flex space-x-2 mt-4">
                 <a
                   href="https://www.facebook.com/104226646277525"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-crock-gray-light hover:text-crock-orange transition-colors"
-                  aria-label="Facebook"
+                  className="text-crock-gray-light hover:text-crock-orange transition-colors p-3 min-w-[48px] min-h-[48px] flex items-center justify-center rounded-full hover:bg-white/10"
+                  aria-label="Visit our Facebook page"
                 >
                   <FaFacebook size={24} />
                 </a>
@@ -103,8 +104,8 @@ const Footer = () => {
                   href="https://www.instagram.com/thecrockspot"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-crock-gray-light hover:text-crock-orange transition-colors"
-                  aria-label="Instagram"
+                  className="text-crock-gray-light hover:text-crock-orange transition-colors p-3 min-w-[48px] min-h-[48px] flex items-center justify-center rounded-full hover:bg-white/10"
+                  aria-label="Visit our Instagram page"
                 >
                   <FaInstagram size={24} />
                 </a>
@@ -123,17 +124,24 @@ const Footer = () => {
         </div>
 
         {/* Copyright */}
-        <div className="border-t border-crock-gray/30 mt-4 pt-6 text-center text-crock-gray-light text-sm">
+        <div className="border-t border-crock-gray/30 mt-4 pt-6 text-center text-crock-gray-light text-sm safe-bottom">
           <p>&copy; {currentYear} The Crock Spot. All rights reserved.</p>
           <p className="mt-2">
             Founded by Steven & Mandy | Serving Denver Since 2010
           </p>
-          <div className="mt-4 flex justify-center space-x-6">
-            <Link href="/privacy" className="hover:text-crock-orange transition-colors">
+          {/* Legal links with adequate touch targets */}
+          <div className="mt-4 flex flex-wrap justify-center gap-2">
+            <Link
+              href="/privacy"
+              className="hover:text-crock-orange transition-colors px-4 py-2 min-h-[44px] flex items-center"
+            >
               Privacy Policy
             </Link>
-            <span>•</span>
-            <Link href="/terms" className="hover:text-crock-orange transition-colors">
+            <span className="hidden sm:inline py-2">•</span>
+            <Link
+              href="/terms"
+              className="hover:text-crock-orange transition-colors px-4 py-2 min-h-[44px] flex items-center"
+            >
               Terms of Service
             </Link>
           </div>

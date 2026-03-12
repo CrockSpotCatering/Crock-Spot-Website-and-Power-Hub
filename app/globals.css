@@ -5,27 +5,43 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ===== GOOGLE MOBILE OPTIMIZATION STANDARDS 2025 ===== */
+
 @layer base {
+  /* Base HTML - Critical for mobile rendering */
+  html {
+    font-size: 16px; /* Google minimum for mobile readability */
+    line-height: 1.5;
+    text-rendering: optimizeLegibility;
+  }
+
   body {
     @apply bg-white text-crock-dark font-body;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     -webkit-text-size-adjust: 100%;
     -ms-text-size-adjust: 100%;
+    text-size-adjust: 100%;
   }
 
   * {
     -webkit-tap-highlight-color: rgba(244, 146, 32, 0.2);
+    /* Prevent text selection issues on touch */
+    -webkit-touch-callout: none;
   }
 
+  /* Google recommends 16px minimum for form inputs to prevent iOS zoom */
   input,
   textarea,
   select {
-    font-size: 16px;
+    font-size: 16px !important;
+    @apply rounded-lg;
   }
 
+  /* Touch-friendly interactive elements */
   button,
-  a {
+  a,
+  [role="button"] {
     touch-action: manipulation;
     -webkit-user-select: none;
     user-select: none;
@@ -33,6 +49,11 @@
 
   h1, h2, h3, h4, h5, h6 {
     @apply font-bold;
+    text-wrap: balance; /* Modern CSS for better headline wrapping */
+  }
+
+  p {
+    text-wrap: pretty; /* Better paragraph wrapping on mobile */
   }
 }
 
@@ -49,16 +70,32 @@
     @apply bg-white/10 backdrop-blur-lg border border-white/20;
   }
 
+  /* Google recommends 48x48px minimum touch targets */
   .touch-target {
-    @apply min-h-[44px] min-w-[44px];
+    @apply min-h-[48px] min-w-[48px];
   }
 
+  /* Safe area insets for notched devices (iPhone X+, etc.) */
   .safe-top {
     padding-top: env(safe-area-inset-top);
   }
 
   .safe-bottom {
     padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .safe-left {
+    padding-left: env(safe-area-inset-left);
+  }
+
+  .safe-right {
+    padding-right: env(safe-area-inset-right);
+  }
+
+  /* Container padding that respects safe areas */
+  .safe-container {
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
   }
 
   /* Steam animation for bowls */
@@ -115,6 +152,54 @@ body {
   * {
     -ms-overflow-style: none;
     scrollbar-width: none;
+  }
+
+  /* Mobile-specific typography adjustments */
+  h1 {
+    font-size: clamp(1.75rem, 5vw, 2.5rem);
+  }
+
+  h2 {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+  }
+
+  /* Ensure adequate spacing between tap targets */
+  nav a,
+  nav button,
+  footer a,
+  .btn,
+  button {
+    margin: 4px 0;
+  }
+
+  /* Better mobile card layouts */
+  .grid {
+    gap: 1rem;
+  }
+
+  /* Prevent horizontal overflow */
+  img,
+  video,
+  iframe {
+    max-width: 100%;
+  }
+
+  /* Mobile-friendly form elements */
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="number"],
+  textarea,
+  select {
+    padding: 14px 16px;
+    min-height: 48px;
+  }
+
+  /* Better button sizing on mobile */
+  button,
+  .btn,
+  a[role="button"] {
+    padding: 14px 24px;
   }
 }
 
