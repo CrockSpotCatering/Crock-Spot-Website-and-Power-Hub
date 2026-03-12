@@ -124,14 +124,17 @@ export default function AIAssistPage() {
         if (!response.ok) {
           setUploadError(data.error || 'Failed to parse document');
           setUploadingFile(false);
+          e.target.value = '';
           return;
         }
 
         setBrandGuidelines(data.text);
         setUploadedFileName(file.name);
         setBrandSaved(false);
+        setUploadingFile(false);
       } catch (error) {
         setUploadError('Failed to upload file: ' + String(error));
+        setUploadingFile(false);
       }
     }
     // Handle plain text files directly
@@ -142,17 +145,19 @@ export default function AIAssistPage() {
         setBrandGuidelines(text);
         setUploadedFileName(file.name);
         setBrandSaved(false);
+        setUploadingFile(false);
       };
       reader.onerror = () => {
         setUploadError('Failed to read file');
+        setUploadingFile(false);
       };
       reader.readAsText(file);
     }
     else {
       setUploadError('Unsupported file type. Please upload a PDF, Word document (.docx), or text file.');
+      setUploadingFile(false);
     }
 
-    setUploadingFile(false);
     // Reset the input so the same file can be uploaded again
     e.target.value = '';
   };
