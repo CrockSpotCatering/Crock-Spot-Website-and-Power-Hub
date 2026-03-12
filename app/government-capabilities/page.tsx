@@ -11,6 +11,9 @@ import {
   FaAward,
   FaClock,
   FaLeaf,
+  FaMedal,
+  FaFlag,
+  FaStar,
 } from 'react-icons/fa';
 import CTASection from '@/components/CTASection';
 import ContactForm from '@/components/ContactForm';
@@ -30,7 +33,7 @@ export default function GovernmentCapabilities() {
     {
       icon: <FaLeaf size={40} />,
       title: 'Dietary Compliance',
-      desc: 'Extensive gluten-free, vegetarian, and vegan options clearly labeled.',
+      desc: 'Gluten-free, vegetarian, vegan, dairy-free, and halal options clearly labeled.',
     },
     {
       icon: <FaShieldAlt size={40} />,
@@ -170,6 +173,92 @@ export default function GovernmentCapabilities() {
         </div>
       </section>
 
+      {/* Mission-Critical Experience */}
+      <section className="py-20 bg-gradient-to-b from-crock-purple/20 to-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <div className="inline-flex items-center gap-2 bg-crock-orange/10 border border-crock-orange/30 text-crock-orange px-4 py-2 rounded-full mb-6">
+              <FaMedal /> Proven Performance
+            </div>
+            <h2 className="text-4xl font-bold text-crock-dark mb-4">
+              Mission-Critical <span className="text-crock-orange">Experience</span>
+            </h2>
+            <p className="text-xl text-crock-gray max-w-3xl mx-auto">
+              When it matters most, government agencies count on The Crock Spot
+            </p>
+          </motion.div>
+
+          {/* COVID-19 Response Highlight */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="bg-crock-dark rounded-2xl overflow-hidden shadow-2xl mb-12"
+          >
+            <div className="bg-gradient-to-r from-crock-orange to-crock-orange/80 px-6 py-4">
+              <div className="flex items-center gap-3 text-white">
+                <FaFlag size={24} />
+                <h3 className="text-xl font-bold">Colorado Army National Guard COVID-19 Response</h3>
+              </div>
+            </div>
+            <div className="p-8 md:p-10">
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
+                <div className="text-center">
+                  <p className="text-5xl font-bold text-crock-orange">36</p>
+                  <p className="text-crock-gray-light">Consecutive Days</p>
+                </div>
+                <div className="text-center">
+                  <p className="text-5xl font-bold text-crock-orange">250</p>
+                  <p className="text-crock-gray-light">Meals Per Day</p>
+                </div>
+                <div className="text-center">
+                  <p className="text-5xl font-bold text-crock-orange">48hr</p>
+                  <p className="text-crock-gray-light">Mobilization Time</p>
+                </div>
+              </div>
+              <p className="text-lg text-white leading-relaxed mb-6">
+                <strong className="text-crock-orange">April 17 – May 22, 2020:</strong> Sole provider of breakfast, lunch, and dinner for the Colorado Army National Guard COVID-19 Response Force at the Colorado Convention Center. Mobilized within 48 hours and delivered up to 250 meals per day, seven days a week, for 36 consecutive days.
+              </p>
+              <p className="text-crock-gray-light">
+                This mission demonstrated our ability to scale rapidly, maintain consistent quality under pressure, and adapt to changing requirements in real-time.
+              </p>
+            </div>
+          </motion.div>
+
+          {/* Military Contracts */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="bg-white rounded-2xl p-8 shadow-lg border border-crock-gray-light/30"
+          >
+            <div className="flex items-center gap-3 mb-6">
+              <FaStar className="text-crock-orange" size={28} />
+              <h3 className="text-2xl font-bold text-crock-dark">Ongoing Military Partnerships</h3>
+            </div>
+            <p className="text-lg text-crock-gray mb-6">
+              Multiple contracts and GPC purchases for Army National Guard AT events and drill weekends at <strong>Buckley Space Force Base</strong>.
+            </p>
+            <div className="flex flex-wrap gap-4">
+              <span className="bg-crock-green/10 text-crock-green px-4 py-2 rounded-full font-semibold flex items-center gap-2">
+                <FaCheckCircle /> SAM Registered
+              </span>
+              <span className="bg-crock-orange/10 text-crock-orange px-4 py-2 rounded-full font-semibold flex items-center gap-2">
+                <FaCheckCircle /> Colorado Small Business
+              </span>
+              <span className="bg-crock-purple/10 text-crock-purple px-4 py-2 rounded-full font-semibold flex items-center gap-2">
+                <FaCheckCircle /> Veteran Friendly
+              </span>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
       {/* Service Types */}
       <section className="py-20 bg-crock-dark text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -261,14 +350,39 @@ export default function GovernmentCapabilities() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-4xl font-bold text-crock-dark mb-6">
+              <h2 className="text-4xl font-bold text-crock-dark mb-4">
                 Why Government Agencies <span className="text-crock-orange">Trust Us</span>
               </h2>
-              <div className="space-y-4">
+              <p className="text-lg text-crock-gray mb-6">
+                We are a <strong>&quot;yes&quot; company</strong>—flexible, adaptive, and committed to meeting every client requirement. Our approach ensures your mission comes first.
+              </p>
+
+              <h3 className="text-lg font-bold text-crock-dark mb-4">Known For:</h3>
+              <div className="grid grid-cols-2 gap-3 mb-8">
+                {[
+                  'Generous portions',
+                  'Fast, efficient service',
+                  'Healthy, quality food',
+                  'Competitive pricing',
+                ].map((item, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1 }}
+                    className="bg-crock-orange/10 px-4 py-3 rounded-lg text-crock-dark font-medium text-center"
+                  >
+                    {item}
+                  </motion.div>
+                ))}
+              </div>
+
+              <div className="space-y-3">
                 {[
                   '15+ years of proven experience in Denver',
                   'Efficient service: 100+ guests per hour',
-                  'Comprehensive dietary accommodations',
+                  'Dietary options: gluten-free, vegetarian, vegan, dairy-free, halal',
                   'Fully licensed, insured, and compliant',
                   'Flexible scheduling for any event type',
                   'Transparent quotes with no hidden fees',
@@ -280,10 +394,10 @@ export default function GovernmentCapabilities() {
                     initial={{ opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
-                    transition={{ delay: index * 0.1 }}
+                    transition={{ delay: index * 0.05 }}
                     className="flex items-center gap-3"
                   >
-                    <FaCheckCircle className="text-crock-orange flex-shrink-0" />
+                    <FaCheckCircle className="text-crock-green flex-shrink-0" />
                     <span className="text-crock-dark">{item}</span>
                   </motion.div>
                 ))}
