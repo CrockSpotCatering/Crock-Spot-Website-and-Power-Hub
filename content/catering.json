@@ -14,32 +14,18 @@
   },
   "cateringOptions": [
     {
-      "title": "Food Truck Service",
-      "description": "Our gourmet food trucks bring the full kitchen experience to your event. Fresh, hot meals cooked on-site.",
-      "price": "Request Quote",
-      "icon": "truck",
-      "features": [
-        "On-site cooking - never reheated",
-        "Serve 100+ guests per hour",
-        "25-second average service time",
-        "Custom menu design",
-        "Professional Crock Star crew"
-      ],
-      "ideal": "Outdoor events, festivals, corporate gatherings"
-    },
-    {
       "title": "Buffet Style Service",
-      "description": "Elegant indoor buffet setup with our full menu selection. Perfect for formal occasions.",
+      "description": "Elegant indoor buffet setup with our full menu selection. Perfect for corporate events, weddings, and formal occasions.",
       "price": "Request Quote",
       "icon": "utensils",
       "features": [
-        "Full service setup",
-        "Chafing dishes included",
+        "Full service setup & teardown",
+        "Professional presentation",
         "Dietary labels provided",
-        "Customizable menu options",
-        "Staff assistance available"
+        "Fully customizable menus",
+        "Dedicated service staff"
       ],
-      "ideal": "Weddings, corporate dinners, private parties"
+      "ideal": "Corporate dinners, weddings, galas, private parties"
     },
     {
       "title": "Themed Bars",
@@ -53,7 +39,21 @@
         "Mac n Cheese Bar",
         "Nacho Bar"
       ],
-      "ideal": "Casual events, team building, celebrations"
+      "ideal": "Team building, celebrations, corporate mixers"
+    },
+    {
+      "title": "Food Truck Option",
+      "description": "Our gourmet food trucks bring the full kitchen experience to your outdoor event. Fresh, hot meals cooked on-site.",
+      "price": "Request Quote",
+      "icon": "truck",
+      "features": [
+        "On-site cooking - never reheated",
+        "Serve 100+ guests per hour",
+        "25-second average service time",
+        "Custom menu design",
+        "Professional Crock Star crew"
+      ],
+      "ideal": "Outdoor events, festivals, casual gatherings"
     }
   ],
   "eventsSection": {

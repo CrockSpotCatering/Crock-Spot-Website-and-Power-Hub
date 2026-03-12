@@ -24,9 +24,9 @@ import homeContent from '@/content/home.json';
 
 // Icon mapping for services
 const serviceIcons: Record<string, React.ReactNode> = {
-  'Food Truck Catering': <FaTruck size={40} />,
+  'Corporate Catering': <FaUsers size={40} />,
   'Buffet Style Service': <FaUtensils size={40} />,
-  'Corporate Events': <FaUsers size={40} />,
+  'Food Truck Option': <FaTruck size={40} />,
 };
 
 // Icon mapping for event types
@@ -178,7 +178,7 @@ export default function Home() {
               Our Catering Services
             </h2>
             <p className="text-xl text-crock-gray max-w-2xl mx-auto">
-              From food trucks to full-service buffets, we bring gourmet cuisine to any event
+              Professional catering for corporate events, weddings, and special occasions
             </p>
           </motion.div>
 

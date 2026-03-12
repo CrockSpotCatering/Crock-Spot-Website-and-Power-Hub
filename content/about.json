@@ -16,20 +16,20 @@
   },
   "cateringStyle": {
     "headline": "Our Signature Catering Style",
-    "subheadline": "Mobile Food Truck or Full Buffet Service",
-    "intro": "At The Crock Spot, we pioneered Denver's food truck catering scene — delivering fresh, fully customizable rustic rice bowls straight to your event, whether it's an intimate mountain wedding or a large corporate gathering.",
-    "history": "Our journey began on wheels as one of the original Denver food trucks, earning loyal fans at Cherry Creek Farmers Market and local events with our healthy, gourmet fast-casual concept. With the addition of our trusted Field Marshall (and now partner) Peter, we expanded rapidly — growing our fleet to multiple trucks by 2017.",
+    "subheadline": "Full-Service Buffets & Mobile Food Truck Options",
+    "intro": "At The Crock Spot, we've built our reputation on delivering exceptional catering for corporate events, weddings, and private gatherings across Colorado — serving fresh, fully customizable cuisine that wows every guest.",
+    "history": "Our journey began at Cherry Creek Farmers Market in 2010, where we earned loyal fans with our healthy, gourmet fast-casual concept. With the addition of our trusted Field Marshall (and now partner) Peter, we expanded rapidly — growing into Denver's go-to corporate caterer and event specialists.",
     "styles": [
       {
-        "name": "Food Truck Catering",
-        "description": "Interactive, fun, and fresh — guests build their perfect rice bowl on-site for a memorable, casual experience."
+        "name": "Buffet-Style Service",
+        "description": "Elegant buffet presentations featuring appetizers and main courses for seamless large-scale events — perfect for corporate gatherings, weddings, and formal occasions."
       },
       {
-        "name": "Buffet-Style Service",
-        "description": "Elegant buffet presentations featuring appetizers and main courses for seamless large-scale events, with the same customizable, crowd-pleasing menus."
+        "name": "Food Truck Option",
+        "description": "Interactive, fun, and fresh — guests build their perfect rice bowl on-site for a memorable, casual outdoor experience."
       }
     ],
-    "closing": "No matter the format, our proven mobile expertise ensures fast, flawless service for weddings, corporate events, festivals, and private parties across Colorado — feeding hundreds with fresh, personalized meals that keep guests coming back."
+    "closing": "Our proven expertise ensures fast, flawless service for corporate events, weddings, festivals, and private parties across Colorado — feeding hundreds with fresh, personalized meals that keep guests coming back."
   },
   "community": {
     "headline": "Our Community",

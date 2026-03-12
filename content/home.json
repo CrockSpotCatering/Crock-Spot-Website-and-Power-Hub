@@ -1,9 +1,9 @@
 {
   "hero": {
-    "badge": "Best Food Truck in Denver - 5280 Magazine",
+    "badge": "Denver's Premier Event Caterer - 15+ Years",
     "headline": "Let Us Crock Your World",
-    "subheadline": "Award-winning food truck catering in Denver. Slow-cooked gourmet cuisine that's always fresh, never reheated.",
-    "tagline": "Serving Denver Since 2010 - 15+ Years of Excellence",
+    "subheadline": "Award-winning catering for corporate events, weddings, and private gatherings. Gourmet cuisine that's always fresh, fully customizable, and professionally served.",
+    "tagline": "Trusted by Colorado's Top Companies & Organizations Since 2010",
     "ctaPrimary": "Get a Free Quote",
     "ctaPrimaryLink": "/contact",
     "ctaSecondary": "View Our Menus",
@@ -18,32 +18,32 @@
   ],
   "services": [
     {
-      "title": "Food Truck Catering",
-      "description": "Our gourmet food trucks bring the full kitchen to your event. Fresh, hot, and served in 25 seconds or less.",
+      "title": "Corporate Catering",
+      "description": "Impress your team and clients with award-winning cuisine. We serve 100+ guests per hour with minimal wait times — perfect for busy professionals.",
       "price": "Request Quote"
     },
     {
       "title": "Buffet Style Service",
-      "description": "Elegant buffet setup with all our signature dishes. Perfect for indoor events and formal occasions.",
+      "description": "Elegant buffet setup with all our signature dishes. Perfect for weddings, galas, and formal occasions.",
       "price": "Request Quote"
     },
     {
-      "title": "Corporate Events",
-      "description": "Quick-serve perfection for busy teams. We can serve 100+ people per hour with minimal wait times.",
+      "title": "Food Truck Option",
+      "description": "Bring the fun outdoors! Our mobile kitchen serves fresh, hot meals on-site for festivals, outdoor events, and casual gatherings.",
       "price": "Request Quote"
     }
   ],
   "benefits": [
     "Fresh, Never Reheated",
     "25-Second Service",
-    "Customizable Bowls",
+    "Customizable Menus",
     "Dietary Friendly",
     "15+ Years Experience",
     "Award-Winning Food"
   ],
   "whyChooseUs": {
     "headline": "Why Choose The Crock Spot?",
-    "description": "With 15+ years serving Denver, we've perfected the art of event catering. Our food truck advantage means your food is always fresh, cooked on-site, and never bagged, boxed, or reheated.",
+    "description": "With 15+ years serving Denver's top companies and organizations, we've perfected the art of event catering. Whether buffet-style elegance or mobile food truck fun, your food is always fresh, cooked on-site, and fully customizable to your event's needs.",
     "image": "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1287&q=80"
   },
   "stats": {
