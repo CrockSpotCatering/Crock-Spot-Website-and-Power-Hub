@@ -8,92 +8,95 @@
 
 I'm working on **The Crock Spot** website & CMS - a food truck catering company in Denver, Colorado.
 
-### 📍 Project Location
+### 📍 FIRST: Read These Files
+```bash
+cd /Users/brettlechtenberg/Documents/agent-girl/crockspot1
 ```
-/Users/brettlechtenberg/Documents/agent-girl/crockspot1
-```
+Then read in this order:
+1. `SESSION_LOG.md` - What was done, what's pending
+2. `README.md` - Full project overview
+3. `DEPLOYMENT.md` - Deployment guide & credentials
 
 ### 🔗 URLs
-- **Live Site:** https://crock-spot-website-and-power-hub.vercel.app
-- **Power Hub CMS:** https://crock-spot-website-and-power-hub.vercel.app/power-hub
-- **GitHub:** https://github.com/CrockSpotCatering/Crock-Spot-Website-and-Power-Hub
-- **Vercel Dashboard:** https://vercel.com/crockspotcaterings-projects
+| Resource | URL |
+|----------|-----|
+| **Live Site** | https://crock-spot-website-and-power-hub.vercel.app |
+| **Power Hub CMS** | https://crock-spot-website-and-power-hub.vercel.app/power-hub |
+| **GitHub Repo** | https://github.com/CrockSpotCatering/Crock-Spot-Website-and-Power-Hub |
+| **Vercel Dashboard** | https://vercel.com/crockspotcaterings-projects |
 
 ### 🛠️ Tech Stack
 - Next.js 16 with App Router
-- Tailwind CSS 3.4
-- Framer Motion
+- Tailwind CSS 3.4 + Framer Motion
 - TypeScript
-- JSON-powered CMS (content stored in `/content/*.json`)
+- JSON-powered CMS (`/content/*.json`)
 - GitHub API for image storage
 - pdf-parse + mammoth for document parsing
-- Vercel deployment (via GitHub integration)
+- Vercel auto-deploy via GitHub
 
 ### 🔐 Power Hub CMS
-| URL | Feature |
-|-----|---------|
-| `/power-hub` | Login (`crockspot` / `letusrock2024`) |
-| `/power-hub/dashboard/content` | Edit page content (JSON files) |
-| `/power-hub/dashboard/media` | Upload/manage images |
-| `/power-hub/dashboard/ai` | AI writing (supports PDF/Word upload) |
+| URL | Feature | Login |
+|-----|---------|-------|
+| `/power-hub` | CMS Login | `crockspot` / `letusrock2024` |
+| `/power-hub/dashboard/content` | Edit JSON content | |
+| `/power-hub/dashboard/media` | Upload/manage images | |
+| `/power-hub/dashboard/ai` | AI writing (PDF/Word) | |
 
-### 📄 Content JSON Files
-All pages read from JSON in `/content/`:
-- `home.json` - Homepage content
-- `about.json` - About page
-- `catering.json` - Catering services
-- `menus.json` - Menu items
-- `contact.json` - Contact info
-- `shared.json` - Testimonials, FAQ
+### 📄 JSON Content System
+Pages import from `/content/*.json`:
+- `home.json`, `about.json`, `catering.json`, `menus.json`, `contact.json`, `shared.json`
 
-### ⚠️ CRITICAL DEPLOYMENT RULES
+Edit JSON in Power Hub → Changes appear on live site.
+
+### ⚠️ CRITICAL RULES
 ```
 ┌─────────────────────────────────────────────────────────────────────┐
 │  🚫 NEVER USE VERCEL CLI (vercel, vercel --prod, etc.)              │
-│  ✅ ONLY deploy via Vercel Dashboard + GitHub Integration          │
+│  ✅ ONLY deploy via GitHub push → Vercel auto-deploys              │
 │                                                                     │
-│  Push to GitHub → Vercel auto-deploys. No CLI. Ever.                │
+│  🚫 NEVER use BoardChairIs1 or Murray Chamber accounts              │
+│  ✅ ONLY use CrockSpotCatering GitHub account                       │
 └─────────────────────────────────────────────────────────────────────┘
 ```
 
-### 📁 Key Files
-Read these first for context:
-1. `DEPLOYMENT.md` - Full deployment guide, credentials, and status
-2. `README.md` - Project overview and structure
-
-### 🔑 Account Info (Keep Separate!)
-| Service | Account | NOT This |
-|---------|---------|----------|
-| **GitHub** | CrockSpotCatering | ❌ Not Brett's personal |
-| **Vercel** | crockspotcaterings-projects | ❌ Not bretts-projects |
-| **Supabase** | CrockSpotCatering@gmail.com | ❌ Not Brett's personal |
-
-> ⚠️ GitHub requires a **classic Personal Access Token** for git push. Create at: https://github.com/settings/tokens/new (select `repo` scope)
+### 🔑 Accounts (KEEP SEPARATE!)
+| Service | Use This | NOT This |
+|---------|----------|----------|
+| **GitHub** | CrockSpotCatering | ❌ BoardChairIs1, BrettLechtenbrerg |
+| **Vercel** | crockspotcaterings-projects | ❌ bretts-projects |
+| **gh CLI** | `gh auth switch -u CrockSpotCatering` | |
 
 ### 🎨 Brand Colors
-- Orange: #F49220 (primary)
-- Maroon: #8C2D2E
-- Green: #667934
-- Purple: #614B8A
-- Dark Purple: #2F2744
+- Orange: `#F49220` (primary)
+- Maroon: `#8C2D2E`
+- Green: `#667934`
+- Purple: `#614B8A`
+- Dark Purple: `#2F2744`
 
 ### 📋 Current Status (March 12, 2026)
 - ✅ Website fully built with all pages
 - ✅ Power Hub CMS complete (Content, Media, AI Assist)
 - ✅ JSON content system wired to all pages
+- ✅ All pages import from JSON files
 - ✅ AI Assist supports PDF/Word document upload
 - ✅ Media Library with GitHub storage
-- ✅ Pushed to GitHub (local commits ready)
-- ✅ Deployed to correct Vercel account (auto-deploy enabled)
-- ⏳ Need CrockSpotCatering GitHub credentials to push latest
+- ✅ All commits pushed to GitHub (CrockSpotCatering account)
+- ✅ Vercel auto-deploying from GitHub
+- ✅ Documentation updated (README, DEPLOYMENT, SESSION_LOG)
 
-### 🚀 Quick Commands (NO VERCEL CLI!)
+### 🐛 Known Issues
+- PDF upload in AI Assist may have issues (needs testing on live site)
+
+### 🚀 Quick Commands
 ```bash
 cd /Users/brettlechtenberg/Documents/agent-girl/crockspot1
-npm run dev        # Start dev server
-npm run build      # Local build test
+npm run dev        # Start dev server (localhost:3000)
+npm run build      # Build for production
 
-# Deploy = push to GitHub (auto-deploys via Vercel integration)
+# Before pushing, ensure correct GitHub account:
+gh auth switch -u CrockSpotCatering
+
+# Deploy = push to GitHub
 git add . && git commit -m "message" && git push origin main
 ```
 
