@@ -16,10 +16,12 @@
 
 | Service | URL | Status |
 |---------|-----|--------|
-| **Live Site** | ⏳ NEEDS REDEPLOYMENT | See instructions below |
-| **GitHub** | https://github.com/CrockSpotCatering/Crock-Spot-Website-and-Power-Hub | ✅ Synced |
-| **Vercel Account** | https://vercel.com/crockspotcaterings-projects | ⏳ Needs import |
+| **Live Site** | https://crock-spot-website-and-power-hub.vercel.app | ✅ LIVE |
+| **GitHub** | https://github.com/CrockSpotCatering/Crock-Spot-Website-and-Power-Hub | ✅ Connected |
+| **Vercel Dashboard** | https://vercel.com/crockspotcaterings-projects | ✅ Deployed |
 | **Local Path** | `/Users/brettlechtenberg/Documents/agent-girl/crockspot1` | ✅ Ready |
+
+> 🔄 **Auto-Deploy Active:** Push to GitHub → Vercel deploys automatically!
 
 ## 📁 Project Structure
 
@@ -101,8 +103,8 @@ git push origin main
 ### Vercel (CrockSpot Account - NOT Brett's personal!)
 - **Account:** crockspotcaterings-projects
 - **Dashboard:** https://vercel.com/crockspotcaterings-projects
-- **Project:** Crock-Spot-Website-and-Power-Hub (import from GitHub)
-- **URL:** Will be assigned after proper deployment
+- **Project:** Crock-Spot-Website-and-Power-Hub
+- **Live URL:** https://crock-spot-website-and-power-hub.vercel.app
 
 > 🚫 **NEVER use Vercel CLI** - Always deploy via GitHub integration only!
 

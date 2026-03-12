@@ -14,6 +14,7 @@ I'm working on **The Crock Spot** website - a food truck catering company in Den
 ```
 
 ### 🔗 URLs
+- **Live Site:** https://crock-spot-website-and-power-hub.vercel.app
 - **GitHub:** https://github.com/CrockSpotCatering/Crock-Spot-Website-and-Power-Hub
 - **Vercel Dashboard:** https://vercel.com/crockspotcaterings-projects
 
@@ -58,7 +59,7 @@ Read these first for context:
 ### 📋 Current Status (March 12, 2026)
 - ✅ Website fully built with all pages
 - ✅ Pushed to GitHub
-- ⏳ **NEEDS:** Import GitHub repo into correct Vercel account
+- ✅ Deployed to correct Vercel account (auto-deploy enabled)
 - ⏳ Images needed in `/public/images/`
 - ⏳ Contact form backend not connected yet
 
