@@ -348,6 +348,97 @@ export default function GovernmentCapabilities() {
         </div>
       </section>
 
+      {/* Vendor Credentials */}
+      <section className="py-16 bg-crock-dark">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-10"
+          >
+            <h2 className="text-3xl font-bold text-white mb-2">
+              Approved <span className="text-crock-orange">Vendor Credentials</span>
+            </h2>
+            <p className="text-crock-gray-light">
+              Registered and verified for government contracting
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="grid grid-cols-1 md:grid-cols-3 gap-6"
+          >
+            {/* NAICS Codes */}
+            <div className="bg-white/10 backdrop-blur rounded-xl p-6 border border-white/20">
+              <h3 className="text-lg font-bold text-crock-orange mb-4 flex items-center gap-2">
+                <FaFileContract /> NAICS Codes
+              </h3>
+              <ul className="space-y-2 text-white font-mono">
+                <li className="flex items-center gap-2">
+                  <span className="bg-crock-orange/20 px-2 py-1 rounded">722310</span>
+                  <span className="text-sm text-crock-gray-light">Food Service Contractors</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="bg-crock-orange/20 px-2 py-1 rounded">722320</span>
+                  <span className="text-sm text-crock-gray-light">Caterers</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="bg-crock-orange/20 px-2 py-1 rounded">722330</span>
+                  <span className="text-sm text-crock-gray-light">Mobile Food Services</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="bg-crock-orange/20 px-2 py-1 rounded">722513</span>
+                  <span className="text-sm text-crock-gray-light">Limited-Service Restaurants</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="bg-crock-orange/20 px-2 py-1 rounded">561210</span>
+                  <span className="text-sm text-crock-gray-light">Facilities Support Services</span>
+                </li>
+              </ul>
+            </div>
+
+            {/* DUNS Number */}
+            <div className="bg-white/10 backdrop-blur rounded-xl p-6 border border-white/20">
+              <h3 className="text-lg font-bold text-crock-orange mb-4 flex items-center gap-2">
+                <FaShieldAlt /> DUNS Number
+              </h3>
+              <div className="bg-crock-orange/20 rounded-lg p-4 text-center">
+                <p className="text-3xl font-mono font-bold text-white tracking-wider">
+                  018638954
+                </p>
+                <p className="text-sm text-crock-gray-light mt-2">
+                  Data Universal Numbering System
+                </p>
+              </div>
+              <p className="text-sm text-crock-gray-light mt-4">
+                Verified business identifier for federal procurement
+              </p>
+            </div>
+
+            {/* CAGE Code */}
+            <div className="bg-white/10 backdrop-blur rounded-xl p-6 border border-white/20">
+              <h3 className="text-lg font-bold text-crock-orange mb-4 flex items-center gap-2">
+                <FaBuilding /> CAGE Code
+              </h3>
+              <div className="bg-crock-orange/20 rounded-lg p-4 text-center">
+                <p className="text-4xl font-mono font-bold text-white tracking-widest">
+                  87UD9
+                </p>
+                <p className="text-sm text-crock-gray-light mt-2">
+                  Commercial and Government Entity
+                </p>
+              </div>
+              <p className="text-sm text-crock-gray-light mt-4">
+                Department of Defense contractor identification
+              </p>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
       <CTASection
         title="Serving Those Who Serve"
         subtitle="Let us take care of the food so you can focus on your mission."
