@@ -6,7 +6,7 @@
 
 ## Project: The Crock Spot Website & Power Hub
 
-I'm working on **The Crock Spot** website & CMS - a food truck catering company in Denver, Colorado.
+I'm working on **The Crock Spot** website & CMS - Denver's premier event caterer for corporate events, weddings, and private gatherings.
 
 ### 📍 FIRST: Read These Files
 ```bash
@@ -42,11 +42,29 @@ Then read in this order:
 | `/power-hub/dashboard/media` | Upload/manage images | |
 | `/power-hub/dashboard/ai` | AI writing (PDF/Word) | |
 
-### 📄 JSON Content System
-Pages import from `/content/*.json`:
-- `home.json`, `about.json`, `catering.json`, `menus.json`, `contact.json`, `shared.json`
+### 📄 JSON Content Files
+All pages import from `/content/*.json`:
+| File | Purpose |
+|------|---------|
+| `home.json` | Homepage - hero, services, benefits, stats |
+| `about.json` | Founders, timeline, values, awards, team |
+| `catering.json` | Catering options, event types, process |
+| `menus.json` | Full menu - appetizers, bases, proteins, sauces, toppers, desserts |
+| `contact.json` | Contact form, locations |
+| `shared.json` | Testimonials, FAQ |
+| `government-capabilities.json` | Vendor credentials, military contracts |
+| `community-partners.json` | Community partnerships |
 
-Edit JSON in Power Hub → Changes appear on live site.
+### 📱 Mobile Optimization (Google 2025)
+✅ Implemented:
+- 48px minimum touch targets
+- `viewportFit: cover` for notched devices
+- `interactiveWidget: resizes-content` for keyboard
+- 16px base font (prevents iOS zoom)
+- `text-wrap: balance/pretty` for typography
+- PWA manifest.json
+- Preconnect hints for fonts/images
+- Safe area inset utilities
 
 ### ⚠️ CRITICAL RULES
 ```
@@ -67,25 +85,51 @@ Edit JSON in Power Hub → Changes appear on live site.
 | **gh CLI** | `gh auth switch -u CrockSpotCatering` | |
 
 ### 🎨 Brand Colors
-- Orange: `#F49220` (primary)
+- Orange: `#F49220` (primary CTA)
 - Maroon: `#8C2D2E`
 - Green: `#667934`
 - Purple: `#614B8A`
-- Dark Purple: `#2F2744`
+- Dark Purple: `#2F2744` (backgrounds)
 
-### 📋 Current Status (March 12, 2026)
-- ✅ Website fully built with all pages
-- ✅ Power Hub CMS complete (Content, Media, AI Assist)
-- ✅ JSON content system wired to all pages
-- ✅ All pages import from JSON files
-- ✅ AI Assist supports PDF/Word document upload
-- ✅ Media Library with GitHub storage
-- ✅ All commits pushed to GitHub (CrockSpotCatering account)
+### 📋 Current Status (March 12, 2026 - End of Day)
+**Website:**
+- ✅ All pages complete and styled
+- ✅ Corporate catering focus (not food trucks)
+- ✅ Mobile optimized per Google 2025 standards
+- ✅ Background images on appetizers, breakfast, timeline, catering style cards
+- ✅ Full menu with rich descriptions
+
+**CMS:**
+- ✅ Power Hub CMS complete
+- ✅ Content editor, Media Library, AI Assist
+- ✅ All pages wired to JSON
+
+**Infrastructure:**
+- ✅ All changes committed and pushed
 - ✅ Vercel auto-deploying from GitHub
-- ✅ Documentation updated (README, DEPLOYMENT, SESSION_LOG)
+- ✅ Documentation up to date
 
-### 🐛 Known Issues
-- PDF upload in AI Assist may have issues (needs testing on live site)
+### 📂 Project Structure
+```
+crockspot1/
+├── app/                    # Next.js pages
+│   ├── page.tsx           # Homepage
+│   ├── about/             # About page
+│   ├── catering/          # Catering page
+│   ├── menus/             # Menu page
+│   ├── contact/           # Contact page
+│   ├── government-capabilities/
+│   ├── community-partners/
+│   ├── power-hub/         # CMS dashboard
+│   └── api/               # API routes
+├── components/            # React components
+├── content/               # JSON content files
+├── public/                # Static assets
+├── SESSION_LOG.md         # What was done
+├── RESTART_PROMPT.md      # This file
+├── DEPLOYMENT.md          # Deploy guide
+└── README.md              # Project overview
+```
 
 ### 🚀 Quick Commands
 ```bash
@@ -101,10 +145,12 @@ git add . && git commit -m "message" && git push origin main
 ```
 
 ### 📞 Business Info
-- **Owners:** Steven & Mandy
-- **Founded:** 2010
+- **Business:** The Crock Spot (Denver food truck catering since 2010)
+- **Owners:** Steven & Mandy (+ Peter, partner)
 - **Email:** steven@thecrockspot.com
 - **Tagline:** "Let Us Crock Your World"
+- **Focus:** Corporate events, weddings, buffet catering
+- **Awards:** Best Food Truck (5280), Best Meals on Wheels (Westword), 50 Coolest Small Businesses (Business Insider)
 
 ---
 
