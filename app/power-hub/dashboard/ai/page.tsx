@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import Header from '@/components/power-hub/Header';
 import {
   Sparkles, FileText, Zap, Copy, Check, Loader2, Key, Eye, EyeOff,
-  X, FileUp, BookOpen
+  X, FileUp, BookOpen, AlertCircle
 } from 'lucide-react';
 
 const quickActions = [
@@ -37,12 +37,16 @@ export default function AIAssistPage() {
   const [brandGuidelines, setBrandGuidelines] = useState('');
   const [showBrandSection, setShowBrandSection] = useState(false);
   const [brandSaved, setBrandSaved] = useState(false);
+  const [uploadedFileName, setUploadedFileName] = useState('');
+  const [uploadingFile, setUploadingFile] = useState(false);
+  const [uploadError, setUploadError] = useState('');
 
   // Load saved data on mount
   useEffect(() => {
     const savedKey = localStorage.getItem('crockspot_ai_api_key');
     const savedProvider = localStorage.getItem('crockspot_ai_provider') as AIProvider;
     const savedBrand = localStorage.getItem('crockspot_brand_guidelines');
+    const savedFileName = localStorage.getItem('crockspot_brand_filename');
 
     if (savedKey) {
       setApiKey(savedKey);
@@ -54,6 +58,9 @@ export default function AIAssistPage() {
     if (savedBrand) {
       setBrandGuidelines(savedBrand);
       setBrandSaved(true);
+    }
+    if (savedFileName) {
+      setUploadedFileName(savedFileName);
     }
   }, []);
 
@@ -75,27 +82,79 @@ export default function AIAssistPage() {
   const saveBrandGuidelines = () => {
     if (brandGuidelines.trim()) {
       localStorage.setItem('crockspot_brand_guidelines', brandGuidelines);
+      if (uploadedFileName) {
+        localStorage.setItem('crockspot_brand_filename', uploadedFileName);
+      }
       setBrandSaved(true);
     }
   };
 
   const clearBrandGuidelines = () => {
     localStorage.removeItem('crockspot_brand_guidelines');
+    localStorage.removeItem('crockspot_brand_filename');
     setBrandGuidelines('');
+    setUploadedFileName('');
     setBrandSaved(false);
+    setUploadError('');
   };
 
-  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
 
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      const text = event.target?.result as string;
-      setBrandGuidelines(text);
-      setBrandSaved(false);
-    };
-    reader.readAsText(file);
+    setUploadError('');
+    setUploadingFile(true);
+    setUploadedFileName('');
+
+    const fileName = file.name.toLowerCase();
+
+    // Check if it's a PDF or Word document that needs parsing
+    if (fileName.endsWith('.pdf') || fileName.endsWith('.docx') || fileName.endsWith('.doc')) {
+      try {
+        const formData = new FormData();
+        formData.append('file', file);
+
+        const response = await fetch('/api/power-hub/parse-document', {
+          method: 'POST',
+          body: formData,
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          setUploadError(data.error || 'Failed to parse document');
+          setUploadingFile(false);
+          return;
+        }
+
+        setBrandGuidelines(data.text);
+        setUploadedFileName(file.name);
+        setBrandSaved(false);
+      } catch (error) {
+        setUploadError('Failed to upload file: ' + String(error));
+      }
+    }
+    // Handle plain text files directly
+    else if (fileName.endsWith('.txt') || fileName.endsWith('.md')) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const text = event.target?.result as string;
+        setBrandGuidelines(text);
+        setUploadedFileName(file.name);
+        setBrandSaved(false);
+      };
+      reader.onerror = () => {
+        setUploadError('Failed to read file');
+      };
+      reader.readAsText(file);
+    }
+    else {
+      setUploadError('Unsupported file type. Please upload a PDF, Word document (.docx), or text file.');
+    }
+
+    setUploadingFile(false);
+    // Reset the input so the same file can be uploaded again
+    e.target.value = '';
   };
 
   const handleGenerate = async (customPrompt?: string) => {
@@ -270,7 +329,9 @@ export default function AIAssistPage() {
               <div className="text-left">
                 <h2 className="text-lg font-bold text-gray-900">Brand Guidelines</h2>
                 <p className="text-sm text-gray-600">
-                  {brandSaved ? 'Brand context loaded - AI will use your guidelines' : 'Upload your brand book or paste guidelines'}
+                  {brandSaved
+                    ? `✓ Brand context loaded${uploadedFileName ? ` (${uploadedFileName})` : ''} - AI will use your guidelines`
+                    : 'Upload your brand book (PDF, Word) or paste guidelines'}
                 </p>
               </div>
             </div>
@@ -284,21 +345,48 @@ export default function AIAssistPage() {
               {/* File Upload */}
               <div className="mb-4">
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Upload Brand Document (.txt, .md)
+                  Upload Brand Document
                 </label>
-                <div className="flex items-center gap-3">
-                  <label className="flex items-center gap-2 px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 cursor-pointer transition-colors">
-                    <FileUp size={18} />
-                    Choose File
+                <div className="flex items-center gap-3 flex-wrap">
+                  <label className={`flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 cursor-pointer transition-colors ${uploadingFile ? 'opacity-50 cursor-wait' : ''}`}>
+                    {uploadingFile ? (
+                      <Loader2 size={18} className="animate-spin" />
+                    ) : (
+                      <FileUp size={18} />
+                    )}
+                    {uploadingFile ? 'Processing...' : 'Upload File'}
                     <input
                       type="file"
-                      accept=".txt,.md"
+                      accept=".pdf,.docx,.doc,.txt,.md"
                       onChange={handleFileUpload}
+                      disabled={uploadingFile}
                       className="hidden"
                     />
                   </label>
-                  <span className="text-sm text-gray-500">or paste below</span>
+                  <span className="text-sm text-gray-500">
+                    Supports: PDF, Word (.docx), Text files
+                  </span>
                 </div>
+
+                {/* Uploaded File Indicator */}
+                {uploadedFileName && (
+                  <div className="mt-2 flex items-center gap-2 text-sm text-blue-600 bg-blue-50 px-3 py-2 rounded-lg">
+                    <FileText size={16} />
+                    <span className="font-medium">{uploadedFileName}</span>
+                    <span className="text-gray-500">- {brandGuidelines.length.toLocaleString()} characters extracted</span>
+                  </div>
+                )}
+
+                {/* Upload Error */}
+                {uploadError && (
+                  <div className="mt-2 flex items-center gap-2 text-sm text-red-600 bg-red-50 px-3 py-2 rounded-lg">
+                    <AlertCircle size={16} />
+                    <span>{uploadError}</span>
+                    <button onClick={() => setUploadError('')} className="ml-auto hover:text-red-800">
+                      <X size={14} />
+                    </button>
+                  </div>
+                )}
               </div>
 
               {/* Text Area for Guidelines */}
@@ -309,9 +397,9 @@ export default function AIAssistPage() {
                 <textarea
                   value={brandGuidelines}
                   onChange={(e) => { setBrandGuidelines(e.target.value); setBrandSaved(false); }}
-                  rows={6}
-                  className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-500 text-gray-900 placeholder-gray-400 resize-none"
-                  placeholder="Paste your brand guidelines here...
+                  rows={8}
+                  className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-500 text-gray-900 placeholder-gray-400 resize-none font-mono text-sm"
+                  placeholder="Paste your brand guidelines here, or upload a PDF/Word document above...
 
 Example:
 - Brand Voice: Friendly, fun, rock & roll themed
@@ -471,7 +559,7 @@ Example:
             <div className="bg-gradient-to-br from-[#F49220]/10 to-[#8C2D2E]/10 rounded-xl p-6">
               <h3 className="font-semibold text-gray-900 mb-3">Tips for Better Results</h3>
               <ul className="text-sm text-gray-600 space-y-2">
-                <li>• Add brand guidelines for on-brand content</li>
+                <li>• Upload your brand book (PDF/Word) for on-brand content</li>
                 <li>• Be specific about the tone you want</li>
                 <li>• Use "Use as Input" to iterate on results</li>
                 <li>• Try different Quick Actions</li>
