@@ -170,7 +170,6 @@ const serviceSchema = {
         name: 'The Crock Spot',
       },
       serviceType: 'Food Truck Catering',
-      priceRange: '$16-18 per person',
     },
     {
       '@type': 'FoodService',
@@ -183,7 +182,6 @@ const serviceSchema = {
         name: 'The Crock Spot',
       },
       serviceType: 'Buffet Catering',
-      priceRange: '$18-20 per person',
     },
     {
       '@type': 'FoodService',

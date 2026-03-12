@@ -65,7 +65,7 @@ export default function GovernmentCapabilities() {
   const pricingTiers = [
     {
       name: 'Food Truck Service',
-      price: '$16-18/person',
+      price: 'Request Quote',
       features: [
         'On-site fresh cooking',
         'Full menu customization',
@@ -76,7 +76,7 @@ export default function GovernmentCapabilities() {
     },
     {
       name: 'Buffet Style',
-      price: '$18-20/person',
+      price: 'Request Quote',
       features: [
         'Elegant setup',
         'Chafing dishes included',
@@ -87,7 +87,7 @@ export default function GovernmentCapabilities() {
     },
     {
       name: 'Boxed Meals',
-      price: '$17.50/person',
+      price: 'Request Quote',
       features: [
         'Individual portions',
         'Easy distribution',
@@ -271,7 +271,7 @@ export default function GovernmentCapabilities() {
                   'Comprehensive dietary accommodations',
                   'Fully licensed, insured, and compliant',
                   'Flexible scheduling for any event type',
-                  'Transparent pricing with no hidden fees',
+                  'Transparent quotes with no hidden fees',
                   'Award-winning food quality',
                   'Professional, uniformed staff',
                 ].map((item, index) => (

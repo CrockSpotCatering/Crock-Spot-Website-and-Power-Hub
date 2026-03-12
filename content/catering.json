@@ -16,7 +16,7 @@
     {
       "title": "Food Truck Service",
       "description": "Our gourmet food trucks bring the full kitchen experience to your event. Fresh, hot meals cooked on-site.",
-      "price": "$16-18 per person",
+      "price": "Request Quote",
       "icon": "truck",
       "features": [
         "On-site cooking - never reheated",
@@ -30,7 +30,7 @@
     {
       "title": "Buffet Style Service",
       "description": "Elegant indoor buffet setup with our full menu selection. Perfect for formal occasions.",
-      "price": "$18-20 per person",
+      "price": "Request Quote",
       "icon": "utensils",
       "features": [
         "Full service setup",
@@ -44,14 +44,14 @@
     {
       "title": "Themed Bars",
       "description": "Interactive food stations that let guests customize their experience. Taco bars, chili bars, and more!",
-      "price": "$19-22 per person",
+      "price": "Request Quote",
       "icon": "glass",
       "features": [
-        "Taco Bar - $19/person",
-        "Tostada Bar - $19/person",
-        "Chili Bar - $19/person",
-        "Mac n Cheese Bar - $22/person",
-        "Nacho Bar - $19/person"
+        "Taco Bar",
+        "Tostada Bar",
+        "Chili Bar",
+        "Mac n Cheese Bar",
+        "Nacho Bar"
       ],
       "ideal": "Casual events, team building, celebrations"
     }

@@ -249,10 +249,7 @@ export default function Menus() {
                 transition={{ delay: index * 0.1 }}
                 className="bg-white p-6 rounded-xl shadow-md"
               >
-                <div className="flex justify-between items-start mb-2">
-                  <h3 className="font-bold text-crock-dark">{item.name}</h3>
-                  <span className="text-crock-orange font-bold">{item.price}</span>
-                </div>
+                <h3 className="font-bold text-crock-dark mb-2">{item.name}</h3>
                 <p className="text-crock-gray text-sm">{item.description}</p>
               </motion.div>
             ))}
@@ -290,7 +287,7 @@ export default function Menus() {
                 className="bg-crock-purple/30 px-8 py-6 rounded-xl border border-crock-orange/30 text-center"
               >
                 <h3 className="text-xl font-bold">{item.name}</h3>
-                <p className="text-crock-orange text-lg">{item.price}</p>
+                {item.description && <p className="text-crock-gray-light text-sm mt-1">{item.description}</p>}
               </motion.div>
             ))}
           </div>
@@ -325,10 +322,7 @@ export default function Menus() {
                 transition={{ delay: index * 0.1 }}
                 className="bg-crock-gray-light/30 p-6 rounded-xl"
               >
-                <div className="flex justify-between items-start mb-2">
-                  <h3 className="font-bold text-crock-dark">{item.name}</h3>
-                  <span className="text-crock-orange font-bold">{item.price}</span>
-                </div>
+                <h3 className="font-bold text-crock-dark mb-2">{item.name}</h3>
                 <p className="text-crock-gray text-sm">{item.description}</p>
               </motion.div>
             ))}

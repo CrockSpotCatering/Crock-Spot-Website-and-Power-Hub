@@ -20,17 +20,17 @@
     {
       "title": "Food Truck Catering",
       "description": "Our gourmet food trucks bring the full kitchen to your event. Fresh, hot, and served in 25 seconds or less.",
-      "price": "From $16/person"
+      "price": "Request Quote"
     },
     {
       "title": "Buffet Style Service",
       "description": "Elegant buffet setup with all our signature dishes. Perfect for indoor events and formal occasions.",
-      "price": "From $18/person"
+      "price": "Request Quote"
     },
     {
       "title": "Corporate Events",
       "description": "Quick-serve perfection for busy teams. We can serve 100+ people per hour with minimal wait times.",
-      "price": "Custom Pricing"
+      "price": "Request Quote"
     }
   ],
   "benefits": [

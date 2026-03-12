@@ -6,7 +6,7 @@
   },
   "buildYourBowl": {
     "headline": "Build Your Own Bowl",
-    "subheadline": "Food Truck Service: $16-18/person | Buffet Style: $18-20/person"
+    "subheadline": "Contact us for a custom quote tailored to your event"
   },
   "basesSection": {
     "title": "Step 1: Choose Your Base",
@@ -35,8 +35,8 @@
     "headline": "Breakfast Options"
   },
   "pricing": {
-    "foodTruck": "$16-18/person",
-    "buffet": "$18-20/person"
+    "foodTruck": "Request Quote",
+    "buffet": "Request Quote"
   },
   "bases": [
     { "name": "Steamed Sesame Rice", "tags": ["GF", "V"] },
@@ -55,9 +55,9 @@
     { "name": "Apple Braised Pork", "tags": ["GF"], "description": "Sweet and savory pork" },
     { "name": "Jalapeno Shredded Beef", "tags": ["GF"], "description": "Bold and flavorful beef" },
     { "name": "Turkey Cardamom Meatballs", "tags": [], "description": "Aromatic turkey meatballs" },
-    { "name": "Herb Roasted Lamb", "tags": ["GF"], "description": "+$4 upgrade" },
-    { "name": "Duck Confit", "tags": ["GF"], "description": "+$5 upgrade" },
-    { "name": "Irish Corned Beef", "tags": ["GF"], "description": "+$4 upgrade" },
+    { "name": "Herb Roasted Lamb", "tags": ["GF"], "description": "Premium upgrade" },
+    { "name": "Duck Confit", "tags": ["GF"], "description": "Premium upgrade" },
+    { "name": "Irish Corned Beef", "tags": ["GF"], "description": "Premium upgrade" },
     { "name": "Coconut Root Veggie Curry", "tags": ["GF", "V", "VG"], "description": "Rich coconut curry with root vegetables" },
     { "name": "Curried Lentils with Hominy", "tags": ["GF", "V", "VG"], "description": "Hearty plant-based protein" },
     { "name": "Southwestern Bean Medley", "tags": ["GF", "V", "VG"], "description": "Flavorful bean mix" },
@@ -90,26 +90,26 @@
     { "name": "Roasted Sweet Potatoes", "tags": ["GF", "V", "VG"] }
   ],
   "appetizers": [
-    { "name": "Artisan Grazing Table", "price": "$13.75-$20.25/person", "description": "Cheese, fruits, vegetables, crackers, dips, nuts" },
-    { "name": "Caprese Skewers", "price": "$5/person", "description": "Fresh mozzarella, grape tomato, basil (2 per guest)" },
-    { "name": "Meatballs in Carolina BBQ", "price": "$5/person", "description": "Beef and pork in tangy BBQ sauce (2 per guest)" },
-    { "name": "Potato Cheddar Pierogies", "price": "$6/person", "description": "Locally made, fried, with crema dips (2 per guest)" },
-    { "name": "Sliders", "price": "$6/person", "description": "Pulled pork or meatballs on Hawaiian buns" },
-    { "name": "Crudite & Hummus", "price": "$4-6/person", "description": "Fresh cut veggies with hummus or spicy ranch" }
+    { "name": "Artisan Grazing Table", "description": "Cheese, fruits, vegetables, crackers, dips, nuts" },
+    { "name": "Caprese Skewers", "description": "Fresh mozzarella, grape tomato, basil (2 per guest)" },
+    { "name": "Meatballs in Carolina BBQ", "description": "Beef and pork in tangy BBQ sauce (2 per guest)" },
+    { "name": "Potato Cheddar Pierogies", "description": "Locally made, fried, with crema dips (2 per guest)" },
+    { "name": "Sliders", "description": "Pulled pork or meatballs on Hawaiian buns" },
+    { "name": "Crudite & Hummus", "description": "Fresh cut veggies with hummus or spicy ranch" }
   ],
   "themedBars": [
-    { "name": "Taco Bar", "price": "$19/person" },
-    { "name": "Tostada Bar", "price": "$19/person" },
-    { "name": "Nacho Bar", "price": "$19/person" },
-    { "name": "Chili Bar", "price": "$19/person" },
-    { "name": "Mac n Cheese Bar", "price": "$22/person" }
+    { "name": "Taco Bar", "description": "Build your own tacos" },
+    { "name": "Tostada Bar", "description": "Crispy tostadas with all the fixings" },
+    { "name": "Nacho Bar", "description": "Loaded nachos your way" },
+    { "name": "Chili Bar", "description": "Hearty chili with toppings" },
+    { "name": "Mac n Cheese Bar", "description": "Creamy mac with premium toppings" }
   ],
   "breakfast": [
-    { "name": "English Style Buffet", "price": "$15-17/person", "description": "Eggs, sausage, roasted potatoes, beans, mushrooms" },
-    { "name": "Colorado Style Buffet", "price": "$15-17/person", "description": "Cheesy eggs, sausage, green chili potatoes, tortillas" },
-    { "name": "Continental Board", "price": "$14-16/person", "description": "Croissants, egg bites, fruits, yogurts, pastries" },
-    { "name": "Bagel Board", "price": "$14-16/person", "description": "Bagels, cream cheeses, peanut butter, jam, ham" },
-    { "name": "Breakfast Burrito Board", "price": "$14-16/person", "description": "Meat and vegetarian burritos, salsa, sour cream" }
+    { "name": "English Style Buffet", "description": "Eggs, sausage, roasted potatoes, beans, mushrooms" },
+    { "name": "Colorado Style Buffet", "description": "Cheesy eggs, sausage, green chili potatoes, tortillas" },
+    { "name": "Continental Board", "description": "Croissants, egg bites, fruits, yogurts, pastries" },
+    { "name": "Bagel Board", "description": "Bagels, cream cheeses, peanut butter, jam, ham" },
+    { "name": "Breakfast Burrito Board", "description": "Meat and vegetarian burritos, salsa, sour cream" }
   ],
   "dietaryLegend": {
     "GF": "Gluten-Free",

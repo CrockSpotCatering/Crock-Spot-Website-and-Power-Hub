@@ -47,7 +47,7 @@
   "pricingTiers": [
     {
       "name": "Food Truck Service",
-      "price": "$16-18/person",
+      "price": "Request Quote",
       "features": [
         "On-site fresh cooking",
         "Full menu customization",
@@ -58,7 +58,7 @@
     },
     {
       "name": "Buffet Style",
-      "price": "$18-20/person",
+      "price": "Request Quote",
       "features": [
         "Elegant setup",
         "Chafing dishes included",
@@ -69,7 +69,7 @@
     },
     {
       "name": "Boxed Meals",
-      "price": "$17.50/person",
+      "price": "Request Quote",
       "features": [
         "Individual portions",
         "Easy distribution",
@@ -79,7 +79,7 @@
       ]
     }
   ],
-  "pricingNote": "Volume discounts available for recurring contracts and large events",
+  "pricingNote": "Contact us for volume discounts on recurring contracts and large events",
   "whyTrustUs": {
     "headline": "Why Government Agencies Trust Us",
     "reasons": [
@@ -88,7 +88,7 @@
       "Comprehensive dietary accommodations",
       "Fully licensed, insured, and compliant",
       "Flexible scheduling for any event type",
-      "Transparent pricing with no hidden fees",
+      "Transparent quotes with no hidden fees",
       "Award-winning food quality",
       "Professional, uniformed staff"
     ]
