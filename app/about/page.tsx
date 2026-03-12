@@ -188,14 +188,24 @@ export default function About() {
                     index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
                   }`}
                 >
-                  <div className={`md:w-1/2 ${index % 2 === 0 ? 'md:text-right' : 'md:text-left'}`}>
-                    <div className="bg-white p-6 rounded-xl shadow-md inline-block">
-                      <span className="text-crock-orange font-bold text-2xl">{milestone.year}</span>
-                      <h3 className="text-xl font-bold text-crock-dark mt-2">{milestone.title}</h3>
-                      <p className="text-crock-gray">{milestone.description}</p>
+                  <div className={`md:w-1/2 ${index % 2 === 0 ? 'md:text-right md:pr-4' : 'md:text-left md:pl-4'}`}>
+                    <div className="relative overflow-hidden rounded-xl shadow-lg">
+                      <div
+                        className="absolute inset-0 bg-cover bg-center"
+                        style={{
+                          backgroundImage: `url(${milestone.image})`,
+                          opacity: 0.5,
+                        }}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-br from-crock-dark/80 to-crock-dark/50" />
+                      <div className="relative p-6">
+                        <span className="text-crock-orange font-bold text-3xl drop-shadow-lg">{milestone.year}</span>
+                        <h3 className="text-xl font-bold text-white mt-2 drop-shadow">{milestone.title}</h3>
+                        <p className="text-white/90 drop-shadow">{milestone.description}</p>
+                      </div>
                     </div>
                   </div>
-                  <div className="hidden md:flex w-4 h-4 bg-crock-orange rounded-full z-10"></div>
+                  <div className="hidden md:flex w-5 h-5 bg-crock-orange rounded-full z-10 ring-4 ring-white shadow-lg"></div>
                   <div className="md:w-1/2"></div>
                 </motion.div>
               ))}

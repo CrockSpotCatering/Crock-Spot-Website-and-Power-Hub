@@ -55,32 +55,38 @@
     {
       "year": "2010",
       "title": "The Beginning",
-      "description": "Started at Cherry Creek Farmers Market with a 10x10 tent and a dream."
+      "description": "Started at Cherry Creek Farmers Market with a 10x10 tent and a dream.",
+      "image": "https://images.unsplash.com/photo-1488459716781-31db52582fe9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
     },
     {
       "year": "2011",
       "title": "First Food Truck",
-      "description": "Became one of the original Denver food trucks, bringing mobile cuisine to the streets."
+      "description": "Became one of the original Denver food trucks, bringing mobile cuisine to the streets.",
+      "image": "https://images.unsplash.com/photo-1565123409695-7b5ef63a2efb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
     },
     {
       "year": "2015",
       "title": "Award Winners",
-      "description": "Named Best Food Truck in Denver by 5280 Magazine."
+      "description": "Named Best Food Truck in Denver by 5280 Magazine.",
+      "image": "https://images.unsplash.com/photo-1567521464027-f127ff144326?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
     },
     {
       "year": "2017",
       "title": "Growing Team",
-      "description": "Peter joins as Field Marshall and co-partner, expanding our multi-truck operation."
+      "description": "Peter joins as Field Marshall and co-partner, expanding our multi-truck operation.",
+      "image": "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
     },
     {
       "year": "2020",
       "title": "National Recognition",
-      "description": "Featured in Business Insider's 50 Coolest Small Businesses in America."
+      "description": "Featured in Business Insider's 50 Coolest Small Businesses in America.",
+      "image": "https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
     },
     {
       "year": "2025",
       "title": "Today",
-      "description": "15+ years strong, serving thousands of events across Colorado."
+      "description": "15+ years strong, serving thousands of events across Colorado.",
+      "image": "https://images.unsplash.com/photo-1555244162-803834f70033?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
     }
   ],
   "valuesSection": {

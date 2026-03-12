@@ -276,10 +276,20 @@ export default function Menus() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="bg-white p-6 rounded-xl shadow-md"
+                className="relative overflow-hidden rounded-xl shadow-md min-h-[200px]"
               >
-                <h3 className="font-bold text-crock-dark text-lg mb-2">{item.name}</h3>
-                <p className="text-crock-gray">{item.description}</p>
+                <div
+                  className="absolute inset-0 bg-cover bg-center"
+                  style={{
+                    backgroundImage: `url(${item.image})`,
+                    opacity: 0.5,
+                  }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+                <div className="relative p-6 h-full flex flex-col justify-end">
+                  <h3 className="font-bold text-white text-lg mb-2 drop-shadow-lg">{item.name}</h3>
+                  <p className="text-white/90 text-sm drop-shadow">{item.description}</p>
+                </div>
               </motion.div>
             ))}
           </div>
@@ -341,10 +351,20 @@ export default function Menus() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="bg-crock-gray-light/30 p-6 rounded-xl"
+                className="relative overflow-hidden rounded-xl shadow-md min-h-[180px]"
               >
-                <h3 className="font-bold text-crock-dark mb-2">{item.name}</h3>
-                <p className="text-crock-gray text-sm">{item.description}</p>
+                <div
+                  className="absolute inset-0 bg-cover bg-center"
+                  style={{
+                    backgroundImage: `url(${item.image})`,
+                    opacity: 0.5,
+                  }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+                <div className="relative p-6 h-full flex flex-col justify-end">
+                  <h3 className="font-bold text-white text-lg mb-2 drop-shadow-lg">{item.name}</h3>
+                  <p className="text-white/90 text-sm drop-shadow">{item.description}</p>
+                </div>
               </motion.div>
             ))}
           </div>
