@@ -128,22 +128,38 @@ export default function About() {
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-8">
-            {cateringStyle.styles.map((style, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.2 }}
-                className="bg-white p-8 rounded-2xl shadow-lg border-t-4 border-crock-orange"
-              >
-                <div className="text-crock-orange mb-4">
-                  {index === 0 ? <FaTruck size={40} /> : <FaUtensils size={40} />}
-                </div>
-                <h3 className="text-2xl font-bold text-crock-dark mb-3">{style.name}</h3>
-                <p className="text-crock-gray">{style.description}</p>
-              </motion.div>
-            ))}
+            {cateringStyle.styles.map((style, index) => {
+              const styleImages = [
+                'https://images.unsplash.com/photo-1555244162-803834f70033?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', // Buffet
+                'https://images.unsplash.com/photo-1565123409695-7b5ef63a2efb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', // Food Truck
+              ];
+              return (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.2 }}
+                  className="relative overflow-hidden rounded-2xl shadow-lg min-h-[280px]"
+                >
+                  <div
+                    className="absolute inset-0 bg-cover bg-center"
+                    style={{
+                      backgroundImage: `url(${styleImages[index]})`,
+                      opacity: 0.5,
+                    }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+                  <div className="relative p-8 h-full flex flex-col justify-end">
+                    <div className="text-crock-orange mb-4 drop-shadow-lg">
+                      {index === 0 ? <FaUtensils size={40} /> : <FaTruck size={40} />}
+                    </div>
+                    <h3 className="text-2xl font-bold text-white mb-3 drop-shadow-lg">{style.name}</h3>
+                    <p className="text-white/90 drop-shadow">{style.description}</p>
+                  </div>
+                </motion.div>
+              );
+            })}
           </div>
 
           <motion.p
