@@ -51,6 +51,7 @@ const Navigation = () => {
     { name: 'Catering', href: '/catering' },
     { name: 'About', href: '/about' },
     { name: 'Menus', href: '/menus' },
+    { name: 'The Spot', href: '/the-spot' },
     { name: 'Government', href: '/government-capabilities' },
     { name: 'Community', href: '/community-partners' },
     { name: 'Contact', href: '/contact' },
