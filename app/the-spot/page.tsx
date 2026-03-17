@@ -52,7 +52,7 @@ export default function TheSpot() {
       {/* Hero Section */}
       <section
         className="relative py-32 bg-crock-dark overflow-hidden bg-cover bg-center"
-        style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80)' }}
+        style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80)' }}
       >
         <div className="absolute inset-0 bg-crock-dark/80"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
