@@ -1,0 +1,71 @@
+{
+  "hero": {
+    "badge": "Sister Company of The Crock Spot",
+    "title": "The Spot Café",
+    "tagline": "Your Trusted Corporate Catering Partner in Denver's RiNo District",
+    "description": "Led by owner and Chef Mandy Smith, The Spot Café is the go-to choice for office catering in the Industry RiNo co-working spaces and surrounding Denver area.",
+    "backgroundImage": "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+    "phone": "(925) 699-6629",
+    "email": "spotcafes@gmail.com"
+  },
+  "intro": {
+    "text": "For years, we've delivered fresh, flavorful meals that keep teams energized and productive. We specialize in light, nourishing corporate catering designed to fuel your day.",
+    "tagline": "We KNOW what hits the Spot!"
+  },
+  "services": [
+    {
+      "icon": "coffee",
+      "title": "Breakfast Meetings & Workshops",
+      "description": "Start your day right with fresh, energizing breakfast options for your team."
+    },
+    {
+      "icon": "leaf",
+      "title": "Healthy Lunches & Salads",
+      "description": "Light, nourishing meals that keep everyone full, focused, and productive."
+    },
+    {
+      "icon": "utensils",
+      "title": "In-Room Coffee & Refreshments",
+      "description": "Keep your team fueled throughout the day with premium beverage service."
+    },
+    {
+      "icon": "glass-cheers",
+      "title": "Happy Hours & Events",
+      "description": "Stunning charcuterie boards, grazing tables, and premium appetizers."
+    }
+  ],
+  "deliveryOptions": {
+    "title": "Flexible Delivery Options",
+    "description": "However you need it, we'll make it happen. Our focus is on food that's satisfying yet light — keeping everyone full, focused, and ready for whatever the workday brings.",
+    "options": [
+      "Drop-off catering",
+      "Buffet-style setups",
+      "Individually packaged meals",
+      "Custom menu creation"
+    ]
+  },
+  "happyHour": {
+    "title": "Happy Hours & Events",
+    "description": "We also shine at end-of-day office happy hours and events, creating:",
+    "items": [
+      "Stunning charcuterie boards",
+      "Beautiful grazing tables",
+      "Premium appetizers & small bites"
+    ]
+  },
+  "customPromise": {
+    "title": "The Sky's the Limit",
+    "description": "Tell us exactly what you need, and we'll make it happen with delicious, custom results every time."
+  },
+  "owner": {
+    "name": "Mandy Smith",
+    "title": "Owner & Chef",
+    "certifications": ["DBE", "MWBE", "SBE"],
+    "phone": "(925) 699-6629",
+    "email": "spotcafes@gmail.com"
+  },
+  "cta": {
+    "title": "Ready to Hit the Spot?",
+    "subtitle": "Contact us today for your next corporate catering event."
+  }
+}

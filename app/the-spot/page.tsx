@@ -16,43 +16,26 @@ import {
 } from 'react-icons/fa';
 import CTASection from '@/components/CTASection';
 
-export default function TheSpot() {
-  const services = [
-    {
-      icon: <FaCoffee size={36} />,
-      title: 'Breakfast Meetings & Workshops',
-      desc: 'Start your day right with fresh, energizing breakfast options for your team.',
-    },
-    {
-      icon: <FaLeaf size={36} />,
-      title: 'Healthy Lunches & Salads',
-      desc: 'Light, nourishing meals that keep everyone full, focused, and productive.',
-    },
-    {
-      icon: <FaUtensils size={36} />,
-      title: 'In-Room Coffee & Refreshments',
-      desc: 'Keep your team fueled throughout the day with premium beverage service.',
-    },
-    {
-      icon: <FaGlassCheers size={36} />,
-      title: 'Happy Hours & Events',
-      desc: 'Stunning charcuterie boards, grazing tables, and premium appetizers.',
-    },
-  ];
+// Import content from JSON - editable via Power Hub CMS
+import content from '@/content/the-spot.json';
 
-  const deliveryOptions = [
-    'Drop-off catering',
-    'Buffet-style setups',
-    'Individually packaged meals',
-    'Custom menu creation',
-  ];
+// Icon mapping for services
+const serviceIcons: Record<string, React.ReactNode> = {
+  'coffee': <FaCoffee size={36} />,
+  'leaf': <FaLeaf size={36} />,
+  'utensils': <FaUtensils size={36} />,
+  'glass-cheers': <FaGlassCheers size={36} />,
+};
+
+export default function TheSpot() {
+  const { hero, intro, services, deliveryOptions, happyHour, customPromise, owner, cta } = content;
 
   return (
     <div className="min-h-screen pt-20">
       {/* Hero Section */}
       <section
         className="relative py-32 bg-crock-dark overflow-hidden bg-cover bg-center"
-        style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80)' }}
+        style={{ backgroundImage: `url(${hero.backgroundImage})` }}
       >
         <div className="absolute inset-0 bg-crock-dark/80"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -63,28 +46,28 @@ export default function TheSpot() {
               transition={{ duration: 0.8 }}
             >
               <div className="inline-flex items-center gap-2 bg-crock-orange/20 border border-crock-orange/40 text-crock-orange px-4 py-2 rounded-full mb-6">
-                <FaBuilding /> Sister Company of The Crock Spot
+                <FaBuilding /> {hero.badge}
               </div>
               <h1 className="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
-                The Spot Café
+                {hero.title}
               </h1>
               <p className="text-xl text-crock-orange font-semibold mb-4">
-                Your Trusted Corporate Catering Partner in Denver&apos;s RiNo District
+                {hero.tagline}
               </p>
               <p className="text-lg text-crock-gray-light mb-8">
-                Led by owner and Chef Mandy Smith, The Spot Café is the go-to choice for office catering in the Industry RiNo co-working spaces and surrounding Denver area.
+                {hero.description}
               </p>
               <div className="flex flex-wrap gap-4">
-                <Link href="tel:925-699-6629">
+                <Link href={`tel:${hero.phone.replace(/[^0-9]/g, '')}`}>
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     className="bg-crock-orange text-white px-8 py-4 rounded-full font-semibold text-lg inline-flex items-center gap-2"
                   >
-                    <FaPhone /> (925) 699-6629
+                    <FaPhone /> {hero.phone}
                   </motion.button>
                 </Link>
-                <Link href="mailto:spotcafes@gmail.com">
+                <Link href={`mailto:${hero.email}`}>
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
@@ -123,10 +106,10 @@ export default function TheSpot() {
             viewport={{ once: true }}
           >
             <p className="text-xl text-crock-gray leading-relaxed mb-8">
-              For years, we&apos;ve delivered fresh, flavorful meals that keep teams energized and productive. We specialize in <strong className="text-crock-dark">light, nourishing corporate catering</strong> designed to fuel your day.
+              {intro.text}
             </p>
             <div className="inline-flex items-center gap-3 bg-crock-green/10 text-crock-green px-6 py-3 rounded-full font-semibold">
-              <FaStar /> We KNOW what hits the Spot!
+              <FaStar /> {intro.tagline}
             </div>
           </motion.div>
         </div>
@@ -159,9 +142,11 @@ export default function TheSpot() {
                 transition={{ delay: index * 0.1 }}
                 className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow"
               >
-                <div className="text-crock-orange mb-4">{service.icon}</div>
+                <div className="text-crock-orange mb-4">
+                  {serviceIcons[service.icon] || <FaUtensils size={36} />}
+                </div>
                 <h3 className="text-xl font-bold text-crock-dark mb-2">{service.title}</h3>
-                <p className="text-crock-gray">{service.desc}</p>
+                <p className="text-crock-gray">{service.description}</p>
               </motion.div>
             ))}
           </div>
@@ -178,13 +163,13 @@ export default function TheSpot() {
               viewport={{ once: true }}
             >
               <h2 className="text-4xl font-bold mb-6">
-                Flexible <span className="text-crock-orange">Delivery Options</span>
+                {deliveryOptions.title.split(' ').slice(0, 1).join(' ')} <span className="text-crock-orange">{deliveryOptions.title.split(' ').slice(1).join(' ')}</span>
               </h2>
               <p className="text-lg text-crock-gray-light mb-8">
-                However you need it, we&apos;ll make it happen. Our focus is on food that&apos;s satisfying yet light — keeping everyone full, focused, and ready for whatever the workday brings.
+                {deliveryOptions.description}
               </p>
               <div className="space-y-4">
-                {deliveryOptions.map((option, index) => (
+                {deliveryOptions.options.map((option, index) => (
                   <motion.div
                     key={index}
                     initial={{ opacity: 0, x: -20 }}
@@ -206,23 +191,17 @@ export default function TheSpot() {
               viewport={{ once: true }}
               className="bg-crock-purple/30 p-8 rounded-2xl border border-crock-orange/20"
             >
-              <h3 className="text-2xl font-bold mb-4 text-crock-orange">Happy Hours & Events</h3>
+              <h3 className="text-2xl font-bold mb-4 text-crock-orange">{happyHour.title}</h3>
               <p className="text-lg text-crock-gray-light mb-6">
-                We also shine at end-of-day office happy hours and events, creating:
+                {happyHour.description}
               </p>
               <ul className="space-y-3">
-                <li className="flex items-center gap-3">
-                  <FaCheckCircle className="text-crock-orange flex-shrink-0" />
-                  <span>Stunning charcuterie boards</span>
-                </li>
-                <li className="flex items-center gap-3">
-                  <FaCheckCircle className="text-crock-orange flex-shrink-0" />
-                  <span>Beautiful grazing tables</span>
-                </li>
-                <li className="flex items-center gap-3">
-                  <FaCheckCircle className="text-crock-orange flex-shrink-0" />
-                  <span>Premium appetizers & small bites</span>
-                </li>
+                {happyHour.items.map((item, index) => (
+                  <li key={index} className="flex items-center gap-3">
+                    <FaCheckCircle className="text-crock-orange flex-shrink-0" />
+                    <span>{item}</span>
+                  </li>
+                ))}
               </ul>
             </motion.div>
           </div>
@@ -238,10 +217,10 @@ export default function TheSpot() {
             viewport={{ once: true }}
           >
             <h2 className="text-4xl font-bold text-crock-dark mb-6">
-              The Sky&apos;s the <span className="text-crock-orange">Limit</span>
+              {customPromise.title.replace("Limit", "")} <span className="text-crock-orange">Limit</span>
             </h2>
             <p className="text-xl text-crock-gray mb-8">
-              Tell us exactly what you need, and we&apos;ll make it happen with delicious, custom results every time.
+              {customPromise.description}
             </p>
           </motion.div>
         </div>
@@ -256,38 +235,41 @@ export default function TheSpot() {
             viewport={{ once: true }}
             className="bg-crock-dark rounded-2xl p-8 md:p-12 text-center"
           >
-            <h2 className="text-3xl font-bold text-white mb-2">Mandy Smith</h2>
-            <p className="text-crock-orange text-xl font-semibold mb-6">Owner & Chef</p>
+            <h2 className="text-3xl font-bold text-white mb-2">{owner.name}</h2>
+            <p className="text-crock-orange text-xl font-semibold mb-6">{owner.title}</p>
 
             <div className="flex flex-wrap justify-center gap-3 mb-8">
-              <span className="bg-crock-green/20 text-crock-green px-4 py-2 rounded-full font-semibold">
-                DBE
-              </span>
-              <span className="bg-crock-orange/20 text-crock-orange px-4 py-2 rounded-full font-semibold">
-                MWBE
-              </span>
-              <span className="bg-crock-purple/20 text-crock-purple px-4 py-2 rounded-full font-semibold">
-                SBE
-              </span>
+              {owner.certifications.map((cert, index) => (
+                <span
+                  key={index}
+                  className={`px-4 py-2 rounded-full font-semibold ${
+                    index === 0 ? 'bg-crock-green/20 text-crock-green' :
+                    index === 1 ? 'bg-crock-orange/20 text-crock-orange' :
+                    'bg-crock-purple/20 text-crock-purple'
+                  }`}
+                >
+                  {cert}
+                </span>
+              ))}
             </div>
 
             <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <Link href="tel:925-699-6629">
+              <Link href={`tel:${owner.phone.replace(/[^0-9]/g, '')}`}>
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="bg-crock-orange text-white px-8 py-4 rounded-full font-semibold text-lg inline-flex items-center justify-center gap-2 w-full sm:w-auto"
                 >
-                  <FaPhone /> (925) 699-6629
+                  <FaPhone /> {owner.phone}
                 </motion.button>
               </Link>
-              <Link href="mailto:spotcafes@gmail.com">
+              <Link href={`mailto:${owner.email}`}>
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="bg-white text-crock-dark px-8 py-4 rounded-full font-semibold text-lg inline-flex items-center justify-center gap-2 w-full sm:w-auto"
                 >
-                  <FaEnvelope /> spotcafes@gmail.com
+                  <FaEnvelope /> {owner.email}
                 </motion.button>
               </Link>
             </div>
@@ -296,8 +278,8 @@ export default function TheSpot() {
       </section>
 
       <CTASection
-        title="Ready to Hit the Spot?"
-        subtitle="Contact us today for your next corporate catering event."
+        title={cta.title}
+        subtitle={cta.subtitle}
         variant="orange"
       />
     </div>
