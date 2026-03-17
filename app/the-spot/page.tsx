@@ -52,7 +52,7 @@ export default function TheSpot() {
       {/* Hero Section */}
       <section
         className="relative py-32 bg-crock-dark overflow-hidden bg-cover bg-center"
-        style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80)' }}
+        style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80)' }}
       >
         <div className="absolute inset-0 bg-crock-dark/80"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -102,15 +102,13 @@ export default function TheSpot() {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="flex justify-center"
             >
-              <div className="bg-white rounded-2xl p-8 shadow-2xl">
-                <Image
-                  src="/spot-cafe-logo.avif"
-                  alt="The Spot Café Logo"
-                  width={300}
-                  height={300}
-                  className="w-full max-w-[300px] h-auto"
-                />
-              </div>
+              <Image
+                src="/spot-cafe-logo.avif"
+                alt="The Spot Café Logo"
+                width={350}
+                height={350}
+                className="w-full max-w-[350px] h-auto drop-shadow-2xl"
+              />
             </motion.div>
           </div>
         </div>
