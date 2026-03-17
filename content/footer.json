@@ -1,0 +1,44 @@
+{
+  "company": {
+    "name": "CROCK",
+    "nameSuffix": "Spot",
+    "description": "Slow Cooked Gourmet Cuisine. Award-winning food truck catering serving Denver since 2010.",
+    "tagline": "Let Us Crock Your World"
+  },
+  "quickLinks": [
+    { "name": "Home", "href": "/" },
+    { "name": "Catering", "href": "/catering" },
+    { "name": "About Us", "href": "/about" },
+    { "name": "Menus", "href": "/menus" },
+    { "name": "Government", "href": "/government-capabilities" },
+    { "name": "Community", "href": "/community-partners" }
+  ],
+  "services": [
+    "Food Truck Catering",
+    "Buffet Style Service",
+    "Corporate Events",
+    "Wedding Catering",
+    "Private Parties",
+    "Themed Food Bars"
+  ],
+  "contact": {
+    "email": "steven@thecrockspot.com",
+    "location": "Denver, Colorado"
+  },
+  "social": {
+    "facebook": "https://www.facebook.com/104226646277525",
+    "instagram": "https://www.instagram.com/thecrockspot"
+  },
+  "awards": [
+    "Best Food Truck - 5280 Magazine",
+    "Best Meals on Wheels - Westword",
+    "50 Coolest Small Businesses - Business Insider"
+  ],
+  "copyright": {
+    "foundersText": "Founded by Steven & Mandy | Serving Denver Since 2010"
+  },
+  "legalLinks": [
+    { "name": "Privacy Policy", "href": "/privacy" },
+    { "name": "Terms of Service", "href": "/terms" }
+  ]
+}

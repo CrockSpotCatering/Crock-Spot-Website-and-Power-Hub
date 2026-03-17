@@ -86,7 +86,7 @@ export default function TheSpot() {
               className="flex justify-center"
             >
               <Image
-                src="/spot-cafe-logo.avif"
+                src={hero.logo}
                 alt="The Spot Café Logo"
                 width={350}
                 height={350}
