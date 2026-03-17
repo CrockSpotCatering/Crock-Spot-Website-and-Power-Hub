@@ -69,11 +69,11 @@ export default function GovernmentCapabilities() {
             <p className="text-xl text-crock-gray-light mb-8 max-w-3xl mx-auto">
               {hero.subheadline}
             </p>
-            <Link href={hero.ctaLink}>
+            <Link href={hero.ctaLink} className="inline-block w-full sm:w-auto px-4 sm:px-0">
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-crock-orange text-white px-8 py-4 rounded-full font-semibold text-lg"
+                className="w-full sm:w-auto bg-crock-orange text-white px-8 py-4 rounded-full font-semibold text-base sm:text-lg min-h-[56px]"
               >
                 {hero.ctaText}
               </motion.button>
@@ -231,18 +231,18 @@ export default function GovernmentCapabilities() {
               </div>
             </div>
             <div className="p-8 md:p-10">
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
+              <div className="grid grid-cols-3 gap-4 sm:gap-8 mb-8">
                 <div className="text-center">
-                  <p className="text-5xl font-bold text-crock-orange">{missionCritical.covidResponse.stats.days}</p>
-                  <p className="text-crock-gray-light">{missionCritical.covidResponse.stats.daysLabel}</p>
+                  <p className="text-3xl sm:text-5xl font-bold text-crock-orange">{missionCritical.covidResponse.stats.days}</p>
+                  <p className="text-crock-gray-light text-xs sm:text-base">{missionCritical.covidResponse.stats.daysLabel}</p>
                 </div>
                 <div className="text-center">
-                  <p className="text-5xl font-bold text-crock-orange">{missionCritical.covidResponse.stats.meals}</p>
-                  <p className="text-crock-gray-light">{missionCritical.covidResponse.stats.mealsLabel}</p>
+                  <p className="text-3xl sm:text-5xl font-bold text-crock-orange">{missionCritical.covidResponse.stats.meals}</p>
+                  <p className="text-crock-gray-light text-xs sm:text-base">{missionCritical.covidResponse.stats.mealsLabel}</p>
                 </div>
                 <div className="text-center">
-                  <p className="text-5xl font-bold text-crock-orange">{missionCritical.covidResponse.stats.mobilization}</p>
-                  <p className="text-crock-gray-light">{missionCritical.covidResponse.stats.mobilizationLabel}</p>
+                  <p className="text-3xl sm:text-5xl font-bold text-crock-orange">{missionCritical.covidResponse.stats.mobilization}</p>
+                  <p className="text-crock-gray-light text-xs sm:text-base">{missionCritical.covidResponse.stats.mobilizationLabel}</p>
                 </div>
               </div>
               <p className="text-lg text-white leading-relaxed mb-6">
@@ -300,7 +300,7 @@ export default function GovernmentCapabilities() {
             </h2>
           </motion.div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
             {serviceTypes.map((type, index) => (
               <motion.div
                 key={index}
@@ -308,7 +308,7 @@ export default function GovernmentCapabilities() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.05 }}
-                className="bg-crock-purple/30 px-4 py-3 rounded-lg text-center text-sm border border-crock-orange/20"
+                className="bg-crock-purple/30 px-3 sm:px-4 py-3 rounded-lg text-center text-xs sm:text-sm border border-crock-orange/20"
               >
                 {type}
               </motion.div>

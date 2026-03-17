@@ -103,21 +103,21 @@ export default function Home() {
               {hero.tagline}
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href={hero.ctaPrimaryLink}>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center px-4 sm:px-0">
+              <Link href={hero.ctaPrimaryLink} className="w-full sm:w-auto">
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="bg-crock-orange text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-crock-orange-dark transition-all duration-300 flex items-center justify-center gap-2 shadow-lg"
+                  className="w-full sm:w-auto bg-crock-orange text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-crock-orange-dark transition-all duration-300 flex items-center justify-center gap-2 shadow-lg min-h-[56px]"
                 >
                   {hero.ctaPrimary} <FaArrowRight />
                 </motion.button>
               </Link>
-              <Link href={hero.ctaSecondaryLink}>
+              <Link href={hero.ctaSecondaryLink} className="w-full sm:w-auto">
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="border-2 border-white text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white hover:text-crock-dark transition-all duration-300"
+                  className="w-full sm:w-auto border-2 border-white text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white hover:text-crock-dark transition-all duration-300 min-h-[56px]"
                 >
                   {hero.ctaSecondary}
                 </motion.button>
@@ -144,9 +144,9 @@ export default function Home() {
       </section>
 
       {/* Event Types Bar */}
-      <section className="bg-crock-orange py-6">
+      <section className="bg-crock-orange py-4 sm:py-6">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-wrap justify-center gap-8 text-white">
+          <div className="grid grid-cols-2 sm:flex sm:flex-wrap justify-center gap-4 sm:gap-8 text-white">
             {eventTypes.map((eventType, index) => (
               <motion.div
                 key={index}
@@ -154,7 +154,7 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="flex items-center gap-2 text-lg font-medium"
+                className="flex items-center justify-center gap-2 text-sm sm:text-lg font-medium"
               >
                 {eventTypeIcons[eventType] || <FaStar />}
                 <span>{eventType}</span>
@@ -225,7 +225,7 @@ export default function Home() {
               <p className="text-lg text-crock-gray mb-8">
                 {whyChooseUs.description}
               </p>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 xs:grid-cols-2 gap-3 sm:gap-4">
                 {benefits.map((benefit, index) => (
                   <motion.div
                     key={index}
@@ -233,10 +233,10 @@ export default function Home() {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.4, delay: index * 0.1 }}
-                    className="flex items-center gap-2"
+                    className="flex items-center gap-2 py-1"
                   >
                     <FaCheckCircle className="text-crock-orange flex-shrink-0" />
-                    <span className="text-crock-dark font-medium">{benefit}</span>
+                    <span className="text-crock-dark font-medium text-sm sm:text-base">{benefit}</span>
                   </motion.div>
                 ))}
               </div>
@@ -301,7 +301,7 @@ export default function Home() {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
             {buildYourBowl.steps.map((item, index) => (
               <motion.div
                 key={index}
@@ -311,12 +311,12 @@ export default function Home() {
                 transition={{ duration: 0.5, delay: index * 0.15 }}
                 className="text-center"
               >
-                <div className="text-5xl mb-4">{bowlStepEmojis[item.icon] || '🍽️'}</div>
-                <div className="bg-crock-orange text-white w-10 h-10 rounded-full flex items-center justify-center font-bold mx-auto mb-3">
+                <div className="text-4xl sm:text-5xl mb-3 sm:mb-4">{bowlStepEmojis[item.icon] || '🍽️'}</div>
+                <div className="bg-crock-orange text-white w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center font-bold mx-auto mb-2 sm:mb-3 text-sm sm:text-base">
                   {item.step}
                 </div>
-                <h3 className="text-xl font-bold mb-2">{item.title}</h3>
-                <p className="text-crock-gray-light text-sm">{item.items}</p>
+                <h3 className="text-base sm:text-xl font-bold mb-1 sm:mb-2">{item.title}</h3>
+                <p className="text-crock-gray-light text-xs sm:text-sm">{item.items}</p>
               </motion.div>
             ))}
           </div>
@@ -336,21 +336,24 @@ export default function Home() {
       </section>
 
       {/* Quick Service Highlight */}
-      <section className="py-16 bg-crock-orange text-white">
+      <section className="py-10 sm:py-16 bg-crock-orange text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8">
             {quickServiceStats.map((stat, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, x: index === 0 ? -20 : 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="flex items-center gap-4"
+                transition={{ delay: index * 0.1 }}
+                className="flex items-center justify-center sm:justify-start gap-4"
               >
-                {quickStatIcons[stat.icon] || <FaStar className="text-5xl" />}
+                <div className="text-4xl sm:text-5xl">
+                  {quickStatIcons[stat.icon] || <FaStar />}
+                </div>
                 <div>
-                  <h3 className="text-3xl font-bold">{stat.value}</h3>
-                  <p className="text-white/80">{stat.description}</p>
+                  <h3 className="text-2xl sm:text-3xl font-bold">{stat.value}</h3>
+                  <p className="text-white/80 text-sm sm:text-base">{stat.description}</p>
                 </div>
               </motion.div>
             ))}

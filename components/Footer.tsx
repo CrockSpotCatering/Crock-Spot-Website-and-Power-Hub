@@ -13,17 +13,17 @@ const Footer = () => {
   return (
     <footer className="bg-crock-dark text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
           {/* Company Info */}
-          <div className="space-y-4">
-            <h3 className="text-2xl font-bold">
+          <div className="space-y-4 col-span-2 md:col-span-1">
+            <h3 className="text-xl sm:text-2xl font-bold">
               <span className="text-white">{company.name}</span>
               <span className="text-crock-orange" style={{ fontStyle: 'italic' }}>{company.nameSuffix}</span>
             </h3>
-            <p className="text-crock-gray-light text-sm">
+            <p className="text-crock-gray-light text-xs sm:text-sm">
               {company.description}
             </p>
-            <p className="text-crock-orange font-semibold text-sm italic">
+            <p className="text-crock-orange font-semibold text-xs sm:text-sm italic">
               &quot;{company.tagline}&quot;
             </p>
           </div>
@@ -53,8 +53,8 @@ const Footer = () => {
           </div>
 
           {/* Contact */}
-          <div>
-            <h4 className="text-lg font-semibold mb-4 text-crock-orange">Connect With Us</h4>
+          <div className="col-span-2 md:col-span-1">
+            <h4 className="text-base sm:text-lg font-semibold mb-4 text-crock-orange">Connect With Us</h4>
             <div className="space-y-2">
               <a
                 href={`mailto:${contact.email}`}
@@ -94,9 +94,9 @@ const Footer = () => {
 
         {/* Awards Banner */}
         <div className="border-t border-crock-orange/30 mt-8 pt-8">
-          <div className="flex flex-wrap justify-center gap-4 text-sm text-crock-gray-light mb-6">
+          <div className="flex flex-wrap justify-center gap-2 sm:gap-4 text-xs sm:text-sm text-crock-gray-light mb-6">
             {awards.map((award, index) => (
-              <span key={index} className="bg-crock-orange/20 px-3 py-1 rounded-full">
+              <span key={index} className="bg-crock-orange/20 px-2 sm:px-3 py-1.5 rounded-full text-center">
                 🏆 {award}
               </span>
             ))}

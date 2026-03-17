@@ -84,15 +84,15 @@ export default function Menus() {
             <p className="text-xl text-crock-gray-light mb-8 max-w-3xl mx-auto">
               {hero.subheadline}
             </p>
-            <div className="flex flex-wrap justify-center gap-4 text-sm">
-              <span className="flex items-center gap-2 bg-crock-green/20 text-crock-green px-4 py-2 rounded-full">
-                <FaBreadSlice /> GF = {dietaryLegend.GF}
+            <div className="flex flex-wrap justify-center gap-2 sm:gap-4 text-xs sm:text-sm">
+              <span className="flex items-center gap-1 sm:gap-2 bg-crock-green/20 text-crock-green px-3 sm:px-4 py-2 rounded-full">
+                <FaBreadSlice className="text-xs sm:text-sm" /> GF = {dietaryLegend.GF}
               </span>
-              <span className="flex items-center gap-2 bg-crock-purple/20 text-crock-purple-light px-4 py-2 rounded-full">
-                <FaLeaf /> V = {dietaryLegend.V}
+              <span className="flex items-center gap-1 sm:gap-2 bg-crock-purple/20 text-crock-purple-light px-3 sm:px-4 py-2 rounded-full">
+                <FaLeaf className="text-xs sm:text-sm" /> V = {dietaryLegend.V}
               </span>
-              <span className="flex items-center gap-2 bg-crock-maroon/20 text-crock-maroon px-4 py-2 rounded-full">
-                <FaLeaf /> VG = {dietaryLegend.VG}
+              <span className="flex items-center gap-1 sm:gap-2 bg-crock-maroon/20 text-crock-maroon px-3 sm:px-4 py-2 rounded-full">
+                <FaLeaf className="text-xs sm:text-sm" /> VG = {dietaryLegend.VG}
               </span>
             </div>
           </motion.div>
@@ -129,7 +129,7 @@ export default function Menus() {
             <h3 className="text-2xl font-bold text-crock-dark mb-6 text-center">
               {basesSection.emoji} {basesSection.title}
             </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4">
               {bases.map((item, index) => (
                 <motion.div
                   key={index}
@@ -139,8 +139,8 @@ export default function Menus() {
                   transition={{ delay: index * 0.05 }}
                   className="bg-crock-gray-light/30 p-4 rounded-lg"
                 >
-                  <p className="font-bold text-crock-dark">{item.name}</p>
-                  <p className="text-sm text-crock-gray mt-1">{item.description}</p>
+                  <p className="font-bold text-crock-dark text-sm sm:text-base">{item.name}</p>
+                  <p className="text-xs sm:text-sm text-crock-gray mt-1">{item.description}</p>
                   <div className="flex gap-1 mt-2">
                     {item.tags.map((tag) => (
                       <TagBadge key={tag} tag={tag} />

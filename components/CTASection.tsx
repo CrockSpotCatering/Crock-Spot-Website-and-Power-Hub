@@ -52,12 +52,12 @@ const CTASection = ({
           <p className="text-lg sm:text-xl text-white/90 mb-8 max-w-2xl mx-auto">
             {subtitle}
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href={buttonLink}>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center px-4 sm:px-0">
+            <Link href={buttonLink} className="w-full sm:w-auto">
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className={`${buttonVariants[variant]} px-8 sm:px-10 py-4 rounded-full font-semibold text-base sm:text-lg transition-all duration-300 inline-flex items-center gap-2 min-h-[48px]`}
+                className={`w-full sm:w-auto ${buttonVariants[variant]} px-8 sm:px-10 py-4 rounded-full font-semibold text-base sm:text-lg transition-all duration-300 inline-flex items-center justify-center gap-2 min-h-[56px]`}
               >
                 <FaPhone /> {buttonText} <FaArrowRight />
               </motion.button>
