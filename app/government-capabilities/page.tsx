@@ -18,95 +18,40 @@ import {
 import CTASection from '@/components/CTASection';
 import ContactForm from '@/components/ContactForm';
 
+// Import content from JSON - editable via Power Hub CMS
+import content from '@/content/government-capabilities.json';
+
+// Icon mapping for capabilities
+const capabilityIcons: Record<string, React.ReactNode> = {
+  'users': <FaUsers size={40} />,
+  'clock': <FaClock size={40} />,
+  'leaf': <FaLeaf size={40} />,
+  'shield': <FaShieldAlt size={40} />,
+  'file-contract': <FaFileContract size={40} />,
+  'award': <FaAward size={40} />,
+};
+
 export default function GovernmentCapabilities() {
-  const capabilities = [
-    {
-      icon: <FaUsers size={40} />,
-      title: 'Large-Scale Events',
-      desc: 'Serve 100+ guests per hour with our efficient quick-serve concept.',
-    },
-    {
-      icon: <FaClock size={40} />,
-      title: 'Flexible Scheduling',
-      desc: 'Available for recurring events, one-time gatherings, or multi-day conferences.',
-    },
-    {
-      icon: <FaLeaf size={40} />,
-      title: 'Dietary Compliance',
-      desc: 'Gluten-free, vegetarian, vegan, dairy-free, and halal options clearly labeled.',
-    },
-    {
-      icon: <FaShieldAlt size={40} />,
-      title: 'Fully Insured',
-      desc: 'Comprehensive liability coverage for peace of mind.',
-    },
-    {
-      icon: <FaFileContract size={40} />,
-      title: 'Contract Ready',
-      desc: 'Experience working with government purchasing requirements.',
-    },
-    {
-      icon: <FaAward size={40} />,
-      title: 'Proven Track Record',
-      desc: '15+ years serving Denver with award-winning service.',
-    },
-  ];
-
-  const serviceTypes = [
-    'Municipal Employee Appreciation Events',
-    'City Council & Board Meetings',
-    'Government Training Sessions',
-    'Public Works Crew Meals',
-    'First Responder Appreciation',
-    'Community Outreach Events',
-    'Multi-Day Conferences',
-    'Emergency Response Support',
-    'Holiday Celebrations',
-    'Retirement Parties',
-  ];
-
-  const pricingTiers = [
-    {
-      name: 'Food Truck Service',
-      price: 'Request Quote',
-      features: [
-        'On-site fresh cooking',
-        'Full menu customization',
-        'Quick 25-second service',
-        'All equipment included',
-        'Professional crew',
-      ],
-    },
-    {
-      name: 'Buffet Style',
-      price: 'Request Quote',
-      features: [
-        'Elegant setup',
-        'Chafing dishes included',
-        'Dietary labels',
-        'Staff assistance',
-        'Indoor/outdoor options',
-      ],
-    },
-    {
-      name: 'Boxed Meals',
-      price: 'Request Quote',
-      features: [
-        'Individual portions',
-        'Easy distribution',
-        'No service staff needed',
-        'Grab-and-go friendly',
-        'Great for meetings',
-      ],
-    },
-  ];
+  const {
+    hero,
+    vendorCredentials,
+    capabilities,
+    missionCritical,
+    serviceTypes,
+    pricingTiers,
+    pricingNote,
+    whyTrustUs,
+    stats,
+    contactForm,
+    finalCta
+  } = content;
 
   return (
     <div className="min-h-screen pt-20">
       {/* Hero Section */}
       <section
         className="relative py-32 bg-crock-dark overflow-hidden bg-cover bg-center"
-        style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1567521464027-f127ff144326?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80)' }}
+        style={{ backgroundImage: `url(${hero.backgroundImage})` }}
       >
         <div className="absolute inset-0 bg-crock-dark/75"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -116,21 +61,21 @@ export default function GovernmentCapabilities() {
             transition={{ duration: 0.8 }}
           >
             <div className="inline-flex items-center gap-2 bg-crock-green/20 border border-crock-green/40 text-crock-green px-4 py-2 rounded-full mb-6">
-              <FaBuilding /> Government & Municipal Services
+              <FaBuilding /> {hero.badge}
             </div>
             <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
               Government <span className="text-crock-orange">Capabilities</span>
             </h1>
             <p className="text-xl text-crock-gray-light mb-8 max-w-3xl mx-auto">
-              Trusted catering partner for government agencies, municipalities, and public sector organizations throughout Colorado.
+              {hero.subheadline}
             </p>
-            <Link href="#contact">
+            <Link href={hero.ctaLink}>
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="bg-crock-orange text-white px-8 py-4 rounded-full font-semibold text-lg"
               >
-                Request Government Quote
+                {hero.ctaText}
               </motion.button>
             </Link>
           </motion.div>
@@ -150,7 +95,7 @@ export default function GovernmentCapabilities() {
               Approved <span className="text-crock-orange">Vendor Credentials</span>
             </h2>
             <p className="text-crock-gray-light">
-              Registered and verified for government contracting
+              {vendorCredentials.subtitle}
             </p>
           </motion.div>
 
@@ -166,26 +111,12 @@ export default function GovernmentCapabilities() {
                 <FaFileContract /> NAICS Codes
               </h3>
               <ul className="space-y-2 text-white font-mono">
-                <li className="flex items-center gap-2">
-                  <span className="bg-crock-orange/20 px-2 py-1 rounded">722310</span>
-                  <span className="text-sm text-crock-gray-light">Food Service Contractors</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="bg-crock-orange/20 px-2 py-1 rounded">722320</span>
-                  <span className="text-sm text-crock-gray-light">Caterers</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="bg-crock-orange/20 px-2 py-1 rounded">722330</span>
-                  <span className="text-sm text-crock-gray-light">Mobile Food Services</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="bg-crock-orange/20 px-2 py-1 rounded">722513</span>
-                  <span className="text-sm text-crock-gray-light">Limited-Service Restaurants</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="bg-crock-orange/20 px-2 py-1 rounded">561210</span>
-                  <span className="text-sm text-crock-gray-light">Facilities Support Services</span>
-                </li>
+                {vendorCredentials.naicsCodes.map((item, index) => (
+                  <li key={index} className="flex items-center gap-2">
+                    <span className="bg-crock-orange/20 px-2 py-1 rounded">{item.code}</span>
+                    <span className="text-sm text-crock-gray-light">{item.description}</span>
+                  </li>
+                ))}
               </ul>
             </div>
 
@@ -196,14 +127,14 @@ export default function GovernmentCapabilities() {
               </h3>
               <div className="bg-crock-orange/20 rounded-lg p-4 text-center">
                 <p className="text-3xl font-mono font-bold text-white tracking-wider">
-                  018638954
+                  {vendorCredentials.dunsNumber.number}
                 </p>
                 <p className="text-sm text-crock-gray-light mt-2">
-                  Data Universal Numbering System
+                  {vendorCredentials.dunsNumber.label}
                 </p>
               </div>
               <p className="text-sm text-crock-gray-light mt-4">
-                Verified business identifier for federal procurement
+                {vendorCredentials.dunsNumber.description}
               </p>
             </div>
 
@@ -214,14 +145,14 @@ export default function GovernmentCapabilities() {
               </h3>
               <div className="bg-crock-orange/20 rounded-lg p-4 text-center">
                 <p className="text-4xl font-mono font-bold text-white tracking-widest">
-                  87UD9
+                  {vendorCredentials.cageCode.code}
                 </p>
                 <p className="text-sm text-crock-gray-light mt-2">
-                  Commercial and Government Entity
+                  {vendorCredentials.cageCode.label}
                 </p>
               </div>
               <p className="text-sm text-crock-gray-light mt-4">
-                Department of Defense contractor identification
+                {vendorCredentials.cageCode.description}
               </p>
             </div>
           </motion.div>
@@ -255,9 +186,11 @@ export default function GovernmentCapabilities() {
                 transition={{ delay: index * 0.1 }}
                 className="bg-crock-gray-light/30 p-8 rounded-xl text-center"
               >
-                <div className="text-crock-orange mb-4 flex justify-center">{item.icon}</div>
+                <div className="text-crock-orange mb-4 flex justify-center">
+                  {capabilityIcons[item.icon] || <FaAward size={40} />}
+                </div>
                 <h3 className="text-xl font-bold text-crock-dark mb-2">{item.title}</h3>
-                <p className="text-crock-gray">{item.desc}</p>
+                <p className="text-crock-gray">{item.description}</p>
               </motion.div>
             ))}
           </div>
@@ -274,13 +207,13 @@ export default function GovernmentCapabilities() {
             className="text-center mb-12"
           >
             <div className="inline-flex items-center gap-2 bg-crock-orange/10 border border-crock-orange/30 text-crock-orange px-4 py-2 rounded-full mb-6">
-              <FaMedal /> Proven Performance
+              <FaMedal /> {missionCritical.badge}
             </div>
             <h2 className="text-4xl font-bold text-crock-dark mb-4">
               Mission-Critical <span className="text-crock-orange">Experience</span>
             </h2>
             <p className="text-xl text-crock-gray max-w-3xl mx-auto">
-              When it matters most, government agencies count on The Crock Spot
+              {missionCritical.subtitle}
             </p>
           </motion.div>
 
@@ -294,29 +227,29 @@ export default function GovernmentCapabilities() {
             <div className="bg-gradient-to-r from-crock-orange to-crock-orange/80 px-6 py-4">
               <div className="flex items-center gap-3 text-white">
                 <FaFlag size={24} />
-                <h3 className="text-xl font-bold">Colorado Army National Guard COVID-19 Response</h3>
+                <h3 className="text-xl font-bold">{missionCritical.covidResponse.title}</h3>
               </div>
             </div>
             <div className="p-8 md:p-10">
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
                 <div className="text-center">
-                  <p className="text-5xl font-bold text-crock-orange">36</p>
-                  <p className="text-crock-gray-light">Consecutive Days</p>
+                  <p className="text-5xl font-bold text-crock-orange">{missionCritical.covidResponse.stats.days}</p>
+                  <p className="text-crock-gray-light">{missionCritical.covidResponse.stats.daysLabel}</p>
                 </div>
                 <div className="text-center">
-                  <p className="text-5xl font-bold text-crock-orange">250</p>
-                  <p className="text-crock-gray-light">Meals Per Day</p>
+                  <p className="text-5xl font-bold text-crock-orange">{missionCritical.covidResponse.stats.meals}</p>
+                  <p className="text-crock-gray-light">{missionCritical.covidResponse.stats.mealsLabel}</p>
                 </div>
                 <div className="text-center">
-                  <p className="text-5xl font-bold text-crock-orange">48hr</p>
-                  <p className="text-crock-gray-light">Mobilization Time</p>
+                  <p className="text-5xl font-bold text-crock-orange">{missionCritical.covidResponse.stats.mobilization}</p>
+                  <p className="text-crock-gray-light">{missionCritical.covidResponse.stats.mobilizationLabel}</p>
                 </div>
               </div>
               <p className="text-lg text-white leading-relaxed mb-6">
-                <strong className="text-crock-orange">April 17 – May 22, 2020:</strong> Sole provider of breakfast, lunch, and dinner for the Colorado Army National Guard COVID-19 Response Force at the Colorado Convention Center. Mobilized within 48 hours and delivered up to 250 meals per day, seven days a week, for 36 consecutive days.
+                <strong className="text-crock-orange">{missionCritical.covidResponse.dateRange}:</strong> {missionCritical.covidResponse.description}
               </p>
               <p className="text-crock-gray-light">
-                This mission demonstrated our ability to scale rapidly, maintain consistent quality under pressure, and adapt to changing requirements in real-time.
+                {missionCritical.covidResponse.impact}
               </p>
             </div>
           </motion.div>
@@ -330,21 +263,24 @@ export default function GovernmentCapabilities() {
           >
             <div className="flex items-center gap-3 mb-6">
               <FaStar className="text-crock-orange" size={28} />
-              <h3 className="text-2xl font-bold text-crock-dark">Ongoing Military Partnerships</h3>
+              <h3 className="text-2xl font-bold text-crock-dark">{missionCritical.militaryPartnerships.title}</h3>
             </div>
             <p className="text-lg text-crock-gray mb-6">
-              Multiple contracts and GPC purchases for Army National Guard AT events and drill weekends at <strong>Buckley Space Force Base</strong>.
+              {missionCritical.militaryPartnerships.description}
             </p>
             <div className="flex flex-wrap gap-4">
-              <span className="bg-crock-green/10 text-crock-green px-4 py-2 rounded-full font-semibold flex items-center gap-2">
-                <FaCheckCircle /> SAM Registered
-              </span>
-              <span className="bg-crock-orange/10 text-crock-orange px-4 py-2 rounded-full font-semibold flex items-center gap-2">
-                <FaCheckCircle /> Colorado Small Business
-              </span>
-              <span className="bg-crock-purple/10 text-crock-purple px-4 py-2 rounded-full font-semibold flex items-center gap-2">
-                <FaCheckCircle /> Veteran Friendly
-              </span>
+              {missionCritical.militaryPartnerships.badges.map((badge, index) => (
+                <span
+                  key={index}
+                  className={`px-4 py-2 rounded-full font-semibold flex items-center gap-2 ${
+                    index === 0 ? 'bg-crock-green/10 text-crock-green' :
+                    index === 1 ? 'bg-crock-orange/10 text-crock-orange' :
+                    'bg-crock-purple/10 text-crock-purple'
+                  }`}
+                >
+                  <FaCheckCircle /> {badge}
+                </span>
+              ))}
             </div>
           </motion.div>
         </div>
@@ -427,7 +363,7 @@ export default function GovernmentCapabilities() {
           </div>
 
           <p className="text-center text-crock-gray mt-8">
-            * Volume discounts available for recurring contracts and large events
+            {pricingNote}
           </p>
         </div>
       </section>
@@ -445,17 +381,12 @@ export default function GovernmentCapabilities() {
                 Why Government Agencies <span className="text-crock-orange">Trust Us</span>
               </h2>
               <p className="text-lg text-crock-gray mb-6">
-                We are a <strong>&quot;yes&quot; company</strong>—flexible, adaptive, and committed to meeting every client requirement. Our approach ensures your mission comes first.
+                {whyTrustUs.intro}
               </p>
 
               <h3 className="text-lg font-bold text-crock-dark mb-4">Known For:</h3>
               <div className="grid grid-cols-2 gap-3 mb-8">
-                {[
-                  'Generous portions',
-                  'Fast, efficient service',
-                  'Healthy, quality food',
-                  'Competitive pricing',
-                ].map((item, index) => (
+                {whyTrustUs.knownFor.map((item, index) => (
                   <motion.div
                     key={index}
                     initial={{ opacity: 0, scale: 0.9 }}
@@ -470,16 +401,7 @@ export default function GovernmentCapabilities() {
               </div>
 
               <div className="space-y-3">
-                {[
-                  '15+ years of proven experience in Denver',
-                  'Efficient service: 100+ guests per hour',
-                  'Dietary options: gluten-free, vegetarian, vegan, dairy-free, halal',
-                  'Fully licensed, insured, and compliant',
-                  'Flexible scheduling for any event type',
-                  'Transparent quotes with no hidden fees',
-                  'Award-winning food quality',
-                  'Professional, uniformed staff',
-                ].map((item, index) => (
+                {whyTrustUs.reasons.map((item, index) => (
                   <motion.div
                     key={index}
                     initial={{ opacity: 0, x: -20 }}
@@ -504,20 +426,20 @@ export default function GovernmentCapabilities() {
               <h3 className="text-2xl font-bold mb-4">Quick Stats</h3>
               <div className="grid grid-cols-2 gap-6">
                 <div className="text-center">
-                  <p className="text-4xl font-bold text-crock-orange">15+</p>
-                  <p className="text-crock-gray-light">Years in Business</p>
+                  <p className="text-4xl font-bold text-crock-orange">{stats.years}</p>
+                  <p className="text-crock-gray-light">{stats.yearsLabel}</p>
                 </div>
                 <div className="text-center">
-                  <p className="text-4xl font-bold text-crock-orange">10K+</p>
-                  <p className="text-crock-gray-light">Events Catered</p>
+                  <p className="text-4xl font-bold text-crock-orange">{stats.events}</p>
+                  <p className="text-crock-gray-light">{stats.eventsLabel}</p>
                 </div>
                 <div className="text-center">
-                  <p className="text-4xl font-bold text-crock-orange">100+</p>
-                  <p className="text-crock-gray-light">Guests/Hour</p>
+                  <p className="text-4xl font-bold text-crock-orange">{stats.guestsPerHour}</p>
+                  <p className="text-crock-gray-light">{stats.guestsLabel}</p>
                 </div>
                 <div className="text-center">
-                  <p className="text-4xl font-bold text-crock-orange">25s</p>
-                  <p className="text-crock-gray-light">Avg Service Time</p>
+                  <p className="text-4xl font-bold text-crock-orange">{stats.serviceTime}</p>
+                  <p className="text-crock-gray-light">{stats.serviceLabel}</p>
                 </div>
               </div>
             </motion.div>
@@ -538,7 +460,7 @@ export default function GovernmentCapabilities() {
               Request a <span className="text-crock-orange">Government Quote</span>
             </h2>
             <p className="text-xl text-crock-gray">
-              We&apos;ll provide a detailed proposal tailored to your agency&apos;s needs
+              {contactForm.description}
             </p>
           </motion.div>
 
@@ -554,8 +476,8 @@ export default function GovernmentCapabilities() {
       </section>
 
       <CTASection
-        title="Serving Those Who Serve"
-        subtitle="Let us take care of the food so you can focus on your mission."
+        title={finalCta.headline}
+        subtitle={finalCta.description}
         variant="dark"
       />
     </div>

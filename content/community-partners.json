@@ -2,64 +2,85 @@
   "hero": {
     "badge": "Community & Partnerships",
     "headline": "Community Partners",
-    "subheadline": "We believe in the power of community. From our humble beginnings at Cherry Creek Farmers Market to today, partnerships have been at the heart of everything we do."
+    "subheadline": "We believe in the power of community. From our humble beginnings at Cherry Creek Farmers Market to today, partnerships have been at the heart of everything we do.",
+    "backgroundImage": "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
   },
-  "partnerships": [
-    {
-      "type": "Event Venues",
-      "description": "We partner with event centers, breweries, and unique venues throughout Colorado."
-    },
-    {
-      "type": "Corporate Clients",
-      "description": "Recurring partnerships with businesses for employee appreciation and client events."
-    },
-    {
-      "type": "Non-Profits",
-      "description": "Supporting local charities and community organizations with special pricing."
-    },
-    {
-      "type": "Farmers Markets",
-      "description": "Where it all began! Still serving our community at local markets."
-    }
-  ],
-  "featuredPartners": [
-    { "name": "Church Ranch Event Center", "type": "Venue Partner" },
-    { "name": "Table Mountain Event Center", "type": "Venue Partner" },
-    { "name": "Cherry Creek Farmers Market", "type": "Market Partner" },
-    { "name": "Local Breweries", "type": "Beverage Partners" },
-    { "name": "New Terrain Brewing", "type": "Event Partner" }
-  ],
-  "communityInvolvement": [
-    {
-      "title": "Local Sourcing",
-      "description": "We partner with local farms and vendors whenever possible to support our community."
-    },
-    {
-      "title": "Charity Events",
-      "description": "Discounted catering for non-profit fundraisers and community benefit events."
-    },
-    {
-      "title": "Food Donations",
-      "description": "Excess food from events is donated to local shelters and food banks."
-    },
-    {
-      "title": "Youth Employment",
-      "description": "Providing job opportunities and training for young people in our community."
-    }
-  ],
+  "partnershipTypes": {
+    "title": "How We Partner",
+    "subtitle": "Building relationships that strengthen our community",
+    "types": [
+      {
+        "icon": "map-marker",
+        "type": "Event Venues",
+        "description": "We partner with event centers, breweries, and unique venues throughout Colorado."
+      },
+      {
+        "icon": "users",
+        "type": "Corporate Clients",
+        "description": "Recurring partnerships with businesses for employee appreciation and client events."
+      },
+      {
+        "icon": "heart",
+        "type": "Non-Profits",
+        "description": "Supporting local charities and community organizations with special pricing."
+      },
+      {
+        "icon": "calendar",
+        "type": "Farmers Markets",
+        "description": "Where it all began! Still serving our community at local markets."
+      }
+    ]
+  },
+  "featuredPartners": {
+    "title": "Featured Partners",
+    "subtitle": "Some of the amazing organizations we work with",
+    "partners": [
+      { "name": "Church Ranch Event Center", "type": "Venue Partner" },
+      { "name": "Table Mountain Event Center", "type": "Venue Partner" },
+      { "name": "Cherry Creek Farmers Market", "type": "Market Partner" },
+      { "name": "Local Breweries", "type": "Beverage Partners" },
+      { "name": "New Terrain Brewing", "type": "Event Partner" }
+    ]
+  },
+  "communityInvolvement": {
+    "title": "Giving Back",
+    "subtitle": "Our commitment to making Denver a better place",
+    "items": [
+      {
+        "title": "Local Sourcing",
+        "description": "We partner with local farms and vendors whenever possible to support our community."
+      },
+      {
+        "title": "Charity Events",
+        "description": "Discounted catering for non-profit fundraisers and community benefit events."
+      },
+      {
+        "title": "Food Donations",
+        "description": "Excess food from events is donated to local shelters and food banks."
+      },
+      {
+        "title": "Youth Employment",
+        "description": "Providing job opportunities and training for young people in our community."
+      }
+    ]
+  },
   "becomePartner": {
-    "headline": "Become a Partner",
+    "title": "Become a Partner",
     "description": "We're always looking for great partners who share our values of quality, community, and exceptional service. Whether you're a venue, business, or organization, let's explore how we can work together.",
+    "formTitle": "Partner With Us",
     "partnershipTypes": [
       {
+        "icon": "handshake",
         "title": "Venue Partnerships",
         "description": "Preferred catering arrangements for your events"
       },
       {
+        "icon": "users",
         "title": "Corporate Programs",
         "description": "Recurring catering with volume benefits"
       },
       {
+        "icon": "heart",
         "title": "Non-Profit Support",
         "description": "Special pricing for charitable organizations"
       }
@@ -70,7 +91,7 @@
     "author": "Local Event Partner"
   },
   "cta": {
-    "headline": "Let's Crock Together",
-    "description": "Join our community of partners and let's create something special."
+    "title": "Let's Crock Together",
+    "subtitle": "Join our community of partners and let's create something special."
   }
 }

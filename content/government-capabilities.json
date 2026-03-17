@@ -3,35 +3,87 @@
     "badge": "Government & Municipal Services",
     "headline": "Government Capabilities",
     "subheadline": "Trusted catering partner for government agencies, municipalities, and public sector organizations throughout Colorado.",
+    "backgroundImage": "https://images.unsplash.com/photo-1567521464027-f127ff144326?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
     "ctaText": "Request Government Quote",
     "ctaLink": "#contact"
   },
+  "vendorCredentials": {
+    "title": "Approved Vendor Credentials",
+    "subtitle": "Registered and verified for government contracting",
+    "naicsCodes": [
+      { "code": "722310", "description": "Food Service Contractors" },
+      { "code": "722320", "description": "Caterers" },
+      { "code": "722330", "description": "Mobile Food Services" },
+      { "code": "722513", "description": "Limited-Service Restaurants" },
+      { "code": "561210", "description": "Facilities Support Services" }
+    ],
+    "dunsNumber": {
+      "number": "018638954",
+      "label": "Data Universal Numbering System",
+      "description": "Verified business identifier for federal procurement"
+    },
+    "cageCode": {
+      "code": "87UD9",
+      "label": "Commercial and Government Entity",
+      "description": "Department of Defense contractor identification"
+    }
+  },
   "capabilities": [
     {
+      "icon": "users",
       "title": "Large-Scale Events",
       "description": "Serve 100+ guests per hour with our efficient quick-serve concept."
     },
     {
+      "icon": "clock",
       "title": "Flexible Scheduling",
       "description": "Available for recurring events, one-time gatherings, or multi-day conferences."
     },
     {
+      "icon": "leaf",
       "title": "Dietary Compliance",
-      "description": "Extensive gluten-free, vegetarian, and vegan options clearly labeled."
+      "description": "Gluten-free, vegetarian, vegan, dairy-free, and halal options clearly labeled."
     },
     {
+      "icon": "shield",
       "title": "Fully Insured",
       "description": "Comprehensive liability coverage for peace of mind."
     },
     {
+      "icon": "file-contract",
       "title": "Contract Ready",
       "description": "Experience working with government purchasing requirements."
     },
     {
+      "icon": "award",
       "title": "Proven Track Record",
       "description": "15+ years serving Denver with award-winning service."
     }
   ],
+  "missionCritical": {
+    "badge": "Proven Performance",
+    "title": "Mission-Critical Experience",
+    "subtitle": "When it matters most, government agencies count on The Crock Spot",
+    "covidResponse": {
+      "title": "Colorado Army National Guard COVID-19 Response",
+      "dateRange": "April 17 – May 22, 2020",
+      "description": "Sole provider of breakfast, lunch, and dinner for the Colorado Army National Guard COVID-19 Response Force at the Colorado Convention Center. Mobilized within 48 hours and delivered up to 250 meals per day, seven days a week, for 36 consecutive days.",
+      "impact": "This mission demonstrated our ability to scale rapidly, maintain consistent quality under pressure, and adapt to changing requirements in real-time.",
+      "stats": {
+        "days": "36",
+        "daysLabel": "Consecutive Days",
+        "meals": "250",
+        "mealsLabel": "Meals Per Day",
+        "mobilization": "48hr",
+        "mobilizationLabel": "Mobilization Time"
+      }
+    },
+    "militaryPartnerships": {
+      "title": "Ongoing Military Partnerships",
+      "description": "Multiple contracts and GPC purchases for Army National Guard AT events and drill weekends at Buckley Space Force Base.",
+      "badges": ["SAM Registered", "Colorado Small Business", "Veteran Friendly"]
+    }
+  },
   "serviceTypes": [
     "Municipal Employee Appreciation Events",
     "City Council & Board Meetings",
@@ -79,13 +131,20 @@
       ]
     }
   ],
-  "pricingNote": "Contact us for volume discounts on recurring contracts and large events",
+  "pricingNote": "* Volume discounts available for recurring contracts and large events",
   "whyTrustUs": {
     "headline": "Why Government Agencies Trust Us",
+    "intro": "We are a \"yes\" company—flexible, adaptive, and committed to meeting every client requirement. Our approach ensures your mission comes first.",
+    "knownFor": [
+      "Generous portions",
+      "Fast, efficient service",
+      "Healthy, quality food",
+      "Competitive pricing"
+    ],
     "reasons": [
       "15+ years of proven experience in Denver",
       "Efficient service: 100+ guests per hour",
-      "Comprehensive dietary accommodations",
+      "Dietary options: gluten-free, vegetarian, vegan, dairy-free, halal",
       "Fully licensed, insured, and compliant",
       "Flexible scheduling for any event type",
       "Transparent quotes with no hidden fees",
@@ -95,11 +154,15 @@
   },
   "stats": {
     "years": "15+",
+    "yearsLabel": "Years in Business",
     "events": "10K+",
+    "eventsLabel": "Events Catered",
     "guestsPerHour": "100+",
-    "serviceTime": "25s"
+    "guestsLabel": "Guests/Hour",
+    "serviceTime": "25s",
+    "serviceLabel": "Avg Service Time"
   },
-  "cta": {
+  "contactForm": {
     "headline": "Request a Government Quote",
     "description": "We'll provide a detailed proposal tailored to your agency's needs"
   },
