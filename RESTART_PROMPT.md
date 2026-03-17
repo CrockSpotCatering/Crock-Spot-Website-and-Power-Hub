@@ -10,7 +10,7 @@ I'm working on **The Crock Spot** website & CMS - Denver's premier event caterer
 
 ### 📍 FIRST: Read These Files
 ```bash
-cd /Users/brettlechtenberg/Documents/agent-girl/crockspot1
+cd /Users/brettlechtenberg/Documents/agent-girl/crockspot
 ```
 Then read in this order:
 1. `SESSION_LOG.md` - What was done, what's pending
@@ -111,7 +111,7 @@ All pages import from `/content/*.json`:
 
 ### 📂 Project Structure
 ```
-crockspot1/
+crockspot/
 ├── app/                    # Next.js pages
 │   ├── page.tsx           # Homepage
 │   ├── about/             # About page
@@ -133,7 +133,7 @@ crockspot1/
 
 ### 🚀 Quick Commands
 ```bash
-cd /Users/brettlechtenberg/Documents/agent-girl/crockspot1
+cd /Users/brettlechtenberg/Documents/agent-girl/crockspot
 npm run dev        # Start dev server (localhost:3000)
 npm run build      # Build for production
 
