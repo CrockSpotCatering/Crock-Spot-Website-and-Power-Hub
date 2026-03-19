@@ -1,13 +1,10 @@
 import { NextResponse } from 'next/server';
 import * as mammoth from 'mammoth';
-import { getDocument, GlobalWorkerOptions } from 'pdfjs-dist';
+import { extractText } from 'unpdf';
 
 // Force Node.js runtime for compatibility
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
-
-// Disable worker for serverless environment
-GlobalWorkerOptions.workerSrc = '';
 
 //==============================================================================
 // POWER HUB - Document Parser API
@@ -35,20 +32,9 @@ export async function POST(request: Request): Promise<NextResponse> {
     // Handle PDF files
     if (fileName.endsWith('.pdf')) {
       try {
-        // Use pdfjs-dist (pure JS, works on serverless)
-        const uint8Array = new Uint8Array(bytes);
-        const pdf = await getDocument({ data: uint8Array, useWorkerFetch: false, isEvalSupported: false, useSystemFonts: true }).promise;
-
-        const textParts: string[] = [];
-        for (let i = 1; i <= pdf.numPages; i++) {
-          const page = await pdf.getPage(i);
-          const textContent = await page.getTextContent();
-          const pageText = textContent.items
-            .map((item: { str?: string }) => item.str || '')
-            .join(' ');
-          textParts.push(pageText);
-        }
-        extractedText = textParts.join('\n\n');
+        // Use unpdf (serverless-friendly, no native dependencies)
+        const { text } = await extractText(new Uint8Array(bytes));
+        extractedText = text;
       } catch (error) {
         console.error('PDF parsing error:', error);
         return NextResponse.json(

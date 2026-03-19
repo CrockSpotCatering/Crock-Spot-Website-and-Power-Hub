@@ -16,11 +16,11 @@
     "lucide-react": "^0.577.0",
     "mammoth": "^1.11.0",
     "next": "^16.0.1",
-    "pdfjs-dist": "^4.0.379",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-icons": "^5.5.0",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "unpdf": "^1.4.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.21",
