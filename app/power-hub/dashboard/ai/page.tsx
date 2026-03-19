@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import Header from '@/components/power-hub/Header';
 import {
   Sparkles, FileText, Zap, Copy, Check, Loader2, Key, Eye, EyeOff,
@@ -29,6 +29,13 @@ interface StoredDocument {
   fileType: string;
 }
 
+interface AISettings {
+  provider: AIProvider;
+  claudeApiKey: string;
+  openaiApiKey: string;
+  lastUpdated: string;
+}
+
 export default function AIAssistPage() {
   const [content, setContent] = useState('');
   const [prompt, setPrompt] = useState('');
@@ -36,11 +43,15 @@ export default function AIAssistPage() {
   const [loading, setLoading] = useState(false);
   const [copied, setCopied] = useState(false);
 
-  // API Key state (kept in localStorage - per user)
-  const [apiKey, setApiKey] = useState('');
+  // API Key state (stored on server - shared across team)
+  const [claudeApiKey, setClaudeApiKey] = useState('');
+  const [openaiApiKey, setOpenaiApiKey] = useState('');
   const [provider, setProvider] = useState<AIProvider>('claude');
   const [showApiKey, setShowApiKey] = useState(false);
   const [keySaved, setKeySaved] = useState(false);
+  const [savingKey, setSavingKey] = useState(false);
+  const [loadingSettings, setLoadingSettings] = useState(true);
+  const [settingsSha, setSettingsSha] = useState<string>('');
 
   // Brand Documents state (stored on server - shared across team)
   const [documents, setDocuments] = useState<StoredDocument[]>([]);
@@ -51,23 +62,59 @@ export default function AIAssistPage() {
   const [loadingDocs, setLoadingDocs] = useState(true);
   const [deletingDoc, setDeletingDoc] = useState<string | null>(null);
 
-  // Load API key from localStorage on mount
-  useEffect(() => {
-    const savedKey = localStorage.getItem('crockspot_ai_api_key');
-    const savedProvider = localStorage.getItem('crockspot_ai_provider') as AIProvider;
-    const savedSelectedDocs = localStorage.getItem('crockspot_selected_docs');
+  // Get the active API key based on current provider
+  const apiKey = provider === 'claude' ? claudeApiKey : openaiApiKey;
 
-    if (savedKey) {
-      setApiKey(savedKey);
-      setKeySaved(true);
+  // Load API settings from server on mount
+  const fetchSettings = useCallback(async () => {
+    setLoadingSettings(true);
+    try {
+      const response = await fetch('/api/power-hub/content?file=settings.json');
+      if (response.ok) {
+        const data = await response.json();
+        const settings: AISettings = data.content?.aiSettings || {};
+        setSettingsSha(data.sha || '');
+
+        if (settings.provider) {
+          setProvider(settings.provider);
+        }
+        if (settings.claudeApiKey) {
+          setClaudeApiKey(settings.claudeApiKey);
+          setKeySaved(true);
+        }
+        if (settings.openaiApiKey) {
+          setOpenaiApiKey(settings.openaiApiKey);
+          if (settings.provider === 'openai') setKeySaved(true);
+        }
+      }
+    } catch (error) {
+      console.error('Failed to fetch settings:', error);
+      // Fall back to localStorage
+      const savedKey = localStorage.getItem('crockspot_ai_api_key');
+      const savedProvider = localStorage.getItem('crockspot_ai_provider') as AIProvider;
+      if (savedKey) {
+        if (savedProvider === 'openai') {
+          setOpenaiApiKey(savedKey);
+        } else {
+          setClaudeApiKey(savedKey);
+        }
+        setKeySaved(true);
+      }
+      if (savedProvider) {
+        setProvider(savedProvider);
+      }
     }
-    if (savedProvider) {
-      setProvider(savedProvider);
-    }
+    setLoadingSettings(false);
+  }, []);
+
+  useEffect(() => {
+    fetchSettings();
+    // Load selected docs from localStorage (per-user preference)
+    const savedSelectedDocs = localStorage.getItem('crockspot_selected_docs');
     if (savedSelectedDocs) {
       setSelectedDocIds(JSON.parse(savedSelectedDocs));
     }
-  }, []);
+  }, [fetchSettings]);
 
   // Load documents from server on mount
   useEffect(() => {
@@ -88,19 +135,87 @@ export default function AIAssistPage() {
     setLoadingDocs(false);
   };
 
-  const saveApiKey = () => {
-    if (apiKey.trim()) {
-      localStorage.setItem('crockspot_ai_api_key', apiKey);
-      localStorage.setItem('crockspot_ai_provider', provider);
-      setKeySaved(true);
+  const saveApiKey = async () => {
+    const currentKey = provider === 'claude' ? claudeApiKey : openaiApiKey;
+    if (!currentKey.trim()) return;
+
+    setSavingKey(true);
+    try {
+      const settings = {
+        aiSettings: {
+          provider,
+          claudeApiKey,
+          openaiApiKey,
+          lastUpdated: new Date().toISOString(),
+        }
+      };
+
+      const response = await fetch('/api/power-hub/content', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          filename: 'content/settings.json',
+          content: settings,
+          sha: settingsSha,
+        }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setSettingsSha(data.newSha || settingsSha);
+        setKeySaved(true);
+        // Also save to localStorage as backup
+        localStorage.setItem('crockspot_ai_api_key', currentKey);
+        localStorage.setItem('crockspot_ai_provider', provider);
+      } else {
+        const error = await response.json();
+        console.error('Failed to save API key:', error);
+        setUploadError('Failed to save API key: ' + (error.error || 'Unknown error'));
+      }
+    } catch (error) {
+      console.error('Failed to save API key:', error);
+      setUploadError('Failed to save API key: ' + String(error));
     }
+    setSavingKey(false);
   };
 
-  const clearApiKey = () => {
-    localStorage.removeItem('crockspot_ai_api_key');
-    localStorage.removeItem('crockspot_ai_provider');
-    setApiKey('');
-    setKeySaved(false);
+  const clearApiKey = async () => {
+    setSavingKey(true);
+    try {
+      const settings = {
+        aiSettings: {
+          provider,
+          claudeApiKey: provider === 'claude' ? '' : claudeApiKey,
+          openaiApiKey: provider === 'openai' ? '' : openaiApiKey,
+          lastUpdated: new Date().toISOString(),
+        }
+      };
+
+      const response = await fetch('/api/power-hub/content', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          filename: 'content/settings.json',
+          content: settings,
+          sha: settingsSha,
+        }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setSettingsSha(data.newSha || settingsSha);
+        if (provider === 'claude') {
+          setClaudeApiKey('');
+        } else {
+          setOpenaiApiKey('');
+        }
+        setKeySaved(false);
+        localStorage.removeItem('crockspot_ai_api_key');
+      }
+    } catch (error) {
+      console.error('Failed to clear API key:', error);
+    }
+    setSavingKey(false);
   };
 
   const toggleDocSelection = (docId: string) => {
@@ -322,24 +437,36 @@ export default function AIAssistPage() {
               <label className="block text-sm font-medium text-gray-700 mb-2">AI Provider</label>
               <div className="flex gap-2">
                 <button
-                  onClick={() => setProvider('claude')}
-                  className={`flex-1 py-3 px-4 rounded-lg font-medium transition-all ${
+                  onClick={() => {
+                    setProvider('claude');
+                    setKeySaved(!!claudeApiKey);
+                  }}
+                  className={`flex-1 py-3 px-4 rounded-lg font-medium transition-all relative ${
                     provider === 'claude'
                       ? 'bg-purple-600 text-white shadow-lg'
                       : 'bg-white text-gray-700 border border-gray-300 hover:border-purple-400'
                   }`}
                 >
                   Claude (Anthropic)
+                  {claudeApiKey && (
+                    <span className="absolute -top-1 -right-1 w-3 h-3 bg-green-500 rounded-full border-2 border-white"></span>
+                  )}
                 </button>
                 <button
-                  onClick={() => setProvider('openai')}
-                  className={`flex-1 py-3 px-4 rounded-lg font-medium transition-all ${
+                  onClick={() => {
+                    setProvider('openai');
+                    setKeySaved(!!openaiApiKey);
+                  }}
+                  className={`flex-1 py-3 px-4 rounded-lg font-medium transition-all relative ${
                     provider === 'openai'
                       ? 'bg-green-600 text-white shadow-lg'
                       : 'bg-white text-gray-700 border border-gray-300 hover:border-green-400'
                   }`}
                 >
                   ChatGPT (OpenAI)
+                  {openaiApiKey && (
+                    <span className="absolute -top-1 -right-1 w-3 h-3 bg-green-500 rounded-full border-2 border-white"></span>
+                  )}
                 </button>
               </div>
             </div>
@@ -353,10 +480,18 @@ export default function AIAssistPage() {
                 <div className="relative flex-1">
                   <input
                     type={showApiKey ? 'text' : 'password'}
-                    value={apiKey}
-                    onChange={(e) => { setApiKey(e.target.value); setKeySaved(false); }}
+                    value={provider === 'claude' ? claudeApiKey : openaiApiKey}
+                    onChange={(e) => {
+                      if (provider === 'claude') {
+                        setClaudeApiKey(e.target.value);
+                      } else {
+                        setOpenaiApiKey(e.target.value);
+                      }
+                      setKeySaved(false);
+                    }}
                     placeholder={provider === 'claude' ? 'sk-ant-api...' : 'sk-...'}
-                    className="w-full py-3 px-4 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F49220] focus:border-[#F49220] text-gray-900 placeholder-gray-400"
+                    disabled={loadingSettings}
+                    className="w-full py-3 px-4 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F49220] focus:border-[#F49220] text-gray-900 placeholder-gray-400 disabled:bg-gray-100"
                   />
                   <button
                     onClick={() => setShowApiKey(!showApiKey)}
@@ -368,14 +503,17 @@ export default function AIAssistPage() {
                 {apiKey && !keySaved ? (
                   <button
                     onClick={saveApiKey}
-                    className="px-4 py-3 bg-[#F49220] text-white rounded-lg hover:bg-[#e08519] font-medium"
+                    disabled={savingKey}
+                    className="px-4 py-3 bg-[#F49220] text-white rounded-lg hover:bg-[#e08519] font-medium disabled:opacity-50 flex items-center gap-2"
                   >
-                    Save
+                    {savingKey ? <Loader2 size={16} className="animate-spin" /> : null}
+                    {savingKey ? 'Saving...' : 'Save'}
                   </button>
-                ) : keySaved ? (
+                ) : keySaved && apiKey ? (
                   <button
                     onClick={clearApiKey}
-                    className="px-4 py-3 bg-red-100 text-red-600 rounded-lg hover:bg-red-200 font-medium"
+                    disabled={savingKey}
+                    className="px-4 py-3 bg-red-100 text-red-600 rounded-lg hover:bg-red-200 font-medium disabled:opacity-50"
                   >
                     Clear
                   </button>
@@ -386,11 +524,16 @@ export default function AIAssistPage() {
 
           {/* Status indicator */}
           <div className="mt-4 flex items-center gap-2">
-            {keySaved && apiKey ? (
+            {loadingSettings ? (
+              <>
+                <Loader2 size={14} className="animate-spin text-gray-500" />
+                <span className="text-sm text-gray-500">Loading saved settings...</span>
+              </>
+            ) : keySaved && apiKey ? (
               <>
                 <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
                 <span className="text-sm text-green-700 font-medium">
-                  {provider === 'claude' ? 'Claude' : 'ChatGPT'} API key saved and ready!
+                  {provider === 'claude' ? 'Claude' : 'ChatGPT'} API key saved and ready! (Shared across team)
                 </span>
               </>
             ) : (
@@ -402,6 +545,13 @@ export default function AIAssistPage() {
               </>
             )}
           </div>
+
+          {/* Show if other provider has a saved key */}
+          {(provider === 'claude' && openaiApiKey) || (provider === 'openai' && claudeApiKey) ? (
+            <div className="mt-2 text-xs text-gray-500">
+              💡 Tip: {provider === 'claude' ? 'OpenAI' : 'Claude'} key is also saved. Switch providers to use it.
+            </div>
+          ) : null}
         </div>
 
         {/* Brand Documents Section */}

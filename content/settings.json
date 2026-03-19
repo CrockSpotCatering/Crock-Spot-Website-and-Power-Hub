@@ -1,0 +1,8 @@
+{
+  "aiSettings": {
+    "provider": "claude",
+    "claudeApiKey": "",
+    "openaiApiKey": "",
+    "lastUpdated": ""
+  }
+}
