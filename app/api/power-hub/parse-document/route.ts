@@ -2,6 +2,10 @@ import { NextResponse } from 'next/server';
 import pdfParse from 'pdf-parse';
 import * as mammoth from 'mammoth';
 
+// Force Node.js runtime for native module compatibility (pdf-parse)
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
+
 //==============================================================================
 // POWER HUB - Document Parser API
 // Extracts text from PDF and Word documents for brand guidelines
