@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { PDFParse } from 'pdf-parse';
+import pdfParse from 'pdf-parse';
 import * as mammoth from 'mammoth';
 
 //==============================================================================
@@ -28,10 +28,8 @@ export async function POST(request: Request): Promise<NextResponse> {
     // Handle PDF files
     if (fileName.endsWith('.pdf')) {
       try {
-        const parser = new PDFParse({ data: buffer });
-        const result = await parser.getText();
+        const result = await pdfParse(buffer);
         extractedText = result.text;
-        await parser.destroy();
       } catch (error) {
         console.error('PDF parsing error:', error);
         return NextResponse.json(

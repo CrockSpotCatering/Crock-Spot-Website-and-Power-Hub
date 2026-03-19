@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import Header from '@/components/power-hub/Header';
 import {
   Sparkles, FileText, Zap, Copy, Check, Loader2, Key, Eye, EyeOff,
-  X, FileUp, BookOpen, AlertCircle
+  X, FileUp, BookOpen, AlertCircle, Trash2, CheckCircle, RefreshCw
 } from 'lucide-react';
 
 const quickActions = [
@@ -20,6 +20,15 @@ const quickActions = [
 
 type AIProvider = 'claude' | 'openai';
 
+interface StoredDocument {
+  id: string;
+  name: string;
+  content: string;
+  uploadedAt: string;
+  fileSize: number;
+  fileType: string;
+}
+
 export default function AIAssistPage() {
   const [content, setContent] = useState('');
   const [prompt, setPrompt] = useState('');
@@ -27,26 +36,26 @@ export default function AIAssistPage() {
   const [loading, setLoading] = useState(false);
   const [copied, setCopied] = useState(false);
 
-  // API Key state
+  // API Key state (kept in localStorage - per user)
   const [apiKey, setApiKey] = useState('');
   const [provider, setProvider] = useState<AIProvider>('claude');
   const [showApiKey, setShowApiKey] = useState(false);
   const [keySaved, setKeySaved] = useState(false);
 
-  // Brand Guidelines state
-  const [brandGuidelines, setBrandGuidelines] = useState('');
+  // Brand Documents state (stored on server - shared across team)
+  const [documents, setDocuments] = useState<StoredDocument[]>([]);
+  const [selectedDocIds, setSelectedDocIds] = useState<string[]>([]);
   const [showBrandSection, setShowBrandSection] = useState(false);
-  const [brandSaved, setBrandSaved] = useState(false);
-  const [uploadedFileName, setUploadedFileName] = useState('');
   const [uploadingFile, setUploadingFile] = useState(false);
   const [uploadError, setUploadError] = useState('');
+  const [loadingDocs, setLoadingDocs] = useState(true);
+  const [deletingDoc, setDeletingDoc] = useState<string | null>(null);
 
-  // Load saved data on mount
+  // Load API key from localStorage on mount
   useEffect(() => {
     const savedKey = localStorage.getItem('crockspot_ai_api_key');
     const savedProvider = localStorage.getItem('crockspot_ai_provider') as AIProvider;
-    const savedBrand = localStorage.getItem('crockspot_brand_guidelines');
-    const savedFileName = localStorage.getItem('crockspot_brand_filename');
+    const savedSelectedDocs = localStorage.getItem('crockspot_selected_docs');
 
     if (savedKey) {
       setApiKey(savedKey);
@@ -55,14 +64,29 @@ export default function AIAssistPage() {
     if (savedProvider) {
       setProvider(savedProvider);
     }
-    if (savedBrand) {
-      setBrandGuidelines(savedBrand);
-      setBrandSaved(true);
-    }
-    if (savedFileName) {
-      setUploadedFileName(savedFileName);
+    if (savedSelectedDocs) {
+      setSelectedDocIds(JSON.parse(savedSelectedDocs));
     }
   }, []);
+
+  // Load documents from server on mount
+  useEffect(() => {
+    fetchDocuments();
+  }, []);
+
+  const fetchDocuments = async () => {
+    setLoadingDocs(true);
+    try {
+      const response = await fetch('/api/power-hub/documents');
+      if (response.ok) {
+        const data = await response.json();
+        setDocuments(data.documents || []);
+      }
+    } catch (error) {
+      console.error('Failed to fetch documents:', error);
+    }
+    setLoadingDocs(false);
+  };
 
   const saveApiKey = () => {
     if (apiKey.trim()) {
@@ -79,23 +103,36 @@ export default function AIAssistPage() {
     setKeySaved(false);
   };
 
-  const saveBrandGuidelines = () => {
-    if (brandGuidelines.trim()) {
-      localStorage.setItem('crockspot_brand_guidelines', brandGuidelines);
-      if (uploadedFileName) {
-        localStorage.setItem('crockspot_brand_filename', uploadedFileName);
-      }
-      setBrandSaved(true);
-    }
+  const toggleDocSelection = (docId: string) => {
+    setSelectedDocIds(prev => {
+      const newSelection = prev.includes(docId)
+        ? prev.filter(id => id !== docId)
+        : [...prev, docId];
+      localStorage.setItem('crockspot_selected_docs', JSON.stringify(newSelection));
+      return newSelection;
+    });
   };
 
-  const clearBrandGuidelines = () => {
-    localStorage.removeItem('crockspot_brand_guidelines');
-    localStorage.removeItem('crockspot_brand_filename');
-    setBrandGuidelines('');
-    setUploadedFileName('');
-    setBrandSaved(false);
-    setUploadError('');
+  const deleteDocument = async (docId: string) => {
+    setDeletingDoc(docId);
+    try {
+      const response = await fetch('/api/power-hub/documents', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: docId }),
+      });
+
+      if (response.ok) {
+        setDocuments(prev => prev.filter(doc => doc.id !== docId));
+        setSelectedDocIds(prev => prev.filter(id => id !== docId));
+      } else {
+        const data = await response.json();
+        setUploadError(data.error || 'Failed to delete document');
+      }
+    } catch (error) {
+      setUploadError('Failed to delete document: ' + String(error));
+    }
+    setDeletingDoc(null);
   };
 
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -104,9 +141,9 @@ export default function AIAssistPage() {
 
     setUploadError('');
     setUploadingFile(true);
-    setUploadedFileName('');
 
     const fileName = file.name.toLowerCase();
+    let extractedText = '';
 
     // Check if it's a PDF or Word document that needs parsing
     if (fileName.endsWith('.pdf') || fileName.endsWith('.docx') || fileName.endsWith('.doc')) {
@@ -128,38 +165,69 @@ export default function AIAssistPage() {
           return;
         }
 
-        setBrandGuidelines(data.text);
-        setUploadedFileName(file.name);
-        setBrandSaved(false);
-        setUploadingFile(false);
+        extractedText = data.text;
       } catch (error) {
         setUploadError('Failed to upload file: ' + String(error));
         setUploadingFile(false);
+        e.target.value = '';
+        return;
       }
     }
     // Handle plain text files directly
     else if (fileName.endsWith('.txt') || fileName.endsWith('.md')) {
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        const text = event.target?.result as string;
-        setBrandGuidelines(text);
-        setUploadedFileName(file.name);
-        setBrandSaved(false);
-        setUploadingFile(false);
-      };
-      reader.onerror = () => {
-        setUploadError('Failed to read file');
-        setUploadingFile(false);
-      };
-      reader.readAsText(file);
+      extractedText = await file.text();
     }
     else {
       setUploadError('Unsupported file type. Please upload a PDF, Word document (.docx), or text file.');
       setUploadingFile(false);
+      e.target.value = '';
+      return;
     }
 
-    // Reset the input so the same file can be uploaded again
+    // Auto-save to server
+    try {
+      const response = await fetch('/api/power-hub/documents', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: file.name,
+          content: extractedText,
+          fileSize: file.size,
+          fileType: file.type || 'text/plain',
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        setUploadError(data.error || 'Failed to save document');
+      } else {
+        // Add to local state and auto-select
+        setDocuments(prev => [...prev, data.document]);
+        setSelectedDocIds(prev => {
+          const newSelection = [...prev, data.document.id];
+          localStorage.setItem('crockspot_selected_docs', JSON.stringify(newSelection));
+          return newSelection;
+        });
+      }
+    } catch (error) {
+      setUploadError('Failed to save document: ' + String(error));
+    }
+
+    setUploadingFile(false);
     e.target.value = '';
+  };
+
+  // Get combined brand context from selected documents
+  const getBrandContext = (): string | null => {
+    if (selectedDocIds.length === 0) return null;
+
+    const selectedDocs = documents.filter(doc => selectedDocIds.includes(doc.id));
+    if (selectedDocs.length === 0) return null;
+
+    return selectedDocs
+      .map(doc => `--- ${doc.name} ---\n${doc.content}`)
+      .join('\n\n');
   };
 
   const handleGenerate = async (customPrompt?: string) => {
@@ -169,11 +237,12 @@ export default function AIAssistPage() {
     setOutput('');
 
     const usedPrompt = customPrompt || prompt;
+    const brandContext = getBrandContext();
 
     // If no API key, show demo response
     if (!apiKey.trim()) {
       await new Promise(resolve => setTimeout(resolve, 1500));
-      setOutput(`[Demo Mode - No API Key]\n\nTo get real AI responses, add your API key above.\n\nYour prompt: "${usedPrompt}"\nYour content: "${content.substring(0, 100)}..."\n\n---\nAdd a Claude or OpenAI API key to enable real AI-powered content generation.`);
+      setOutput(`[Demo Mode - No API Key]\n\nTo get real AI responses, add your API key above.\n\nYour prompt: "${usedPrompt}"\nYour content: "${content.substring(0, 100)}..."\n${brandContext ? `\nBrand documents selected: ${selectedDocIds.length}` : ''}\n\n---\nAdd a Claude or OpenAI API key to enable real AI-powered content generation.`);
       setLoading(false);
       return;
     }
@@ -187,7 +256,7 @@ export default function AIAssistPage() {
           prompt: usedPrompt,
           apiKey,
           provider,
-          brandContext: brandGuidelines || null,
+          brandContext,
         }),
       });
 
@@ -214,6 +283,20 @@ export default function AIAssistPage() {
   const useAsInput = () => {
     setContent(output);
     setOutput('');
+  };
+
+  const formatFileSize = (bytes: number): string => {
+    if (bytes < 1024) return bytes + ' B';
+    if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+    return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+  };
+
+  const formatDate = (dateString: string): string => {
+    return new Date(dateString).toLocaleDateString('en-US', {
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric',
+    });
   };
 
   return (
@@ -246,7 +329,7 @@ export default function AIAssistPage() {
                       : 'bg-white text-gray-700 border border-gray-300 hover:border-purple-400'
                   }`}
                 >
-                  🟣 Claude (Anthropic)
+                  Claude (Anthropic)
                 </button>
                 <button
                   onClick={() => setProvider('openai')}
@@ -256,7 +339,7 @@ export default function AIAssistPage() {
                       : 'bg-white text-gray-700 border border-gray-300 hover:border-green-400'
                   }`}
                 >
-                  🟢 ChatGPT (OpenAI)
+                  ChatGPT (OpenAI)
                 </button>
               </div>
             </div>
@@ -321,7 +404,7 @@ export default function AIAssistPage() {
           </div>
         </div>
 
-        {/* Brand Guidelines Section */}
+        {/* Brand Documents Section */}
         <div className="mb-6 bg-white border border-gray-200 rounded-xl p-6">
           <button
             onClick={() => setShowBrandSection(!showBrandSection)}
@@ -332,11 +415,11 @@ export default function AIAssistPage() {
                 <BookOpen size={20} className="text-blue-600" />
               </div>
               <div className="text-left">
-                <h2 className="text-lg font-bold text-gray-900">Brand Guidelines</h2>
+                <h2 className="text-lg font-bold text-gray-900">Brand Documents</h2>
                 <p className="text-sm text-gray-600">
-                  {brandSaved
-                    ? `✓ Brand context loaded${uploadedFileName ? ` (${uploadedFileName})` : ''} - AI will use your guidelines`
-                    : 'Upload your brand book (PDF, Word) or paste guidelines'}
+                  {documents.length > 0
+                    ? `${documents.length} document${documents.length !== 1 ? 's' : ''} saved${selectedDocIds.length > 0 ? ` (${selectedDocIds.length} selected for AI context)` : ''}`
+                    : 'Upload brand books, style guides, and flyers (saved for all team members)'}
                 </p>
               </div>
             </div>
@@ -349,9 +432,6 @@ export default function AIAssistPage() {
             <div className="mt-4 pt-4 border-t border-gray-100">
               {/* File Upload */}
               <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Upload Brand Document
-                </label>
                 <div className="flex items-center gap-3 flex-wrap">
                   <label className={`flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 cursor-pointer transition-colors ${uploadingFile ? 'opacity-50 cursor-wait' : ''}`}>
                     {uploadingFile ? (
@@ -359,7 +439,7 @@ export default function AIAssistPage() {
                     ) : (
                       <FileUp size={18} />
                     )}
-                    {uploadingFile ? 'Processing...' : 'Upload File'}
+                    {uploadingFile ? 'Uploading & Saving...' : 'Upload Document'}
                     <input
                       type="file"
                       accept=".pdf,.docx,.doc,.txt,.md"
@@ -368,19 +448,18 @@ export default function AIAssistPage() {
                       className="hidden"
                     />
                   </label>
+                  <button
+                    onClick={fetchDocuments}
+                    disabled={loadingDocs}
+                    className="flex items-center gap-2 px-3 py-2 text-gray-600 border border-gray-300 rounded-lg hover:bg-gray-50"
+                  >
+                    <RefreshCw size={16} className={loadingDocs ? 'animate-spin' : ''} />
+                    Refresh
+                  </button>
                   <span className="text-sm text-gray-500">
-                    Supports: PDF, Word (.docx), Text files
+                    PDF, Word (.docx), Text files - Auto-saved for all team members
                   </span>
                 </div>
-
-                {/* Uploaded File Indicator */}
-                {uploadedFileName && (
-                  <div className="mt-2 flex items-center gap-2 text-sm text-blue-600 bg-blue-50 px-3 py-2 rounded-lg">
-                    <FileText size={16} />
-                    <span className="font-medium">{uploadedFileName}</span>
-                    <span className="text-gray-500">- {brandGuidelines.length.toLocaleString()} characters extracted</span>
-                  </div>
-                )}
 
                 {/* Upload Error */}
                 {uploadError && (
@@ -394,51 +473,77 @@ export default function AIAssistPage() {
                 )}
               </div>
 
-              {/* Text Area for Guidelines */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Brand Guidelines / Voice & Tone
-                </label>
-                <textarea
-                  value={brandGuidelines}
-                  onChange={(e) => { setBrandGuidelines(e.target.value); setBrandSaved(false); }}
-                  rows={8}
-                  className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-500 text-gray-900 placeholder-gray-400 resize-none font-mono text-sm"
-                  placeholder="Paste your brand guidelines here, or upload a PDF/Word document above...
-
-Example:
-- Brand Voice: Friendly, fun, rock & roll themed
-- Key Phrases: 'Let Us Crock Your World', 'Crock Stars'
-- Avoid: Formal language, corporate speak
-- Colors: Orange (#F49220), Dark (#1a1a2e)
-- Target Audience: Event planners, corporate HR, wedding couples"
-                />
-              </div>
-
-              <div className="flex items-center gap-3 mt-4">
-                {brandGuidelines && !brandSaved ? (
-                  <button
-                    onClick={saveBrandGuidelines}
-                    className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-medium"
-                  >
-                    <Check size={16} />
-                    Save Guidelines
-                  </button>
-                ) : brandSaved ? (
-                  <button
-                    onClick={clearBrandGuidelines}
-                    className="flex items-center gap-2 px-4 py-2 bg-red-100 text-red-600 rounded-lg hover:bg-red-200 font-medium"
-                  >
-                    <X size={16} />
-                    Clear Guidelines
-                  </button>
-                ) : null}
-                {brandSaved && (
-                  <span className="text-sm text-green-600 flex items-center gap-1">
-                    <Check size={14} /> Guidelines saved - AI will use them for context
-                  </span>
+              {/* Documents List */}
+              <div className="space-y-2">
+                {loadingDocs ? (
+                  <div className="flex items-center justify-center py-8 text-gray-500">
+                    <Loader2 size={24} className="animate-spin mr-2" />
+                    Loading documents...
+                  </div>
+                ) : documents.length === 0 ? (
+                  <div className="text-center py-8 text-gray-500">
+                    <FileText size={48} className="mx-auto mb-2 opacity-30" />
+                    <p>No brand documents uploaded yet.</p>
+                    <p className="text-sm">Upload your brand book, style guide, or any reference materials.</p>
+                  </div>
+                ) : (
+                  <>
+                    <p className="text-sm text-gray-600 mb-3">
+                      Select documents to include as context for AI generation:
+                    </p>
+                    {documents.map((doc) => (
+                      <div
+                        key={doc.id}
+                        className={`flex items-center gap-3 p-3 rounded-lg border transition-colors ${
+                          selectedDocIds.includes(doc.id)
+                            ? 'border-blue-500 bg-blue-50'
+                            : 'border-gray-200 hover:border-gray-300'
+                        }`}
+                      >
+                        <button
+                          onClick={() => toggleDocSelection(doc.id)}
+                          className={`w-6 h-6 rounded flex items-center justify-center transition-colors ${
+                            selectedDocIds.includes(doc.id)
+                              ? 'bg-blue-600 text-white'
+                              : 'bg-gray-100 text-gray-400 hover:bg-gray-200'
+                          }`}
+                        >
+                          {selectedDocIds.includes(doc.id) && <Check size={14} />}
+                        </button>
+                        <FileText size={20} className="text-gray-400 flex-shrink-0" />
+                        <div className="flex-1 min-w-0">
+                          <p className="font-medium text-gray-900 truncate">{doc.name}</p>
+                          <p className="text-xs text-gray-500">
+                            {formatFileSize(doc.fileSize)} • {doc.content.length.toLocaleString()} chars • {formatDate(doc.uploadedAt)}
+                          </p>
+                        </div>
+                        <button
+                          onClick={() => deleteDocument(doc.id)}
+                          disabled={deletingDoc === doc.id}
+                          className="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded transition-colors"
+                          title="Delete document"
+                        >
+                          {deletingDoc === doc.id ? (
+                            <Loader2 size={16} className="animate-spin" />
+                          ) : (
+                            <Trash2 size={16} />
+                          )}
+                        </button>
+                      </div>
+                    ))}
+                  </>
                 )}
               </div>
+
+              {/* Selected Status */}
+              {selectedDocIds.length > 0 && (
+                <div className="mt-4 flex items-center gap-2 text-sm text-green-600 bg-green-50 px-3 py-2 rounded-lg">
+                  <CheckCircle size={16} />
+                  <span>
+                    {selectedDocIds.length} document{selectedDocIds.length !== 1 ? 's' : ''} selected - AI will use these for brand context
+                  </span>
+                </div>
+              )}
             </div>
           )}
         </div>
@@ -547,7 +652,7 @@ Example:
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 text-sm text-purple-600 hover:text-purple-800 hover:underline"
                 >
-                  🟣 Get Claude API Key →
+                  Get Claude API Key →
                 </a>
                 <a
                   href="https://platform.openai.com/api-keys"
@@ -555,7 +660,7 @@ Example:
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 text-sm text-green-600 hover:text-green-800 hover:underline"
                 >
-                  🟢 Get OpenAI API Key →
+                  Get OpenAI API Key →
                 </a>
               </div>
             </div>
@@ -564,10 +669,10 @@ Example:
             <div className="bg-gradient-to-br from-[#F49220]/10 to-[#8C2D2E]/10 rounded-xl p-6">
               <h3 className="font-semibold text-gray-900 mb-3">Tips for Better Results</h3>
               <ul className="text-sm text-gray-600 space-y-2">
-                <li>• Upload your brand book (PDF/Word) for on-brand content</li>
-                <li>• Be specific about the tone you want</li>
-                <li>• Use "Use as Input" to iterate on results</li>
-                <li>• Try different Quick Actions</li>
+                <li>• Upload your brand book for on-brand content</li>
+                <li>• Documents are saved for all team members</li>
+                <li>• Select multiple docs for richer context</li>
+                <li>• Use &ldquo;Use as Input&rdquo; to iterate on results</li>
               </ul>
             </div>
           </div>
