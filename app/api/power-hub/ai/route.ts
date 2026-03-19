@@ -1,8 +1,20 @@
 import { NextResponse } from 'next/server';
 
+// API keys are stored securely in Vercel Environment Variables
+const CLAUDE_API_KEY = process.env.CLAUDE_API_KEY;
+const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
+
+// GET: Check which API keys are configured
+export async function GET(): Promise<NextResponse> {
+  return NextResponse.json({
+    claudeConfigured: !!CLAUDE_API_KEY,
+    openaiConfigured: !!OPENAI_API_KEY,
+  });
+}
+
 export async function POST(request: Request): Promise<NextResponse> {
   try {
-    const { prompt, content, apiKey, provider, brandContext } = await request.json();
+    const { prompt, content, apiKey: clientApiKey, provider, brandContext } = await request.json();
 
     if (!content || !prompt) {
       return NextResponse.json(
@@ -11,9 +23,14 @@ export async function POST(request: Request): Promise<NextResponse> {
       );
     }
 
+    // Use environment variable first, fall back to client-provided key
+    const apiKey = provider === 'openai'
+      ? (OPENAI_API_KEY || clientApiKey)
+      : (CLAUDE_API_KEY || clientApiKey);
+
     if (!apiKey) {
       return NextResponse.json(
-        { error: 'API key is required. Add your Claude or OpenAI API key above.' },
+        { error: `No ${provider === 'openai' ? 'OpenAI' : 'Claude'} API key configured. Please add ${provider === 'openai' ? 'OPENAI_API_KEY' : 'CLAUDE_API_KEY'} to Vercel Environment Variables.` },
         { status: 400 }
       );
     }

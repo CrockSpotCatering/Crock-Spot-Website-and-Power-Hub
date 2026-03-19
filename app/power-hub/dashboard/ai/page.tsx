@@ -29,12 +29,6 @@ interface StoredDocument {
   fileType: string;
 }
 
-interface AISettings {
-  provider: AIProvider;
-  claudeApiKey: string;
-  openaiApiKey: string;
-  lastUpdated: string;
-}
 
 export default function AIAssistPage() {
   const [content, setContent] = useState('');
@@ -43,17 +37,16 @@ export default function AIAssistPage() {
   const [loading, setLoading] = useState(false);
   const [copied, setCopied] = useState(false);
 
-  // API Key state (stored on server - shared across team)
+  // API Key state
   const [claudeApiKey, setClaudeApiKey] = useState('');
   const [openaiApiKey, setOpenaiApiKey] = useState('');
   const [provider, setProvider] = useState<AIProvider>('claude');
   const [showApiKey, setShowApiKey] = useState(false);
-  const [keySaved, setKeySaved] = useState(false);
-  const [savingKey, setSavingKey] = useState(false);
   const [loadingSettings, setLoadingSettings] = useState(true);
-  const [settingsSha, setSettingsSha] = useState<string>('');
-  const [saveSuccess, setSaveSuccess] = useState(false);
-  const [saveError, setSaveError] = useState('');
+
+  // Environment variable status (configured in Vercel Dashboard)
+  const [claudeEnvConfigured, setClaudeEnvConfigured] = useState(false);
+  const [openaiEnvConfigured, setOpenaiEnvConfigured] = useState(false);
 
   // Brand Documents state (stored on server - shared across team)
   const [documents, setDocuments] = useState<StoredDocument[]>([]);
@@ -64,49 +57,24 @@ export default function AIAssistPage() {
   const [loadingDocs, setLoadingDocs] = useState(true);
   const [deletingDoc, setDeletingDoc] = useState<string | null>(null);
 
-  // Get the active API key based on current provider
+  // Get the active API key based on current provider (for fallback/manual entry)
   const apiKey = provider === 'claude' ? claudeApiKey : openaiApiKey;
 
-  // Load API settings from server on mount
-  const fetchSettings = useCallback(async () => {
+  // Check if API keys are configured via Vercel Environment Variables
+  const checkEnvKeys = useCallback(async () => {
     setLoadingSettings(true);
-    setSaveError('');
     try {
-      const response = await fetch('/api/power-hub/content?file=settings.json');
-      const data = await response.json();
-
-      if (response.ok && data.sha) {
-        const settings: AISettings = data.content?.aiSettings || {};
-        setSettingsSha(data.sha);
-        console.log('Settings loaded, SHA:', data.sha);
-
-        if (settings.provider) {
-          setProvider(settings.provider);
-        }
-        if (settings.claudeApiKey) {
-          setClaudeApiKey(settings.claudeApiKey);
-          setKeySaved(true);
-        }
-        if (settings.openaiApiKey) {
-          setOpenaiApiKey(settings.openaiApiKey);
-          if (settings.provider === 'openai') setKeySaved(true);
-        }
-      } else {
-        console.error('Failed to load settings:', data.error || 'No SHA returned');
-        setSaveError('Could not load settings: ' + (data.error || 'Unknown error'));
-        // Fall back to localStorage
-        loadFromLocalStorage();
+      const response = await fetch('/api/power-hub/ai');
+      if (response.ok) {
+        const data = await response.json();
+        setClaudeEnvConfigured(data.claudeConfigured);
+        setOpenaiEnvConfigured(data.openaiConfigured);
       }
     } catch (error) {
-      console.error('Failed to fetch settings:', error);
-      setSaveError('Network error loading settings');
-      // Fall back to localStorage
-      loadFromLocalStorage();
+      console.error('Failed to check API key status:', error);
     }
-    setLoadingSettings(false);
-  }, []);
 
-  const loadFromLocalStorage = () => {
+    // Also load any localStorage fallback keys
     const savedKey = localStorage.getItem('crockspot_ai_api_key');
     const savedProvider = localStorage.getItem('crockspot_ai_provider') as AIProvider;
     if (savedKey) {
@@ -115,21 +83,22 @@ export default function AIAssistPage() {
       } else {
         setClaudeApiKey(savedKey);
       }
-      setKeySaved(true);
     }
     if (savedProvider) {
       setProvider(savedProvider);
     }
-  };
+
+    setLoadingSettings(false);
+  }, []);
 
   useEffect(() => {
-    fetchSettings();
+    checkEnvKeys();
     // Load selected docs from localStorage (per-user preference)
     const savedSelectedDocs = localStorage.getItem('crockspot_selected_docs');
     if (savedSelectedDocs) {
       setSelectedDocIds(JSON.parse(savedSelectedDocs));
     }
-  }, [fetchSettings]);
+  }, [checkEnvKeys]);
 
   // Load documents from server on mount
   useEffect(() => {
@@ -150,103 +119,30 @@ export default function AIAssistPage() {
     setLoadingDocs(false);
   };
 
-  const saveApiKey = async () => {
+  // Save API key to localStorage (fallback when env vars not configured)
+  const saveApiKeyToLocal = () => {
     const currentKey = provider === 'claude' ? claudeApiKey : openaiApiKey;
     if (!currentKey.trim()) return;
 
-    // Check if we have a SHA - if not, we can't save
-    if (!settingsSha) {
-      setSaveError('Cannot save: Settings not loaded. Please refresh the page.');
-      return;
-    }
-
-    setSavingKey(true);
-    setSaveError('');
-    setSaveSuccess(false);
-
-    try {
-      const settings = {
-        aiSettings: {
-          provider,
-          claudeApiKey,
-          openaiApiKey,
-          lastUpdated: new Date().toISOString(),
-        }
-      };
-
-      console.log('Saving with SHA:', settingsSha);
-
-      const response = await fetch('/api/power-hub/content', {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          filename: 'content/settings.json',
-          content: settings,
-          sha: settingsSha,
-        }),
-      });
-
-      const data = await response.json();
-
-      if (response.ok && data.newSha) {
-        setSettingsSha(data.newSha);
-        setKeySaved(true);
-        setSaveSuccess(true);
-        console.log('Saved successfully, new SHA:', data.newSha);
-        // Also save to localStorage as backup
-        localStorage.setItem('crockspot_ai_api_key', currentKey);
-        localStorage.setItem('crockspot_ai_provider', provider);
-        // Clear success message after 3 seconds
-        setTimeout(() => setSaveSuccess(false), 3000);
-      } else {
-        console.error('Failed to save API key:', data);
-        setSaveError('Failed to save: ' + (data.error || 'Unknown error'));
-      }
-    } catch (error) {
-      console.error('Failed to save API key:', error);
-      setSaveError('Network error: ' + String(error));
-    }
-    setSavingKey(false);
+    localStorage.setItem('crockspot_ai_api_key', currentKey);
+    localStorage.setItem('crockspot_ai_provider', provider);
   };
 
-  const clearApiKey = async () => {
-    setSavingKey(true);
-    try {
-      const settings = {
-        aiSettings: {
-          provider,
-          claudeApiKey: provider === 'claude' ? '' : claudeApiKey,
-          openaiApiKey: provider === 'openai' ? '' : openaiApiKey,
-          lastUpdated: new Date().toISOString(),
-        }
-      };
-
-      const response = await fetch('/api/power-hub/content', {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          filename: 'content/settings.json',
-          content: settings,
-          sha: settingsSha,
-        }),
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        setSettingsSha(data.newSha || settingsSha);
-        if (provider === 'claude') {
-          setClaudeApiKey('');
-        } else {
-          setOpenaiApiKey('');
-        }
-        setKeySaved(false);
-        localStorage.removeItem('crockspot_ai_api_key');
-      }
-    } catch (error) {
-      console.error('Failed to clear API key:', error);
+  // Clear API key from localStorage
+  const clearApiKey = () => {
+    if (provider === 'claude') {
+      setClaudeApiKey('');
+    } else {
+      setOpenaiApiKey('');
     }
-    setSavingKey(false);
+    localStorage.removeItem('crockspot_ai_api_key');
+    localStorage.removeItem('crockspot_ai_provider');
   };
+
+  // Check if current provider has a configured key (either env var or local)
+  const isKeyConfigured = provider === 'claude'
+    ? (claudeEnvConfigured || !!claudeApiKey)
+    : (openaiEnvConfigured || !!openaiApiKey);
 
   const toggleDocSelection = (docId: string) => {
     setSelectedDocIds(prev => {
@@ -384,10 +280,10 @@ export default function AIAssistPage() {
     const usedPrompt = customPrompt || prompt;
     const brandContext = getBrandContext();
 
-    // If no API key, show demo response
-    if (!apiKey.trim()) {
+    // If no API key configured, show demo response
+    if (!isKeyConfigured) {
       await new Promise(resolve => setTimeout(resolve, 1500));
-      setOutput(`[Demo Mode - No API Key]\n\nTo get real AI responses, add your API key above.\n\nYour prompt: "${usedPrompt}"\nYour content: "${content.substring(0, 100)}..."\n${brandContext ? `\nBrand documents selected: ${selectedDocIds.length}` : ''}\n\n---\nAdd a Claude or OpenAI API key to enable real AI-powered content generation.`);
+      setOutput(`[Demo Mode - No API Key]\n\nTo get real AI responses, configure your API key.\n\nYour prompt: "${usedPrompt}"\nYour content: "${content.substring(0, 100)}..."\n${brandContext ? `\nBrand documents selected: ${selectedDocIds.length}` : ''}\n\n---\nAdd CLAUDE_API_KEY or OPENAI_API_KEY to Vercel Environment Variables for team-wide access.`);
       setLoading(false);
       return;
     }
@@ -456,8 +352,8 @@ export default function AIAssistPage() {
               <Key size={20} className="text-white" />
             </div>
             <div>
-              <h2 className="text-lg font-bold text-gray-900">AI API Key</h2>
-              <p className="text-sm text-gray-600">Enter your API key to enable AI-powered content generation</p>
+              <h2 className="text-lg font-bold text-gray-900">AI Configuration</h2>
+              <p className="text-sm text-gray-600">Select your AI provider</p>
             </div>
           </div>
 
@@ -467,10 +363,7 @@ export default function AIAssistPage() {
               <label className="block text-sm font-medium text-gray-700 mb-2">AI Provider</label>
               <div className="flex gap-2">
                 <button
-                  onClick={() => {
-                    setProvider('claude');
-                    setKeySaved(!!claudeApiKey);
-                  }}
+                  onClick={() => setProvider('claude')}
                   className={`flex-1 py-3 px-4 rounded-lg font-medium transition-all relative ${
                     provider === 'claude'
                       ? 'bg-purple-600 text-white shadow-lg'
@@ -478,15 +371,12 @@ export default function AIAssistPage() {
                   }`}
                 >
                   Claude (Anthropic)
-                  {claudeApiKey && (
+                  {(claudeEnvConfigured || claudeApiKey) && (
                     <span className="absolute -top-1 -right-1 w-3 h-3 bg-green-500 rounded-full border-2 border-white"></span>
                   )}
                 </button>
                 <button
-                  onClick={() => {
-                    setProvider('openai');
-                    setKeySaved(!!openaiApiKey);
-                  }}
+                  onClick={() => setProvider('openai')}
                   className={`flex-1 py-3 px-4 rounded-lg font-medium transition-all relative ${
                     provider === 'openai'
                       ? 'bg-green-600 text-white shadow-lg'
@@ -494,61 +384,62 @@ export default function AIAssistPage() {
                   }`}
                 >
                   ChatGPT (OpenAI)
-                  {openaiApiKey && (
+                  {(openaiEnvConfigured || openaiApiKey) && (
                     <span className="absolute -top-1 -right-1 w-3 h-3 bg-green-500 rounded-full border-2 border-white"></span>
                   )}
                 </button>
               </div>
             </div>
 
-            {/* API Key Input */}
+            {/* API Key Status/Input */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                {provider === 'claude' ? 'Anthropic API Key' : 'OpenAI API Key'}
+                {provider === 'claude' ? 'Claude API Key' : 'OpenAI API Key'}
               </label>
-              <div className="flex gap-2">
-                <div className="relative flex-1">
-                  <input
-                    type={showApiKey ? 'text' : 'password'}
-                    value={provider === 'claude' ? claudeApiKey : openaiApiKey}
-                    onChange={(e) => {
-                      if (provider === 'claude') {
-                        setClaudeApiKey(e.target.value);
-                      } else {
-                        setOpenaiApiKey(e.target.value);
-                      }
-                      setKeySaved(false);
-                    }}
-                    placeholder={provider === 'claude' ? 'sk-ant-api...' : 'sk-...'}
-                    disabled={loadingSettings}
-                    className="w-full py-3 px-4 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F49220] focus:border-[#F49220] text-gray-900 placeholder-gray-400 disabled:bg-gray-100"
-                  />
-                  <button
-                    onClick={() => setShowApiKey(!showApiKey)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
-                  >
-                    {showApiKey ? <EyeOff size={18} /> : <Eye size={18} />}
-                  </button>
+
+              {/* Show if env var is configured */}
+              {(provider === 'claude' ? claudeEnvConfigured : openaiEnvConfigured) ? (
+                <div className="flex items-center gap-2 py-3 px-4 bg-green-50 border border-green-200 rounded-lg">
+                  <CheckCircle size={18} className="text-green-600" />
+                  <span className="text-green-700 font-medium">Configured in Vercel (shared with team)</span>
                 </div>
-                {apiKey && !keySaved ? (
-                  <button
-                    onClick={saveApiKey}
-                    disabled={savingKey}
-                    className="px-4 py-3 bg-[#F49220] text-white rounded-lg hover:bg-[#e08519] font-medium disabled:opacity-50 flex items-center gap-2"
-                  >
-                    {savingKey ? <Loader2 size={16} className="animate-spin" /> : null}
-                    {savingKey ? 'Saving...' : 'Save'}
-                  </button>
-                ) : keySaved && apiKey ? (
-                  <button
-                    onClick={clearApiKey}
-                    disabled={savingKey}
-                    className="px-4 py-3 bg-red-100 text-red-600 rounded-lg hover:bg-red-200 font-medium disabled:opacity-50"
-                  >
-                    Clear
-                  </button>
-                ) : null}
-              </div>
+              ) : (
+                /* Fallback: manual key entry */
+                <div className="flex gap-2">
+                  <div className="relative flex-1">
+                    <input
+                      type={showApiKey ? 'text' : 'password'}
+                      value={provider === 'claude' ? claudeApiKey : openaiApiKey}
+                      onChange={(e) => {
+                        if (provider === 'claude') {
+                          setClaudeApiKey(e.target.value);
+                        } else {
+                          setOpenaiApiKey(e.target.value);
+                        }
+                        saveApiKeyToLocal();
+                      }}
+                      onBlur={saveApiKeyToLocal}
+                      placeholder={provider === 'claude' ? 'sk-ant-api...' : 'sk-...'}
+                      disabled={loadingSettings}
+                      className="w-full py-3 px-4 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F49220] focus:border-[#F49220] text-gray-900 placeholder-gray-400 disabled:bg-gray-100"
+                    />
+                    <button
+                      onClick={() => setShowApiKey(!showApiKey)}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                    >
+                      {showApiKey ? <EyeOff size={18} /> : <Eye size={18} />}
+                    </button>
+                  </div>
+                  {apiKey && (
+                    <button
+                      onClick={clearApiKey}
+                      className="px-4 py-3 bg-red-100 text-red-600 rounded-lg hover:bg-red-200 font-medium"
+                    >
+                      Clear
+                    </button>
+                  )}
+                </div>
+              )}
             </div>
           </div>
 
@@ -557,50 +448,53 @@ export default function AIAssistPage() {
             {loadingSettings ? (
               <>
                 <Loader2 size={14} className="animate-spin text-gray-500" />
-                <span className="text-sm text-gray-500">Loading saved settings...</span>
+                <span className="text-sm text-gray-500">Checking API configuration...</span>
               </>
-            ) : keySaved && apiKey ? (
+            ) : isKeyConfigured ? (
               <>
                 <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
                 <span className="text-sm text-green-700 font-medium">
-                  {provider === 'claude' ? 'Claude' : 'ChatGPT'} API key saved and ready! (Shared across team)
+                  {provider === 'claude' ? 'Claude' : 'ChatGPT'} ready!
+                  {(provider === 'claude' ? claudeEnvConfigured : openaiEnvConfigured)
+                    ? ' (Vercel env var)'
+                    : ' (browser storage)'}
                 </span>
               </>
             ) : (
               <>
                 <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
                 <span className="text-sm text-yellow-700">
-                  No API key - running in demo mode
+                  No API key configured - running in demo mode
                 </span>
               </>
             )}
           </div>
 
-          {/* Show if other provider has a saved key */}
-          {(provider === 'claude' && openaiApiKey) || (provider === 'openai' && claudeApiKey) ? (
+          {/* Team setup instructions */}
+          {!claudeEnvConfigured && !openaiEnvConfigured && (
+            <div className="mt-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">
+              <p className="text-sm text-blue-800">
+                <strong>💡 For team-wide access:</strong> Add <code className="bg-blue-100 px-1 rounded">CLAUDE_API_KEY</code> or{' '}
+                <code className="bg-blue-100 px-1 rounded">OPENAI_API_KEY</code> to{' '}
+                <a
+                  href="https://vercel.com/crockspotcaterings-projects/crock-spot-website-and-power-hub/settings/environment-variables"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline font-medium"
+                >
+                  Vercel Environment Variables
+                </a>
+              </p>
+            </div>
+          )}
+
+          {/* Show if other provider is also available */}
+          {(provider === 'claude' && (openaiEnvConfigured || openaiApiKey)) ||
+           (provider === 'openai' && (claudeEnvConfigured || claudeApiKey)) ? (
             <div className="mt-2 text-xs text-gray-500">
-              💡 Tip: {provider === 'claude' ? 'OpenAI' : 'Claude'} key is also saved. Switch providers to use it.
+              💡 Tip: {provider === 'claude' ? 'OpenAI' : 'Claude'} is also available. Switch providers above.
             </div>
           ) : null}
-
-          {/* Save Success Message */}
-          {saveSuccess && (
-            <div className="mt-3 flex items-center gap-2 text-sm text-green-700 bg-green-50 border border-green-200 px-4 py-2 rounded-lg">
-              <CheckCircle size={16} />
-              <span>API key saved successfully! It will persist across all devices and team members.</span>
-            </div>
-          )}
-
-          {/* Save Error Message */}
-          {saveError && (
-            <div className="mt-3 flex items-center gap-2 text-sm text-red-700 bg-red-50 border border-red-200 px-4 py-2 rounded-lg">
-              <AlertCircle size={16} />
-              <span>{saveError}</span>
-              <button onClick={() => setSaveError('')} className="ml-auto hover:text-red-900">
-                <X size={14} />
-              </button>
-            </div>
-          )}
         </div>
 
         {/* Brand Documents Section */}
