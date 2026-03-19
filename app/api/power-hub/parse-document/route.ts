@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
+import { extractText } from 'unpdf';
+import * as mammoth from 'mammoth';
 
-// Remove nodejs runtime - not needed anymore
 export const dynamic = 'force-dynamic';
 
 //==============================================================================
@@ -14,9 +15,6 @@ export async function GET(): Promise<NextResponse> {
 }
 
 export async function POST(request: Request): Promise<NextResponse> {
-  // Debug: Return immediately to test if POST even works
-  // return NextResponse.json({ debug: 'POST received' });
-
   let formData;
   try {
     formData = await request.formData();
@@ -38,33 +36,52 @@ export async function POST(request: Request): Promise<NextResponse> {
     }
 
     const fileName = file.name.toLowerCase();
-
-    // Return early for PDF/DOCX with friendly message
-    if (fileName.endsWith('.pdf')) {
-      return NextResponse.json(
-        { error: 'PDF upload temporarily unavailable. Please convert to .txt or paste content directly.' },
-        { status: 400 }
-      );
-    }
-
-    if (fileName.endsWith('.docx') || fileName.endsWith('.doc')) {
-      return NextResponse.json(
-        { error: 'Word upload temporarily unavailable. Please convert to .txt or paste content directly.' },
-        { status: 400 }
-      );
-    }
-
-    // Only handle text files
-    if (!fileName.endsWith('.txt') && !fileName.endsWith('.md')) {
-      return NextResponse.json(
-        { error: 'Unsupported file type. Please upload a text file (.txt).' },
-        { status: 400 }
-      );
-    }
-
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
-    let extractedText = buffer.toString('utf-8');
+
+    let extractedText = '';
+
+    // Handle PDF files
+    if (fileName.endsWith('.pdf')) {
+      try {
+        const { text } = await extractText(new Uint8Array(bytes));
+        extractedText = text;
+      } catch (pdfError) {
+        return NextResponse.json(
+          { error: 'Failed to parse PDF: ' + String(pdfError) },
+          { status: 400 }
+        );
+      }
+    }
+    // Handle Word documents (.docx)
+    else if (fileName.endsWith('.docx')) {
+      try {
+        const result = await mammoth.extractRawText({ buffer });
+        extractedText = result.value;
+      } catch (docxError) {
+        return NextResponse.json(
+          { error: 'Failed to parse Word document: ' + String(docxError) },
+          { status: 400 }
+        );
+      }
+    }
+    // Handle old Word documents (.doc)
+    else if (fileName.endsWith('.doc')) {
+      return NextResponse.json(
+        { error: 'Old .doc format not supported. Please save as .docx or PDF and try again.' },
+        { status: 400 }
+      );
+    }
+    // Handle text files
+    else if (fileName.endsWith('.txt') || fileName.endsWith('.md')) {
+      extractedText = buffer.toString('utf-8');
+    }
+    else {
+      return NextResponse.json(
+        { error: 'Unsupported file type. Please upload a PDF, Word document (.docx), or text file.' },
+        { status: 400 }
+      );
+    }
 
     // Clean up the extracted text
     extractedText = extractedText
@@ -74,7 +91,7 @@ export async function POST(request: Request): Promise<NextResponse> {
 
     if (!extractedText) {
       return NextResponse.json(
-        { error: 'No text could be extracted from this file.' },
+        { error: 'No text could be extracted from this file. The file may be empty or contain only images.' },
         { status: 400 }
       );
     }
