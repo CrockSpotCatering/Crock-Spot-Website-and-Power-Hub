@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server';
 
-// Force Node.js runtime for compatibility
-export const runtime = 'nodejs';
+// Remove nodejs runtime - not needed anymore
 export const dynamic = 'force-dynamic';
 
 //==============================================================================
@@ -15,8 +14,20 @@ export async function GET(): Promise<NextResponse> {
 }
 
 export async function POST(request: Request): Promise<NextResponse> {
+  // Debug: Return immediately to test if POST even works
+  // return NextResponse.json({ debug: 'POST received' });
+
+  let formData;
   try {
-    const formData = await request.formData();
+    formData = await request.formData();
+  } catch (formError) {
+    return NextResponse.json(
+      { error: 'Failed to parse form data: ' + String(formError) },
+      { status: 400 }
+    );
+  }
+
+  try {
     const file = formData.get('file') as File;
 
     if (!file) {
@@ -27,35 +38,33 @@ export async function POST(request: Request): Promise<NextResponse> {
     }
 
     const fileName = file.name.toLowerCase();
-    const bytes = await file.arrayBuffer();
-    const buffer = Buffer.from(bytes);
 
-    let extractedText = '';
-
-    // Handle PDF files - temporarily disabled, ask user to convert
+    // Return early for PDF/DOCX with friendly message
     if (fileName.endsWith('.pdf')) {
       return NextResponse.json(
         { error: 'PDF upload temporarily unavailable. Please convert to .txt or paste content directly.' },
         { status: 400 }
       );
     }
-    // Handle Word documents - temporarily disabled
-    else if (fileName.endsWith('.docx') || fileName.endsWith('.doc')) {
+
+    if (fileName.endsWith('.docx') || fileName.endsWith('.doc')) {
       return NextResponse.json(
         { error: 'Word upload temporarily unavailable. Please convert to .txt or paste content directly.' },
         { status: 400 }
       );
     }
-    // Handle text files - this should work
-    else if (fileName.endsWith('.txt') || fileName.endsWith('.md')) {
-      extractedText = buffer.toString('utf-8');
-    }
-    else {
+
+    // Only handle text files
+    if (!fileName.endsWith('.txt') && !fileName.endsWith('.md')) {
       return NextResponse.json(
         { error: 'Unsupported file type. Please upload a text file (.txt).' },
         { status: 400 }
       );
     }
+
+    const bytes = await file.arrayBuffer();
+    const buffer = Buffer.from(bytes);
+    let extractedText = buffer.toString('utf-8');
 
     // Clean up the extracted text
     extractedText = extractedText
@@ -78,7 +87,6 @@ export async function POST(request: Request): Promise<NextResponse> {
     });
 
   } catch (error) {
-    console.error('Document parsing error:', error);
     return NextResponse.json(
       { error: 'Failed to process document: ' + String(error) },
       { status: 500 }
