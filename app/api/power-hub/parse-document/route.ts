@@ -9,6 +9,11 @@ export const dynamic = 'force-dynamic';
 // Extracts text from PDF and Word documents for brand guidelines
 //==============================================================================
 
+// Test endpoint - GET to verify route is deployed
+export async function GET(): Promise<NextResponse> {
+  return NextResponse.json({ status: 'ok', message: 'Parse document endpoint is working' });
+}
+
 export async function POST(request: Request): Promise<NextResponse> {
   try {
     const formData = await request.formData();
