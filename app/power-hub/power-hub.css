@@ -1,0 +1,21 @@
+/* Hide Navigation and Footer on Power Hub pages */
+/* Using :has() selector - supported in all modern browsers */
+
+/* Hide the fixed navigation bar */
+body:has(.power-hub-wrapper) > nav,
+body:has(.power-hub-wrapper) nav.fixed {
+  display: none !important;
+}
+
+/* Hide the footer */
+body:has(.power-hub-wrapper) > footer,
+body:has(.power-hub-wrapper) > main ~ footer,
+body:has(.power-hub-wrapper) footer.bg-crock-dark {
+  display: none !important;
+}
+
+/* Remove any padding that accounts for fixed nav */
+body:has(.power-hub-wrapper) > main {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
