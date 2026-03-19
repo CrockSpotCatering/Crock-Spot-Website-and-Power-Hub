@@ -45,7 +45,7 @@ export async function POST(request: Request): Promise<NextResponse> {
     if (fileName.endsWith('.pdf')) {
       try {
         const { text } = await extractText(new Uint8Array(bytes));
-        extractedText = text;
+        extractedText = Array.isArray(text) ? text.join('\n') : text;
       } catch (pdfError) {
         return NextResponse.json(
           { error: 'Failed to parse PDF: ' + String(pdfError) },
