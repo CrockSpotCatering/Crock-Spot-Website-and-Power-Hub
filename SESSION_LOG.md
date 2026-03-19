@@ -1,6 +1,40 @@
 # CrockSpot Session Log
 
-## March 19, 2026 - Session: PDF/DOCX Upload Fix & Documentation Update
+## March 19, 2026 - Session 2: API Key Persistence
+
+### What Was Done This Session
+
+#### **Added Persistent API Key Storage for AI Assist**
+The CrockSpot team needed API keys to persist so they don't have to re-enter them every time.
+
+**Solution:**
+- Created `content/settings.json` to store API settings server-side
+- API keys now save to GitHub (via content API) instead of just localStorage
+- Keys persist across browsers, devices, and all team members
+- Supports storing BOTH Claude and OpenAI keys simultaneously
+- Green dot indicator shows which providers have saved keys
+- Falls back to localStorage if server fails
+
+**How It Works:**
+1. Team member enters API key and clicks "Save"
+2. Key is saved to `settings.json` via GitHub API
+3. Any team member on any device can use the saved key
+4. Switching between Claude and OpenAI preserves both keys
+
+### Commits This Session
+| Commit | Description |
+|--------|-------------|
+| `6bf586d` | Add persistent API key storage for AI Assist |
+
+### Files Changed
+| File | Changes |
+|------|---------|
+| `content/settings.json` | NEW - Stores AI provider and API keys |
+| `app/power-hub/dashboard/ai/page.tsx` | Server-side key storage, separate Claude/OpenAI keys, loading states |
+
+---
+
+## March 19, 2026 - Session 1: PDF/DOCX Upload Fix & Documentation Update
 
 ### What Was Done This Session
 

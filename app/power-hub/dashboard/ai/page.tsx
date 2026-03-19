@@ -52,6 +52,8 @@ export default function AIAssistPage() {
   const [savingKey, setSavingKey] = useState(false);
   const [loadingSettings, setLoadingSettings] = useState(true);
   const [settingsSha, setSettingsSha] = useState<string>('');
+  const [saveSuccess, setSaveSuccess] = useState(false);
+  const [saveError, setSaveError] = useState('');
 
   // Brand Documents state (stored on server - shared across team)
   const [documents, setDocuments] = useState<StoredDocument[]>([]);
@@ -68,12 +70,15 @@ export default function AIAssistPage() {
   // Load API settings from server on mount
   const fetchSettings = useCallback(async () => {
     setLoadingSettings(true);
+    setSaveError('');
     try {
       const response = await fetch('/api/power-hub/content?file=settings.json');
-      if (response.ok) {
-        const data = await response.json();
+      const data = await response.json();
+
+      if (response.ok && data.sha) {
         const settings: AISettings = data.content?.aiSettings || {};
-        setSettingsSha(data.sha || '');
+        setSettingsSha(data.sha);
+        console.log('Settings loaded, SHA:', data.sha);
 
         if (settings.provider) {
           setProvider(settings.provider);
@@ -86,26 +91,36 @@ export default function AIAssistPage() {
           setOpenaiApiKey(settings.openaiApiKey);
           if (settings.provider === 'openai') setKeySaved(true);
         }
+      } else {
+        console.error('Failed to load settings:', data.error || 'No SHA returned');
+        setSaveError('Could not load settings: ' + (data.error || 'Unknown error'));
+        // Fall back to localStorage
+        loadFromLocalStorage();
       }
     } catch (error) {
       console.error('Failed to fetch settings:', error);
+      setSaveError('Network error loading settings');
       // Fall back to localStorage
-      const savedKey = localStorage.getItem('crockspot_ai_api_key');
-      const savedProvider = localStorage.getItem('crockspot_ai_provider') as AIProvider;
-      if (savedKey) {
-        if (savedProvider === 'openai') {
-          setOpenaiApiKey(savedKey);
-        } else {
-          setClaudeApiKey(savedKey);
-        }
-        setKeySaved(true);
-      }
-      if (savedProvider) {
-        setProvider(savedProvider);
-      }
+      loadFromLocalStorage();
     }
     setLoadingSettings(false);
   }, []);
+
+  const loadFromLocalStorage = () => {
+    const savedKey = localStorage.getItem('crockspot_ai_api_key');
+    const savedProvider = localStorage.getItem('crockspot_ai_provider') as AIProvider;
+    if (savedKey) {
+      if (savedProvider === 'openai') {
+        setOpenaiApiKey(savedKey);
+      } else {
+        setClaudeApiKey(savedKey);
+      }
+      setKeySaved(true);
+    }
+    if (savedProvider) {
+      setProvider(savedProvider);
+    }
+  };
 
   useEffect(() => {
     fetchSettings();
@@ -139,7 +154,16 @@ export default function AIAssistPage() {
     const currentKey = provider === 'claude' ? claudeApiKey : openaiApiKey;
     if (!currentKey.trim()) return;
 
+    // Check if we have a SHA - if not, we can't save
+    if (!settingsSha) {
+      setSaveError('Cannot save: Settings not loaded. Please refresh the page.');
+      return;
+    }
+
     setSavingKey(true);
+    setSaveError('');
+    setSaveSuccess(false);
+
     try {
       const settings = {
         aiSettings: {
@@ -149,6 +173,8 @@ export default function AIAssistPage() {
           lastUpdated: new Date().toISOString(),
         }
       };
+
+      console.log('Saving with SHA:', settingsSha);
 
       const response = await fetch('/api/power-hub/content', {
         method: 'PUT',
@@ -160,21 +186,25 @@ export default function AIAssistPage() {
         }),
       });
 
-      if (response.ok) {
-        const data = await response.json();
-        setSettingsSha(data.newSha || settingsSha);
+      const data = await response.json();
+
+      if (response.ok && data.newSha) {
+        setSettingsSha(data.newSha);
         setKeySaved(true);
+        setSaveSuccess(true);
+        console.log('Saved successfully, new SHA:', data.newSha);
         // Also save to localStorage as backup
         localStorage.setItem('crockspot_ai_api_key', currentKey);
         localStorage.setItem('crockspot_ai_provider', provider);
+        // Clear success message after 3 seconds
+        setTimeout(() => setSaveSuccess(false), 3000);
       } else {
-        const error = await response.json();
-        console.error('Failed to save API key:', error);
-        setUploadError('Failed to save API key: ' + (error.error || 'Unknown error'));
+        console.error('Failed to save API key:', data);
+        setSaveError('Failed to save: ' + (data.error || 'Unknown error'));
       }
     } catch (error) {
       console.error('Failed to save API key:', error);
-      setUploadError('Failed to save API key: ' + String(error));
+      setSaveError('Network error: ' + String(error));
     }
     setSavingKey(false);
   };
@@ -552,6 +582,25 @@ export default function AIAssistPage() {
               💡 Tip: {provider === 'claude' ? 'OpenAI' : 'Claude'} key is also saved. Switch providers to use it.
             </div>
           ) : null}
+
+          {/* Save Success Message */}
+          {saveSuccess && (
+            <div className="mt-3 flex items-center gap-2 text-sm text-green-700 bg-green-50 border border-green-200 px-4 py-2 rounded-lg">
+              <CheckCircle size={16} />
+              <span>API key saved successfully! It will persist across all devices and team members.</span>
+            </div>
+          )}
+
+          {/* Save Error Message */}
+          {saveError && (
+            <div className="mt-3 flex items-center gap-2 text-sm text-red-700 bg-red-50 border border-red-200 px-4 py-2 rounded-lg">
+              <AlertCircle size={16} />
+              <span>{saveError}</span>
+              <button onClick={() => setSaveError('')} className="ml-auto hover:text-red-900">
+                <X size={14} />
+              </button>
+            </div>
+          )}
         </div>
 
         {/* Brand Documents Section */}
