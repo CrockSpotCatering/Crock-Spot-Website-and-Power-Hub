@@ -1,0 +1,13 @@
+{
+  "documents": [
+    {
+      "id": "doc_1773927932649_kh4vp1k2f",
+      "name": "test2-brand-doc.txt",
+      "content": "The Crock Spot - Brand Guidelines Test Document\n\nCompany: The Crock Spot\nTagline: Let Us Crock Your World\nFounded: 2010\nLocation: Denver, Colorado\n\nBrand Colors:\n- Orange: #F49220\n- Maroon: #8C2D2E\n- Green: #667934\n- Purple: #614B8A\n\nThis is a test document to verify that the AI Assist document upload feature is working correctly.\n",
+      "uploadedAt": "2026-03-19T13:45:32.649Z",
+      "fileSize": 333,
+      "fileType": "text/plain"
+    }
+  ],
+  "lastUpdated": "2026-03-19T13:45:32.649Z"
+}
