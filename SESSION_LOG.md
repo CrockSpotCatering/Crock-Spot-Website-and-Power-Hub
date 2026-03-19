@@ -1,5 +1,68 @@
 # CrockSpot Session Log
 
+## March 19, 2026 - Session: PDF/DOCX Upload Fix & Documentation Update
+
+### What Was Done This Session
+
+#### 1. **Fixed PDF/DOCX Upload in AI Assist**
+The PDF and DOCX upload feature was crashing on Vercel serverless. After extensive debugging:
+
+**Root Cause:** The `export const runtime = 'nodejs'` setting was causing serverless function crashes.
+
+**Solution:**
+- Removed `runtime = 'nodejs'` from parse-document route
+- Switched from `pdf-parse` to `unpdf` (serverless-compatible, pure JS)
+- Fixed TypeScript error: `unpdf` returns `string[]`, not `string`
+- Added better error handling with separate try/catch for formData parsing
+- Added GET endpoint for debugging route availability
+
+**Result:** PDF and DOCX files now upload, parse, and persist correctly!
+
+#### 2. **Brand Documents Working**
+- Documents persist to `content/documents.json` via GitHub API
+- Successfully uploaded and parsed:
+  - `test2-brand-doc.txt` (test file)
+  - `Branding Guide Crock_Spot_Red Egg copy.pdf` (actual brand guide!)
+  - `Exchange_Club_Position_Letter.docx` (test DOCX)
+
+#### 3. **Complete Documentation Update**
+Updated all 5 markdown files to fix outdated info:
+
+| File | Changes |
+|------|---------|
+| `CLAUDE.md` | Fixed path `crockspot1` → `crockspot`, added tech stack, Power Hub login |
+| `DEPLOYMENT.md` | Fixed path, updated date to March 19, added documents.json, tech stack table |
+| `README.md` | Changed `pdf-parse` → `unpdf`, added documents.json, updated project structure |
+| `RESTART_PROMPT.md` | Updated tech stack, status, added documents.json to content files |
+| `SESSION_LOG.md` | Added this session! |
+
+### Commits This Session
+| Commit | Description |
+|--------|-------------|
+| `81c9d91` | Force Node.js runtime for PDF parsing on Vercel |
+| `2e6621c` | Switch to pdfjs-dist for serverless-compatible PDF parsing |
+| `3861112` | Use unpdf for serverless-compatible PDF parsing |
+| `5619cf3` | Simplify document parser - temporarily disable PDF/DOCX to debug |
+| `e0e7e45` | Add GET handler to debug parse-document endpoint |
+| `9edc237` | Better error handling for formData parsing, remove nodejs runtime |
+| `d973d59` | Re-enable PDF/DOCX parsing without nodejs runtime |
+| `744a104` | Fix unpdf type error - text is string array |
+
+### Tech Stack Update
+| Package | Old | New | Reason |
+|---------|-----|-----|--------|
+| PDF parsing | `pdf-parse` | `unpdf` | Serverless-compatible, no native modules |
+| DOCX parsing | `mammoth` | `mammoth` | No change needed, pure JS |
+
+### Git Status
+- ✅ All changes committed
+- ✅ All changes pushed to GitHub (CrockSpotCatering account)
+- ✅ Vercel deployed and working
+- ✅ GitHub CLI active account: CrockSpotCatering
+- ✅ Documentation fully updated
+
+---
+
 ## March 17, 2026 - Session: The Spot Page, CMS Wiring & Mobile Optimization
 
 ### What Was Done This Session
@@ -137,6 +200,7 @@ Footer:
 
 3. **API Routes Created**
    - `/api/power-hub/content` - Read/write JSON content
+   - `/api/power-hub/documents` - Brand document storage
    - `/api/power-hub/media` - List images from GitHub
    - `/api/power-hub/upload` - Upload/delete images via GitHub API
    - `/api/power-hub/ai` - AI content generation
@@ -144,7 +208,7 @@ Footer:
 
 ---
 
-## Content Files Reference
+## Content Files Reference (13 total)
 | File | Purpose | CMS Editable |
 |------|---------|--------------|
 | `home.json` | Homepage content, services, hero | ✅ |
@@ -159,6 +223,7 @@ Footer:
 | `footer.json` | Footer content | ✅ |
 | `privacy.json` | Privacy policy | ✅ |
 | `terms.json` | Terms of service | ✅ |
+| `documents.json` | AI Assist brand documents | ✅ |
 
 ---
 
@@ -166,7 +231,7 @@ Footer:
 - None currently identified
 
 ## Next Steps / Ideas
+- [x] ~~Test PDF upload in AI Assist on live site~~ ✅ DONE (March 19)
 - [ ] Add actual CrockSpot photos to replace Unsplash images
-- [ ] Test PDF upload in AI Assist on live site
 - [ ] Consider adding online ordering integration
 - [ ] Add Google Analytics / tracking

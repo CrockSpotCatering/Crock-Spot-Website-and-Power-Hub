@@ -1,6 +1,6 @@
-# 🚀 Crock Spot Deployment Guide
+# Crock Spot Deployment Guide
 
-## ⚠️ CRITICAL DEPLOYMENT RULES
+## CRITICAL DEPLOYMENT RULES
 
 ```
 ┌─────────────────────────────────────────────────────────────────────┐
@@ -12,21 +12,21 @@
 └─────────────────────────────────────────────────────────────────────┘
 ```
 
-## ✅ Current Status (March 12, 2026)
+## Current Status (March 19, 2026)
 
 | Service | URL | Status |
 |---------|-----|--------|
 | **Live Site** | https://crock-spot-website-and-power-hub.vercel.app | ✅ LIVE |
 | **GitHub** | https://github.com/CrockSpotCatering/Crock-Spot-Website-and-Power-Hub | ✅ Connected |
 | **Vercel Dashboard** | https://vercel.com/crockspotcaterings-projects | ✅ Deployed |
-| **Local Path** | `/Users/brettlechtenberg/Documents/agent-girl/crockspot1` | ✅ Ready |
+| **Local Path** | `/Users/brettlechtenberg/Documents/agent-girl/crockspot` | ✅ Ready |
 
-> 🔄 **Auto-Deploy Active:** Push to GitHub → Vercel deploys automatically!
+> **Auto-Deploy Active:** Push to GitHub → Vercel deploys automatically!
 
-## 📁 Project Structure
+## Project Structure
 
 ```
-crockspot1/
+crockspot/
 ├── app/
 │   ├── page.tsx              # Home (uses home.json)
 │   ├── layout.tsx            # Root layout + SEO
@@ -37,13 +37,15 @@ crockspot1/
 │   ├── contact/page.tsx      # Contact (uses contact.json)
 │   ├── government-capabilities/page.tsx
 │   ├── community-partners/page.tsx
+│   ├── the-spot/page.tsx     # The Spot Cafe sister company
 │   ├── privacy/page.tsx
 │   ├── terms/page.tsx
-│   ├── power-hub/            # 🔐 CMS Dashboard
+│   ├── power-hub/            # CMS Dashboard
 │   │   ├── page.tsx          # Login
 │   │   └── dashboard/        # Dashboard pages
-│   └── api/power-hub/        # 🔌 API Routes
+│   └── api/power-hub/        # API Routes
 │       ├── content/route.ts  # JSON read/write
+│       ├── documents/route.ts # Brand document storage
 │       ├── media/route.ts    # Image listing
 │       ├── upload/route.ts   # Image upload/delete
 │       ├── ai/route.ts       # AI generation
@@ -56,26 +58,34 @@ crockspot1/
 │   ├── FAQ.tsx               # Uses shared.json
 │   ├── Testimonials.tsx      # Uses shared.json
 │   └── power-hub/            # CMS components
-├── content/                  # 📄 JSON Content Files
+├── content/                  # JSON Content Files (13 files)
 │   ├── home.json
 │   ├── about.json
 │   ├── catering.json
 │   ├── menus.json
 │   ├── contact.json
-│   └── shared.json
+│   ├── shared.json
+│   ├── government-capabilities.json
+│   ├── community-partners.json
+│   ├── the-spot.json
+│   ├── footer.json
+│   ├── privacy.json
+│   ├── terms.json
+│   └── documents.json        # AI Assist brand documents
 ├── public/images/
 │   └── uploads/              # User-uploaded images
 ├── CLAUDE.md
 ├── DEPLOYMENT.md
 ├── README.md
 ├── RESTART_PROMPT.md
+├── SESSION_LOG.md
 ├── package.json
 ├── tailwind.config.ts
 ├── tsconfig.json
 └── next.config.js
 ```
 
-## 🔐 Power Hub CMS
+## Power Hub CMS
 
 | URL | Feature |
 |-----|---------|
@@ -83,16 +93,16 @@ crockspot1/
 | `/power-hub/dashboard` | Main dashboard |
 | `/power-hub/dashboard/content` | Edit page content (JSON) |
 | `/power-hub/dashboard/media` | Upload/manage images |
-| `/power-hub/dashboard/ai` | AI writing assistant |
+| `/power-hub/dashboard/ai` | AI writing assistant (PDF/DOCX upload) |
 | `/power-hub/dashboard/settings` | Configuration |
 
-**Login:** `crockspot` / `letusrock2024`
+**Login:** `crockspot` / `crockspot2026`
 
-## 🔧 Quick Commands
+## Quick Commands
 
 ```bash
 # Navigate to project
-cd /Users/brettlechtenberg/Documents/agent-girl/crockspot1
+cd /Users/brettlechtenberg/Documents/agent-girl/crockspot
 
 # Install dependencies
 npm install
@@ -109,20 +119,14 @@ git commit -m "Your message"
 git push origin main
 ```
 
-## 🚀 How Deployment Works (GitHub Integration)
+## How Deployment Works (GitHub Integration)
 
 1. You push code to GitHub
 2. Vercel automatically detects the push
 3. Vercel builds and deploys automatically
 4. Done! No CLI commands needed
 
-**To set this up (one-time):**
-1. Go to https://vercel.com/crockspotcaterings-projects
-2. Click "Add New..." → "Project"
-3. Import: `CrockSpotCatering/Crock-Spot-Website-and-Power-Hub`
-4. Click Deploy
-
-## 🔑 Account Credentials
+## Account Credentials
 
 ### GitHub
 - **Username:** CrockSpotCatering
@@ -130,7 +134,7 @@ git push origin main
 - **Password:** CrockSpotCateringIs#1
 - **Repo:** https://github.com/CrockSpotCatering/Crock-Spot-Website-and-Power-Hub
 
-> ⚠️ **Note:** GitHub requires a Personal Access Token (PAT) for git push. Create one at: https://github.com/settings/tokens/new (select `repo` scope)
+> **Note:** GitHub requires a Personal Access Token (PAT) for git push. Create one at: https://github.com/settings/tokens/new (select `repo` scope)
 
 ### Vercel (CrockSpot Account - NOT Brett's personal!)
 - **Account:** crockspotcaterings-projects
@@ -145,7 +149,27 @@ git push origin main
 - **Password:** CrockSpotCateringIs#1
 - **Project URL:** https://ptmcisouwmkqiowmxttq.supabase.co
 
-## 🎨 Brand Colors
+## Environment Variables (Vercel)
+
+| Variable | Purpose |
+|----------|---------|
+| `NEXT_PUBLIC_SUPABASE_URL` | Supabase project URL |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Supabase anon key |
+| `GITHUB_TOKEN` | GitHub API access for image storage |
+
+## Tech Stack
+
+| Package | Version | Purpose |
+|---------|---------|---------|
+| `next` | ^16.0.1 | Framework |
+| `react` | ^19.2.0 | UI Library |
+| `unpdf` | ^1.4.0 | PDF parsing (serverless-compatible) |
+| `mammoth` | ^1.12.0 | DOCX parsing |
+| `framer-motion` | ^12.23.24 | Animations |
+| `lucide-react` | ^0.577.0 | Icons |
+| `tailwindcss` | ^3.4.18 | Styling |
+
+## Brand Colors
 
 | Color | Hex | Usage |
 |-------|-----|-------|
@@ -156,16 +180,7 @@ git push origin main
 | Dark Purple | `#2F2744` | Dark backgrounds |
 | Yellow | `#F0DB9C` | Highlights |
 
-## 🖼️ Images Needed
-
-Add to `/public/images/`:
-- `hero-bowl.jpg` - Hero background (1920x1080)
-- `crock-spot-logo.png` - Logo
-- `food-truck.jpg` - Food truck photo
-- `team.jpg` - Steven & Mandy photo
-- Food photos for gallery sections
-
-## 📞 Crock Spot Contact Info
+## Crock Spot Contact Info
 
 - **Email:** steven@thecrockspot.com
 - **Website:** thecrockspot.com
@@ -176,4 +191,4 @@ Add to `/public/images/`:
 
 ---
 
-*Let Us Crock Your World!* 🎸🍲
+*Let Us Crock Your World!*

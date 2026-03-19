@@ -1,27 +1,27 @@
 # The Crock Spot - Website & Power Hub
 
-🍲 Award-winning food truck catering website for The Crock Spot, Denver's premier slow-cooked gourmet cuisine company.
+Award-winning food truck catering website for The Crock Spot, Denver's premier slow-cooked gourmet cuisine company.
 
-## 🎸 About The Crock Spot
+## About The Crock Spot
 
 - **Founded:** 2010 by Steven & Mandy
 - **Location:** Denver, Colorado
 - **Service Area:** Denver Metro, Front Range & Mountain Regions
 - **Awards:** Best Food Truck in Denver (5280 Magazine), Best Meals on Wheels (Westword), 50 Coolest Small Businesses (Business Insider)
 
-## 🚀 Tech Stack
+## Tech Stack
 
 - **Framework:** Next.js 16 with App Router
 - **Styling:** Tailwind CSS 3.4
 - **Animations:** Framer Motion
-- **Icons:** React Icons & Lucide React
+- **Icons:** Lucide React
 - **Language:** TypeScript
 - **Content:** JSON-powered CMS (editable via Power Hub)
 - **Image Storage:** GitHub API
-- **Document Parsing:** pdf-parse, mammoth
+- **Document Parsing:** unpdf (PDF), mammoth (DOCX)
 - **Deployment:** Vercel (auto-deploy via GitHub)
 
-## 🎨 Brand Colors
+## Brand Colors
 
 | Color | Hex | Usage |
 |-------|-----|-------|
@@ -32,7 +32,7 @@
 | Dark Purple | `#2F2744` | Dark backgrounds |
 | Yellow | `#F0DB9C` | Highlights |
 
-## 🔐 Power Hub CMS
+## Power Hub CMS
 
 The Power Hub is a full content management system at `/power-hub`:
 
@@ -44,9 +44,9 @@ The Power Hub is a full content management system at `/power-hub`:
 | **AI Assist** | `/power-hub/dashboard/ai` | AI-powered content writing (PDF/Word upload) |
 | **Settings** | `/power-hub/dashboard/settings` | Portal configuration |
 
-**Power Hub Login:** `crockspot` / `letusrock2024`
+**Power Hub Login:** `crockspot` / `crockspot2026`
 
-## 📄 JSON Content System
+## JSON Content System
 
 All page content is stored in `/content/*.json` files and can be edited via the Power Hub:
 
@@ -58,12 +58,18 @@ All page content is stored in `/content/*.json` files and can be edited via the 
 | `menus.json` | Full menu items (bases, proteins, etc.) |
 | `contact.json` | Contact info, hours, form settings |
 | `shared.json` | Testimonials, FAQ (used across pages) |
+| `government-capabilities.json` | Vendor credentials, capabilities |
+| `community-partners.json` | Community partnerships |
+| `the-spot.json` | The Spot Cafe sister company |
+| `footer.json` | Footer content |
+| `documents.json` | AI Assist brand documents |
 
 **How it works:** Pages import JSON → render content dynamically → edit JSON in Power Hub → changes appear on site.
 
-## 📁 Project Structure
+## Project Structure
 
 ```
+crockspot/
 ├── app/
 │   ├── page.tsx              # Home (imports home.json)
 │   ├── layout.tsx            # Root layout with SEO
@@ -74,9 +80,10 @@ All page content is stored in `/content/*.json` files and can be edited via the 
 │   ├── contact/page.tsx      # Contact (imports contact.json)
 │   ├── government-capabilities/
 │   ├── community-partners/
+│   ├── the-spot/
 │   ├── privacy/page.tsx
 │   ├── terms/page.tsx
-│   ├── power-hub/            # 🆕 CMS Dashboard
+│   ├── power-hub/            # CMS Dashboard
 │   │   ├── page.tsx          # Login page
 │   │   └── dashboard/
 │   │       ├── page.tsx      # Dashboard home
@@ -84,8 +91,9 @@ All page content is stored in `/content/*.json` files and can be edited via the 
 │   │       ├── media/        # Media library
 │   │       ├── ai/           # AI assistant
 │   │       └── settings/     # Settings
-│   └── api/power-hub/        # 🆕 API Routes
+│   └── api/power-hub/        # API Routes
 │       ├── content/route.ts  # Read/write JSON
+│       ├── documents/route.ts # Brand document storage
 │       ├── media/route.ts    # List images from GitHub
 │       ├── upload/route.ts   # Upload/delete images
 │       ├── ai/route.ts       # AI content generation
@@ -97,32 +105,23 @@ All page content is stored in `/content/*.json` files and can be edited via the 
 │   ├── ContactForm.tsx
 │   ├── FAQ.tsx               # (imports shared.json)
 │   ├── Testimonials.tsx      # (imports shared.json)
-│   └── power-hub/            # 🆕 CMS Components
+│   └── power-hub/            # CMS Components
 │       ├── Header.tsx
-│       ├── Sidebar.tsx
-│       └── JsonEditor.tsx
-├── content/                  # 🆕 JSON Content Files
+│       └── Sidebar.tsx
+├── content/                  # JSON Content Files
 │   ├── home.json
 │   ├── about.json
 │   ├── catering.json
 │   ├── menus.json
 │   ├── contact.json
-│   └── shared.json
+│   ├── shared.json
+│   └── ... (13 total)
 └── public/
     └── images/
-        └── uploads/          # 🆕 User-uploaded images
+        └── uploads/          # User-uploaded images
 ```
 
-## 🖼️ Images Needed
-
-Add these images to `/public/images/`:
-- `hero-bowl.jpg` - Hero section background
-- `crock-spot-logo.png` - Company logo
-- `food-truck.jpg` - Food truck photos
-- `team.jpg` - Team/founders photo
-- Various food/event photos
-
-## 🔧 Local Development
+## Local Development
 
 ```bash
 # Install dependencies
@@ -138,63 +137,49 @@ npm run build
 npm start
 ```
 
-## 🚢 Deployment to Vercel
+## Deployment to Vercel
 
-### Option 1: Via Vercel Dashboard (Recommended)
+### Auto-Deploy (Recommended)
+
+This project uses automatic deployment:
 
 1. Push code to GitHub repository
-2. Go to [Vercel](https://vercel.com)
-3. Import the GitHub repository
-4. Configure project settings (auto-detected for Next.js)
-5. Deploy!
-
-### Option 2: Connect GitHub to Vercel
-
-1. Log into Vercel with GitHub
-2. Select "Import Project"
-3. Choose the Crock Spot repository
-4. Vercel will auto-detect Next.js and configure
-
-## 📋 GitHub Repository Setup
+2. Vercel automatically detects the push
+3. Vercel builds and deploys automatically
+4. Done! No CLI commands needed
 
 ```bash
-# Initialize git
-git init
-
-# Add all files
 git add .
-
-# Commit
-git commit -m "Initial commit: Crock Spot website"
-
-# Add remote
-git remote add origin https://github.com/CrockSpotCatering/Crock-Spot-Website-and-Power-Hub.git
-
-# Push
-git push -u origin main
+git commit -m "Your message"
+git push origin main
 ```
 
-## ⚙️ Environment Variables
+> **NEVER use Vercel CLI** - Always deploy via GitHub integration only!
 
-Create a `.env.local` file for any environment variables:
+## Environment Variables
 
-```env
-# Add as needed
-NEXT_PUBLIC_GA_ID=your-google-analytics-id
-```
+Set these in Vercel Dashboard:
 
-## 📱 Features
+| Variable | Purpose |
+|----------|---------|
+| `NEXT_PUBLIC_SUPABASE_URL` | Supabase project URL |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Supabase anon key |
+| `GITHUB_TOKEN` | GitHub API access for image/document storage |
 
-- ✅ Responsive design (mobile-first)
-- ✅ SEO optimized with structured data
-- ✅ Fast page loads with Next.js optimization
-- ✅ Animated interactions with Framer Motion
-- ✅ Contact form on every page
-- ✅ Full menu with dietary labels
-- ✅ Government capabilities section
-- ✅ Community partners page
+## Features
 
-## 🎯 Pages
+- Responsive design (mobile-first, Google 2025 standards)
+- SEO optimized with structured data
+- Fast page loads with Next.js optimization
+- Animated interactions with Framer Motion
+- Contact form on every page
+- Full menu with dietary labels
+- Government capabilities section
+- Community partners page
+- AI Assist with PDF/DOCX upload for brand context
+- Media library with GitHub storage
+
+## Pages
 
 1. **Home** - Hero, services, build-your-bowl, testimonials, FAQ
 2. **Catering** - Service options, pricing, process
@@ -202,9 +187,10 @@ NEXT_PUBLIC_GA_ID=your-google-analytics-id
 4. **Menus** - Full menu with bases, proteins, sauces, toppers
 5. **Government Capabilities** - Services for government agencies
 6. **Community Partners** - Partnership opportunities
-7. **Contact** - Contact form and information
+7. **The Spot** - Sister company (The Spot Cafe)
+8. **Contact** - Contact form and information
 
-## 📞 Contact
+## Contact
 
 - **Email:** steven@thecrockspot.com
 - **Website:** https://thecrockspot.com
@@ -213,6 +199,6 @@ NEXT_PUBLIC_GA_ID=your-google-analytics-id
 
 ---
 
-*"Let Us Crock Your World"* 🎸
+*"Let Us Crock Your World"*
 
-Built with ❤️ for The Crock Spot
+Built with love for The Crock Spot

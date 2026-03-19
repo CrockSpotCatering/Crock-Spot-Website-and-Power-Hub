@@ -24,6 +24,11 @@ Before making any changes, read these files in order:
 ✅ Run: gh auth switch -u CrockSpotCatering
 ```
 
+## Project Location
+```bash
+cd /Users/brettlechtenberg/Documents/agent-girl/crockspot
+```
+
 ## Project Structure
 - `/app/` - Next.js pages and API routes
 - `/content/*.json` - CMS content (edit here or via Power Hub)
@@ -32,7 +37,7 @@ Before making any changes, read these files in order:
 
 ## Quick Commands
 ```bash
-cd /Users/brettlechtenberg/Documents/agent-girl/crockspot1
+cd /Users/brettlechtenberg/Documents/agent-girl/crockspot
 npm run dev          # Dev server at localhost:3000
 npm run build        # Build for production
 git push origin main # Deploy to Vercel
@@ -47,6 +52,20 @@ git push origin main # Deploy to Vercel
 - Live: https://crock-spot-website-and-power-hub.vercel.app
 - CMS: https://crock-spot-website-and-power-hub.vercel.app/power-hub
 - GitHub: https://github.com/CrockSpotCatering/Crock-Spot-Website-and-Power-Hub
+
+## Power Hub CMS
+- **Login:** `crockspot` / `crockspot2026`
+- **Content Editor:** Edit all JSON content files
+- **Media Library:** Upload/manage images (GitHub storage)
+- **AI Assist:** AI writing with PDF/Word document upload
+
+## Tech Stack
+- Next.js 16 with App Router
+- Tailwind CSS 3.4
+- TypeScript
+- `unpdf` for PDF parsing (serverless-compatible)
+- `mammoth` for DOCX parsing
+- Vercel auto-deploy via GitHub
 
 ## General Guidelines
 

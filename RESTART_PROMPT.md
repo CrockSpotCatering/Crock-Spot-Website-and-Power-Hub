@@ -1,4 +1,4 @@
-# 🍲 CROCK SPOT - Ultimate Restart Prompt
+# CROCK SPOT - Ultimate Restart Prompt
 
 **Copy and paste this entire prompt into a new Claude session:**
 
@@ -8,7 +8,7 @@
 
 I'm working on **The Crock Spot** website & CMS - Denver's premier event caterer for corporate events, weddings, and private gatherings.
 
-### 📍 FIRST: Read These Files
+### FIRST: Read These Files
 ```bash
 cd /Users/brettlechtenberg/Documents/agent-girl/crockspot
 ```
@@ -17,7 +17,7 @@ Then read in this order:
 2. `README.md` - Full project overview
 3. `DEPLOYMENT.md` - Deployment guide & credentials
 
-### 🔗 URLs
+### URLs
 | Resource | URL |
 |----------|-----|
 | **Live Site** | https://crock-spot-website-and-power-hub.vercel.app |
@@ -25,24 +25,25 @@ Then read in this order:
 | **GitHub Repo** | https://github.com/CrockSpotCatering/Crock-Spot-Website-and-Power-Hub |
 | **Vercel Dashboard** | https://vercel.com/crockspotcaterings-projects |
 
-### 🛠️ Tech Stack
+### Tech Stack
 - Next.js 16 with App Router
 - Tailwind CSS 3.4 + Framer Motion
 - TypeScript
 - JSON-powered CMS (`/content/*.json`)
 - GitHub API for image storage
-- pdf-parse + mammoth for document parsing
+- `unpdf` for PDF parsing (serverless-compatible)
+- `mammoth` for DOCX parsing
 - Vercel auto-deploy via GitHub
 
-### 🔐 Power Hub CMS
+### Power Hub CMS
 | URL | Feature | Login |
 |-----|---------|-------|
 | `/power-hub` | CMS Login | `crockspot` / `crockspot2026` |
 | `/power-hub/dashboard/content` | Edit JSON content | |
 | `/power-hub/dashboard/media` | Upload/manage images | |
-| `/power-hub/dashboard/ai` | AI writing (PDF/Word) | |
+| `/power-hub/dashboard/ai` | AI writing (PDF/Word upload) | |
 
-### 📄 JSON Content Files
+### JSON Content Files (13 total)
 All pages import from `/content/*.json`:
 | File | Purpose |
 |------|---------|
@@ -54,11 +55,14 @@ All pages import from `/content/*.json`:
 | `shared.json` | Testimonials, FAQ |
 | `government-capabilities.json` | Vendor credentials, military contracts |
 | `community-partners.json` | Community partnerships |
-| `the-spot.json` | The Spot Café sister company |
+| `the-spot.json` | The Spot Cafe sister company |
 | `footer.json` | Footer content (company, links, social, awards) |
+| `privacy.json` | Privacy policy |
+| `terms.json` | Terms of service |
+| `documents.json` | AI Assist brand documents |
 
-### 📱 Mobile Optimization (Google 2025)
-✅ Implemented:
+### Mobile Optimization (Google 2025)
+Implemented:
 - 48px minimum touch targets
 - Full-width buttons on mobile (min-h-[56px])
 - `viewportFit: cover` for notched devices
@@ -70,7 +74,7 @@ All pages import from `/content/*.json`:
 - Safe area inset utilities
 - Responsive grids (2-col on mobile, 4-col on desktop)
 
-### ⚠️ CRITICAL RULES
+### CRITICAL RULES
 ```
 ┌─────────────────────────────────────────────────────────────────────┐
 │  🚫 NEVER USE VERCEL CLI (vercel, vercel --prod, etc.)              │
@@ -81,42 +85,43 @@ All pages import from `/content/*.json`:
 └─────────────────────────────────────────────────────────────────────┘
 ```
 
-### 🔑 Accounts (KEEP SEPARATE!)
+### Accounts (KEEP SEPARATE!)
 | Service | Use This | NOT This |
 |---------|----------|----------|
-| **GitHub** | CrockSpotCatering | ❌ BoardChairIs1, BrettLechtenbrerg |
-| **Vercel** | crockspotcaterings-projects | ❌ bretts-projects |
+| **GitHub** | CrockSpotCatering | BoardChairIs1, BrettLechtenbrerg |
+| **Vercel** | crockspotcaterings-projects | bretts-projects |
 | **gh CLI** | `gh auth switch -u CrockSpotCatering` | |
 
-### 🎨 Brand Colors
+### Brand Colors
 - Orange: `#F49220` (primary CTA)
 - Maroon: `#8C2D2E`
 - Green: `#667934`
 - Purple: `#614B8A`
 - Dark Purple: `#2F2744` (backgrounds)
 
-### 📋 Current Status (March 17, 2026 - End of Session)
+### Current Status (March 19, 2026)
 **Website:**
-- ✅ All pages complete and styled
-- ✅ Corporate catering focus (not food trucks)
-- ✅ Mobile optimized per Google 2025 standards (comprehensive pass done)
-- ✅ "The Spot" sister company page added
-- ✅ Full menu with rich descriptions
-- ✅ Government capabilities with vendor credentials
+- All pages complete and styled
+- Corporate catering focus (not food trucks)
+- Mobile optimized per Google 2025 standards
+- "The Spot" sister company page added
+- Full menu with rich descriptions
+- Government capabilities with vendor credentials
 
 **CMS:**
-- ✅ Power Hub CMS complete
-- ✅ Content editor, Media Library, AI Assist
-- ✅ ALL pages wired to JSON (including Footer, The Spot, Government, Community)
-- ✅ Login: `crockspot` / `crockspot2026`
+- Power Hub CMS complete
+- Content editor, Media Library, AI Assist
+- ALL pages wired to JSON (13 content files)
+- Login: `crockspot` / `crockspot2026`
+- PDF/DOCX upload working (uses `unpdf` + `mammoth`)
 
 **Infrastructure:**
-- ✅ All changes committed and pushed
-- ✅ Vercel auto-deploying from GitHub
-- ✅ GitHub CLI active account: CrockSpotCatering
-- ✅ Documentation up to date
+- All changes committed and pushed
+- Vercel auto-deploying from GitHub
+- GitHub CLI active account: CrockSpotCatering
+- Documentation up to date
 
-### 📂 Project Structure
+### Project Structure
 ```
 crockspot/
 ├── app/                    # Next.js pages
@@ -125,21 +130,22 @@ crockspot/
 │   ├── catering/          # Catering page
 │   ├── menus/             # Menu page
 │   ├── contact/           # Contact page
-│   ├── the-spot/          # The Spot Café page
+│   ├── the-spot/          # The Spot Cafe page
 │   ├── government-capabilities/
 │   ├── community-partners/
 │   ├── power-hub/         # CMS dashboard
-│   └── api/               # API routes
+│   └── api/power-hub/     # API routes
 ├── components/            # React components
-├── content/               # JSON content files (12 files)
+├── content/               # JSON content files (13 files)
 ├── public/                # Static assets
 ├── SESSION_LOG.md         # What was done
 ├── RESTART_PROMPT.md      # This file
 ├── DEPLOYMENT.md          # Deploy guide
+├── CLAUDE.md              # Claude instructions
 └── README.md              # Project overview
 ```
 
-### 🚀 Quick Commands
+### Quick Commands
 ```bash
 cd /Users/brettlechtenberg/Documents/agent-girl/crockspot
 npm run dev        # Start dev server (localhost:3000)
@@ -152,14 +158,14 @@ gh auth switch -u CrockSpotCatering
 git add . && git commit -m "message" && git push origin main
 ```
 
-### 📞 Business Info
+### Business Info
 - **Business:** The Crock Spot (Denver food truck catering since 2010)
 - **Owners:** Steven & Mandy (+ Peter, partner)
 - **Email:** steven@thecrockspot.com
 - **Tagline:** "Let Us Crock Your World"
 - **Focus:** Corporate events, weddings, buffet catering
 - **Awards:** Best Food Truck (5280), Best Meals on Wheels (Westword), 50 Coolest Small Businesses (Business Insider)
-- **Sister Company:** The Spot Café (Mandy Smith, RiNo District corporate catering)
+- **Sister Company:** The Spot Cafe (Mandy Smith, RiNo District corporate catering)
 
 ---
 
