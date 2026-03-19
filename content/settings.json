@@ -1,8 +1,8 @@
 {
   "aiSettings": {
     "provider": "claude",
-    "claudeApiKey": "",
+    "claudeApiKey": "test-key-12345",
     "openaiApiKey": "",
-    "lastUpdated": ""
+    "lastUpdated": "2026-03-19T16:30:00.000Z"
   }
 }
