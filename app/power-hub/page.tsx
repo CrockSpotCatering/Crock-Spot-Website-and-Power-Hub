@@ -2,9 +2,9 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Eye, EyeOff, LogIn, ChefHat } from 'lucide-react';
+import { Eye, EyeOff, LogIn, ChefHat, Loader2 } from 'lucide-react';
 
-// Default credentials
+// Default credentials (fallback if API fails)
 const DEFAULT_USERNAME = 'crockspot';
 const DEFAULT_PASSWORD = 'crockspot2026';
 
@@ -21,27 +21,36 @@ export default function PowerHubLogin() {
     setLoading(true);
     setError('');
 
-    // Check credentials
-    const storedCreds = localStorage.getItem('crockspot_power_hub_creds');
-    let validUsername = DEFAULT_USERNAME;
-    let validPassword = DEFAULT_PASSWORD;
+    try {
+      // Fetch credentials from GitHub via API
+      const response = await fetch('/api/power-hub/credentials');
+      let validUsername = DEFAULT_USERNAME;
+      let validPassword = DEFAULT_PASSWORD;
 
-    if (storedCreds) {
-      try {
-        const creds = JSON.parse(storedCreds);
-        validUsername = creds.username || DEFAULT_USERNAME;
-        validPassword = creds.password || DEFAULT_PASSWORD;
-      } catch {
-        // Use defaults if parsing fails
+      if (response.ok) {
+        const data = await response.json();
+        validUsername = data.username || DEFAULT_USERNAME;
+        validPassword = data.password || DEFAULT_PASSWORD;
       }
-    }
 
-    if (username === validUsername && password === validPassword) {
-      localStorage.setItem('crockspot_power_hub_auth', 'true');
-      router.push('/power-hub/dashboard');
-    } else {
-      setError('Invalid username or password');
-      setLoading(false);
+      // Validate credentials
+      if (username === validUsername && password === validPassword) {
+        localStorage.setItem('crockspot_power_hub_auth', 'true');
+        router.push('/power-hub/dashboard');
+      } else {
+        setError('Invalid username or password');
+        setLoading(false);
+      }
+    } catch (err) {
+      console.error('Login error:', err);
+      // Fallback to default credentials if API fails
+      if (username === DEFAULT_USERNAME && password === DEFAULT_PASSWORD) {
+        localStorage.setItem('crockspot_power_hub_auth', 'true');
+        router.push('/power-hub/dashboard');
+      } else {
+        setError('Invalid username or password');
+        setLoading(false);
+      }
     }
   };
 
@@ -109,7 +118,10 @@ export default function PowerHubLogin() {
               className="w-full bg-gradient-to-r from-[#F49220] to-[#8C2D2E] hover:from-[#e08519] hover:to-[#7a2627] text-white py-3 px-4 rounded-lg font-medium flex items-center justify-center gap-2 transition-all disabled:opacity-50 shadow-lg"
             >
               {loading ? (
-                <span>Signing in...</span>
+                <>
+                  <Loader2 size={18} className="animate-spin" />
+                  Signing in...
+                </>
               ) : (
                 <>
                   <LogIn size={18} />
