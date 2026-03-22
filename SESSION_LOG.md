@@ -1,5 +1,82 @@
 # CrockSpot Session Log
 
+## March 22, 2026 - Session: GoHighLevel Integration & Credential Management
+
+### What Was Done This Session
+
+#### 1. **GoHighLevel Contact Form Integration**
+Connected all website contact forms to GoHighLevel CRM for lead management.
+
+**Implementation:**
+- Created `/api/contact/route.ts` - Server-side API to forward form data to GHL
+- Updated `ContactForm.tsx` to POST to local API (avoids CORS issues)
+- Webhook URL: `https://services.leadconnectorhq.com/hooks/z8YptnIlol2ryLihGK7z/webhook-trigger/72f29b9b-4952-4dde-84d5-8e99f641828d`
+
+**Data Flow:**
+```
+User fills form → /api/contact → GoHighLevel Webhook → Contact created → Workflow triggered
+```
+
+**Fields Sent to GHL:**
+| Field | Description |
+|-------|-------------|
+| `name` | Full Name |
+| `email` | Email Address |
+| `phone` | Phone Number |
+| `eventDate` | Event Date |
+| `guestCount` | Number of Guests |
+| `eventType` | Type of Event |
+| `message` | Event Details |
+| `source` | "Crock Spot Website" |
+
+#### 2. **GitHub-Backed Credential Management**
+Replaced localStorage with persistent GitHub storage for Power Hub login credentials.
+
+**New Files:**
+- `content/credentials.json` - Stores username/password in GitHub repo
+- `/api/power-hub/credentials/route.ts` - API for reading/writing credentials
+
+**Updated Files:**
+- `app/power-hub/page.tsx` - Login now fetches credentials from GitHub API
+- `app/power-hub/dashboard/settings/page.tsx` - Full password change flow with verification
+
+**Features:**
+- Credentials sync across all browsers/devices
+- Requires current password to change password (security)
+- Shows "Last Updated" timestamp
+- Falls back to defaults if GitHub API fails
+- Green "Connected to GitHub" status indicator
+
+#### 3. **Cleanup**
+- Deleted duplicate `crockspot2` folder to eliminate confusion
+- Verified GitHub CLI is using `CrockSpotCatering` account
+- Confirmed Vercel deploys via GitHub integration only (no CLI)
+
+### Commits This Session
+| Commit | Description |
+|--------|-------------|
+| `3afc1d7` | Connect contact form to GoHighLevel webhook |
+| `b1a1a76` | Add GitHub-backed credential management for Power Hub |
+
+### Files Changed
+| File | Changes |
+|------|---------|
+| `app/api/contact/route.ts` | NEW - Forwards form data to GHL webhook |
+| `components/ContactForm.tsx` | POST to /api/contact instead of simulating |
+| `content/credentials.json` | NEW - Stores Power Hub login credentials |
+| `app/api/power-hub/credentials/route.ts` | NEW - Credential read/write API |
+| `app/power-hub/page.tsx` | Fetch credentials from GitHub API |
+| `app/power-hub/dashboard/settings/page.tsx` | Full password change flow |
+
+### Git Status
+- ✅ All changes committed
+- ✅ All changes pushed to GitHub (CrockSpotCatering account)
+- ✅ Vercel auto-deployed
+- ✅ GoHighLevel integration tested and working
+- ✅ Credential management tested and working
+
+---
+
 ## March 19, 2026 - Session 2: API Key Persistence
 
 ### What Was Done This Session
@@ -242,7 +319,7 @@ Footer:
 
 ---
 
-## Content Files Reference (13 total)
+## Content Files Reference (15 total)
 | File | Purpose | CMS Editable |
 |------|---------|--------------|
 | `home.json` | Homepage content, services, hero | ✅ |
@@ -258,6 +335,8 @@ Footer:
 | `privacy.json` | Privacy policy | ✅ |
 | `terms.json` | Terms of service | ✅ |
 | `documents.json` | AI Assist brand documents | ✅ |
+| `settings.json` | AI provider & API keys | ✅ |
+| `credentials.json` | Power Hub login credentials | ✅ (via Settings)
 
 ---
 
@@ -266,6 +345,9 @@ Footer:
 
 ## Next Steps / Ideas
 - [x] ~~Test PDF upload in AI Assist on live site~~ ✅ DONE (March 19)
+- [x] ~~Connect contact forms to GoHighLevel~~ ✅ DONE (March 22)
+- [x] ~~Add persistent credential management~~ ✅ DONE (March 22)
 - [ ] Add actual CrockSpot photos to replace Unsplash images
+- [ ] Re-enable GHL notification actions for real leads
 - [ ] Consider adding online ordering integration
 - [ ] Add Google Analytics / tracking

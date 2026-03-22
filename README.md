@@ -19,6 +19,7 @@ Award-winning food truck catering website for The Crock Spot, Denver's premier s
 - **Content:** JSON-powered CMS (editable via Power Hub)
 - **Image Storage:** GitHub API
 - **Document Parsing:** unpdf (PDF), mammoth (DOCX)
+- **CRM Integration:** GoHighLevel (webhook-based)
 - **Deployment:** Vercel (auto-deploy via GitHub)
 
 ## Brand Colors
@@ -63,6 +64,8 @@ All page content is stored in `/content/*.json` files and can be edited via the 
 | `the-spot.json` | The Spot Cafe sister company |
 | `footer.json` | Footer content |
 | `documents.json` | AI Assist brand documents |
+| `settings.json` | AI provider settings & API keys |
+| `credentials.json` | Power Hub login credentials |
 
 **How it works:** Pages import JSON → render content dynamically → edit JSON in Power Hub → changes appear on site.
 
@@ -91,12 +94,14 @@ crockspot/
 │   │       ├── media/        # Media library
 │   │       ├── ai/           # AI assistant
 │   │       └── settings/     # Settings
+│   ├── api/contact/route.ts  # GoHighLevel webhook integration
 │   └── api/power-hub/        # API Routes
 │       ├── content/route.ts  # Read/write JSON
 │       ├── documents/route.ts # Brand document storage
 │       ├── media/route.ts    # List images from GitHub
 │       ├── upload/route.ts   # Upload/delete images
 │       ├── ai/route.ts       # AI content generation
+│       ├── credentials/route.ts # Power Hub login credentials
 │       └── parse-document/route.ts  # PDF/Word parsing
 ├── components/
 │   ├── Navigation.tsx
@@ -115,7 +120,7 @@ crockspot/
 │   ├── menus.json
 │   ├── contact.json
 │   ├── shared.json
-│   └── ... (13 total)
+│   └── ... (15 total)
 └── public/
     └── images/
         └── uploads/          # User-uploaded images
@@ -172,12 +177,14 @@ Set these in Vercel Dashboard:
 - SEO optimized with structured data
 - Fast page loads with Next.js optimization
 - Animated interactions with Framer Motion
-- Contact form on every page
+- Contact form on every page (connected to GoHighLevel CRM)
 - Full menu with dietary labels
 - Government capabilities section
 - Community partners page
 - AI Assist with PDF/DOCX upload for brand context
 - Media library with GitHub storage
+- GitHub-backed credential management (multi-device sync)
+- GoHighLevel integration for lead management
 
 ## Pages
 
