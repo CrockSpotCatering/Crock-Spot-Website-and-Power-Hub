@@ -97,7 +97,8 @@
     {
       "name": "Jalapeño Shredded Beef",
       "tags": ["GF"],
-      "description": "Shredded beef chuck tenders, served with fresh jalapeños."
+      "description": "Shredded beef chuck tenders, served with fresh jalapeños.",
+      "premium": true
     },
     {
       "name": "Turkey Cardamom Meatballs",
