@@ -234,7 +234,7 @@ const ContactForm = ({ variant = 'full' }: ContactFormProps) => {
           </>
         ) : (
           <>
-            <FaPaperPlane /> Get Your Free Quote
+            <FaPaperPlane /> Get Your Free Custom Quote
           </>
         )}
       </motion.button>
