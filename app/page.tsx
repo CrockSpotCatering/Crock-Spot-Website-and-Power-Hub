@@ -1,6 +1,7 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import {
   FaTruck,
@@ -55,18 +56,53 @@ const quickStatIcons: Record<string, React.ReactNode> = {
 export default function Home() {
   const { hero, eventTypes, services, benefits, whyChooseUs, stats, buildYourBowl, quickServiceStats, cta, finalCta } = homeContent;
 
+  // Hero carousel state
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const carouselImages = hero.carouselImages || [hero.backgroundImage];
+
+  // Auto-advance carousel every 5 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % carouselImages.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [carouselImages.length]);
+
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center bg-crock-dark overflow-hidden">
-        {/* Background Image */}
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{
-            backgroundImage: `url(${hero.backgroundImage})`,
-          }}
-        >
-          <div className="absolute inset-0 bg-gradient-to-b from-crock-dark/80 via-crock-dark/60 to-crock-dark/90"></div>
+        {/* Background Image Carousel */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentImageIndex}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1 }}
+            className="absolute inset-0 bg-cover bg-center"
+            style={{
+              backgroundImage: `url(${carouselImages[currentImageIndex]})`,
+            }}
+          >
+            <div className="absolute inset-0 bg-gradient-to-b from-crock-dark/80 via-crock-dark/60 to-crock-dark/90"></div>
+          </motion.div>
+        </AnimatePresence>
+
+        {/* Carousel Indicators */}
+        <div className="absolute bottom-24 left-1/2 transform -translate-x-1/2 z-20 flex gap-2">
+          {carouselImages.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentImageIndex(index)}
+              className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                index === currentImageIndex
+                  ? 'bg-crock-orange w-8'
+                  : 'bg-white/50 hover:bg-white/80'
+              }`}
+              aria-label={`Go to slide ${index + 1}`}
+            />
+          ))}
         </div>
 
         {/* Animated Background Elements */}
