@@ -35,11 +35,78 @@
     "title": "Featured Partners",
     "subtitle": "Some of the amazing organizations we work with",
     "partners": [
-      { "name": "Church Ranch Event Center", "type": "Venue Partner" },
-      { "name": "Table Mountain Event Center", "type": "Venue Partner" },
-      { "name": "Cherry Creek Farmers Market", "type": "Market Partner" },
-      { "name": "Local Breweries", "type": "Beverage Partners" },
-      { "name": "New Terrain Brewing", "type": "Event Partner" }
+      {
+        "name": "Church Ranch Event Center",
+        "logo": "https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=200&h=200&fit=crop",
+        "type": "Venue Partner",
+        "description": "Premier event venue in Westminster offering stunning mountain views and world-class amenities. We've partnered to provide exceptional catering for weddings, corporate events, and special celebrations."
+      },
+      {
+        "name": "Table Mountain Event Center",
+        "logo": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=200&h=200&fit=crop",
+        "type": "Venue Partner",
+        "description": "Golden's premier event destination with breathtaking views of Table Mountain. Our partnership delivers unforgettable culinary experiences for their exclusive events and celebrations."
+      },
+      {
+        "name": "Cherry Creek Farmers Market",
+        "logo": "https://images.unsplash.com/photo-1488459716781-31db52582fe9?w=200&h=200&fit=crop",
+        "type": "Market Partner",
+        "description": "Where it all began! Since 2010, we've been serving the Cherry Creek community with fresh, locally-sourced cuisine every Saturday morning during market season."
+      },
+      {
+        "name": "New Terrain Brewing",
+        "logo": "https://images.unsplash.com/photo-1559526324-593bc073d938?w=200&h=200&fit=crop",
+        "type": "Beverage Partner",
+        "description": "Golden's favorite craft brewery and our go-to beverage partner. Together we create the perfect pairing of craft beer and gourmet food truck cuisine for their taproom events."
+      },
+      {
+        "name": "Denver Tech Center",
+        "logo": "https://images.unsplash.com/photo-1497366216548-37526070297c?w=200&h=200&fit=crop",
+        "type": "Corporate Partner",
+        "description": "Serving Denver's bustling tech hub with weekly lunch service and corporate event catering. We fuel innovation with fresh, customizable bowl meals that keep teams productive."
+      },
+      {
+        "name": "Buckley Space Force Base",
+        "logo": "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=200&h=200&fit=crop",
+        "type": "Government Partner",
+        "description": "Proud to serve our military community at Buckley SFB. From family day events to unit celebrations, we bring restaurant-quality catering to those who serve our nation."
+      },
+      {
+        "name": "Colorado Convention Center",
+        "logo": "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=200&h=200&fit=crop",
+        "type": "Venue Partner",
+        "description": "Denver's premier convention facility trusts The Crock Spot for large-scale event catering. We've served thousands at trade shows, conferences, and exhibitions."
+      },
+      {
+        "name": "Denver Botanic Gardens",
+        "logo": "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=200&h=200&fit=crop",
+        "type": "Event Partner",
+        "description": "Partnering to bring delicious cuisine to garden events, summer concerts, and private celebrations surrounded by nature's beauty in the heart of Denver."
+      },
+      {
+        "name": "Red Rocks Amphitheatre",
+        "logo": "https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?w=200&h=200&fit=crop",
+        "type": "Event Partner",
+        "description": "The world's most iconic outdoor venue. We provide pre-show catering and VIP experiences for concerts and events at this legendary Colorado landmark."
+      },
+      {
+        "name": "University of Denver",
+        "logo": "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=200&h=200&fit=crop",
+        "type": "Education Partner",
+        "description": "Feeding the future leaders at DU! From homecoming celebrations to faculty events and graduation parties, we bring campus events to life with fresh cuisine."
+      },
+      {
+        "name": "Children's Hospital Colorado",
+        "logo": "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=200&h=200&fit=crop",
+        "type": "Healthcare Partner",
+        "description": "Supporting the amazing staff and families at Children's Hospital with appreciation events, fundraisers, and team celebrations throughout the year."
+      },
+      {
+        "name": "Denver Art Museum",
+        "logo": "https://images.unsplash.com/photo-1554907984-15263bfd63bd?w=200&h=200&fit=crop",
+        "type": "Cultural Partner",
+        "description": "Bringing culinary artistry to complement world-class visual art. We cater exhibition openings, member events, and private gallery experiences."
+      }
     ]
   },
   "communityInvolvement": {

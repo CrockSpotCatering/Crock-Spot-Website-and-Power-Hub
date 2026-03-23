@@ -1,12 +1,16 @@
 'use client';
 
+import { useState } from 'react';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import {
   FaHandshake,
   FaHeart,
   FaUsers,
   FaMapMarkerAlt,
   FaCalendar,
+  FaChevronDown,
+  FaChevronUp,
 } from 'react-icons/fa';
 import CTASection from '@/components/CTASection';
 import ContactForm from '@/components/ContactForm';
@@ -40,6 +44,16 @@ export default function CommunityPartners() {
     testimonial,
     cta
   } = content;
+
+  // Track which partner cards have expanded descriptions
+  const [expandedCards, setExpandedCards] = useState<Record<number, boolean>>({});
+
+  const toggleExpanded = (index: number) => {
+    setExpandedCards(prev => ({
+      ...prev,
+      [index]: !prev[index]
+    }));
+  };
 
   return (
     <div className="min-h-screen pt-20">
@@ -107,7 +121,7 @@ export default function CommunityPartners() {
         </div>
       </section>
 
-      {/* Featured Partners */}
+      {/* Featured Partners - 4x3 Grid with Expandable Descriptions */}
       <section className="py-20 bg-crock-gray-light/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
@@ -124,20 +138,77 @@ export default function CommunityPartners() {
             </p>
           </motion.div>
 
-          <div className="flex flex-wrap justify-center gap-6">
-            {featuredPartners.partners.map((partner, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="bg-white px-8 py-6 rounded-xl shadow-md text-center"
-              >
-                <h3 className="font-bold text-crock-dark">{partner.name}</h3>
-                <p className="text-sm text-crock-orange">{partner.type}</p>
-              </motion.div>
-            ))}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {featuredPartners.partners.map((partner, index) => {
+              const isExpanded = expandedCards[index];
+              const hasLongDescription = partner.description && partner.description.length > 80;
+              const displayDescription = isExpanded
+                ? partner.description
+                : partner.description?.slice(0, 80) + (hasLongDescription ? '...' : '');
+
+              return (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: (index % 4) * 0.1 }}
+                  className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 flex flex-col"
+                >
+                  {/* Logo */}
+                  <div className="relative h-32 bg-gradient-to-br from-crock-dark to-crock-purple flex items-center justify-center">
+                    {partner.logo ? (
+                      <Image
+                        src={partner.logo}
+                        alt={`${partner.name} logo`}
+                        width={80}
+                        height={80}
+                        className="w-20 h-20 object-cover rounded-full border-4 border-white shadow-lg"
+                      />
+                    ) : (
+                      <div className="w-20 h-20 bg-crock-orange/20 rounded-full flex items-center justify-center">
+                        <FaHandshake className="text-3xl text-crock-orange" />
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Content */}
+                  <div className="p-5 flex-1 flex flex-col">
+                    <span className="text-xs font-semibold text-crock-orange uppercase tracking-wide mb-1">
+                      {partner.type}
+                    </span>
+                    <h3 className="font-bold text-crock-dark text-lg mb-2">
+                      {partner.name}
+                    </h3>
+
+                    {partner.description && (
+                      <div className="flex-1">
+                        <p className="text-sm text-crock-gray leading-relaxed">
+                          {displayDescription}
+                        </p>
+
+                        {hasLongDescription && (
+                          <button
+                            onClick={() => toggleExpanded(index)}
+                            className="mt-2 text-sm font-medium text-crock-orange hover:text-crock-orange-dark flex items-center gap-1 transition-colors"
+                          >
+                            {isExpanded ? (
+                              <>
+                                Read less <FaChevronUp className="text-xs" />
+                              </>
+                            ) : (
+                              <>
+                                Read more <FaChevronDown className="text-xs" />
+                              </>
+                            )}
+                          </button>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>
