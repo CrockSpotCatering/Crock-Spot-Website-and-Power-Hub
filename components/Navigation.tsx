@@ -51,11 +51,13 @@ const Navigation = () => {
     { name: 'Catering', href: '/catering' },
     { name: 'About', href: '/about' },
     { name: 'Menus', href: '/menus' },
-    { name: 'The Spot', href: '/the-spot' },
     { name: 'Government', href: '/government-capabilities' },
     { name: 'Community', href: '/community-partners' },
     { name: 'Contact', href: '/contact' },
   ];
+
+  // The Spot Café - separate styling for sister company
+  const theSpotLink = { name: 'The Spot Café', href: '/the-spot' };
 
   return (
     <nav
@@ -107,10 +109,25 @@ const Navigation = () => {
                 </Link>
               </motion.div>
             ))}
+            {/* The Spot Café - Sister Company with distinct branding */}
             <motion.div
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: navLinks.length * 0.1 }}
+            >
+              <Link
+                href={theSpotLink.href}
+                className={`px-4 py-1.5 rounded-full border-2 border-crock-green text-crock-green hover:bg-crock-green hover:text-white transition-all duration-300 font-semibold text-sm ${
+                  pathname === theSpotLink.href ? 'bg-crock-green text-white' : ''
+                }`}
+              >
+                {theSpotLink.name}
+              </Link>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: (navLinks.length + 1) * 0.1 }}
             >
               <Link
                 href="/contact"
@@ -171,6 +188,17 @@ const Navigation = () => {
                   {link.name}
                 </Link>
               ))}
+              {/* The Spot Café - Sister Company with distinct branding */}
+              <Link
+                href={theSpotLink.href}
+                onClick={handleClose}
+                className={`block text-crock-green hover:text-white transition-colors duration-300 py-3 px-4 rounded-lg border-2 border-crock-green hover:bg-crock-green text-lg font-semibold touch-manipulation active:bg-crock-green/80 mt-2 ${
+                  pathname === theSpotLink.href ? 'bg-crock-green text-white' : ''
+                }`}
+                aria-label="Navigate to The Spot Café"
+              >
+                {theSpotLink.name}
+              </Link>
               <Link
                 href="/contact"
                 onClick={handleClose}
