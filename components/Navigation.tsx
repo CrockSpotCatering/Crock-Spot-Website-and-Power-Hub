@@ -117,9 +117,7 @@ const Navigation = () => {
             >
               <Link
                 href={theSpotLink.href}
-                className={`px-4 py-1.5 rounded-full border-2 border-crock-green text-crock-green hover:bg-crock-green hover:text-white transition-all duration-300 font-semibold text-sm ${
-                  pathname === theSpotLink.href ? 'bg-crock-green text-white' : ''
-                }`}
+                className="px-4 py-1.5 rounded-full bg-crock-green text-white hover:bg-crock-green-dark transition-all duration-300 font-semibold text-sm"
               >
                 {theSpotLink.name}
               </Link>
@@ -133,7 +131,7 @@ const Navigation = () => {
                 href="/contact"
                 className="bg-crock-orange text-white px-6 py-2 rounded-full hover:bg-crock-orange-dark transition-all duration-300 font-semibold inline-flex items-center gap-2"
               >
-                <FaPhone className="text-sm" /> Get a Quote
+                <FaPhone className="text-sm" /> Get a Custom Quote
               </Link>
             </motion.div>
           </div>
@@ -192,9 +190,7 @@ const Navigation = () => {
               <Link
                 href={theSpotLink.href}
                 onClick={handleClose}
-                className={`block text-crock-green hover:text-white transition-colors duration-300 py-3 px-4 rounded-lg border-2 border-crock-green hover:bg-crock-green text-lg font-semibold touch-manipulation active:bg-crock-green/80 mt-2 ${
-                  pathname === theSpotLink.href ? 'bg-crock-green text-white' : ''
-                }`}
+                className="block bg-crock-green text-white hover:bg-crock-green-dark transition-colors duration-300 py-3 px-4 rounded-lg text-lg font-semibold touch-manipulation active:bg-crock-green/80 mt-2"
                 aria-label="Navigate to The Spot Café"
               >
                 {theSpotLink.name}
@@ -205,7 +201,7 @@ const Navigation = () => {
                 className="block bg-crock-orange text-white px-6 py-4 rounded-full hover:bg-crock-orange-dark transition-all duration-300 font-semibold text-center mt-4 text-lg touch-manipulation active:scale-95"
                 aria-label="Get a quote"
               >
-                <FaPhone className="inline mr-2" /> Get a Quote
+                <FaPhone className="inline mr-2" /> Get a Custom Quote
               </Link>
             </div>
           </motion.div>
