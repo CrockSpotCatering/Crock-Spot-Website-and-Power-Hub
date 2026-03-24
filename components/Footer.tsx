@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { FaFacebook, FaInstagram, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa';
 
 // Import content from JSON - editable via Power Hub CMS
@@ -16,10 +17,17 @@ const Footer = () => {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
           {/* Company Info */}
           <div className="space-y-4 col-span-2 md:col-span-1">
-            <h3 className="text-xl sm:text-2xl font-bold">
-              <span className="text-white">{company.name}</span>
-              <span className="text-crock-orange" style={{ fontStyle: 'italic' }}>{company.nameSuffix}</span>
-            </h3>
+            <Link href="/" className="inline-block">
+              <div className="bg-white rounded-xl px-4 py-2 shadow-lg inline-block hover:shadow-xl transition-shadow duration-300">
+                <Image
+                  src="/images/crock-spot-logo-new.png"
+                  alt="The Crock Spot"
+                  width={160}
+                  height={50}
+                  className="h-10 w-auto"
+                />
+              </div>
+            </Link>
             <p className="text-crock-gray-light text-xs sm:text-sm">
               {company.description}
             </p>

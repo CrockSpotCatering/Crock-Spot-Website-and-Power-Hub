@@ -78,13 +78,14 @@ const Navigation = () => {
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
+              className="bg-white rounded-xl px-3 py-1.5 shadow-lg hover:shadow-xl transition-shadow duration-300 ring-2 ring-crock-orange/20"
             >
               <Image
-                src="/images/crock-spot-logo-white.png"
+                src="/images/crock-spot-logo-new.png"
                 alt="The Crock Spot"
-                width={150}
-                height={50}
-                className="h-10 sm:h-12 w-auto"
+                width={140}
+                height={45}
+                className="h-8 sm:h-10 w-auto"
                 priority
               />
             </motion.div>

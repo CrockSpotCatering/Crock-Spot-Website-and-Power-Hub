@@ -113,7 +113,7 @@ const organizationSchema = {
   '@type': 'FoodEstablishment',
   name: 'The Crock Spot',
   url: 'https://thecrockspot.com',
-  logo: 'https://thecrockspot.com/images/crock-spot-logo.png',
+  logo: 'https://thecrockspot.com/images/crock-spot-logo-new.png',
   description:
     'Award-winning food truck catering company in Denver serving slow-cooked gourmet cuisine since 2010.',
   foundingDate: '2010',
