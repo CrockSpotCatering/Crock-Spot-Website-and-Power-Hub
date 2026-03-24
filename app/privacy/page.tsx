@@ -65,7 +65,7 @@ export default function Privacy() {
               <h2 className="text-2xl font-bold text-crock-dark">Contact Us</h2>
               <p className="text-crock-gray">
                 If you have questions about this privacy policy, please contact us at{' '}
-                <a href="mailto:steven@thecrockspot.com" className="text-crock-orange hover:underline">
+                <a href="mailto:steven@thecrockspot.com" target="_blank" rel="noopener noreferrer" className="text-crock-orange hover:underline">
                   steven@thecrockspot.com
                 </a>
               </p>

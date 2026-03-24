@@ -67,7 +67,7 @@ export default function TheSpot() {
                     <FaPhone /> {hero.phone}
                   </motion.button>
                 </Link>
-                <Link href={`mailto:${hero.email}`}>
+                <a href={`mailto:${hero.email}`} target="_blank" rel="noopener noreferrer">
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
@@ -75,7 +75,7 @@ export default function TheSpot() {
                   >
                     <FaEnvelope /> Email Us
                   </motion.button>
-                </Link>
+                </a>
               </div>
             </motion.div>
 
@@ -263,7 +263,7 @@ export default function TheSpot() {
                   <FaPhone /> {owner.phone}
                 </motion.button>
               </Link>
-              <Link href={`mailto:${owner.email}`}>
+              <a href={`mailto:${owner.email}`} target="_blank" rel="noopener noreferrer">
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
@@ -271,7 +271,7 @@ export default function TheSpot() {
                 >
                   <FaEnvelope /> {owner.email}
                 </motion.button>
-              </Link>
+              </a>
             </div>
           </motion.div>
         </div>

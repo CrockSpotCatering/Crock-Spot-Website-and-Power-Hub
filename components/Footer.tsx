@@ -66,6 +66,8 @@ const Footer = () => {
             <div className="space-y-2">
               <a
                 href={`mailto:${contact.email}`}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex items-center space-x-2 text-crock-gray-light hover:text-crock-orange transition-colors py-2 min-h-[44px]"
               >
                 <FaEnvelope className="flex-shrink-0" />

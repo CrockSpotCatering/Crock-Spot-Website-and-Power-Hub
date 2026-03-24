@@ -73,7 +73,7 @@ export default function Terms() {
               <h2 className="text-2xl font-bold text-crock-dark">Contact</h2>
               <p className="text-crock-gray">
                 For questions about these terms, please contact us at{' '}
-                <a href="mailto:steven@thecrockspot.com" className="text-crock-orange hover:underline">
+                <a href="mailto:steven@thecrockspot.com" target="_blank" rel="noopener noreferrer" className="text-crock-orange hover:underline">
                   steven@thecrockspot.com
                 </a>
               </p>
