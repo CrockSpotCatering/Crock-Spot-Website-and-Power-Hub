@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { Mulish } from 'next/font/google';
+import { Mulish, Pacifico } from 'next/font/google';
 import Script from 'next/script';
 import './globals.css';
 import Navigation from '@/components/Navigation';
@@ -9,6 +9,13 @@ const mulish = Mulish({
   subsets: ['latin'],
   weight: ['300', '400', '500', '600', '700', '800'],
   variable: '--font-muli',
+});
+
+// Script font for The Spot Café button - matches café logo aesthetic
+const pacifico = Pacifico({
+  subsets: ['latin'],
+  weight: '400',
+  variable: '--font-pacifico',
 });
 
 // Viewport configuration - Google Mobile Optimization Standards 2025
@@ -326,7 +333,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={mulish.className}>
+      <body className={`${mulish.className} ${pacifico.variable}`}>
         <Navigation />
         <main>{children}</main>
         <Footer />

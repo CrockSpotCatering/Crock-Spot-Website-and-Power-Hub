@@ -117,7 +117,7 @@ const Navigation = () => {
             >
               <Link
                 href={theSpotLink.href}
-                className="px-4 py-1.5 rounded-full bg-crock-green text-white hover:bg-crock-green-dark transition-all duration-300 font-semibold text-sm"
+                className="px-4 py-1.5 rounded-full bg-spot-burnt-orange text-white hover:bg-spot-burnt-orange-dark transition-all duration-300 font-cafe text-base tracking-wide"
               >
                 {theSpotLink.name}
               </Link>
@@ -190,7 +190,7 @@ const Navigation = () => {
               <Link
                 href={theSpotLink.href}
                 onClick={handleClose}
-                className="block bg-crock-green text-white hover:bg-crock-green-dark transition-colors duration-300 py-3 px-4 rounded-lg text-lg font-semibold touch-manipulation active:bg-crock-green/80 mt-2"
+                className="block bg-spot-burnt-orange text-white hover:bg-spot-burnt-orange-dark transition-colors duration-300 py-3 px-4 rounded-lg text-lg font-cafe tracking-wide touch-manipulation active:bg-spot-burnt-orange/80 mt-2"
                 aria-label="Navigate to The Spot Café"
               >
                 {theSpotLink.name}

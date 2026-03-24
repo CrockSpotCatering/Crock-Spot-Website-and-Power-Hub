@@ -15,6 +15,12 @@ const config: Config = {
           light: '#F9A94D',
           dark: '#D97D0E',
         },
+        // The Spot Café - burnt orange from logo
+        'spot-burnt-orange': {
+          DEFAULT: '#C65D24',
+          light: '#D97630',
+          dark: '#A84D1E',
+        },
         'crock-maroon': {
           DEFAULT: '#8C2D2E',
           light: '#A84445',
@@ -49,6 +55,7 @@ const config: Config = {
       fontFamily: {
         display: ['var(--font-gobold)', 'sans-serif'],
         body: ['var(--font-muli)', 'Mulish', 'sans-serif'],
+        cafe: ['var(--font-pacifico)', 'Pacifico', 'cursive'],
       },
       animation: {
         'fade-in': 'fadeIn 0.5s ease-in',
