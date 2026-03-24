@@ -132,9 +132,19 @@ export default function Menus() {
 
           {/* Bases */}
           <div className="mb-16">
-            <h3 className="text-2xl font-bold text-crock-dark mb-6 text-center">
-              {basesSection.emoji} {basesSection.title}
-            </h3>
+            <div className="flex flex-col items-center mb-6">
+              <div className="relative w-32 h-32 sm:w-40 sm:h-40 mb-4 rounded-full overflow-hidden shadow-lg ring-4 ring-crock-orange/30">
+                <Image
+                  src={basesSection.image}
+                  alt="Choose Your Base"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <h3 className="text-2xl font-bold text-crock-dark text-center">
+                {basesSection.title}
+              </h3>
+            </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4">
               {bases.map((item, index) => (
                 <motion.div
@@ -159,9 +169,19 @@ export default function Menus() {
 
           {/* Proteins */}
           <div className="mb-16">
-            <h3 className="text-2xl font-bold text-crock-dark mb-6 text-center">
-              {proteinsSection.emoji} {proteinsSection.title}
-            </h3>
+            <div className="flex flex-col items-center mb-6">
+              <div className="relative w-32 h-32 sm:w-40 sm:h-40 mb-4 rounded-full overflow-hidden shadow-lg ring-4 ring-crock-orange/30">
+                <Image
+                  src={proteinsSection.image}
+                  alt="Pick Your Protein"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <h3 className="text-2xl font-bold text-crock-dark text-center">
+                {proteinsSection.title}
+              </h3>
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {proteins.map((item, index) => (
                 <motion.div
@@ -200,9 +220,19 @@ export default function Menus() {
 
           {/* Sauces */}
           <div className="mb-16">
-            <h3 className="text-2xl font-bold text-crock-dark mb-6 text-center">
-              {saucesSection.emoji} {saucesSection.title}
-            </h3>
+            <div className="flex flex-col items-center mb-6">
+              <div className="relative w-32 h-32 sm:w-40 sm:h-40 mb-4 rounded-full overflow-hidden shadow-lg ring-4 ring-crock-orange/30">
+                <Image
+                  src={saucesSection.image}
+                  alt="Add Your Sauce"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <h3 className="text-2xl font-bold text-crock-dark text-center">
+                {saucesSection.title}
+              </h3>
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {sauces.map((item, index) => (
                 <motion.div
@@ -230,10 +260,22 @@ export default function Menus() {
 
           {/* Toppers */}
           <div>
-            <h3 className="text-2xl font-bold text-crock-dark mb-2 text-center">
-              {toppersSection.emoji} {toppersSection.title}
-            </h3>
-            <p className="text-center text-crock-gray mb-6">{toppersSection.note}</p>
+            <div className="flex flex-col items-center mb-6">
+              <div className="relative w-32 h-32 sm:w-40 sm:h-40 mb-4 rounded-full overflow-hidden shadow-lg ring-4 ring-crock-orange/30">
+                <video
+                  src={toppersSection.video}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
+              </div>
+              <h3 className="text-2xl font-bold text-crock-dark text-center">
+                {toppersSection.title}
+              </h3>
+              <p className="text-center text-crock-gray mt-2">{toppersSection.note}</p>
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
               {toppers.map((item, index) => (
                 <motion.div

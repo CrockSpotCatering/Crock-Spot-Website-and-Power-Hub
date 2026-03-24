@@ -12,20 +12,24 @@
   },
   "basesSection": {
     "title": "Step 1: Choose Your Base",
-    "emoji": "🍚"
+    "emoji": "🍚",
+    "image": "/images/steps/step-1-base.jpg"
   },
   "proteinsSection": {
     "title": "Step 2: Pick Your Protein",
-    "emoji": "🍖"
+    "emoji": "🍖",
+    "image": "/images/steps/step-2-protein.jpg"
   },
   "saucesSection": {
     "title": "Step 3: Add Your Sauce",
-    "emoji": "🥣"
+    "emoji": "🥣",
+    "image": "/images/steps/step-3-sauce.jpg"
   },
   "toppersSection": {
     "title": "Step 4: Top It Off",
     "emoji": "🥗",
-    "note": "We make toppers for any occasion or themes."
+    "note": "We make toppers for any occasion or themes.",
+    "video": "/images/steps/step-4-toppers.mp4"
   },
   "appetizersSection": {
     "headline": "Appetizers",
