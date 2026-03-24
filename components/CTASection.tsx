@@ -15,7 +15,7 @@ interface CTASectionProps {
 const CTASection = ({
   title = "Ready to Crock Your Event?",
   subtitle = "Let us bring our award-winning cuisine to your next event. From corporate lunches to dream weddings, we've got you covered.",
-  buttonText = "Get a Free Quote",
+  buttonText = "Get Your Free Custom Quote",
   buttonLink = "/contact",
   variant = 'orange',
 }: CTASectionProps) => {

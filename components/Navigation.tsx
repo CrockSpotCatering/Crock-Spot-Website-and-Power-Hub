@@ -132,7 +132,7 @@ const Navigation = () => {
                 href="/contact"
                 className="bg-crock-orange text-white px-6 py-2 rounded-full hover:bg-crock-orange-dark transition-all duration-300 font-semibold inline-flex items-center gap-2"
               >
-                <FaPhone className="text-sm" /> Get a Custom Quote
+                <FaPhone className="text-sm" /> Get Your Free Custom Quote
               </Link>
             </motion.div>
           </div>
@@ -202,7 +202,7 @@ const Navigation = () => {
                 className="block bg-crock-orange text-white px-6 py-4 rounded-full hover:bg-crock-orange-dark transition-all duration-300 font-semibold text-center mt-4 text-lg touch-manipulation active:scale-95"
                 aria-label="Get a quote"
               >
-                <FaPhone className="inline mr-2" /> Get a Custom Quote
+                <FaPhone className="inline mr-2" /> Get Your Free Custom Quote
               </Link>
             </div>
           </motion.div>
