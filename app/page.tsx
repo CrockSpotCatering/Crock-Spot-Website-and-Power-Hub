@@ -58,7 +58,7 @@ export default function Home() {
 
   // Hero carousel state
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const carouselImages = hero.carouselImages || [hero.backgroundImage];
+  const carouselImages = hero.carouselImages;
 
   // Auto-advance carousel every 5 seconds
   useEffect(() => {
