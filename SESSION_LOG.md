@@ -1,5 +1,61 @@
 # CrockSpot Session Log
 
+## March 24, 2026 - Session: Button Text Standardization & Email Link Fixes
+
+### What Was Done This Session
+
+#### 1. **Standardized All Quote Buttons**
+Updated all CTA buttons containing "quote" to use consistent text: **"Get Your Free Custom Quote"**
+
+**Files Updated:**
+| File | Location | Before | After |
+|------|----------|--------|-------|
+| `Navigation.tsx` | Desktop navbar button | "Get a Custom Quote" | "Get Your Free Custom Quote" |
+| `Navigation.tsx` | Mobile navbar button | "Get a Custom Quote" | "Get Your Free Custom Quote" |
+| `CTASection.tsx` | Default button text | "Get a Free Quote" | "Get Your Free Custom Quote" |
+| `home.json` | Hero primary CTA | "Get a Free Quote" | "Get Your Free Custom Quote" |
+| `catering.json` | Hero secondary CTA | "Get a Quote" | "Get Your Free Custom Quote" |
+
+**Note:** `ContactForm.tsx` submit button already had correct text - no change needed.
+
+#### 2. **Fixed Email Links to Open in New Windows**
+Added `target="_blank"` and `rel="noopener noreferrer"` to all mailto links so users stay on the page when clicking email buttons.
+
+**Files Updated:**
+| File | Link Type |
+|------|-----------|
+| `app/the-spot/page.tsx` | Hero "Email Us" button |
+| `app/the-spot/page.tsx` | Owner email button |
+| `components/Footer.tsx` | Footer email link |
+| `app/privacy/page.tsx` | Contact email text link |
+| `app/terms/page.tsx` | Contact email text link |
+
+### Commits This Session
+| Commit | Description |
+|--------|-------------|
+| `952a927` | Update all quote buttons to "Get Your Free Custom Quote" |
+| `3a89276` | Make all email links open in new window |
+
+### Files Changed
+| File | Changes |
+|------|---------|
+| `components/Navigation.tsx` | Updated 2 quote button texts |
+| `components/CTASection.tsx` | Updated default buttonText |
+| `content/home.json` | Updated hero ctaPrimary |
+| `content/catering.json` | Updated hero ctaSecondary |
+| `app/the-spot/page.tsx` | Changed Link to `<a>` with target="_blank" for 2 email buttons |
+| `components/Footer.tsx` | Added target="_blank" to email link |
+| `app/privacy/page.tsx` | Added target="_blank" to email link |
+| `app/terms/page.tsx` | Added target="_blank" to email link |
+
+### Git Status
+- ✅ All changes committed
+- ✅ All changes pushed to GitHub (CrockSpotCatering account)
+- ✅ Vercel auto-deployed
+- ✅ GitHub CLI active account: CrockSpotCatering
+
+---
+
 ## March 22, 2026 - Session: GoHighLevel Integration & Credential Management
 
 ### What Was Done This Session
@@ -347,6 +403,8 @@ Footer:
 - [x] ~~Test PDF upload in AI Assist on live site~~ ✅ DONE (March 19)
 - [x] ~~Connect contact forms to GoHighLevel~~ ✅ DONE (March 22)
 - [x] ~~Add persistent credential management~~ ✅ DONE (March 22)
+- [x] ~~Standardize quote button text across site~~ ✅ DONE (March 24)
+- [x] ~~Make email links open in new windows~~ ✅ DONE (March 24)
 - [ ] Add actual CrockSpot photos to replace Unsplash images
 - [ ] Re-enable GHL notification actions for real leads
 - [ ] Consider adding online ordering integration

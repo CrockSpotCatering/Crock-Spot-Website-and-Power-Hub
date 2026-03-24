@@ -43,7 +43,7 @@ Then read in this order:
 | `/power-hub/dashboard/media` | Upload/manage images | |
 | `/power-hub/dashboard/ai` | AI writing (PDF/Word upload) | |
 
-### JSON Content Files (13 total)
+### JSON Content Files (15 total)
 All pages import from `/content/*.json`:
 | File | Purpose |
 |------|---------|
@@ -60,6 +60,8 @@ All pages import from `/content/*.json`:
 | `privacy.json` | Privacy policy |
 | `terms.json` | Terms of service |
 | `documents.json` | AI Assist brand documents |
+| `settings.json` | AI provider & API keys |
+| `credentials.json` | Power Hub login credentials |
 
 ### Mobile Optimization (Google 2025)
 Implemented:
@@ -99,7 +101,7 @@ Implemented:
 - Purple: `#614B8A`
 - Dark Purple: `#2F2744` (backgrounds)
 
-### Current Status (March 19, 2026)
+### Current Status (March 24, 2026)
 **Website:**
 - All pages complete and styled
 - Corporate catering focus (not food trucks)
@@ -107,13 +109,16 @@ Implemented:
 - "The Spot" sister company page added
 - Full menu with rich descriptions
 - Government capabilities with vendor credentials
+- All quote buttons standardized to "Get Your Free Custom Quote"
+- All email links open in new windows (users stay on page)
 
 **CMS:**
 - Power Hub CMS complete
 - Content editor, Media Library, AI Assist
-- ALL pages wired to JSON (13 content files)
+- ALL pages wired to JSON (15 content files)
 - Login: `crockspot` / `crockspot2026`
 - PDF/DOCX upload working (uses `unpdf` + `mammoth`)
+- GoHighLevel integration for contact forms
 
 **Infrastructure:**
 - All changes committed and pushed
