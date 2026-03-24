@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
+import Image from 'next/image';
 import {
   FaTruck,
   FaUtensils,
@@ -345,9 +346,27 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.15 }}
-                className="text-center"
+                className="text-center flex flex-col items-center"
               >
-                <div className="text-4xl sm:text-5xl mb-3 sm:mb-4">{bowlStepEmojis[item.icon] || '🍽️'}</div>
+                <div className="relative w-24 h-24 sm:w-32 sm:h-32 mb-3 sm:mb-4 rounded-full overflow-hidden shadow-lg ring-4 ring-crock-orange/30">
+                  {item.video ? (
+                    <video
+                      src={item.video}
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      className="absolute inset-0 w-full h-full object-cover"
+                    />
+                  ) : (
+                    <Image
+                      src={item.image || ''}
+                      alt={item.title}
+                      fill
+                      className="object-cover"
+                    />
+                  )}
+                </div>
                 <div className="bg-crock-orange text-white w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center font-bold mx-auto mb-2 sm:mb-3 text-sm sm:text-base">
                   {item.step}
                 </div>

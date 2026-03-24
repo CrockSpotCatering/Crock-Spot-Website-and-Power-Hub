@@ -69,25 +69,29 @@
         "step": "1",
         "title": "Choose Your Base",
         "items": "Sesame Rice, Quinoa, Couscous, Barley, Potatoes",
-        "icon": "bowl"
+        "icon": "bowl",
+        "image": "/images/steps/step-1-base.jpg"
       },
       {
         "step": "2",
         "title": "Pick Your Protein",
         "items": "Pulled Pork, Chicken, Beef, Duck, Lamb, Vegan Options",
-        "icon": "meat"
+        "icon": "meat",
+        "image": "/images/steps/step-2-protein.jpg"
       },
       {
         "step": "3",
         "title": "Add Your Sauce",
         "items": "Chimichurri, Tzatziki, Miso Honey, Sriracha Cream",
-        "icon": "sauce"
+        "icon": "sauce",
+        "image": "/images/steps/step-3-sauce.jpg"
       },
       {
         "step": "4",
         "title": "Top It Off",
         "items": "Corn Salad, Asian Slaw, Garden Gravy & More",
-        "icon": "salad"
+        "icon": "salad",
+        "video": "/images/steps/step-4-toppers.mp4"
       }
     ]
   },
