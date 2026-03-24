@@ -90,6 +90,11 @@
       "title": "Recurring Events",
       "description": "Weekly lunches, monthly meetings",
       "icon": "calendar"
+    },
+    {
+      "title": "Celebration of Life Events",
+      "description": "Honor loved ones with a meaningful gathering",
+      "icon": "dove"
     }
   ],
   "process": {

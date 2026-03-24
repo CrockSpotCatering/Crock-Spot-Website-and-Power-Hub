@@ -14,6 +14,7 @@ import {
   FaBirthdayCake,
   FaMountain,
   FaUsers,
+  FaDove,
 } from 'react-icons/fa';
 import CTASection from '@/components/CTASection';
 import ContactForm from '@/components/ContactForm';
@@ -36,6 +37,7 @@ const eventIcons: Record<string, React.ReactNode> = {
   'users': <FaUsers />,
   'mountain': <FaMountain />,
   'calendar': <FaCalendar />,
+  'dove': <FaDove />,
 };
 
 export default function Catering() {
