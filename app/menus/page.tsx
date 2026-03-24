@@ -424,7 +424,7 @@ export default function Menus() {
             className="text-center mb-12"
           >
             <h2 className="text-4xl font-bold mb-4">
-              BYO <span className="text-crock-orange">Themed Bars</span>
+              <span className="text-crock-orange">Themed Bars</span>
             </h2>
             <p className="text-crock-gray-light">{themedBarsSection.subheadline}</p>
           </motion.div>

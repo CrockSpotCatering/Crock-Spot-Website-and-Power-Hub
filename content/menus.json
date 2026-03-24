@@ -54,7 +54,7 @@
     "/images/appetizers/pulled-pork-sliders.webp"
   ],
   "themedBarsSection": {
-    "headline": "BYO Themed Bars",
+    "headline": "Themed Bars",
     "subheadline": "Interactive food stations for your guests"
   },
   "breakfastSection": {
@@ -348,7 +348,10 @@
     { "name": "Tostada Bar", "description": "Crispy tostadas with all the fixings" },
     { "name": "Nacho Bar", "description": "Loaded nachos your way" },
     { "name": "Chili Bar", "description": "Hearty chili with all the toppings" },
-    { "name": "Mac n Cheese Bar", "description": "Creamy mac with premium toppings" }
+    { "name": "Mac n Cheese Bar", "description": "Creamy mac with premium toppings" },
+    { "name": "Waffle Bar", "description": "Fresh waffles with sweet and savory toppings" },
+    { "name": "Pancake Bar", "description": "Fluffy pancakes with all the fixings" },
+    { "name": "Pasta Bar", "description": "Build your own pasta with choice of sauces and toppings" }
   ],
   "breakfast": [
     { "name": "English Style Buffet", "description": "Eggs, sausage, roasted potatoes, beans, mushrooms", "image": "https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" },
