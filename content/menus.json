@@ -30,8 +30,25 @@
   "appetizersSection": {
     "headline": "Appetizers",
     "subheadline": "Custom Appetizers Tailored Just for You",
-    "intro": "We're passionate about personalizing our appetizers to perfectly match your event — and we know from experience that these crowd-pleasing bites always deliver big smiles."
+    "intro": "We're passionate about personalizing our appetizers to perfectly match your event — and we know from experience that these crowd-pleasing bites always deliver big smiles.",
+    "galleryTitle": "Our Appetizers in Action"
   },
+  "appetizerGallery": [
+    "/images/appetizers/appetizer-1.jpg",
+    "/images/appetizers/appetizer-2.jpg",
+    "/images/appetizers/appetizer-3.jpg",
+    "/images/appetizers/appetizer-4.jpg",
+    "/images/appetizers/appetizer-5.jpg",
+    "/images/appetizers/appetizer-6.jpg",
+    "/images/appetizers/appetizer-7.jpg",
+    "/images/appetizers/appetizer-8.jpg",
+    "/images/appetizers/appetizer-9.jpg",
+    "/images/appetizers/appetizer-10.jpg",
+    "/images/appetizers/appetizer-11.jpg",
+    "/images/appetizers/crock-pockets.jpeg",
+    "/images/appetizers/nachos.jpeg",
+    "/images/appetizers/pulled-pork-sliders.webp"
+  ],
   "themedBarsSection": {
     "headline": "BYO Themed Bars",
     "subheadline": "Interactive food stations for your guests"

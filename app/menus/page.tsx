@@ -1,7 +1,9 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { FaLeaf, FaBreadSlice, FaStar, FaSnowflake, FaGlassWhiskey, FaCookie } from 'react-icons/fa';
+import { useState } from 'react';
+import Image from 'next/image';
+import { motion, AnimatePresence } from 'framer-motion';
+import { FaLeaf, FaBreadSlice, FaStar, FaSnowflake, FaGlassWhiskey, FaCookie, FaTimes } from 'react-icons/fa';
 import CTASection from '@/components/CTASection';
 import ContactForm from '@/components/ContactForm';
 
@@ -22,6 +24,7 @@ export default function Menus() {
     toppers,
     appetizersSection,
     appetizers,
+    appetizerGallery,
     themedBarsSection,
     themedBars,
     breakfastSection,
@@ -35,6 +38,9 @@ export default function Menus() {
     cta,
     finalCta
   } = menusContent;
+
+  // Lightbox state for appetizer gallery
+  const [lightboxImage, setLightboxImage] = useState<string | null>(null);
 
   const TagBadge = ({ tag }: { tag: string }) => {
     const colors: Record<string, string> = {
@@ -293,8 +299,78 @@ export default function Menus() {
               </motion.div>
             ))}
           </div>
+
+          {/* Appetizer Photo Gallery */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mt-16"
+          >
+            <h3 className="text-2xl font-bold text-crock-dark text-center mb-8">
+              {appetizersSection.galleryTitle}
+            </h3>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
+              {appetizerGallery.map((image, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.05 }}
+                  whileHover={{ scale: 1.05 }}
+                  onClick={() => setLightboxImage(image)}
+                  className="relative aspect-square rounded-xl overflow-hidden cursor-pointer shadow-md hover:shadow-xl transition-shadow"
+                >
+                  <Image
+                    src={image}
+                    alt={`Appetizer photo ${index + 1}`}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 25vw, 20vw"
+                  />
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
         </div>
       </section>
+
+      {/* Lightbox */}
+      <AnimatePresence>
+        {lightboxImage && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setLightboxImage(null)}
+            className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4 cursor-pointer"
+          >
+            <button
+              onClick={() => setLightboxImage(null)}
+              className="absolute top-4 right-4 text-white text-3xl hover:text-crock-orange transition-colors"
+              aria-label="Close lightbox"
+            >
+              <FaTimes />
+            </button>
+            <motion.div
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              className="relative max-w-5xl max-h-[85vh] w-full h-full"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <Image
+                src={lightboxImage}
+                alt="Appetizer enlarged view"
+                fill
+                className="object-contain"
+                sizes="100vw"
+              />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Themed Bars */}
       <section className="py-20 bg-crock-dark text-white">
