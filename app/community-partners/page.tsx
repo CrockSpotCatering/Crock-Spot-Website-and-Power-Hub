@@ -213,7 +213,7 @@ export default function CommunityPartners() {
         </div>
       </section>
 
-      {/* Community Involvement */}
+      {/* Community Involvement - Hidden until program is developed
       <section className="py-20 bg-crock-dark text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
@@ -247,6 +247,7 @@ export default function CommunityPartners() {
           </div>
         </div>
       </section>
+      */}
 
       {/* Become a Partner */}
       <section className="py-20 bg-white">
