@@ -23,11 +23,6 @@
         "icon": "heart",
         "type": "Non-Profits",
         "description": "Supporting local charities and community organizations with special pricing."
-      },
-      {
-        "icon": "calendar",
-        "type": "Farmers Markets",
-        "description": "Where it all began! Still serving our community at local markets."
       }
     ]
   },
