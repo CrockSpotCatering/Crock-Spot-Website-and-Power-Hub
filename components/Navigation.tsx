@@ -82,7 +82,7 @@ const Navigation = () => {
             >
               <Image
                 src="/images/crock-spot-logo-new.png"
-                alt="The Crock Spot"
+                alt="Crock Spot"
                 width={140}
                 height={45}
                 className="h-8 sm:h-10 w-auto"

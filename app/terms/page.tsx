@@ -30,7 +30,7 @@ export default function Terms() {
             <div>
               <h2 className="text-2xl font-bold text-crock-dark">Catering Services</h2>
               <p className="text-crock-gray">
-                The Crock Spot provides food truck catering, buffet-style catering, and related food services for events throughout the Denver metro area and Colorado. All services are subject to availability and confirmation.
+                Crock Spot provides food truck catering, buffet-style catering, and related food services for events throughout the Denver metro area and Colorado. All services are subject to availability and confirmation.
               </p>
             </div>
 
@@ -65,7 +65,7 @@ export default function Terms() {
             <div>
               <h2 className="text-2xl font-bold text-crock-dark">Liability</h2>
               <p className="text-crock-gray">
-                The Crock Spot carries comprehensive liability insurance. However, we are not responsible for injuries or damages caused by third parties, venue conditions, or circumstances beyond our control.
+                Crock Spot carries comprehensive liability insurance. However, we are not responsible for injuries or damages caused by third parties, venue conditions, or circumstances beyond our control.
               </p>
             </div>
 

@@ -36,7 +36,7 @@ export default function Dashboard() {
         <div className="bg-gradient-to-r from-[#F49220] to-[#8C2D2E] rounded-2xl p-6 mb-8 text-white shadow-lg">
           <div className="flex items-center justify-between">
             <div>
-              <h2 className="text-2xl font-bold">The Crock Spot Power Hub</h2>
+              <h2 className="text-2xl font-bold">Crock Spot Power Hub</h2>
               <p className="text-white/80 mt-1">Manage your website content, media, and more!</p>
             </div>
             <div className="text-6xl opacity-20">

@@ -49,7 +49,7 @@
     "Award-Winning Food"
   ],
   "whyChooseUs": {
-    "headline": "Why Choose The Crock Spot?",
+    "headline": "Why Choose Crock Spot?",
     "description": "With 15+ years serving Denver's top companies and organizations, we've perfected the art of event catering. Whether buffet-style elegance or mobile food truck fun, your food is always fresh, cooked on-site, and fully customizable to your event's needs.",
     "image": "/images/why-choose-us.jpg"
   },
@@ -118,7 +118,7 @@
   },
   "finalCta": {
     "headline": "For Those About to Crock, We Salute You",
-    "description": "Join the thousands of happy customers who've trusted The Crock Spot for their most important events.",
+    "description": "Join the thousands of happy customers who've trusted Crock Spot for their most important events.",
     "buttonText": "Get Your Free Custom Quote"
   }
 }

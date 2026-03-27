@@ -21,7 +21,7 @@ const Footer = () => {
               <div className="bg-white rounded-xl px-4 py-2 shadow-lg inline-block hover:shadow-xl transition-shadow duration-300">
                 <Image
                   src="/images/crock-spot-logo-new.png"
-                  alt="The Crock Spot"
+                  alt="Crock Spot"
                   width={160}
                   height={50}
                   className="h-10 w-auto"
@@ -115,7 +115,7 @@ const Footer = () => {
 
         {/* Copyright */}
         <div className="border-t border-crock-gray/30 mt-4 pt-6 text-center text-crock-gray-light text-sm safe-bottom">
-          <p>&copy; {currentYear} The Crock Spot. All rights reserved.</p>
+          <p>&copy; {currentYear} Crock Spot. All rights reserved.</p>
           <p className="mt-2">
             {copyright.foundersText}
           </p>

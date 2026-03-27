@@ -2,13 +2,13 @@
   "hero": {
     "headline": "Our Story",
     "tagline": "Serving the Denver Metro area (and beyond) Colorado Style Rice Bowls since 2010",
-    "subheadline": "Born in May 2010 under a humble 10x10 tent at the Cherry Creek Farmers Market, The Crock Spot has become a Mile High City icon.",
+    "subheadline": "Born in May 2010 under a humble 10x10 tent at the Cherry Creek Farmers Market, Crock Spot has become a Mile High City icon.",
     "backgroundImage": "/images/crockspot-truck.jpg"
   },
   "founders": {
     "headline": "Meet the Founders",
-    "description": "Born in May 2010 under a humble 10x10 tent at the Cherry Creek Farmers Market, The Crock Spot was founded by husband-and-wife team Steven and Mandy with one mission: deliver gourmet, fast-casual meals that are 100% customizable to every guest's taste.",
-    "story": "From the very first day, customers raved about our fresh, healthy, mix-and-match rice bowls — launching us into Denver's must-try food scene. Over 15 years strong, The Crock Spot has become a Mile High City icon.",
+    "description": "Born in May 2010 under a humble 10x10 tent at the Cherry Creek Farmers Market, Crock Spot was founded by husband-and-wife team Steven and Mandy with one mission: deliver gourmet, fast-casual meals that are 100% customizable to every guest's taste.",
+    "story": "From the very first day, customers raved about our fresh, healthy, mix-and-match rice bowls — launching us into Denver's must-try food scene. Over 15 years strong, Crock Spot has become a Mile High City icon.",
     "expanded": "Today, we're Denver's go-to for unforgettable catering — serving hundreds of corporate lunches, dream weddings, concerts, festivals, and large events across Colorado. Our proven ability to feed crowds quickly and deliciously, paired with food that truly CROCKS, makes every gathering extraordinary.",
     "quote": "Our guiding mission has stayed the same since day one: make people happy with amazing food — and have a blast doing it!",
     "quoteAuthor": "Steven & Mandy, Founders",
@@ -17,7 +17,7 @@
   "cateringStyle": {
     "headline": "Our Signature Catering Style",
     "subheadline": "Full-Service Buffets & Mobile Food Truck Options",
-    "intro": "At The Crock Spot, we've built our reputation on delivering exceptional catering for corporate events, weddings, and private gatherings across Colorado — serving fresh, fully customizable cuisine that wows every guest.",
+    "intro": "At Crock Spot, we've built our reputation on delivering exceptional catering for corporate events, weddings, and private gatherings across Colorado — serving fresh, fully customizable cuisine that wows every guest.",
     "history": "Our journey began at Cherry Creek Farmers Market in 2010, where we earned loyal fans with our healthy, gourmet fast-casual concept. With the addition of our trusted Field Marshall (and now partner) Peter, we expanded rapidly — growing into Denver's go-to corporate caterer and event specialists.",
     "styles": [
       {
@@ -34,7 +34,7 @@
   "community": {
     "headline": "Our Community",
     "subheadline": "Making Colorado Happy, One Bowl at a Time",
-    "description": "Steven and Mandy are incredibly proud of the journey they've built from that first farmers market tent to becoming a beloved Colorado staple. The Crock Spot has delighted thousands of happy customers and played a starring role in hundreds of unforgettable special occasions — from intimate gatherings to massive celebrations across the state.",
+    "description": "Steven and Mandy are incredibly proud of the journey they've built from that first farmers market tent to becoming a beloved Colorado staple. Crock Spot has delighted thousands of happy customers and played a starring role in hundreds of unforgettable special occasions — from intimate gatherings to massive celebrations across the state.",
     "future": "Year after year, our ever-growing fan base inspires us to keep pushing forward. Alongside our dedicated team of Crock Stars, we're excited for new adventures, continued growth, and fresh ways to bring joy through our fresh, customizable rustic rice bowls.",
     "callToAction": "Join the Crock Spot community today! Contact us to cater your next special occasion, or track down our trucks on the streets of Colorado — come say hello, customize your perfect bowl, and get your CROCK on!"
   },
@@ -116,7 +116,7 @@
   ],
   "awardsSection": {
     "headline": "Awards & Recognition",
-    "intro": "Over 15 years strong, The Crock Spot has earned top honors including:"
+    "intro": "Over 15 years strong, Crock Spot has earned top honors including:"
   },
   "awards": [
     {
@@ -140,7 +140,7 @@
   ],
   "cta": {
     "headline": "Ready to Elevate Your Next Event?",
-    "description": "Get your free custom quote today and discover why Denver trusts The Crock Spot for fresh, rustic rice bowls and fully personalized menus that wow every guest."
+    "description": "Get your free custom quote today and discover why Denver trusts Crock Spot for fresh, rustic rice bowls and fully personalized menus that wow every guest."
   },
   "finalCta": {
     "headline": "Get Your CROCK On!",

@@ -41,7 +41,7 @@ export default function Sidebar() {
           </div>
           <div>
             <h1 className="font-bold text-lg">Power Hub</h1>
-            <p className="text-xs text-white/60">The Crock Spot</p>
+            <p className="text-xs text-white/60">Crock Spot</p>
           </div>
         </Link>
       </div>

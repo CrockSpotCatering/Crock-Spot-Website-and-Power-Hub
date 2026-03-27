@@ -32,8 +32,8 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL('https://thecrockspot.com'),
   title: {
-    default: 'The Crock Spot - Denver\'s Premier Event Caterer | Corporate Catering & Weddings',
-    template: '%s | The Crock Spot',
+    default: 'Crock Spot - Denver\'s Premier Event Caterer | Corporate Catering & Weddings',
+    template: '%s | Crock Spot',
   },
   description:
     'Denver\'s award-winning event caterer for corporate events, weddings, and private gatherings. Customizable gourmet rice bowls, buffet service, and food truck catering. 15+ years serving Colorado.',
@@ -53,10 +53,10 @@ export const metadata: Metadata = {
   ],
   authors: [
     { name: 'Steven & Mandy' },
-    { name: 'The Crock Spot Team' },
+    { name: 'Crock Spot Team' },
   ],
-  creator: 'The Crock Spot',
-  publisher: 'The Crock Spot',
+  creator: 'Crock Spot',
+  publisher: 'Crock Spot',
   formatDetection: {
     email: false,
     address: false,
@@ -69,8 +69,8 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: 'https://thecrockspot.com',
-    siteName: 'The Crock Spot',
-    title: 'The Crock Spot - Denver\'s Premier Event Caterer',
+    siteName: 'Crock Spot',
+    title: 'Crock Spot - Denver\'s Premier Event Caterer',
     description:
       'Award-winning catering for corporate events, weddings, and private gatherings. Customizable gourmet rice bowls and buffet service. Serving Colorado since 2010.',
     images: [
@@ -78,13 +78,13 @@ export const metadata: Metadata = {
         url: '/images/hero-bowl.jpg',
         width: 1200,
         height: 630,
-        alt: 'The Crock Spot - Award-Winning Event Catering',
+        alt: 'Crock Spot - Award-Winning Event Catering',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'The Crock Spot - Denver\'s Premier Event Caterer',
+    title: 'Crock Spot - Denver\'s Premier Event Caterer',
     description:
       'Award-winning catering for corporate events, weddings, and private gatherings. Customizable gourmet cuisine.',
     images: ['/images/hero-bowl.jpg'],
@@ -103,7 +103,7 @@ export const metadata: Metadata = {
   appleWebApp: {
     capable: true,
     statusBarStyle: 'default',
-    title: 'The Crock Spot',
+    title: 'Crock Spot',
   },
 };
 
@@ -111,7 +111,7 @@ export const metadata: Metadata = {
 const organizationSchema = {
   '@context': 'https://schema.org',
   '@type': 'FoodEstablishment',
-  name: 'The Crock Spot',
+  name: 'Crock Spot',
   url: 'https://thecrockspot.com',
   logo: 'https://thecrockspot.com/images/crock-spot-logo-new.png',
   description:
@@ -176,7 +176,7 @@ const serviceSchema = {
         'Professional catering for corporate events, team lunches, and business gatherings. Serve 100+ guests per hour with customizable menus.',
       provider: {
         '@type': 'Organization',
-        name: 'The Crock Spot',
+        name: 'Crock Spot',
       },
       serviceType: 'Corporate Catering',
     },
@@ -188,7 +188,7 @@ const serviceSchema = {
         'Elegant buffet presentations with signature slow-cooked proteins, bases, sauces, and toppings. Perfect for weddings and formal occasions.',
       provider: {
         '@type': 'Organization',
-        name: 'The Crock Spot',
+        name: 'Crock Spot',
       },
       serviceType: 'Buffet Catering',
     },
@@ -200,7 +200,7 @@ const serviceSchema = {
         'Design specialty bowls or themed bars for your special day. Memorable food experiences for you and your guests.',
       provider: {
         '@type': 'Organization',
-        name: 'The Crock Spot',
+        name: 'Crock Spot',
       },
       serviceType: 'Wedding Catering',
     },
@@ -212,7 +212,7 @@ const serviceSchema = {
         'On-site food truck catering for outdoor events and festivals. Fresh, customizable rice bowls served directly from our mobile kitchen.',
       provider: {
         '@type': 'Organization',
-        name: 'The Crock Spot',
+        name: 'Crock Spot',
       },
       serviceType: 'Food Truck Catering',
     },
@@ -226,7 +226,7 @@ const faqSchema = {
   mainEntity: [
     {
       '@type': 'Question',
-      name: 'What makes The Crock Spot different from other caterers?',
+      name: 'What makes Crock Spot different from other caterers?',
       acceptedAnswer: {
         '@type': 'Answer',
         text: 'Our food truck advantage means your food is cooked fresh on-site and never has to be bagged, boxed, or reheated. Plus, our quick-serve concept means guests are served in 25 seconds or less!',
@@ -263,13 +263,13 @@ const faqSchema = {
 const websiteSchema = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
-  name: 'The Crock Spot',
+  name: 'Crock Spot',
   url: 'https://thecrockspot.com',
   description:
     'Award-winning food truck catering company in Denver. Slow cooked gourmet cuisine for events, weddings, and corporate catering.',
   publisher: {
     '@type': 'Organization',
-    name: 'The Crock Spot',
+    name: 'Crock Spot',
   },
 };
 

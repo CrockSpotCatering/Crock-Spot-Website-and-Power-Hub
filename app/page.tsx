@@ -256,8 +256,8 @@ export default function Home() {
               transition={{ duration: 0.6 }}
             >
               <h2 className="text-4xl md:text-5xl font-bold text-crock-dark mb-6">
-                {whyChooseUs.headline.split('The Crock Spot')[0]}
-                <span className="text-crock-orange">The Crock Spot?</span>
+                {whyChooseUs.headline.split('Crock Spot')[0]}
+                <span className="text-crock-orange">Crock Spot?</span>
               </h2>
               <p className="text-lg text-crock-gray mb-8">
                 {whyChooseUs.description}

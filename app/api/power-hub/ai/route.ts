@@ -36,7 +36,7 @@ export async function POST(request: Request): Promise<NextResponse> {
     }
 
     // Build system prompt with optional brand context
-    let systemPrompt = `You are a helpful AI assistant for The Crock Spot, a Denver-based gourmet food truck catering company. You help users improve, edit, and create website content. Be concise and practical. Output only the improved content without explanations unless asked.`;
+    let systemPrompt = `You are a helpful AI assistant for Crock Spot, a Denver-based gourmet food truck catering company. You help users improve, edit, and create website content. Be concise and practical. Output only the improved content without explanations unless asked.`;
 
     if (brandContext) {
       systemPrompt += `\n\nBrand Guidelines:\n${brandContext}`;

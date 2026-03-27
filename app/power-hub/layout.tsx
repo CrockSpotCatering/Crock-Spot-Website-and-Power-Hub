@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import './power-hub.css';
 
 export const metadata: Metadata = {
-  title: 'Power Hub | The Crock Spot',
+  title: 'Power Hub | Crock Spot',
   description: 'CrockSpot Power Hub - Content Management System',
   robots: {
     index: false,

@@ -19,7 +19,7 @@ export default function SettingsPage() {
   const [storedPassword, setStoredPassword] = useState('');
 
   // Site settings
-  const [siteName, setSiteName] = useState('The Crock Spot');
+  const [siteName, setSiteName] = useState('Crock Spot');
   const [siteTagline, setSiteTagline] = useState('Let Us Crock Your World!');
   const [contactEmail, setContactEmail] = useState('steven@thecrockspot.com');
 
@@ -49,7 +49,7 @@ export default function SettingsPage() {
     if (savedSettings) {
       try {
         const settings = JSON.parse(savedSettings);
-        setSiteName(settings.siteName || 'The Crock Spot');
+        setSiteName(settings.siteName || 'Crock Spot');
         setSiteTagline(settings.siteTagline || 'Let Us Crock Your World!');
         setContactEmail(settings.contactEmail || 'steven@thecrockspot.com');
       } catch {
