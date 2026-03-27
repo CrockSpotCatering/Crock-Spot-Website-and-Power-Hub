@@ -35,6 +35,7 @@ export default function GovernmentCapabilities() {
   const {
     hero,
     vendorCredentials,
+    pastPerformance,
     capabilities,
     missionCritical,
     serviceTypes,
@@ -156,6 +157,127 @@ export default function GovernmentCapabilities() {
               </p>
             </div>
           </motion.div>
+        </div>
+      </section>
+
+      {/* Past Performance Section */}
+      <section className="py-20 bg-gradient-to-b from-crock-dark to-crock-purple/90">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+              Crock Spot <span className="text-crock-orange">Past Performance</span>
+            </h2>
+            <p className="text-crock-gray-light text-lg mb-6">
+              {pastPerformance.subtitle}
+            </p>
+            <p className="text-white/80 max-w-3xl mx-auto">
+              {pastPerformance.intro}
+            </p>
+          </motion.div>
+
+          {/* Total Meals Served Stat */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <div className="inline-block bg-crock-orange/20 border-2 border-crock-orange rounded-2xl px-12 py-6">
+              <p className="text-5xl md:text-6xl font-bold text-crock-orange">{pastPerformance.totalMeals}</p>
+              <p className="text-white text-lg mt-2">{pastPerformance.totalMealsLabel}</p>
+            </div>
+          </motion.div>
+
+          {/* Contract Cards Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {pastPerformance.contracts.map((contract, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className={`rounded-xl overflow-hidden shadow-lg ${
+                  contract.type === 'emergency'
+                    ? 'bg-gradient-to-br from-red-600/20 to-crock-orange/20 border-2 border-red-500/50'
+                    : contract.type === 'recent'
+                    ? 'bg-gradient-to-br from-crock-green/20 to-crock-green/10 border-2 border-crock-green/50'
+                    : 'bg-white/10 border border-white/20'
+                }`}
+              >
+                {/* Contract Header */}
+                <div className={`px-5 py-3 ${
+                  contract.type === 'emergency'
+                    ? 'bg-red-600/30'
+                    : contract.type === 'recent'
+                    ? 'bg-crock-green/30'
+                    : 'bg-crock-orange/20'
+                }`}>
+                  <div className="flex items-center justify-between">
+                    <h3 className="font-bold text-white">{contract.client}</h3>
+                    {contract.type === 'recent' && (
+                      <span className="text-xs bg-crock-green text-white px-2 py-1 rounded-full">Recent</span>
+                    )}
+                    {contract.type === 'emergency' && (
+                      <span className="text-xs bg-red-600 text-white px-2 py-1 rounded-full">Emergency</span>
+                    )}
+                  </div>
+                  {contract.contractNumber && (
+                    <p className="text-xs font-mono text-crock-orange mt-1">Contract: {contract.contractNumber}</p>
+                  )}
+                </div>
+
+                {/* Contract Details */}
+                <div className="p-5">
+                  <div className="space-y-3">
+                    <div className="flex items-start gap-2">
+                      <FaBuilding className="text-crock-orange mt-1 flex-shrink-0" size={14} />
+                      <span className="text-white/90 text-sm">{contract.location}</span>
+                    </div>
+
+                    <div className="flex items-center gap-2">
+                      <FaClock className="text-crock-orange flex-shrink-0" size={14} />
+                      <span className="text-white/90 text-sm">{contract.date}</span>
+                    </div>
+
+                    {contract.duration && (
+                      <div className="flex items-center gap-2">
+                        <FaFlag className="text-crock-orange flex-shrink-0" size={14} />
+                        <span className="text-white/90 text-sm">{contract.duration}</span>
+                      </div>
+                    )}
+
+                    {contract.mealTypes && (
+                      <div className="flex items-center gap-2">
+                        <FaLeaf className="text-crock-orange flex-shrink-0" size={14} />
+                        <span className="text-white/90 text-sm">{contract.mealTypes}</span>
+                      </div>
+                    )}
+
+                    {contract.personnel && (
+                      <div className="flex items-center gap-2">
+                        <FaUsers className="text-crock-orange flex-shrink-0" size={14} />
+                        <span className="text-white/90 text-sm">{contract.personnel}</span>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Meals Badge */}
+                  <div className="mt-4 pt-4 border-t border-white/10">
+                    <div className="flex items-center justify-between">
+                      <span className="text-crock-gray-light text-sm">Meals Served</span>
+                      <span className="text-2xl font-bold text-crock-orange">{contract.meals}</span>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 

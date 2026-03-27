@@ -28,6 +28,81 @@
       "description": "Department of Defense contractor identification"
     }
   },
+  "pastPerformance": {
+    "title": "Crock Spot Past Performance",
+    "subtitle": "Proven track record with government agencies and military installations",
+    "intro": "15+ years owning and operating a Denver-based food service business. Catering for large companies to small businesses. Known for high quality and thoughtful food, approachable price point, and ability to serve many people quickly.",
+    "totalMeals": "4,000+",
+    "totalMealsLabel": "Government Meals Served",
+    "contracts": [
+      {
+        "client": "AmeriCorps",
+        "location": "Aurora Office",
+        "meals": "536+",
+        "date": "February 2026",
+        "type": "recent"
+      },
+      {
+        "client": "Dept of the Army",
+        "contractNumber": "W912LC24P007",
+        "location": "Watkins Armory",
+        "meals": "529+",
+        "date": "March 2024",
+        "type": "contract"
+      },
+      {
+        "client": "Dept of the Army",
+        "contractNumber": "W912LC24P008",
+        "location": "Aurora Armory",
+        "meals": "615+",
+        "date": "March 2024 – Sept 2024",
+        "type": "contract"
+      },
+      {
+        "client": "Dept of the Army",
+        "contractNumber": "W912LC23P0016",
+        "location": "Ft Collins Armory",
+        "meals": "560+",
+        "date": "May 2023 – Aug 2023",
+        "type": "contract"
+      },
+      {
+        "client": "Dept of the Army",
+        "contractNumber": "W912LC23P0018",
+        "location": "Aurora Armory",
+        "meals": "1,200+",
+        "date": "May 2023 – Sept 2023",
+        "type": "contract"
+      },
+      {
+        "client": "Dept of the Army",
+        "location": "COVID-19 Disaster Relief",
+        "meals": "200+",
+        "mealTypes": "Breakfast, Lunch, Dinner",
+        "date": "April 2020",
+        "duration": "36 Consecutive Days",
+        "type": "emergency"
+      },
+      {
+        "client": "Dept of the Army",
+        "location": "Military Training",
+        "meals": "125",
+        "mealTypes": "Breakfast, Lunch, Dinner",
+        "date": "February 2019",
+        "personnel": "125 Soldiers",
+        "type": "military"
+      },
+      {
+        "client": "Dept of the Army",
+        "location": "Military Training",
+        "meals": "140",
+        "mealTypes": "Breakfast, Lunch, Dinner",
+        "date": "December 2019",
+        "personnel": "140 Soldiers",
+        "type": "military"
+      }
+    ]
+  },
   "capabilities": [
     {
       "icon": "users",
