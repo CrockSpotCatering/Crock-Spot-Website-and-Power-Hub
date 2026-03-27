@@ -54,7 +54,7 @@
     "/images/appetizers/pulled-pork-sliders.webp"
   ],
   "themedBarsSection": {
-    "headline": "Themed Bars",
+    "headline": "BYO Themed Bars",
     "subheadline": "Interactive food stations for your guests"
   },
   "breakfastSection": {
@@ -111,6 +111,11 @@
   ],
   "proteins": [
     {
+      "name": "Garlic Chicken",
+      "tags": ["GF"],
+      "description": "Roasted chicken thighs with garlic, herbs, and our signature seasoning blend."
+    },
+    {
       "name": "Tender Slow Roasted Pulled Pork",
       "tags": ["GF"],
       "description": "Hand-pulled, melt-in-your-mouth pork shoulder slow-roasted for hours until irresistibly juicy and fork-tender."
@@ -123,7 +128,7 @@
     },
     {
       "name": "Turkey Cardamom Meatballs",
-      "tags": ["GF"],
+      "tags": [],
       "description": "Ground turkey balls mixed with cardamom. Delish!"
     },
     {
