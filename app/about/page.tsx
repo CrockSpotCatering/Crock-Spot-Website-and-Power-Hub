@@ -130,8 +130,8 @@ export default function About() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-8">
             {cateringStyle.styles.map((style, index) => {
               const styleImages = [
-                'https://images.unsplash.com/photo-1555244162-803834f70033?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', // Buffet
-                'https://images.unsplash.com/photo-1565123409695-7b5ef63a2efb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', // Food Truck
+                '/images/appetizers/appetizer-11.jpg', // Buffet
+                '/images/crockspot-truck.jpg', // Food Truck
               ];
               return (
                 <motion.div
