@@ -2,7 +2,7 @@
   "hero": {
     "headline": "Let's Connect",
     "subheadline": "Ready to rock your next event? Get in touch and let's make it happen.",
-    "backgroundImage": "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
+    "backgroundImage": "/images/lets-connect.jpg"
   },
   "contactInfo": [
     {
