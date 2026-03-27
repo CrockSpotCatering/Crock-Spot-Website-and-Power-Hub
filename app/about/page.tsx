@@ -128,12 +128,7 @@ export default function About() {
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-8">
-            {cateringStyle.styles.map((style, index) => {
-              const styleImages = [
-                '/images/appetizers/appetizer-11.jpg', // Buffet
-                '/images/crockspot-truck.jpg', // Food Truck
-              ];
-              return (
+            {cateringStyle.styles.map((style, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, y: 30 }}
@@ -145,7 +140,7 @@ export default function About() {
                   <div
                     className="absolute inset-0 bg-cover bg-center"
                     style={{
-                      backgroundImage: `url(${styleImages[index]})`,
+                      backgroundImage: `url(${style.image})`,
                       opacity: 0.5,
                     }}
                   />
@@ -158,8 +153,7 @@ export default function About() {
                     <p className="text-white/90 drop-shadow">{style.description}</p>
                   </div>
                 </motion.div>
-              );
-            })}
+            ))}
           </div>
 
           <motion.p

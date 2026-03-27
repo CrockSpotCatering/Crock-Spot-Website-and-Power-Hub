@@ -22,11 +22,13 @@
     "styles": [
       {
         "name": "Buffet-Style Service",
-        "description": "Elegant buffet presentations featuring appetizers and main courses for seamless large-scale events — perfect for corporate gatherings, weddings, and formal occasions."
+        "description": "Elegant buffet presentations featuring appetizers and main courses for seamless large-scale events — perfect for corporate gatherings, weddings, and formal occasions.",
+        "image": "/images/appetizers/appetizer-11.jpg"
       },
       {
         "name": "Food Truck Option",
-        "description": "Interactive, fun, and fresh — guests build their perfect rice bowl on-site for a memorable, casual outdoor experience."
+        "description": "Interactive, fun, and fresh — guests build their perfect rice bowl on-site for a memorable, casual outdoor experience.",
+        "image": "/images/crockspot-truck.jpg"
       }
     ],
     "closing": "Our proven expertise ensures fast, flawless service for corporate events, weddings, festivals, and private parties across Colorado — feeding hundreds with fresh, personalized meals that keep guests coming back."
