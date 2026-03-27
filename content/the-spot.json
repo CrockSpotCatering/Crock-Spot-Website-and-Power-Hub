@@ -3,14 +3,14 @@
     "badge": "Sister Company of Crock Spot",
     "title": "The Spot Café",
     "tagline": "Your Trusted Corporate Catering Partner in Denver's RiNo District",
-    "description": "Led by owner and Chef Mandy Smith, The Spot Café is the go-to choice for office catering in the Industry RiNo co-working spaces and surrounding Denver area.",
+    "description": "Led by owner and Cafe Queen Mandy Smith, The Spot Café is the go-to choice for office catering in the Industry RiNo co-working spaces and surrounding Denver area.",
     "backgroundImage": "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
     "logo": "/spot-cafe-logo.avif",
     "phone": "(925) 699-6629",
     "email": "spotcafes@gmail.com"
   },
   "intro": {
-    "text": "For years, we've delivered fresh, flavorful meals that keep teams energized and productive. We specialize in light, nourishing corporate catering designed to fuel your day.",
+    "text": "For years, we've delivered fresh, flavorful meals that keep teams energized and productive. After serving the National Guard meals for 36 days straight during the Pandemic, we've perfected individually packaged meals and large-scale catering. We specialize in light, nourishing corporate catering designed to fuel your day.",
     "tagline": "We KNOW what hits the Spot!"
   },
   "services": [
@@ -33,6 +33,54 @@
       "icon": "glass-cheers",
       "title": "Happy Hours & Events",
       "description": "Stunning charcuterie boards, grazing tables, and premium appetizers."
+    }
+  ],
+  "cateringPackagesSection": {
+    "headline": "In-House Catering Packages",
+    "subheadline": "Fresh, delicious options for every occasion — from morning meetings to themed celebrations"
+  },
+  "cateringPackages": [
+    {
+      "name": "Breakfast Boards",
+      "description": "A medley of continental style breakfast bites — pastries, yogurt, fruit, eggs, muffins, cheese, and more. We can design one specifically for your needs.",
+      "price": "$12.50",
+      "priceNote": "per person",
+      "icon": "board"
+    },
+    {
+      "name": "Breakfast Burrito Platter",
+      "description": "House made breakfast burritos, served with salsa & our famous Sriracha Sour Cream. Available flavors: Bacon, Chorizo, or Veggie. GF and Vegan options available!",
+      "price": "$10.50",
+      "priceNote": "per person",
+      "icon": "burrito"
+    },
+    {
+      "name": "Individually Packaged Lunches",
+      "description": "From salads and wraps, sandwiches, rice bowls, adult lunchables... you name it. Add drinks or desserts with a mix of cold drinks & cookies!",
+      "price": "Starting at $15",
+      "priceNote": "per person",
+      "icon": "package"
+    },
+    {
+      "name": "Buffet Style Lunch",
+      "description": "Any of our Cafe Menu options served buffet style — salad bars, build your own rice bowls, build your own wraps, and more.",
+      "price": "$15–$17",
+      "priceNote": "per person",
+      "icon": "buffet"
+    },
+    {
+      "name": "Themed Meals",
+      "description": "We've catered hundreds of corporate events and themed parties. From taco and chili bars, Hawaiian luaus, Oktoberfest, BBQ Picnic... the sky's the limit!",
+      "price": "Custom",
+      "priceNote": "Let's chat!",
+      "icon": "party"
+    },
+    {
+      "name": "Happy Hour & Grazing",
+      "description": "Beautifully crafted charcuterie and grazing boards, perfect for your after-hours meeting or special event.",
+      "price": "Custom",
+      "priceNote": "Let's chat!",
+      "icon": "wine"
     }
   ],
   "deliveryOptions": {
@@ -60,7 +108,7 @@
   },
   "owner": {
     "name": "Mandy Smith",
-    "title": "Owner & Chef",
+    "title": "Cafe Queen & Owner",
     "certifications": ["DBE", "MWBE", "SBE"],
     "phone": "(925) 699-6629",
     "email": "spotcafes@gmail.com"

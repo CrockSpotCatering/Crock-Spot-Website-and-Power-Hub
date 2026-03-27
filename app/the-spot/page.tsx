@@ -13,6 +13,11 @@ import {
   FaCheckCircle,
   FaBuilding,
   FaStar,
+  FaBox,
+  FaHamburger,
+  FaConciergeBell,
+  FaWineGlass,
+  FaGift,
 } from 'react-icons/fa';
 import CTASection from '@/components/CTASection';
 
@@ -27,8 +32,18 @@ const serviceIcons: Record<string, React.ReactNode> = {
   'glass-cheers': <FaGlassCheers size={36} />,
 };
 
+// Icon mapping for catering packages
+const packageIcons: Record<string, React.ReactNode> = {
+  'board': <FaConciergeBell size={32} />,
+  'burrito': <FaHamburger size={32} />,
+  'package': <FaBox size={32} />,
+  'buffet': <FaUtensils size={32} />,
+  'party': <FaGift size={32} />,
+  'wine': <FaWineGlass size={32} />,
+};
+
 export default function TheSpot() {
-  const { hero, intro, services, deliveryOptions, happyHour, customPromise, owner, cta } = content;
+  const { hero, intro, services, cateringPackagesSection, cateringPackages, deliveryOptions, happyHour, customPromise, owner, cta } = content;
 
   return (
     <div className="min-h-screen pt-20">
@@ -147,6 +162,54 @@ export default function TheSpot() {
                 </div>
                 <h3 className="text-xl font-bold text-crock-dark mb-2">{service.title}</h3>
                 <p className="text-crock-gray">{service.description}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Catering Packages */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-4xl font-bold text-crock-dark mb-4">
+              {cateringPackagesSection.headline.split('Catering')[0]}<span className="text-crock-orange">Catering Packages</span>
+            </h2>
+            <p className="text-xl text-crock-gray max-w-3xl mx-auto">
+              {cateringPackagesSection.subheadline}
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {cateringPackages.map((pkg, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="bg-white border-2 border-crock-gray-light/50 rounded-2xl overflow-hidden hover:border-crock-orange/50 hover:shadow-xl transition-all"
+              >
+                <div className="bg-gradient-to-r from-crock-dark to-crock-purple p-5">
+                  <div className="flex items-center justify-between">
+                    <div className="text-crock-orange">
+                      {packageIcons[pkg.icon] || <FaUtensils size={32} />}
+                    </div>
+                    <div className="text-right">
+                      <p className="text-2xl font-bold text-crock-orange">{pkg.price}</p>
+                      <p className="text-sm text-crock-gray-light">{pkg.priceNote}</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="p-6">
+                  <h3 className="text-xl font-bold text-crock-dark mb-3">{pkg.name}</h3>
+                  <p className="text-crock-gray">{pkg.description}</p>
+                </div>
               </motion.div>
             ))}
           </div>
