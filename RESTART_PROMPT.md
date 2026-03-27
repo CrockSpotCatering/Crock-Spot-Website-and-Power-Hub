@@ -101,16 +101,18 @@ Implemented:
 - Purple: `#614B8A`
 - Dark Purple: `#2F2744` (backgrounds)
 
-### Current Status (March 24, 2026)
+### Current Status (March 27, 2026)
 **Website:**
 - All pages complete and styled
 - Corporate catering focus (not food trucks)
 - Mobile optimized per Google 2025 standards
-- "The Spot" sister company page added
-- Full menu with rich descriptions
-- Government capabilities with vendor credentials
+- "The Spot" sister company page fully rebranded (Navy #1B3A5F + Coral #E8704A)
+- The Spot Cafe has full catering packages with pricing
+- Full menu with rich descriptions + real client photos
+- Government capabilities with vendor credentials + Past Performance section
 - All quote buttons standardized to "Get Your Free Custom Quote"
 - All email links open in new windows (users stay on page)
+- Peter Edholm added as third founder throughout site
 
 **CMS:**
 - Power Hub CMS complete
@@ -119,6 +121,7 @@ Implemented:
 - Login: `crockspot` / `crockspot2026`
 - PDF/DOCX upload working (uses `unpdf` + `mammoth`)
 - GoHighLevel integration for contact forms
+- All JSON files validated ✓
 
 **Infrastructure:**
 - All changes committed and pushed
@@ -165,12 +168,12 @@ git add . && git commit -m "message" && git push origin main
 
 ### Business Info
 - **Business:** The Crock Spot (Denver food truck catering since 2010)
-- **Owners:** Steven & Mandy (+ Peter, partner)
+- **Founders:** Steven, Mandy & Peter Edholm
 - **Email:** steven@thecrockspot.com
 - **Tagline:** "Let Us Crock Your World"
 - **Focus:** Corporate events, weddings, buffet catering
 - **Awards:** Best Food Truck (5280), Best Meals on Wheels (Westword), 50 Coolest Small Businesses (Business Insider)
-- **Sister Company:** The Spot Cafe (Mandy Smith, RiNo District corporate catering)
+- **Sister Company:** The Spot Cafe (Mandy Smith "Cafe Queen", RiNo District corporate catering)
 
 ---
 

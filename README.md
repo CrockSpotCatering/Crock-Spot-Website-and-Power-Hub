@@ -4,7 +4,7 @@ Award-winning food truck catering website for The Crock Spot, Denver's premier s
 
 ## About The Crock Spot
 
-- **Founded:** 2010 by Steven & Mandy
+- **Founded:** 2010 by Steven, Mandy & Peter Edholm
 - **Location:** Denver, Colorado
 - **Service Area:** Denver Metro, Front Range & Mountain Regions
 - **Awards:** Best Food Truck in Denver (5280 Magazine), Best Meals on Wheels (Westword), 50 Coolest Small Businesses (Business Insider)

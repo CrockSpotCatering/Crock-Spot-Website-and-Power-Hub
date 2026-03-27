@@ -1,5 +1,88 @@
 # CrockSpot Session Log
 
+## March 27, 2026 - Session: Site Enhancements & The Spot Cafe Rebrand
+
+### What Was Done This Session
+
+#### 1. **Government Capabilities - Past Performance Section**
+Added comprehensive past performance section showcasing contract history:
+- Total meals served stat (4,000+)
+- 8 contract cards with details (AmeriCorps, Army National Guard, etc.)
+- Type-based styling (recent/emergency/contract/military)
+
+#### 2. **Community Partners Page Updates**
+- Removed "Farmers Markets" from "How We Partner" section
+- Hidden "Giving Back" section (commented out for future reactivation)
+- Centered remaining 3 partnership type cards with max-w-4xl
+
+#### 3. **Replaced Placeholder Images**
+- **Menus Page**: 6 appetizer images → real client photos
+- **About Page**: 6 timeline milestone images → appetizer photos
+- **About Page**: Food Truck Option card → real crockspot-truck.jpg
+- **Contact Page**: Hero → Let's Connect.jpg from client
+
+#### 4. **CMS Editability Audit**
+- Fixed hardcoded catering style images on About page → moved to JSON
+- Verified all JSON content is editable via Power Hub
+- Documented remaining Unsplash placeholders (awaiting client photos)
+
+#### 5. **Peter Edholm Added as Third Founder**
+Updated About page to include Peter throughout:
+- Founders story mentions Peter joining in 2017
+- Quote attribution: "Steven, Mandy & Peter — Founders"
+- Community section includes all three founders
+
+#### 6. **The Spot Cafe Major Enhancements**
+Added comprehensive catering packages from PDF:
+- Breakfast Boards ($12.50/person)
+- Breakfast Burrito Platter ($10.50/person)
+- Individually Packaged Lunches (from $15/person)
+- Buffet Style Lunch ($15-$17/person)
+- Themed Meals (custom)
+- Happy Hour & Grazing (custom)
+
+Updated branding:
+- Mandy's title → "Cafe Queen & Owner"
+- Added National Guard pandemic story to intro
+
+**Rebranded entire page with The Spot Cafe colors:**
+- Navy Blue (#1B3A5F) for headers, backgrounds
+- Coral Orange (#E8704A) for accents, CTAs
+- Warm Cream (#F8F6F3) for light sections
+- Custom CTA section (no longer uses shared component)
+
+### Commits This Session
+| Commit | Description |
+|--------|-------------|
+| `66d5059` | fix: Move catering style images to JSON for CMS editability |
+| `258b56f` | Update Contact page hero with custom image |
+| `e71fd77` | Add Peter Edholm as third founder throughout About page |
+| `6f6c019` | Bolster The Spot Cafe page with catering packages |
+| `3e89a0f` | Rebrand The Spot Cafe page with custom brand colors |
+
+### Files Changed
+| File | Changes |
+|------|---------|
+| `content/government-capabilities.json` | Added pastPerformance section |
+| `app/government-capabilities/page.tsx` | Added Past Performance section UI |
+| `content/community-partners.json` | Removed Farmers Markets |
+| `app/community-partners/page.tsx` | Hidden Giving Back, centered 3-col grid |
+| `content/menus.json` | Real appetizer images |
+| `content/about.json` | Timeline images, style images, Peter Edholm |
+| `app/about/page.tsx` | Use JSON for style images |
+| `content/contact.json` | lets-connect.jpg hero |
+| `content/the-spot.json` | Catering packages, Cafe Queen title |
+| `app/the-spot/page.tsx` | Packages section, full rebrand to navy/coral |
+| `README.md` | Added Peter Edholm to founders |
+
+### Git Status
+- ✅ All changes committed
+- ✅ All changes pushed to GitHub (CrockSpotCatering account)
+- ✅ Vercel auto-deployed
+- ✅ All JSON files validated
+
+---
+
 ## March 24, 2026 - Session: Button Text Standardization & Email Link Fixes
 
 ### What Was Done This Session
@@ -405,7 +488,12 @@ Footer:
 - [x] ~~Add persistent credential management~~ ✅ DONE (March 22)
 - [x] ~~Standardize quote button text across site~~ ✅ DONE (March 24)
 - [x] ~~Make email links open in new windows~~ ✅ DONE (March 24)
-- [ ] Add actual CrockSpot photos to replace Unsplash images
+- [x] ~~Replace placeholder images on Menus/About pages~~ ✅ DONE (March 27)
+- [x] ~~Add Peter Edholm as third founder~~ ✅ DONE (March 27)
+- [x] ~~Rebrand The Spot Cafe with custom colors~~ ✅ DONE (March 27)
+- [x] ~~Add catering packages to The Spot Cafe~~ ✅ DONE (March 27)
+- [ ] Replace remaining Unsplash hero images with client photos
+- [ ] Add partner logos to Community Partners page
 - [ ] Re-enable GHL notification actions for real leads
 - [ ] Consider adding online ordering integration
 - [ ] Add Google Analytics / tracking
