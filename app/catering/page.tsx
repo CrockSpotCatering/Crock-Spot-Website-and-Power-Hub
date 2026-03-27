@@ -8,7 +8,7 @@ import {
   FaArrowRight,
   FaCheckCircle,
   FaCalendar,
-  FaGlassCheers,
+  FaConciergeBell,
   FaBriefcase,
   FaHeart,
   FaBirthdayCake,
@@ -26,7 +26,7 @@ import cateringContent from '@/content/catering.json';
 const optionIcons: Record<string, React.ReactNode> = {
   'truck': <FaTruck size={48} />,
   'utensils': <FaUtensils size={48} />,
-  'glass': <FaGlassCheers size={48} />,
+  'bell': <FaConciergeBell size={48} />,
 };
 
 // Icon mapping for event types
