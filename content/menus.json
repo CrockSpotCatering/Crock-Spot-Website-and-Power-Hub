@@ -320,32 +320,32 @@
     {
       "name": "Artisan Grazing Table",
       "description": "Stunning spreads of cheeses, fresh seasonal fruits and vegetables, artisanal crackers, gourmet dips, nuts, and hand-selected accompaniments — beautifully arranged for effortless, interactive grazing that wows guests from the first glance.",
-      "image": "https://images.unsplash.com/photo-1626200419199-391ae4be7a41?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+      "image": "/images/appetizers/appetizer-1.jpg"
     },
     {
       "name": "Caprese Skewers",
       "description": "Light and refreshing, fresh mozzarella, sliced grape tomato, and fresh basil, skewered for a perfect bite (2 per guest).",
-      "image": "https://images.unsplash.com/photo-1608897013039-887f21d8c804?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+      "image": "/images/appetizers/appetizer-5.jpg"
     },
     {
       "name": "Meatballs in Carolina BBQ Sauce",
       "description": "Juicy pork and beef meatballs, perfectly seasoned and slow-simmered in our signature tangy Carolina gold sauce — sweet, mustardy, and irresistibly bold. A guaranteed crowd-pleaser that disappears fast at every event!",
-      "image": "https://images.unsplash.com/photo-1529042410759-befb1204b468?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+      "image": "/images/appetizers/appetizer-3.jpg"
     },
     {
       "name": "Potato Cheddar Pierogies",
       "description": "Locally made and they taste like it. Fried golden and crispy served with our signature crema dipping sauces (2 per guest).",
-      "image": "https://images.unsplash.com/photo-1605926637512-c8b131444a4b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+      "image": "/images/appetizers/crock-pockets.jpeg"
     },
     {
       "name": "Sliders",
       "description": "Shredded meat of your choice, sauce of your choice, served with King's Hawaiian buns, slaw or pickles.",
-      "image": "https://images.unsplash.com/photo-1550547660-d9450f859349?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+      "image": "/images/appetizers/pulled-pork-sliders.webp"
     },
     {
       "name": "Crudité and Hummus",
       "description": "Crisp, hand-cut seasonal vegetables paired with creamy traditional hummus — or swap in our zesty Spicy Ranch for an extra kick. A light, crowd-pleasing appetizer that's always a refreshing favorite!",
-      "image": "https://images.unsplash.com/photo-1540420773420-3366772f4999?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+      "image": "/images/appetizers/appetizer-8.jpg"
     }
   ],
   "themedBars": [
