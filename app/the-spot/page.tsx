@@ -19,6 +19,7 @@ import {
   FaWineGlass,
   FaGift,
   FaArrowRight,
+  FaCertificate,
 } from 'react-icons/fa';
 
 // Import content from JSON - editable via Power Hub CMS
@@ -48,7 +49,7 @@ const packageIcons: Record<string, React.ReactNode> = {
 };
 
 export default function TheSpot() {
-  const { hero, intro, services, cateringPackagesSection, cateringPackages, deliveryOptions, happyHour, customPromise, owner, cta } = content;
+  const { hero, intro, services, cateringPackagesSection, cateringPackages, deliveryOptions, happyHour, customPromise, certification, owner, cta } = content;
 
   return (
     <div className="min-h-screen pt-20">
@@ -290,7 +291,7 @@ export default function TheSpot() {
 
       {/* Custom Promise */}
       <section
-        className="py-20"
+        className="pt-20 pb-8"
         style={{ background: `linear-gradient(to bottom, ${spotCoral}15 0%, white 100%)` }}
       >
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -299,18 +300,76 @@ export default function TheSpot() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-4xl font-bold mb-6" style={{ color: spotNavy }}>
+            <h2 className="text-4xl font-bold mb-4" style={{ color: spotNavy }}>
               The Sky&apos;s the <span style={{ color: spotCoral }}>Limit</span>
             </h2>
-            <p className="text-xl text-gray-600 mb-8">
+            <p className="text-xl text-gray-600">
               {customPromise.description}
             </p>
           </motion.div>
         </div>
       </section>
 
+      {/* Certification Section */}
+      {certification && (
+        <section className="py-12 bg-white">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-center mb-8"
+            >
+              <div className="inline-flex items-center gap-2 mb-4" style={{ color: spotCoral }}>
+                <FaCertificate size={28} />
+                <span className="text-lg font-semibold uppercase tracking-wide">Credentials</span>
+              </div>
+              <h2 className="text-3xl font-bold" style={{ color: spotNavy }}>
+                {certification.title}
+              </h2>
+              <p className="text-gray-600 mt-2">{certification.subtitle}</p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="flex flex-col lg:flex-row items-center gap-8 p-6 rounded-2xl border-2"
+              style={{ borderColor: `${spotNavy}20`, backgroundColor: `${spotNavy}05` }}
+            >
+              <div className="flex-shrink-0">
+                <Image
+                  src={certification.certificateImage}
+                  alt={certification.certificateName}
+                  width={400}
+                  height={300}
+                  className="rounded-lg shadow-lg"
+                />
+              </div>
+              <div className="text-center lg:text-left">
+                <h3 className="text-xl font-bold mb-3" style={{ color: spotNavy }}>
+                  {certification.certificateName}
+                </h3>
+                <div className="space-y-2 text-gray-600">
+                  <p><span className="font-semibold">Holder:</span> {owner.name}</p>
+                  <p><span className="font-semibold">Issued:</span> {certification.issuedDate}</p>
+                  <p><span className="font-semibold">Valid Through:</span> {certification.expiresDate}</p>
+                  <p><span className="font-semibold">Certificate ID:</span> #{certification.certificateId}</p>
+                </div>
+                <div
+                  className="inline-flex items-center gap-2 mt-4 px-4 py-2 rounded-full text-sm font-semibold"
+                  style={{ backgroundColor: `${spotCoral}15`, color: spotCoral }}
+                >
+                  <FaCheckCircle /> Certified for On-Premises Alcohol Service
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+      )}
+
       {/* Contact / Owner Info */}
-      <section className="py-20 bg-white">
+      <section className="pt-8 pb-20 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}

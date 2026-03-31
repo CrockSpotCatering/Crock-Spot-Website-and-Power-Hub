@@ -106,6 +106,15 @@
     "title": "The Sky's the Limit",
     "description": "Tell us exactly what you need, and we'll make it happen with delicious, custom results every time."
   },
+  "certification": {
+    "title": "Licensed & Certified",
+    "subtitle": "Professional beverage service you can trust",
+    "certificateName": "Colorado Responsible Alcohol Beverage Vendor Training",
+    "certificateImage": "/mandy-alcohol-certificate.jpg",
+    "issuedDate": "March 4, 2026",
+    "expiresDate": "March 4, 2028",
+    "certificateId": "72067634"
+  },
   "owner": {
     "name": "Mandy Smith",
     "title": "Cafe Queen & Owner",
