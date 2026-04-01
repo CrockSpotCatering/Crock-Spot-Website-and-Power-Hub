@@ -101,12 +101,14 @@ Implemented:
 - Purple: `#614B8A`
 - Dark Purple: `#2F2744` (backgrounds)
 
-### Current Status (March 27, 2026)
+### Current Status (March 31, 2026)
 **Website:**
 - All pages complete and styled
 - Corporate catering focus (not food trucks)
 - Mobile optimized per Google 2025 standards
 - "The Spot" sister company page fully rebranded (Navy #1B3A5F + Coral #E8704A)
+- The Spot Cafe has NEW coffee cup logo with transparent background
+- The Spot Cafe has alcohol certification section (Colorado Responsible Vendor Training)
 - The Spot Cafe has full catering packages with pricing
 - Full menu with rich descriptions + real client photos
 - Government capabilities with vendor credentials + Past Performance section
@@ -124,10 +126,14 @@ Implemented:
 - All JSON files validated ✓
 
 **Infrastructure:**
-- All changes committed and pushed
+- All changes committed and pushed (latest: `425f23f`)
 - Vercel auto-deploying from GitHub
 - GitHub CLI active account: CrockSpotCatering
 - Documentation up to date
+
+**The Spot Cafe Assets (March 31):**
+- `public/the-spot-logo.png` - New coffee cup logo (transparent background)
+- `public/mandy-alcohol-certificate.jpg` - Alcohol vendor training certificate
 
 ### Project Structure
 ```

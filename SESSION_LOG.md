@@ -1,5 +1,59 @@
 # CrockSpot Session Log
 
+## March 31, 2026 - Session: The Spot Cafe Logo & Certification Updates
+
+### What Was Done This Session
+
+#### 1. **New The Spot Cafe Logo**
+- Added new coffee cup logo (`Mandy's logo.jpg` from desktop)
+- Removed white background using Python flood fill algorithm
+- Preserved white text "the Spot CAFE" inside navy circle
+- Saved as transparent PNG for clean display over hero background
+
+#### 2. **Alcohol Certification Section**
+Added new "Licensed & Certified" section to The Spot Cafe page:
+- Scanned and added Mandy's Colorado Responsible Alcohol Beverage Vendor Training certificate
+- Certificate details: Issued March 4, 2026, valid through March 4, 2028
+- Certificate ID: #72067634
+- Added "Certified for On-Premises Alcohol Service" badge
+- Section placed between "The Sky's The Limit" and owner info card
+
+#### 3. **Spacing Fix**
+- Fixed excessive gap between "The Sky's The Limit" section and Mandy's contact card
+- Changed Custom Promise section from `py-20` to `pt-20 pb-8`
+- Changed Owner Info section from `py-20` to `pt-8 pb-20`
+
+### Commits This Session
+| Commit | Description |
+|--------|-------------|
+| `1353f5d` | Update The Spot Cafe logo to new coffee cup design |
+| `9de4a5d` | Add alcohol certification section to The Spot Cafe page |
+| `fadf214` | Remove white background from The Spot Cafe logo |
+| `425f23f` | Fix logo transparency - preserve white text inside coffee cup |
+
+### Files Changed
+| File | Changes |
+|------|---------|
+| `content/the-spot.json` | New logo path, added certification section |
+| `app/the-spot/page.tsx` | Added FaCertificate icon, certification section UI, fixed spacing |
+| `public/the-spot-logo.jpg` | NEW - Original logo from client |
+| `public/the-spot-logo.png` | NEW - Transparent background version |
+| `public/mandy-alcohol-certificate.jpg` | NEW - Alcohol training certificate |
+
+### New Assets Added
+| File | Description |
+|------|-------------|
+| `the-spot-logo.png` | Coffee cup logo with transparent background |
+| `mandy-alcohol-certificate.jpg` | Colorado alcohol vendor training certificate |
+
+### Git Status
+- ✅ All changes committed
+- ✅ All changes pushed to GitHub (CrockSpotCatering account)
+- ✅ Vercel auto-deployed
+- ✅ GitHub CLI active account: CrockSpotCatering
+
+---
+
 ## March 27, 2026 - Session: Site Enhancements & The Spot Cafe Rebrand
 
 ### What Was Done This Session
@@ -492,6 +546,8 @@ Footer:
 - [x] ~~Add Peter Edholm as third founder~~ ✅ DONE (March 27)
 - [x] ~~Rebrand The Spot Cafe with custom colors~~ ✅ DONE (March 27)
 - [x] ~~Add catering packages to The Spot Cafe~~ ✅ DONE (March 27)
+- [x] ~~Update The Spot Cafe logo~~ ✅ DONE (March 31)
+- [x] ~~Add alcohol certification to The Spot Cafe~~ ✅ DONE (March 31)
 - [ ] Replace remaining Unsplash hero images with client photos
 - [ ] Add partner logos to Community Partners page
 - [ ] Re-enable GHL notification actions for real leads
