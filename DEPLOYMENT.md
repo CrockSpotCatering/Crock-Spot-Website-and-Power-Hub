@@ -12,16 +12,41 @@
 └─────────────────────────────────────────────────────────────────────┘
 ```
 
-## Current Status (March 19, 2026)
+## Current Status (April 1, 2026)
+
+### 🎉 SITE IS LIVE!
 
 | Service | URL | Status |
 |---------|-----|--------|
-| **Live Site** | https://crock-spot-website-and-power-hub.vercel.app | ✅ LIVE |
+| **Live Site** | https://www.thecrockspot.com | ✅ LIVE |
+| **Power Hub CMS** | https://www.thecrockspot.com/power-hub | ✅ LIVE |
 | **GitHub** | https://github.com/CrockSpotCatering/Crock-Spot-Website-and-Power-Hub | ✅ Connected |
 | **Vercel Dashboard** | https://vercel.com/crockspotcaterings-projects | ✅ Deployed |
 | **Local Path** | `/Users/brettlechtenberg/Documents/agent-girl/crockspot` | ✅ Ready |
 
 > **Auto-Deploy Active:** Push to GitHub → Vercel deploys automatically!
+
+## Domain Configuration
+
+### Primary Domain (Vercel + GoDaddy DNS)
+| Domain | Type | Status |
+|--------|------|--------|
+| **www.thecrockspot.com** | Primary site | ✅ Live |
+| **thecrockspot.com** | Redirects to www | ✅ Working |
+
+**GoDaddy DNS Records for thecrockspot.com:**
+| Type | Name | Value |
+|------|------|-------|
+| A | @ | 216.198.79.1 |
+| CNAME | www | ae446c4f4f389a32.vercel-dns-017.com |
+
+### Redirect Domains (GoDaddy Forwarding)
+| Domain | Redirect Type | Target |
+|--------|---------------|--------|
+| **denversbestcatering.com** | 301 Permanent | thecrockspot.com |
+| **crockspotcatering.com** | 301 Permanent | thecrockspot.com |
+
+These use GoDaddy's built-in forwarding service (no DNS configuration needed).
 
 ## Project Structure
 
@@ -140,7 +165,8 @@ git push origin main
 - **Account:** crockspotcaterings-projects
 - **Dashboard:** https://vercel.com/crockspotcaterings-projects
 - **Project:** Crock-Spot-Website-and-Power-Hub
-- **Live URL:** https://crock-spot-website-and-power-hub.vercel.app
+- **Live URL:** https://www.thecrockspot.com
+- **Vercel URL:** https://crock-spot-website-and-power-hub.vercel.app (still works)
 
 > 🚫 **NEVER use Vercel CLI** - Always deploy via GitHub integration only!
 
@@ -183,10 +209,10 @@ git push origin main
 ## Crock Spot Contact Info
 
 - **Email:** steven@thecrockspot.com
-- **Website:** thecrockspot.com
+- **Website:** https://www.thecrockspot.com
 - **Facebook:** facebook.com/104226646277525
 - **Instagram:** @thecrockspot
-- **Founded:** 2010 by Steven & Mandy
+- **Founded:** 2010 by Steven, Mandy & Peter Edholm
 - **Location:** Denver, Colorado
 
 ---

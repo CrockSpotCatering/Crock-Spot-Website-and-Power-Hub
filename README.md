@@ -1,6 +1,22 @@
 # The Crock Spot - Website & Power Hub
 
+🎉 **LIVE AT: https://www.thecrockspot.com**
+
 Award-winning food truck catering website for The Crock Spot, Denver's premier slow-cooked gourmet cuisine company.
+
+## Live URLs
+
+| Resource | URL |
+|----------|-----|
+| **Live Site** | https://www.thecrockspot.com |
+| **Power Hub CMS** | https://www.thecrockspot.com/power-hub |
+| **GitHub Repo** | https://github.com/CrockSpotCatering/Crock-Spot-Website-and-Power-Hub |
+
+### Redirect Domains
+All of these redirect to the main site:
+- thecrockspot.com → www.thecrockspot.com
+- denversbestcatering.com → thecrockspot.com
+- crockspotcatering.com → thecrockspot.com
 
 ## About The Crock Spot
 
@@ -200,7 +216,7 @@ Set these in Vercel Dashboard:
 ## Contact
 
 - **Email:** steven@thecrockspot.com
-- **Website:** https://thecrockspot.com
+- **Website:** https://www.thecrockspot.com
 - **Facebook:** [The Crock Spot](https://www.facebook.com/104226646277525)
 - **Instagram:** [@thecrockspot](https://www.instagram.com/thecrockspot)
 

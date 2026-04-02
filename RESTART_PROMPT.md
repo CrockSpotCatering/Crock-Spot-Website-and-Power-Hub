@@ -20,10 +20,18 @@ Then read in this order:
 ### URLs
 | Resource | URL |
 |----------|-----|
-| **Live Site** | https://crock-spot-website-and-power-hub.vercel.app |
-| **Power Hub CMS** | https://crock-spot-website-and-power-hub.vercel.app/power-hub |
+| **Live Site** | https://www.thecrockspot.com |
+| **Power Hub CMS** | https://www.thecrockspot.com/power-hub |
 | **GitHub Repo** | https://github.com/CrockSpotCatering/Crock-Spot-Website-and-Power-Hub |
 | **Vercel Dashboard** | https://vercel.com/crockspotcaterings-projects |
+
+### Domain Configuration (April 1, 2026)
+| Domain | Method | Status |
+|--------|--------|--------|
+| **www.thecrockspot.com** | Vercel + GoDaddy DNS | ✅ Primary Site |
+| **thecrockspot.com** | Vercel redirect | ✅ → www |
+| **denversbestcatering.com** | GoDaddy forwarding | ✅ → main site |
+| **crockspotcatering.com** | GoDaddy forwarding | ✅ → main site |
 
 ### Tech Stack
 - Next.js 16 with App Router
@@ -101,7 +109,12 @@ Implemented:
 - Purple: `#614B8A`
 - Dark Purple: `#2F2744` (backgrounds)
 
-### Current Status (March 31, 2026)
+### Current Status (April 1, 2026)
+
+**🎉 SITE IS LIVE!**
+- **Primary Domain:** https://www.thecrockspot.com
+- **All redirect domains configured and working**
+
 **Website:**
 - All pages complete and styled
 - Corporate catering focus (not food trucks)
@@ -117,7 +130,7 @@ Implemented:
 - Peter Edholm added as third founder throughout site
 
 **CMS:**
-- Power Hub CMS complete
+- Power Hub CMS complete at https://www.thecrockspot.com/power-hub
 - Content editor, Media Library, AI Assist
 - ALL pages wired to JSON (15 content files)
 - Login: `crockspot` / `crockspot2026`
@@ -125,11 +138,18 @@ Implemented:
 - GoHighLevel integration for contact forms
 - All JSON files validated ✓
 
+**Domain Configuration:**
+- thecrockspot.com → Vercel (DNS at GoDaddy: A record + CNAME)
+- www.thecrockspot.com → Primary site on Vercel
+- denversbestcatering.com → GoDaddy forwarding → thecrockspot.com
+- crockspotcatering.com → GoDaddy forwarding → thecrockspot.com
+
 **Infrastructure:**
-- All changes committed and pushed (latest: `425f23f`)
+- All changes committed and pushed
 - Vercel auto-deploying from GitHub
 - GitHub CLI active account: CrockSpotCatering
-- Documentation up to date
+- SSL certificates active on all domains
+- Documentation fully up to date
 
 **The Spot Cafe Assets (March 31):**
 - `public/the-spot-logo.png` - New coffee cup logo (transparent background)

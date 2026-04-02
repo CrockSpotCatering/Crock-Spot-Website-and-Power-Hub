@@ -48,10 +48,15 @@ git push origin main # Deploy to Vercel
 - **Secondary:** Food truck option for outdoor events
 - **Tagline:** "Let Us Crock Your World"
 
-## URLs
-- Live: https://crock-spot-website-and-power-hub.vercel.app
-- CMS: https://crock-spot-website-and-power-hub.vercel.app/power-hub
-- GitHub: https://github.com/CrockSpotCatering/Crock-Spot-Website-and-Power-Hub
+## URLs (LIVE as of April 1, 2026!)
+- **Live Site:** https://www.thecrockspot.com
+- **Power Hub CMS:** https://www.thecrockspot.com/power-hub
+- **GitHub:** https://github.com/CrockSpotCatering/Crock-Spot-Website-and-Power-Hub
+
+### Redirect Domains (all point to main site)
+- thecrockspot.com → www.thecrockspot.com (Vercel)
+- denversbestcatering.com → thecrockspot.com (GoDaddy forwarding)
+- crockspotcatering.com → thecrockspot.com (GoDaddy forwarding)
 
 ## Power Hub CMS
 - **Login:** `crockspot` / `crockspot2026`
