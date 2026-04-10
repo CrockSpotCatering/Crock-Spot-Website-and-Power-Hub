@@ -11,11 +11,26 @@
     "title": "Approved Vendor Credentials",
     "subtitle": "Registered and verified for government contracting",
     "naicsCodes": [
-      { "code": "722310", "description": "Food Service Contractors" },
-      { "code": "722320", "description": "Caterers" },
-      { "code": "722330", "description": "Mobile Food Services" },
-      { "code": "722513", "description": "Limited-Service Restaurants" },
-      { "code": "561210", "description": "Facilities Support Services" }
+      {
+        "code": "722310",
+        "description": "Food Service Contractors"
+      },
+      {
+        "code": "722320",
+        "description": "Caterers"
+      },
+      {
+        "code": "722330",
+        "description": "Mobile Food Services"
+      },
+      {
+        "code": "722513",
+        "description": "Limited-Service Restaurants"
+      },
+      {
+        "code": "561210",
+        "description": "Facilities Support Services"
+      }
     ],
     "dunsNumber": {
       "number": "018638954",
@@ -77,7 +92,7 @@
       {
         "client": "Dept of the Army",
         "location": "COVID-19 Disaster Relief",
-        "meals": "200+",
+        "meals": "13,500",
         "mealTypes": "Breakfast, Lunch, Dinner",
         "date": "April 2020",
         "duration": "36 Consecutive Days",
@@ -156,7 +171,11 @@
     "militaryPartnerships": {
       "title": "Ongoing Military Partnerships",
       "description": "Multiple contracts and GPC purchases for Army National Guard AT events and drill weekends at Buckley Space Force Base.",
-      "badges": ["SAM Registered", "Colorado Small Business", "Veteran Friendly"]
+      "badges": [
+        "SAM Registered",
+        "Colorado Small Business",
+        "Veteran Friendly"
+      ]
     }
   },
   "serviceTypes": [
