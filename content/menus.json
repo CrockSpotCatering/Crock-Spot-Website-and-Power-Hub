@@ -76,53 +76,77 @@
     {
       "name": "Steamed Sesame Rice",
       "description": "Long grain rice, lightly seasoned with pure sesame oil.",
-      "tags": ["GF", "VG"]
+      "tags": [
+        "GF",
+        "VG"
+      ]
     },
     {
       "name": "Fluffy Couscous",
       "description": "Couscous is a small light pasta.",
-      "tags": ["VG"]
+      "tags": [
+        "VG"
+      ]
     },
     {
       "name": "Hearty Pearled Barley",
       "description": "Chewy and hearty whole grain.",
-      "tags": ["VG"]
+      "tags": [
+        "VG"
+      ]
     },
     {
       "name": "Quinoa",
       "description": "Power grain! High in protein and fiber, quinoa is a seed. Nutty and herby tasting.",
-      "tags": ["GF", "VG"]
+      "tags": [
+        "GF",
+        "VG"
+      ]
     },
     {
       "name": "Cilantro Lime Rice",
       "description": "Long grain rice, steamed with our famous chimichurri sauce.",
-      "tags": ["GF", "VG"]
+      "tags": [
+        "GF",
+        "VG"
+      ]
     },
     {
       "name": "Caraway Roasted Potatoes",
       "description": "Red potatoes, lightly seasoned with caraway, salt and pepper.",
-      "tags": ["GF", "VG"]
+      "tags": [
+        "GF",
+        "VG"
+      ]
     },
     {
       "name": "Healthy Grain Combo",
       "description": "This medley changes, usually consisting of quinoa, barley, and couscous.",
-      "tags": ["VG"]
+      "tags": [
+        "VG"
+      ]
     }
   ],
   "proteins": [
     {
       "name": "Garlic Chicken",
-      "tags": ["GF"],
+      "tags": [
+        "GF"
+      ],
       "description": "Roasted chicken thighs with garlic, herbs, and our signature seasoning blend."
     },
     {
       "name": "Tender Slow Roasted Pulled Pork",
-      "tags": ["GF"],
+      "tags": [
+        "GF"
+      ],
       "description": "Hand-pulled, melt-in-your-mouth pork shoulder slow-roasted for hours until irresistibly juicy and fork-tender."
     },
     {
       "name": "Jalapeño Shredded Beef",
-      "tags": ["GF"],
+      "tags": [
+        "GF"
+      ],
       "description": "Shredded beef chuck tenders, served with fresh jalapeños.",
       "premium": true
     },
@@ -133,70 +157,102 @@
     },
     {
       "name": "Southwest Chicken",
-      "tags": ["GF"],
+      "tags": [
+        "GF"
+      ],
       "description": "Roasted chicken thighs, seasoned with traditional SW spices."
     },
     {
       "name": "Salt-N-Pepa Chicken",
-      "tags": ["GF"],
+      "tags": [
+        "GF"
+      ],
       "description": "Roasted chicken thighs with three types of ground pepper and sea salt."
     },
     {
       "name": "Tuscan Chicken",
-      "tags": ["GF"],
+      "tags": [
+        "GF"
+      ],
       "description": "Roasted chicken thighs with kalamata olives, artichoke hearts, turmeric, white pepper, and sea salt."
     },
     {
       "name": "Apple Braised Pork",
-      "tags": ["GF"],
+      "tags": [
+        "GF"
+      ],
       "description": "A holiday-inspired dish. Slow-roasted pork with apple and hints of cinnamon."
     },
     {
       "name": "Herb Roasted Lamb",
-      "tags": ["GF"],
+      "tags": [
+        "GF"
+      ],
       "description": "Braised lamb with chopped tomatoes and dried herbs.",
       "premium": true
     },
     {
       "name": "Duck Confit",
-      "tags": ["GF"],
+      "tags": [
+        "GF"
+      ],
       "description": "The whole DUCK! Slow-roasted and shredded.",
       "premium": true
     },
     {
       "name": "Irish Corned Beef",
-      "tags": ["GF"],
+      "tags": [
+        "GF"
+      ],
       "description": "Traditional braised corned beef brisket, hand-shredded served with sauerkraut.",
       "seasonal": true
     },
     {
       "name": "Coconut Root Veggie Curry",
-      "tags": ["GF", "VG"],
+      "tags": [
+        "GF",
+        "VG"
+      ],
       "description": "Yellow curry with coconut milk, mushrooms, potatoes, celery, carrots, ginger, garlic and onions. Mild and vegan!"
     },
     {
       "name": "Curried Lentils with Hominy",
-      "tags": ["GF", "VG"],
+      "tags": [
+        "GF",
+        "VG"
+      ],
       "description": "One of our vegan favorites. Green lentils simmered with hominy, celery, and onions. We add Dijon mustard."
     },
     {
       "name": "Southwestern Bean Medley",
-      "tags": ["GF", "VG"],
+      "tags": [
+        "GF",
+        "VG"
+      ],
       "description": "Five bean medley with green chiles. Mild and hearty."
     },
     {
       "name": "Beet Nut Balls",
-      "tags": ["GF", "VG"],
+      "tags": [
+        "GF",
+        "VG"
+      ],
       "description": "These are hard to beat! Shredded beets, bound with tahini, orange zest and slivered almonds."
     },
     {
       "name": "Celtic White Bean Stew",
-      "tags": ["GF", "VG"],
+      "tags": [
+        "GF",
+        "VG"
+      ],
       "description": "One of our Irish-inspired delights. Great Northern white beans, shredded carrots, cabbage, and kale."
     },
     {
       "name": "Tofu & Veggies",
-      "tags": ["GF", "VG"],
+      "tags": [
+        "GF",
+        "VG"
+      ],
       "description": "Marinated tofu with Asian vegetables: bok choy, beech and shiitake mushrooms, shredded carrots, and broccoli."
     }
   ],
@@ -204,115 +260,175 @@
     {
       "name": "Chimichurri",
       "heat": "Mild",
-      "tags": ["GF", "VG"],
+      "tags": [
+        "GF",
+        "VG"
+      ],
       "description": "Made with fresh herbs. Cilantro base with parsley, garlic, lime, our secret seasonings, and love."
     },
     {
       "name": "Fresh Basil Tzatziki",
       "heat": "Mild",
-      "tags": ["GF", "V"],
+      "tags": [
+        "GF",
+        "V"
+      ],
       "description": "Tzatziki is used in most Mediterranean cooking. Yogurt-based sauce with fresh basil, dill, garlic, and seasonings."
     },
     {
       "name": "Avocado Velvet",
       "heat": "Mild",
-      "tags": ["GF", "V"],
+      "tags": [
+        "GF",
+        "V"
+      ],
       "description": "Our creamy, tangy version of guacamole. Avocados, sour cream, tomatillo, cilantro and jalapeños. Cool and smooth."
     },
     {
       "name": "Cuban Mojo",
       "heat": "Mild",
-      "tags": ["GF", "V"],
+      "tags": [
+        "GF",
+        "V"
+      ],
       "description": "Loaded with fresh orange and lime juice, herbs and garlic. A light refreshing delight."
     },
     {
       "name": "Boursin Cheese",
       "heat": "Mild",
-      "tags": ["GF", "V"],
+      "tags": [
+        "GF",
+        "V"
+      ],
       "description": "Creamy, cheesy yumminess. Cream cheese, garlic, dill, parmesan, basil and chives."
     },
     {
       "name": "Tangy Herb Mustard",
       "heat": "Mild",
-      "tags": ["GF", "VG"],
+      "tags": [
+        "GF",
+        "VG"
+      ],
       "description": "Mainly served with our Irish Corned Beef dish. Herby and tangy, house-made Dijon mustard."
     },
     {
       "name": "Cranberry Wasabi",
       "heat": "Mild/Medium",
-      "tags": ["GF", "VG"],
+      "tags": [
+        "GF",
+        "VG"
+      ],
       "description": "Holiday delight with a bit of a bite. Cranberry puréed with wasabi, salt, and pepper. Sweet and savory."
     },
     {
       "name": "Gado Gado",
       "heat": "Mild/Medium",
-      "tags": ["GF", "VG"],
+      "tags": [
+        "GF",
+        "VG"
+      ],
       "description": "Peanut-based sauce with lime, coconut milk, chiles and tamarind."
     },
     {
       "name": "Miso Honey",
       "heat": "Mild/Medium",
-      "tags": ["GF", "V"],
+      "tags": [
+        "GF",
+        "V"
+      ],
       "description": "Oh Miso Honey! Sweet and savory sauce with miso, ginger, honey, chili paste and sesame."
     },
     {
       "name": "Sriracha Sour Cream",
       "heat": "Medium",
-      "tags": ["GF", "V"],
+      "tags": [
+        "GF",
+        "V"
+      ],
       "description": "Asian hot sauce made from chili paste, mixed with sour cream for medium heat."
     },
     {
       "name": "Playa Fire",
       "heat": "Medium/Hot",
-      "tags": ["GF", "VG"],
+      "tags": [
+        "GF",
+        "VG"
+      ],
       "description": "Coconut milk-based sauce made with puréed roasted vegetables, lime, and garlic."
     },
     {
       "name": "Esteban's Yucatan Fire",
       "heat": "Hot",
-      "tags": ["GF", "VG"],
+      "tags": [
+        "GF",
+        "VG"
+      ],
       "description": "Fresh lime juice, jalapeños, habañeros, garlic, salt and pepper. HOT!"
     }
   ],
   "toppers": [
     {
       "name": "Fresh Basil Corn Salad",
-      "tags": ["GF", "VG"],
+      "tags": [
+        "GF",
+        "VG"
+      ],
       "description": "Sweet summer corn with fresh basil, red peppers and shredded carrots."
     },
     {
       "name": "Asian Slaw",
-      "tags": ["GF", "VG"],
+      "tags": [
+        "GF",
+        "VG"
+      ],
       "description": "Shredded purple and green cabbage with ginger, carrots and sesame."
     },
     {
       "name": "Garden Gravy",
-      "tags": ["GF", "VG"],
+      "tags": [
+        "GF",
+        "VG"
+      ],
       "description": "Fresh diced Roma tomatoes with olive oil and vinegar, scallions, salt, and pepper."
     },
     {
       "name": "Summer Slaw",
-      "tags": ["GF", "VG"],
+      "tags": [
+        "GF",
+        "VG"
+      ],
       "description": "Light and refreshing seasonal slaw."
     },
     {
       "name": "Sweet Corn Salad",
-      "tags": ["GF", "VG"],
+      "tags": [
+        "GF",
+        "VG"
+      ],
       "description": "Fresh sweet corn with seasonal vegetables."
     },
     {
       "name": "Sautéed Veggies",
-      "tags": ["GF", "VG"],
+      "tags": [
+        "GF",
+        "VG"
+      ],
       "description": "Chef's selection of seasonal sautéed vegetables."
     },
     {
       "name": "Mixed Green Salad",
-      "tags": ["GF", "VG"],
+      "tags": [
+        "GF",
+        "VG"
+      ],
       "description": "Fresh mixed greens with light vinaigrette."
     },
     {
       "name": "Roasted Sweet Potatoes",
-      "tags": ["GF", "VG"],
+      "tags": [
+        "GF",
+        "VG"
+      ],
       "description": "Caramelized roasted sweet potato chunks."
     }
   ],
@@ -349,35 +465,109 @@
     }
   ],
   "themedBars": [
-    { "name": "Taco Bar", "description": "Build your own tacos with all the fixings" },
-    { "name": "Tostada Bar", "description": "Crispy tostadas with all the fixings" },
-    { "name": "Nacho Bar", "description": "Loaded nachos your way" },
-    { "name": "Chili Bar", "description": "Hearty chili with all the toppings" },
-    { "name": "Mac n Cheese Bar", "description": "Creamy mac with premium toppings" },
-    { "name": "Waffle Bar", "description": "Fresh waffles with sweet and savory toppings" },
-    { "name": "Pancake Bar", "description": "Fluffy pancakes with all the fixings" },
-    { "name": "Pasta Bar", "description": "Build your own pasta with choice of sauces and toppings" }
+    {
+      "name": "Taco Bar",
+      "description": "Build your own tacos with all the fixings"
+    },
+    {
+      "name": "Tostada Bar",
+      "description": "Crispy tostadas with all the fixings"
+    },
+    {
+      "name": "Nacho Bar",
+      "description": "Loaded nachos your way"
+    },
+    {
+      "name": "Chili Bar",
+      "description": "Hearty chili with all the toppings"
+    },
+    {
+      "name": "Mac n Cheese Bar",
+      "description": "Creamy mac with premium toppings"
+    },
+    {
+      "name": "Waffle Bar",
+      "description": "Fresh waffles with sweet and savory toppings"
+    },
+    {
+      "name": "Pancake Bar",
+      "description": "Fluffy pancakes with all the fixings"
+    },
+    {
+      "name": "Pasta Bar",
+      "description": "Build your own pasta with choice of sauces and toppings"
+    }
   ],
   "breakfast": [
-    { "name": "English Style Buffet", "description": "Eggs, sausage, roasted potatoes, beans, mushrooms", "image": "https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" },
-    { "name": "Colorado Style Buffet", "description": "Cheesy eggs, sausage, green chili potatoes, tortillas", "image": "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" },
-    { "name": "Continental Board", "description": "Croissants, egg bites, fruits, yogurts, pastries", "image": "https://images.unsplash.com/photo-1495147466023-ac5c588e2e94?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" },
-    { "name": "Bagel Board", "description": "Bagels, cream cheeses, peanut butter, jam, ham", "image": "https://images.unsplash.com/photo-1592767479746-8be3b88bcbd1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" },
-    { "name": "Breakfast Burrito Board", "description": "Meat and vegetarian burritos, salsa, sour cream", "image": "https://images.unsplash.com/photo-1626700051175-6818013e1d4f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" }
+    {
+      "name": "English Style Buffet",
+      "description": "Eggs, sausage, roasted potatoes, beans, mushrooms",
+      "image": "https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "name": "Colorado Style Buffet",
+      "description": "Cheesy eggs, sausage, green chili potatoes, tortillas",
+      "image": "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "name": "Continental Board",
+      "description": "Croissants, egg bites, fruits, yogurts, pastries",
+      "image": "https://images.unsplash.com/photo-1495147466023-ac5c588e2e94?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "name": "Bagel Board",
+      "description": "Bagels, cream cheeses, peanut butter, jam, ham",
+      "image": "https://images.unsplash.com/photo-1592767479746-8be3b88bcbd1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "name": "Breakfast Burrito Board",
+      "description": "Meat and vegetarian burritos, salsa, sour cream",
+      "image": "https://images.unsplash.com/photo-1626700051175-6818013e1d4f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    }
   ],
   "softDrinks": [
-    { "name": "Individual Cans", "description": "Soda or carbonated beverages" },
-    { "name": "Individual Bottles", "description": "Water, lemonade, iced tea, Gatorade, juices" },
-    { "name": "3-Gallon Dispensers", "description": "Water, lemonade, or iced tea for larger events" }
+    {
+      "name": "Individual Cans",
+      "description": "Soda or carbonated beverages"
+    },
+    {
+      "name": "Individual Bottles",
+      "description": "Water, lemonade, iced tea, Gatorade, juices"
+    },
+    {
+      "name": "3-Gallon Dispensers",
+      "description": "Water, lemonade, or iced tea for larger events"
+    }
   ],
   "desserts": [
-    { "name": "Cheesecake Bites", "description": "Individual cheesecake portions" },
-    { "name": "Brownie Bites", "description": "Rich chocolate brownie squares" },
-    { "name": "French Macarons", "description": "Delicate almond meringue cookies" },
-    { "name": "Various Cookies", "description": "Assorted fresh-baked cookies" },
-    { "name": "Cookie Pops", "description": "Fun cookies on sticks" },
-    { "name": "Madeleines", "description": "Classic French butter cakes" },
-    { "name": "Cinnamon Buns", "description": "Warm, gooey cinnamon rolls" }
+    {
+      "name": "Cheesecake Bites",
+      "description": "Individual cheesecake portions"
+    },
+    {
+      "name": "Brownie Bites",
+      "description": "Rich chocolate brownie squares"
+    },
+    {
+      "name": "French Macarons",
+      "description": "Delicate almond meringue cookies"
+    },
+    {
+      "name": "Various Cookies",
+      "description": "Assorted fresh-baked cookies"
+    },
+    {
+      "name": "Cookie Pops",
+      "description": "Fun cookies on sticks"
+    },
+    {
+      "name": "Madeleines",
+      "description": "Classic French butter cakes"
+    },
+    {
+      "name": "Cinnamon Buns",
+      "description": "Warm, gooey cinnamon rolls"
+    }
   ],
   "dessertNote": "We can do any combination on our \"Sweet Treat Platters\".",
   "dietaryLegend": {
@@ -390,7 +580,7 @@
     "description": "Have a special request? Reach out today — we're excited to design the perfect menu that wows your guests."
   },
   "finalCta": {
-    "headline": "Crock Hard & Crock Often",
+    "headline": "We Will Crock Your World",
     "description": "Ready to build the perfect menu for your event? Let's talk!"
   }
 }
