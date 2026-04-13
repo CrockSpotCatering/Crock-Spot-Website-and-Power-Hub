@@ -114,9 +114,16 @@ function JsonEditor({
         </button>
         {!isCollapsed && (
           <div className="p-3 space-y-3 bg-white">
+            {/* Reorder Instructions Banner */}
+            <div className="flex items-center gap-2 px-3 py-2 bg-blue-50 border border-blue-200 rounded-lg text-blue-700 text-sm">
+              <ArrowUp size={16} />
+              <ArrowDown size={16} />
+              <span className="font-medium">Use the orange arrows to reorder items</span>
+            </div>
             {data.map((item, index) => (
-              <div key={index} className="flex items-start gap-2">
-                <div className="flex flex-col gap-1 pt-1">
+              <div key={index} className="flex items-start gap-2 p-3 bg-gray-50 rounded-xl border border-gray-200">
+                {/* REORDER BUTTONS - Big and Orange */}
+                <div className="flex flex-col gap-1">
                   <button
                     onClick={() => {
                       if (index === 0) return;
@@ -125,10 +132,14 @@ function JsonEditor({
                       onChange(path, newArray);
                     }}
                     disabled={index === 0}
-                    className={`p-1 rounded ${index === 0 ? 'text-gray-300 cursor-not-allowed' : 'text-gray-500 hover:bg-gray-100 hover:text-gray-700'}`}
+                    className={`p-2 rounded-lg font-bold transition-all ${
+                      index === 0
+                        ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                        : 'bg-[#F49220] text-white hover:bg-[#e08519] shadow-md hover:shadow-lg'
+                    }`}
                     title="Move up"
                   >
-                    <ArrowUp size={14} />
+                    <ArrowUp size={18} />
                   </button>
                   <button
                     onClick={() => {
@@ -138,13 +149,21 @@ function JsonEditor({
                       onChange(path, newArray);
                     }}
                     disabled={index === data.length - 1}
-                    className={`p-1 rounded ${index === data.length - 1 ? 'text-gray-300 cursor-not-allowed' : 'text-gray-500 hover:bg-gray-100 hover:text-gray-700'}`}
+                    className={`p-2 rounded-lg font-bold transition-all ${
+                      index === data.length - 1
+                        ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                        : 'bg-[#F49220] text-white hover:bg-[#e08519] shadow-md hover:shadow-lg'
+                    }`}
                     title="Move down"
                   >
-                    <ArrowDown size={14} />
+                    <ArrowDown size={18} />
                   </button>
                 </div>
-                <span className="text-xs font-mono text-gray-400 pt-2">[{index}]</span>
+                {/* Position Badge */}
+                <div className="flex flex-col items-center justify-center min-w-[40px]">
+                  <span className="text-xs text-gray-500 font-medium">#{index + 1}</span>
+                </div>
+                {/* Content */}
                 <div className="flex-1">
                   <JsonEditor
                     data={item}
@@ -153,16 +172,17 @@ function JsonEditor({
                     level={level + 1}
                   />
                 </div>
+                {/* Delete Button */}
                 <button
                   onClick={() => {
                     const newArray = [...data];
                     newArray.splice(index, 1);
                     onChange(path, newArray);
                   }}
-                  className="p-2 text-red-500 hover:bg-red-50 rounded-lg"
+                  className="p-2 text-red-500 hover:bg-red-100 rounded-lg transition-colors"
                   title="Delete item"
                 >
-                  <Trash2 size={14} />
+                  <Trash2 size={18} />
                 </button>
               </div>
             ))}
@@ -171,10 +191,10 @@ function JsonEditor({
                 const newItem = typeof data[0] === 'object' ? { ...data[0] } : '';
                 onChange(path, [...data, newItem]);
               }}
-              className="flex items-center gap-2 px-3 py-2 text-sm text-[#F49220] hover:bg-[#F49220]/10 rounded-lg w-full"
+              className="flex items-center justify-center gap-2 px-4 py-3 text-sm font-medium text-[#F49220] hover:bg-[#F49220]/10 rounded-xl w-full border-2 border-dashed border-[#F49220]/30 hover:border-[#F49220] transition-colors"
             >
-              <Plus size={14} />
-              Add Item
+              <Plus size={18} />
+              Add New Item
             </button>
           </div>
         )}
