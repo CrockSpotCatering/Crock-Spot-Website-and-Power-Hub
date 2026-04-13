@@ -74,8 +74,16 @@
   },
   "bases": [
     {
-      "name": "Steamed Sesame Rice",
-      "description": "Long grain rice, lightly seasoned with pure sesame oil.",
+      "name": "Steamed Jasmine Rice",
+      "description": "Light, fragrant long grain jasmine rice.",
+      "tags": [
+        "GF",
+        "VG"
+      ]
+    },
+    {
+      "name": "Quinoa",
+      "description": "Power grain! High in protein and fiber, quinoa is a seed. Nutty and herby tasting.",
       "tags": [
         "GF",
         "VG"
@@ -92,14 +100,6 @@
       "name": "Hearty Pearled Barley",
       "description": "Chewy and hearty whole grain.",
       "tags": [
-        "VG"
-      ]
-    },
-    {
-      "name": "Quinoa",
-      "description": "Power grain! High in protein and fiber, quinoa is a seed. Nutty and herby tasting.",
-      "tags": [
-        "GF",
         "VG"
       ]
     },
@@ -129,18 +129,25 @@
   ],
   "proteins": [
     {
+      "name": "Southwest Chicken",
+      "tags": [
+        "GF"
+      ],
+      "description": "Roasted chicken thighs, seasoned with traditional SW spices."
+    },
+    {
+      "name": "Savory Pulled Pork",
+      "tags": [
+        "GF"
+      ],
+      "description": "Hand-pulled, melt-in-your-mouth pork shoulder slow-roasted for hours until irresistibly juicy and fork-tender."
+    },
+    {
       "name": "Garlic Chicken",
       "tags": [
         "GF"
       ],
       "description": "Roasted chicken thighs with garlic, herbs, and our signature seasoning blend."
-    },
-    {
-      "name": "Tender Slow Roasted Pulled Pork",
-      "tags": [
-        "GF"
-      ],
-      "description": "Hand-pulled, melt-in-your-mouth pork shoulder slow-roasted for hours until irresistibly juicy and fork-tender."
     },
     {
       "name": "Jalapeño Shredded Beef",
@@ -151,23 +158,24 @@
       "premium": true
     },
     {
-      "name": "Turkey Cardamom Meatballs",
-      "tags": [],
-      "description": "Ground turkey balls mixed with cardamom. Delish!"
-    },
-    {
-      "name": "Southwest Chicken",
+      "name": "Tofu and Sautéed Veggies",
       "tags": [
-        "GF"
+        "GF",
+        "VG"
       ],
-      "description": "Roasted chicken thighs, seasoned with traditional SW spices."
+      "description": "Marinated tofu with Asian vegetables: bok choy, beech and shiitake mushrooms, shredded carrots, and broccoli."
     },
     {
-      "name": "Salt-N-Pepa Chicken",
+      "name": "Salt and Pepper Chicken",
       "tags": [
         "GF"
       ],
       "description": "Roasted chicken thighs with three types of ground pepper and sea salt."
+    },
+    {
+      "name": "Turkey Cardamom Meatballs",
+      "tags": [],
+      "description": "Ground turkey balls mixed with cardamom. Delish!"
     },
     {
       "name": "Tuscan Chicken",
@@ -224,12 +232,12 @@
       "description": "One of our vegan favorites. Green lentils simmered with hominy, celery, and onions. We add Dijon mustard."
     },
     {
-      "name": "Southwestern Bean Medley",
+      "name": "4 Bean Green Chili",
       "tags": [
         "GF",
         "VG"
       ],
-      "description": "Five bean medley with green chiles. Mild and hearty."
+      "description": "Four bean medley with green chiles. Mild and hearty."
     },
     {
       "name": "Beet Nut Balls",
@@ -246,14 +254,6 @@
         "VG"
       ],
       "description": "One of our Irish-inspired delights. Great Northern white beans, shredded carrots, cabbage, and kale."
-    },
-    {
-      "name": "Tofu & Veggies",
-      "tags": [
-        "GF",
-        "VG"
-      ],
-      "description": "Marinated tofu with Asian vegetables: bok choy, beech and shiitake mushrooms, shredded carrots, and broccoli."
     }
   ],
   "sauces": [
@@ -267,6 +267,24 @@
       "description": "Made with fresh herbs. Cilantro base with parsley, garlic, lime, our secret seasonings, and love."
     },
     {
+      "name": "Avocado Velvet",
+      "heat": "Mild",
+      "tags": [
+        "GF",
+        "V"
+      ],
+      "description": "Our creamy, tangy version of guacamole. Avocados, sour cream, tomatillo, cilantro and jalapeños. Cool and smooth."
+    },
+    {
+      "name": "Spicy Crema",
+      "heat": "Medium",
+      "tags": [
+        "GF",
+        "V"
+      ],
+      "description": "Asian hot sauce made from chili paste, mixed with sour cream for medium heat."
+    },
+    {
       "name": "Fresh Basil Tzatziki",
       "heat": "Mild",
       "tags": [
@@ -276,13 +294,13 @@
       "description": "Tzatziki is used in most Mediterranean cooking. Yogurt-based sauce with fresh basil, dill, garlic, and seasonings."
     },
     {
-      "name": "Avocado Velvet",
-      "heat": "Mild",
+      "name": "Esteban's Yucatan Fire",
+      "heat": "Hot",
       "tags": [
         "GF",
-        "V"
+        "VG"
       ],
-      "description": "Our creamy, tangy version of guacamole. Avocados, sour cream, tomatillo, cilantro and jalapeños. Cool and smooth."
+      "description": "Fresh lime juice, jalapeños, habañeros, garlic, salt and pepper. HOT!"
     },
     {
       "name": "Cuban Mojo",
@@ -339,15 +357,6 @@
       "description": "Oh Miso Honey! Sweet and savory sauce with miso, ginger, honey, chili paste and sesame."
     },
     {
-      "name": "Sriracha Sour Cream",
-      "heat": "Medium",
-      "tags": [
-        "GF",
-        "V"
-      ],
-      "description": "Asian hot sauce made from chili paste, mixed with sour cream for medium heat."
-    },
-    {
       "name": "Playa Fire",
       "heat": "Medium/Hot",
       "tags": [
@@ -355,15 +364,6 @@
         "VG"
       ],
       "description": "Coconut milk-based sauce made with puréed roasted vegetables, lime, and garlic."
-    },
-    {
-      "name": "Esteban's Yucatan Fire",
-      "heat": "Hot",
-      "tags": [
-        "GF",
-        "VG"
-      ],
-      "description": "Fresh lime juice, jalapeños, habañeros, garlic, salt and pepper. HOT!"
     }
   ],
   "toppers": [
