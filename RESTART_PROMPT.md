@@ -109,7 +109,7 @@ Implemented:
 - Purple: `#614B8A`
 - Dark Purple: `#2F2744` (backgrounds)
 
-### Current Status (April 1, 2026)
+### Current Status (April 13, 2026)
 
 **🎉 SITE IS LIVE!**
 - **Primary Domain:** https://www.thecrockspot.com
@@ -129,6 +129,12 @@ Implemented:
 - All email links open in new windows (users stay on page)
 - Peter Edholm added as third founder throughout site
 
+**Menu Updates (April 13, 2026):**
+- Bases reordered: Jasmine Rice, Quinoa, Couscous, Barley, Cilantro Lime Rice
+- Proteins reordered: SW Chicken, Savory Pulled Pork, Garlic Chicken, Jalapeño Beef, Tofu, Salt & Pepper Chicken
+- Sauces reordered: Chimichurri, Avocado Velvet, Spicy Crema, Basil Tzatziki, Esteban's Yucatan Fire
+- Renamed items: Jasmine Rice, Savory Pulled Pork, Salt and Pepper Chicken, Tofu and Sautéed Veggies, 4 Bean Green Chili, Spicy Crema
+
 **CMS:**
 - Power Hub CMS complete at https://www.thecrockspot.com/power-hub
 - Content editor, Media Library, AI Assist
@@ -137,6 +143,7 @@ Implemented:
 - PDF/DOCX upload working (uses `unpdf` + `mammoth`)
 - GoHighLevel integration for contact forms
 - All JSON files validated ✓
+- **NEW (April 13):** Reorder buttons for menu items (big orange up/down arrows)
 
 **Domain Configuration:**
 - thecrockspot.com → Vercel (DNS at GoDaddy: A record + CNAME)

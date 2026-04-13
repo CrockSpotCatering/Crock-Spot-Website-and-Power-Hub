@@ -1,5 +1,73 @@
 # CrockSpot Session Log
 
+## April 13, 2026 - Session: Menu Reordering & Power Hub CMS Enhancements
+
+### What Was Done This Session
+
+#### 1. **Menu Reordering for Suggestive Selling**
+Reordered menu items on https://www.thecrockspot.com/menus for better suggestive selling:
+
+**Step 1 - Bases:**
+- Renamed "Steamed Sesame Rice" → **"Steamed Jasmine Rice"**
+- New order: Jasmine Rice, Quinoa, Fluffy Couscous, Hearty Pearled Barley, Cilantro Lime Rice
+
+**Step 2 - Proteins:**
+- Renamed "Tender Slow Roasted Pulled Pork" → **"Savory Pulled Pork"**
+- Renamed "Salt-N-Pepa Chicken" → **"Salt and Pepper Chicken"**
+- Renamed "Tofu & Veggies" → **"Tofu and Sautéed Veggies"**
+- Renamed "Southwestern Bean Medley" → **"4 Bean Green Chili"**
+- New order: Southwest Chicken, Savory Pulled Pork, Garlic Chicken, Jalapeño Shredded Beef, Tofu and Sautéed Veggies, Salt and Pepper Chicken
+
+**Step 3 - Sauces:**
+- Renamed "Sriracha Sour Cream" → **"Spicy Crema"**
+- New order: Chimichurri, Avocado Velvet, Spicy Crema, Fresh Basil Tzatziki, Esteban's Yucatan Fire
+
+#### 2. **Power Hub CMS - Reorder Feature**
+Added ability for CrockSpot team to reorder menu items directly in Power Hub CMS:
+- Added **up/down arrow buttons** to all array items
+- **Big orange buttons** (brand color #F49220) for high visibility
+- **Blue instruction banner**: "Use the orange arrows to reorder items"
+- Position badges changed from [0] to #1, #2, #3 for clarity
+- Each item now in bordered card for visual separation
+- Disabled buttons are gray, active buttons are bright orange with shadow
+
+#### 3. **Build & Testing**
+- ✅ Build successful - no TypeScript errors
+- ✅ Menus page loads correctly (HTTP 200)
+- ✅ Power Hub content editor loads correctly (HTTP 200)
+- ✅ All menu changes verified in JSON
+
+### Commits This Session
+| Commit | Description |
+|--------|-------------|
+| `d61216b` | Reorder menu items for suggestive selling |
+| `06755b1` | Add reorder buttons to Power Hub CMS content editor |
+| `3b77855` | Make reorder buttons super obvious in Power Hub CMS |
+
+### Files Changed
+| File | Changes |
+|------|---------|
+| `content/menus.json` | Renamed items, reordered bases/proteins/sauces |
+| `app/power-hub/dashboard/content/[file]/page.tsx` | Added reorder buttons with up/down arrows |
+
+### Power Hub CMS Capabilities (Updated)
+The CrockSpot team can now do the following in Power Hub at `/power-hub/dashboard/content/menus`:
+- ✅ Edit item names
+- ✅ Edit descriptions
+- ✅ **Reorder items** (NEW - up/down arrows)
+- ✅ Add new items
+- ✅ Delete items
+- ✅ Save & Deploy to live site
+
+### Git Status
+- ✅ All changes committed
+- ✅ Pushed to GitHub (CrockSpotCatering account)
+- ✅ Vercel auto-deployed
+- ✅ Build tested and passing
+- ✅ GitHub CLI active account: CrockSpotCatering
+
+---
+
 ## April 1, 2026 - Session: 🎉 SITE GOES LIVE! Domain Configuration
 
 ### What Was Done This Session
@@ -601,6 +669,8 @@ Footer:
 - [x] ~~Add catering packages to The Spot Cafe~~ ✅ DONE (March 27)
 - [x] ~~Update The Spot Cafe logo~~ ✅ DONE (March 31)
 - [x] ~~Add alcohol certification to The Spot Cafe~~ ✅ DONE (March 31)
+- [x] ~~Reorder menu items for suggestive selling~~ ✅ DONE (April 13)
+- [x] ~~Add reorder buttons to Power Hub CMS~~ ✅ DONE (April 13)
 - [ ] Replace remaining Unsplash hero images with client photos
 - [ ] Add partner logos to Community Partners page
 - [ ] Re-enable GHL notification actions for real leads
