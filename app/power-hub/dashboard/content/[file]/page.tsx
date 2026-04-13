@@ -22,6 +22,8 @@ import {
   Trash2,
   Rocket,
   GitCommit,
+  ArrowUp,
+  ArrowDown,
 } from 'lucide-react';
 
 // Recursive JSON editor component
@@ -114,6 +116,34 @@ function JsonEditor({
           <div className="p-3 space-y-3 bg-white">
             {data.map((item, index) => (
               <div key={index} className="flex items-start gap-2">
+                <div className="flex flex-col gap-1 pt-1">
+                  <button
+                    onClick={() => {
+                      if (index === 0) return;
+                      const newArray = [...data];
+                      [newArray[index - 1], newArray[index]] = [newArray[index], newArray[index - 1]];
+                      onChange(path, newArray);
+                    }}
+                    disabled={index === 0}
+                    className={`p-1 rounded ${index === 0 ? 'text-gray-300 cursor-not-allowed' : 'text-gray-500 hover:bg-gray-100 hover:text-gray-700'}`}
+                    title="Move up"
+                  >
+                    <ArrowUp size={14} />
+                  </button>
+                  <button
+                    onClick={() => {
+                      if (index === data.length - 1) return;
+                      const newArray = [...data];
+                      [newArray[index], newArray[index + 1]] = [newArray[index + 1], newArray[index]];
+                      onChange(path, newArray);
+                    }}
+                    disabled={index === data.length - 1}
+                    className={`p-1 rounded ${index === data.length - 1 ? 'text-gray-300 cursor-not-allowed' : 'text-gray-500 hover:bg-gray-100 hover:text-gray-700'}`}
+                    title="Move down"
+                  >
+                    <ArrowDown size={14} />
+                  </button>
+                </div>
                 <span className="text-xs font-mono text-gray-400 pt-2">[{index}]</span>
                 <div className="flex-1">
                   <JsonEditor
@@ -130,6 +160,7 @@ function JsonEditor({
                     onChange(path, newArray);
                   }}
                   className="p-2 text-red-500 hover:bg-red-50 rounded-lg"
+                  title="Delete item"
                 >
                   <Trash2 size={14} />
                 </button>
