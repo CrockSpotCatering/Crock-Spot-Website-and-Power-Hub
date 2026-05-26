@@ -5,9 +5,11 @@ The Crock Spot is Denver's premier event caterer. This is a Next.js 16 website w
 
 ## CRITICAL: Read First
 Before making any changes, read these files in order:
-1. `SESSION_LOG.md` - Recent work and current status
-2. `RESTART_PROMPT.md` - Full project context
+1. `RESUME.md` - Durable project context (coordinates, rules, structure, active workstreams) ← **start here**
+2. `SESSION_LOG.md` - Recent work and current status
 3. `DEPLOYMENT.md` - Deployment procedures
+
+`RESTART_PROMPT.md` and the older docs are kept for history but `RESUME.md` is the source of truth.
 
 ## Key Rules
 
@@ -26,8 +28,10 @@ Before making any changes, read these files in order:
 
 ## Project Location
 ```bash
-cd /Users/brettlechtenberg/Documents/agent-girl/crockspot
+cd /Users/brettlechtenberg/dev/crockspot
 ```
+
+🚫 **NEVER work in `~/Documents/agent-girl/crockspot`** — that folder is under Google Drive sync and corrupts `.git` (duplicate `index 2`, `index 3`… files, `git status` hangs). The only correct home is `~/dev/crockspot`.
 
 ## Project Structure
 - `/app/` - Next.js pages and API routes
@@ -37,10 +41,10 @@ cd /Users/brettlechtenberg/Documents/agent-girl/crockspot
 
 ## Quick Commands
 ```bash
-cd /Users/brettlechtenberg/Documents/agent-girl/crockspot
+cd /Users/brettlechtenberg/dev/crockspot
 npm run dev          # Dev server at localhost:3000
 npm run build        # Build for production
-git push origin main # Deploy to Vercel
+git push origin main # Deploy to Vercel (auto-deploy)
 ```
 
 ## Business Focus
