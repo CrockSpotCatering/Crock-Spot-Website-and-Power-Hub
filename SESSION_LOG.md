@@ -99,6 +99,73 @@ Walk Steven and Peter through the dashboard and the new Follow-Up section. If th
 
 ---
 
+## May 26, 2026 (evening) — Session: Email deliverability — GHL dedicated sending domain
+
+### Goal
+Stop GHL-sent emails (campaigns, automations, the planned Phase 2 follow-up emails) from going to spam by giving GHL a dedicated, fully authenticated sending domain on `thecrockspot.com` — SPF + DKIM + DMARC, all green in GHL, all verified at GoDaddy.
+
+### What we found before touching anything
+- GHL had auto-created an unverified dedicated domain at `mail.thecrockspot.com` with a 30-day auto-delete clock (warning: deletion JUN 18).
+- GoDaddy DNS for `thecrockspot.com` already had ~30 records. Audit revealed:
+  - **Active and untouchable:** Vercel website (`A @ → 216.198.79.1`, `CNAME www → ae446c4f4f389a32.vercel-dns-017.com`), Google Workspace email (5 × MX → `*.aspmx.l.google.com`, 2 × `google-site-verification` TXTs, SRV `_autodiscover._tcp`).
+  - **Existing CNAME `mail → pop.secureserver.net`** — leftover from a never-used GoDaddy Workspace Email default. This is what blocked GHL's `mail.thecrockspot.com` setup; GoDaddy's auto-config tried to "help" by re-pointing it to itself, which would have only added that one record and left the rest of GHL's setup unverified.
+  - **No root SPF record** — Google Workspace had been sending from Steven@thecrockspot.com / info@thecrockspot.com with no SPF, weakening deliverability on his own outbound Gmail.
+  - Old SendGrid records, GoDaddy Workspace defaults — all inert, all left alone (don't touch what isn't broken).
+- Confirmed with Steven via text that the active Google Workspace mailboxes are `Steven@thecrockspot.com` (also spelled `Stephen@`) and `info@thecrockspot.com` (voicemail catch-all). MUST NOT break those.
+
+### Decision: switch GHL from `mail.` to `send.`
+Deleting the `mail` CNAME would probably have been safe but carried unnecessary risk. We deleted the `mail.thecrockspot.com` dedicated domain in GHL and re-added it as `send.thecrockspot.com` — clean subdomain, zero collision, semantically reads as "outbound campaigns." This is the GHL → GoDaddy pattern Brett should reuse for any future deliverability work.
+
+### Records added to GoDaddy DNS (manual, not Domain Connect)
+GoDaddy's Domain Connect template for LeadConnector is broken — it offers only the POP3 CNAME. Manual was required. All values added with `Name` field stripped of `.thecrockspot.com` (GoDaddy auto-appends).
+
+| # | Type | Name | Value | Priority | Purpose |
+|---|------|------|-------|----------|---------|
+| 1 | TXT | `send` | `v=spf1 include:spf.leadconnectorhq.com include:mailgun.org ~all` | — | GHL SPF |
+| 2 | TXT | `smtp._domainkey.send` | `k=rsa; p=MIGfMA0G…QIDAQAB` (225 chars, copied via GHL Copy button) | — | GHL DKIM |
+| 3 | CNAME | `email.send` | `mailgun.org` | — | GHL tracking |
+| 4 | MX | `send` | `mxa.mailgun.org` | 10 | GHL inbound (replies → Mailgun catch-all) |
+| 5 | MX | `send` | `mxb.mailgun.org` | 10 | GHL inbound (replies → Mailgun catch-all) |
+| 6 | TXT | `_dmarc.send` | `v=DMARC1; p=none; rua=mailto:CrockSpotCatering@gmail.com` | — | DMARC monitor-only |
+| 7 | TXT | `@` | `v=spf1 include:_spf.google.com ~all` | — | **Bonus: fixes root SPF for Google Workspace outbound — separate win for Steven's @thecrockspot.com Gmail** |
+
+Verified resolution from the public side via `dig @8.8.8.8` immediately after save — all 7 propagated within minutes (GoDaddy default TTL is short).
+
+### GHL verification
+Clicked **Verify records** → all 6 GHL records flipped green instantly. SSL Issued within minutes of clicking **Verify Domain**. Domain Warmup is now "In Progress — Stage 1" (1,000 emails/day cap; auto-ramps).
+
+### Dedicated Header set (DMARC fallback)
+- **From Name:** `Crock Spot Catering`
+- **From Email:** `Steven@thecrockspot.com`
+
+Deliberately NOT `*@send.thecrockspot.com` — the `send` subdomain MX points to Mailgun's catch-all, so replies would vanish. Using Steven's real Google Workspace inbox means replies route back to him. DMARC alignment still passes because the root `@thecrockspot.com` now has SPF (Record 7) and DKIM signing happens via the `send` subdomain.
+
+### What's NOT done — pick up here next session
+1. **Send a test email and verify SPF/DKIM/DMARC = PASS in Gmail's "Show original" view.** Steps:
+   - GHL → Conversations → New Conversation
+   - Pick a contact (or temporarily add a personal Gmail you control — NOT Steven's Workspace, since same-domain mail bypasses some checks)
+   - Channel: Email
+   - From: should default to `Crock Spot Catering <Steven@thecrockspot.com>`
+   - Send anything (subject "deliverability test")
+   - In Gmail, open the email → ⋯ menu → "Show original"
+   - Confirm: **SPF: PASS** (domain `send.thecrockspot.com` or `thecrockspot.com`), **DKIM: PASS** (domain `send.thecrockspot.com`), **DMARC: PASS**
+   - Screenshot the header block for the record
+2. **Flip `content/settings.json` → `followUpWebhook.enabled = true`** ONLY after Phase 2 GHL workflow is built and Steven/Peter opt in (still requires their explicit consent — see RESUME.md "Active workstreams").
+3. **Tighten DMARC after 2–4 weeks of clean sending** — change `p=none` to `p=quarantine` in the `_dmarc.send` TXT once `rua=` reports show no surprises.
+
+### Files changed in this session
+None — all work was in GHL admin and GoDaddy DNS, no repo code touched.
+
+### Reusable pattern (for RESUME.md)
+GHL dedicated sending domain on a GoDaddy-registered domain that already has Google Workspace email:
+- Always use a fresh subdomain (`send.`, never `mail.` — GoDaddy reserves `mail` for its own Workspace Email default CNAME)
+- Always add records manually; skip GoDaddy's Domain Connect template for LeadConnector (broken — only offers POP3 CNAME)
+- Always add root SPF for Google Workspace in the same session (`v=spf1 include:_spf.google.com ~all` on `@`) — fixes a separate deliverability hole most GoDaddy + Workspace customers don't realize they have
+- Set the GHL Dedicated Header's From Email to a real inbox on the root domain (`user@thecrockspot.com`), NOT on the send subdomain — replies on the subdomain go to Mailgun catch-all and disappear
+- Verify with `dig @8.8.8.8 TXT/MX/CNAME <name>.<domain>` before clicking GHL's Verify button (saves false-fail clicks)
+
+---
+
 ## May 26, 2026 — Session: Event Intake Sheets in Power Hub
 
 ### Goal

@@ -135,6 +135,18 @@ All page components import directly from these files. Editing a JSON file = edit
 
 ---
 
+## Email deliverability
+
+- **Dedicated sending domain:** `send.thecrockspot.com` — fully verified in GHL (SPF + DKIM + DMARC + tracking CNAME + 2× MX). SSL issued. Domain Warmup auto-progressing from Stage 1 (1,000 emails/day).
+- **GHL Dedicated Header:** From Name = `Crock Spot Catering`, From Email = `Steven@thecrockspot.com` (root-domain inbox so replies land in his Google Workspace, not Mailgun catch-all).
+- **Root SPF added** at GoDaddy: `v=spf1 include:_spf.google.com ~all` on `@` — fixes deliverability for Steven's outbound Google Workspace mail (was missing before this session).
+- **DMARC:** `_dmarc.send` is `p=none` (monitor only) with `rua=mailto:CrockSpotCatering@gmail.com`. Tighten to `p=quarantine` after 2–4 weeks of clean sending and no surprises in the `rua` reports.
+- **Untouchable Google Workspace DNS** on `thecrockspot.com` root: 5× MX → `*.aspmx.l.google.com`, 2× `google-site-verification` TXT, SRV `_autodiscover._tcp`. Active mailboxes: `Steven@thecrockspot.com` (also spelled `Stephen@`), `info@thecrockspot.com`.
+- **Pattern for any future GHL deliverability work on a GoDaddy + Workspace domain:** always use a fresh subdomain (`send.`, never `mail.` — GoDaddy reserves it); always add records manually (skip GoDaddy Domain Connect template for LeadConnector — it's broken, only offers a POP3 CNAME); verify with `dig @8.8.8.8` before clicking GHL Verify.
+- **Open: test email needed** to confirm SPF/DKIM/DMARC = PASS in Gmail's "Show original" view. See SESSION_LOG.md May 26 evening entry for click-by-click test instructions.
+
+---
+
 ## Active workstreams (things you may pick up)
 
 - **Power Hub Events polish** — CSV export of all events, link the existing `/calendar` tab into real events data (currently demo `useState` only), notification when a new event is created.
