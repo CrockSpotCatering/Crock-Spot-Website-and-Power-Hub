@@ -1,5 +1,62 @@
 # CrockSpot Session Log
 
+## May 26, 2026 (late evening) — Session: Email deliverability — live test + root DMARC fix
+
+### Goal
+Pick up the open thread from earlier today: send a live test email through the new `send.thecrockspot.com` GHL sending domain and confirm SPF/DKIM/DMARC all PASS in Gmail's "Show original" view.
+
+### Test 1 — surfaced a real gap
+Sent a live email via GHL composer (Crock Spot sub-account → Contacts → new contact `brett@brettlechtenberg.com` → Email channel). After fixing the From in the composer (see "Cosmetic gotcha" below), the email landed in Gmail Inbox cleanly. But headers showed:
+- ✅ SPF: PASS (IP 198.244.50.142, Mailgun)
+- ✅ DKIM: PASS (domain `send.thecrockspot.com`)
+- ❌ **DMARC: FAIL**
+
+**Root cause:** the only DMARC record was at `_dmarc.send.thecrockspot.com`. Visible From was `Steven@thecrockspot.com` (root domain). Gmail looked for `_dmarc.thecrockspot.com`, didn't find one, so DMARC failed. The earlier session's design intentionally used a root-domain From (so replies route to Steven's Workspace inbox instead of Mailgun's catch-all) but missed that this requires a root-level DMARC record with relaxed alignment for the `send.` DKIM signature to count.
+
+### Fix — added root DMARC at GoDaddy
+One new TXT record added at GoDaddy DNS for `thecrockspot.com`:
+
+| Field | Value |
+|---|---|
+| Type | TXT |
+| Name | `_dmarc` |
+| Value | `v=DMARC1; p=none; sp=none; adkim=r; aspf=r; rua=mailto:CrockSpotCatering@gmail.com` |
+| TTL | 1 Hour |
+
+Key flags: `p=none` + `sp=none` (monitor only, no policy enforcement yet); `adkim=r` + `aspf=r` (relaxed alignment — a `send.` DKIM signature now counts as aligned with a root-domain From). The existing `_dmarc.send` record was left untouched and still applies for any mail sent as `*@send.thecrockspot.com`.
+
+Propagation was immediate (GoDaddy's TTL is short):
+```
+$ dig @8.8.8.8 TXT _dmarc.thecrockspot.com +short
+"v=DMARC1; p=none; sp=none; adkim=r; aspf=r; rua=mailto:CrockSpotCatering@gmail.com"
+```
+
+### Test 2 — full pass
+Resent the test from GHL. Gmail "Show original" summary table:
+- ✅ **SPF: PASS** with IP 198.244.50.142
+- ✅ **DKIM: PASS** with domain `send.thecrockspot.com`
+- ✅ **DMARC: PASS**
+
+Raw `Authentication-Results` line confirmed the pass triple: `spf=pass ... dkim=pass ... dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=thecrockspot.com`.
+
+### Cosmetic gotcha — GHL composer From defaults to wrong identity for Brett
+When Brett opens the GHL composer in the Crock Spot sub-account, From auto-fills as `brett@brettlechtenberg.com` / `Brett Lechtenberg` instead of the dedicated header. **This is not a bug or misconfiguration.** Investigated via Settings → My Staff: the sub-account has exactly one user — Steve Smith (`steven@thecrockspot.com`, ACCOUNT-ADMIN). Brett is logged in at the agency level and "visits" the sub-account, so GHL falls back to his agency identity. **For Steven (the actual operator), the From correctly defaults to `Steven@thecrockspot.com` / Crock Spot Catering.** No fix needed unless Brett starts sending real customer mail — in which case add Brett as an Admin user in the sub-account.
+
+### `pbcopy` workflow added to RESUME.md
+Brett uses `pbcopy` to receive long values (DNS strings, env vars, etc.) on the macOS clipboard so he can paste them verbatim. Pattern: `printf '%s' 'THE VALUE' | pbcopy` (`printf`, not `echo`, to avoid trailing newline). Confirm with `pbpaste`. Added to RESUME.md under a new "Working with Brett — preferences" section so future agents do this proactively without being asked.
+
+### Files changed
+- `RESUME.md` — new "Working with Brett — preferences" section; Email deliverability section updated (two DMARC records documented, verification milestone recorded, cosmetic From-default non-issue documented, removed the now-resolved "test email needed" open thread)
+- `SESSION_LOG.md` — this entry
+
+No repo code changed. All work was in GoDaddy DNS + GHL admin + Gmail.
+
+### Open follow-ups
+- **~2–4 weeks (calendar reminder):** tighten both DMARC records from `p=none` to `p=quarantine` once `rua=` aggregate reports at `CrockSpotCatering@gmail.com` show no surprises.
+- **Steven lead-flow questions** are the gating dependency for the Follow-Up Phase 2 GHL workflow build — unrelated to deliverability, but the next planned work on this stack.
+
+---
+
 ## May 26, 2026 (afternoon) — Session: Follow-Up system (sticky-note killer)
 
 ### Goal

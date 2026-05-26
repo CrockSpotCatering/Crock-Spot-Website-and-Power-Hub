@@ -43,6 +43,12 @@ Durable, structured context for resuming work on **The Crock Spot** website + Po
 
 ---
 
+## Working with Brett — preferences
+
+- **Putting values on Brett's clipboard:** when Brett needs to paste a long/exact string into a GoDaddy DNS field, GHL record, env var, etc., copy it to the macOS clipboard with `printf '%s' 'THE VALUE' | pbcopy` (use `printf`, not `echo`, so no trailing newline). Confirm with `pbpaste` and show length. Brett may refer to this as "put it on my clipboard" or "the copy thing." Do this proactively whenever the agent gives Brett a string longer than ~30 chars to paste somewhere.
+
+---
+
 ## Tech stack
 
 - Next.js 16 (App Router) + React + TypeScript
@@ -140,10 +146,14 @@ All page components import directly from these files. Editing a JSON file = edit
 - **Dedicated sending domain:** `send.thecrockspot.com` — fully verified in GHL (SPF + DKIM + DMARC + tracking CNAME + 2× MX). SSL issued. Domain Warmup auto-progressing from Stage 1 (1,000 emails/day).
 - **GHL Dedicated Header:** From Name = `Crock Spot Catering`, From Email = `Steven@thecrockspot.com` (root-domain inbox so replies land in his Google Workspace, not Mailgun catch-all).
 - **Root SPF added** at GoDaddy: `v=spf1 include:_spf.google.com ~all` on `@` — fixes deliverability for Steven's outbound Google Workspace mail (was missing before this session).
-- **DMARC:** `_dmarc.send` is `p=none` (monitor only) with `rua=mailto:CrockSpotCatering@gmail.com`. Tighten to `p=quarantine` after 2–4 weeks of clean sending and no surprises in the `rua` reports.
+- **DMARC — two records:**
+  - `_dmarc.send.thecrockspot.com` = `v=DMARC1; p=none; rua=mailto:CrockSpotCatering@gmail.com` (subdomain policy, monitor only)
+  - `_dmarc.thecrockspot.com` = `v=DMARC1; p=none; sp=none; adkim=r; aspf=r; rua=mailto:CrockSpotCatering@gmail.com` (**root** policy with relaxed alignment — required so a `send.` DKIM signature aligns with a root-domain visible From like `Steven@thecrockspot.com`. Without this record DMARC fails on every GHL-sent email.)
+  - Tighten both to `p=quarantine` after 2–4 weeks of clean sending and no surprises in the `rua` reports.
 - **Untouchable Google Workspace DNS** on `thecrockspot.com` root: 5× MX → `*.aspmx.l.google.com`, 2× `google-site-verification` TXT, SRV `_autodiscover._tcp`. Active mailboxes: `Steven@thecrockspot.com` (also spelled `Stephen@`), `info@thecrockspot.com`.
-- **Pattern for any future GHL deliverability work on a GoDaddy + Workspace domain:** always use a fresh subdomain (`send.`, never `mail.` — GoDaddy reserves it); always add records manually (skip GoDaddy Domain Connect template for LeadConnector — it's broken, only offers a POP3 CNAME); verify with `dig @8.8.8.8` before clicking GHL Verify.
-- **Open: test email needed** to confirm SPF/DKIM/DMARC = PASS in Gmail's "Show original" view. See SESSION_LOG.md May 26 evening entry for click-by-click test instructions.
+- **Verified end-to-end on May 26, 2026 evening:** live GHL test email to `brett@brettlechtenberg.com` landed in Gmail Inbox with **SPF=PASS, DKIM=PASS, DMARC=PASS** (full pass triple in `Authentication-Results`). Setup is production-ready.
+- **Pattern for any future GHL deliverability work on a GoDaddy + Workspace domain:** always use a fresh subdomain (`send.`, never `mail.` — GoDaddy reserves it); always add records manually (skip GoDaddy Domain Connect template for LeadConnector — it's broken, only offers a POP3 CNAME); always add a **root** DMARC record with relaxed alignment alongside the subdomain DMARC; verify with `dig @8.8.8.8` before clicking GHL Verify.
+- **Known cosmetic non-issue:** when Brett (agency-level admin, not a sub-account user) opens the GHL composer in the Crock Spot sub-account, the From defaults to `brett@brettlechtenberg.com` because Brett isn't a user *inside* the sub-account. The only user is Steven (`steven@thecrockspot.com`, ACCOUNT-ADMIN), so when Steven composes the From correctly defaults to the dedicated header. No fix needed unless Brett starts sending customer mail directly — then add Brett as an Admin user in the sub-account.
 
 ---
 
