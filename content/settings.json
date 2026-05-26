@@ -4,5 +4,12 @@
     "claudeApiKey": "",
     "openaiApiKey": "",
     "lastUpdated": ""
+  },
+  "followUpWebhook": {
+    "enabled": false,
+    "url": "",
+    "sharedSecret": "",
+    "lastSyncedAt": "",
+    "notes": "Phase 2 — when enabled, every event save POSTs the event payload to this URL (typically a GoHighLevel inbound webhook). The sharedSecret is sent in the X-CrockSpot-Signature header so GHL can verify the request. Default: DISABLED."
   }
 }

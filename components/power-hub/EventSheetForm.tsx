@@ -65,6 +65,17 @@ export type EventFormState = {
   post_notes: boolean;
   // Status
   status: string;
+  // Follow-Up (Phase 1 — recorded; Phase 2 — will sync to GHL when enabled)
+  nextFollowUpDate: string;          // YYYY-MM-DD, blank = no follow-up scheduled
+  assignedTo: 'Steven' | 'Peter' | 'Both' | '';
+  followUpDone: boolean;             // Was today's follow-up completed?
+  followUpLog: FollowUpLogEntry[];   // Append-only conversation history
+};
+
+export type FollowUpLogEntry = {
+  at: string;       // ISO timestamp
+  who: string;      // 'Steven' | 'Peter' | typed-in name
+  note: string;     // What happened in this follow-up
 };
 
 export const emptyEventForm: EventFormState = {
@@ -104,6 +115,10 @@ export const emptyEventForm: EventFormState = {
   post_followup: false,
   post_notes: false,
   status: 'New Lead',
+  nextFollowUpDate: '',
+  assignedTo: 'Steven',
+  followUpDone: false,
+  followUpLog: [],
 };
 
 interface EventSheetFormProps {
@@ -501,6 +516,61 @@ export default function EventSheetForm({
             </Field>
           </Section>
 
+          {/* ── Follow-Up ────────────────────────────── */}
+          <Section icon="🔔" title="Follow-Up" highlight="amber">
+            <Grid3>
+              <Field label="Next Follow-Up Date">
+                <input
+                  type="date"
+                  value={form.nextFollowUpDate}
+                  onChange={(e) => update('nextFollowUpDate', e.target.value)}
+                  className={inputCls}
+                />
+              </Field>
+              <Field label="Assigned To">
+                <select
+                  value={form.assignedTo}
+                  onChange={(e) =>
+                    update('assignedTo', e.target.value as EventFormState['assignedTo'])
+                  }
+                  className={inputCls}
+                >
+                  <option value="Steven">Steven</option>
+                  <option value="Peter">Peter</option>
+                  <option value="Both">Both</option>
+                </select>
+              </Field>
+              <Field label="Status">
+                <label className="flex items-center gap-3 mt-3 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={form.followUpDone}
+                    onChange={(e) => update('followUpDone', e.target.checked)}
+                    className="w-5 h-5 accent-crock-orange cursor-pointer"
+                  />
+                  <span
+                    className={`text-crock-dark ${
+                      form.followUpDone ? 'line-through opacity-60' : ''
+                    }`}
+                  >
+                    Today&rsquo;s follow-up done
+                  </span>
+                </label>
+              </Field>
+            </Grid3>
+
+            <FollowUpLog
+              entries={form.followUpLog}
+              onAdd={(entry) =>
+                setForm((f) => ({
+                  ...f,
+                  followUpLog: [...f.followUpLog, entry],
+                }))
+              }
+              defaultAuthor={form.assignedTo === 'Peter' ? 'Peter' : 'Steven'}
+            />
+          </Section>
+
           {/* ── Pre-Event Checklist ──────────────────── */}
           <Section icon="✅" title="Pre-Event Checklist" highlight="green">
             <div className="space-y-2">
@@ -679,6 +749,32 @@ function EventSheetPrintView({ form }: { form: EventFormState }) {
 
       <PrintSection icon="🧠" title="Client Insights">
         <PrintBlock value={form.clientInsights} />
+      </PrintSection>
+
+      <PrintSection icon="🔔" title="Follow-Up" highlight>
+        <div className="grid grid-cols-3 gap-x-6 gap-y-0.5 mb-2">
+          <PrintRow label="Next Date" value={form.nextFollowUpDate ? fmtDate(form.nextFollowUpDate) : ''} />
+          <PrintRow label="Assigned" value={form.assignedTo} />
+          <PrintRow
+            label="Today's nudge"
+            value={form.followUpDone ? 'Complete' : 'Pending'}
+          />
+        </div>
+        {form.followUpLog.length === 0 ? (
+          <div className="text-gray-400 italic">—</div>
+        ) : (
+          <ol className="space-y-1">
+            {[...form.followUpLog]
+              .sort((a, b) => b.at.localeCompare(a.at))
+              .map((entry, i) => (
+                <li key={`p-${entry.at}-${i}`} className="mb-1">
+                  <span className="font-semibold">{entry.who}</span>
+                  <span className="text-gray-600"> · {formatLogStamp(entry.at)}</span>
+                  <div className="whitespace-pre-wrap pl-2">{entry.note}</div>
+                </li>
+              ))}
+          </ol>
+        )}
       </PrintSection>
 
       <PrintSection icon="✅" title="Pre-Event Checklist">
@@ -870,4 +966,126 @@ function Check({
       </span>
     </label>
   );
+}
+
+// ─── Follow-Up Log ─────────────────────────────────────────────
+// Append-only timestamped conversation history. Replaces the single
+// "client insights" textarea pattern with a real audit trail — critical
+// because Steven is the sole point of lead intake; if Peter picks one
+// up, he needs to know what's already been said.
+
+function FollowUpLog({
+  entries,
+  onAdd,
+  defaultAuthor,
+}: {
+  entries: FollowUpLogEntry[];
+  onAdd: (entry: FollowUpLogEntry) => void;
+  defaultAuthor: string;
+}) {
+  const [draft, setDraft] = useState('');
+  const [who, setWho] = useState(defaultAuthor);
+
+  const addEntry = () => {
+    const trimmed = draft.trim();
+    if (!trimmed) return;
+    onAdd({
+      at: new Date().toISOString(),
+      who: who.trim() || defaultAuthor,
+      note: trimmed,
+    });
+    setDraft('');
+  };
+
+  const sorted = [...entries].sort((a, b) => b.at.localeCompare(a.at));
+
+  return (
+    <div className="mt-6">
+      <div className="text-sm font-semibold text-crock-gray-dark mb-2 flex items-center gap-2">
+        📝 Follow-Up Notes
+        <span className="text-xs font-normal text-crock-gray-dark/60">
+          ({entries.length} {entries.length === 1 ? 'entry' : 'entries'})
+        </span>
+      </div>
+
+      {/* New entry form */}
+      <div className="bg-white border border-crock-gray-light/40 rounded-lg p-3 mb-3">
+        <textarea
+          value={draft}
+          onChange={(e) => setDraft(e.target.value)}
+          rows={2}
+          placeholder="Add a quick note about today's follow-up (e.g. 'Called Marcus, left voicemail. Try Tuesday after 10am.')"
+          className="w-full px-3 py-2 border border-crock-gray-light rounded-md focus:border-crock-orange focus:ring-2 focus:ring-crock-orange/20 outline-none transition text-sm text-crock-dark"
+          onKeyDown={(e) => {
+            if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') {
+              e.preventDefault();
+              addEntry();
+            }
+          }}
+        />
+        <div className="flex items-center justify-between mt-2 gap-3">
+          <div className="flex items-center gap-2 text-xs text-crock-gray-dark/70">
+            <span>From:</span>
+            <select
+              value={who}
+              onChange={(e) => setWho(e.target.value)}
+              className="border border-crock-gray-light rounded px-2 py-1 text-sm text-crock-dark"
+            >
+              <option>Steven</option>
+              <option>Peter</option>
+              <option>Mandy</option>
+              <option>Other</option>
+            </select>
+            <span className="hidden md:inline text-[10px] opacity-60">
+              Tip: ⌘/Ctrl + Enter to add
+            </span>
+          </div>
+          <button
+            type="button"
+            onClick={addEntry}
+            disabled={!draft.trim()}
+            className="px-4 py-1.5 text-sm font-semibold bg-crock-orange text-white rounded-md hover:bg-crock-orange-dark disabled:opacity-40 disabled:cursor-not-allowed transition"
+          >
+            + Add note
+          </button>
+        </div>
+      </div>
+
+      {/* History */}
+      {sorted.length === 0 ? (
+        <p className="text-sm text-crock-gray-dark/60 italic px-1">
+          No follow-up notes yet. Add one above when you call, text, or email
+          this client.
+        </p>
+      ) : (
+        <ol className="space-y-2">
+          {sorted.map((entry, i) => (
+            <li
+              key={`${entry.at}-${i}`}
+              className="bg-white border border-crock-gray-light/40 rounded-lg p-3 text-sm"
+            >
+              <div className="flex items-center justify-between mb-1 text-xs text-crock-gray-dark/70">
+                <span className="font-semibold text-crock-dark">{entry.who}</span>
+                <span>{formatLogStamp(entry.at)}</span>
+              </div>
+              <div className="text-crock-dark whitespace-pre-wrap">{entry.note}</div>
+            </li>
+          ))}
+        </ol>
+      )}
+    </div>
+  );
+}
+
+function formatLogStamp(iso: string): string {
+  if (!iso) return '';
+  const d = new Date(iso);
+  if (isNaN(d.getTime())) return iso;
+  return d.toLocaleString('en-US', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+    hour: 'numeric',
+    minute: '2-digit',
+  });
 }

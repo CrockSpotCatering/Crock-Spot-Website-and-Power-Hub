@@ -34,6 +34,10 @@ type EventSummary = {
   date: string;
   guestCount: string;
   status: string;
+  // Follow-up fields (optional on older records)
+  nextFollowUpDate?: string;
+  assignedTo?: 'Steven' | 'Peter' | 'Both' | '';
+  followUpDone?: boolean;
 };
 
 const STATUS_STYLES: Record<string, string> = {
@@ -169,6 +173,7 @@ export default function EventsListPage() {
                 <tr className="text-left text-xs uppercase tracking-wider text-gray-500">
                   <th className="px-6 py-3 font-semibold">Event Date</th>
                   <th className="px-6 py-3 font-semibold">Client</th>
+                  <th className="px-6 py-3 font-semibold">Follow-Up</th>
                   <th className="px-6 py-3 font-semibold">Type</th>
                   <th className="px-6 py-3 font-semibold">Guests</th>
                   <th className="px-6 py-3 font-semibold">Status</th>
@@ -203,6 +208,13 @@ export default function EventsListPage() {
                           {e.location}
                         </div>
                       )}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <FollowUpBadge
+                        date={e.nextFollowUpDate}
+                        done={e.followUpDone}
+                        assignedTo={e.assignedTo}
+                      />
                     </td>
                     <td className="px-6 py-4 text-sm text-gray-700">
                       {e.eventType || '—'}
@@ -243,6 +255,15 @@ export default function EventsListPage() {
                       <div className="flex items-center gap-1.5">
                         <MapPin size={14} />
                         {e.location}
+                      </div>
+                    )}
+                    {e.nextFollowUpDate && (
+                      <div>
+                        <FollowUpBadge
+                          date={e.nextFollowUpDate}
+                          done={e.followUpDone}
+                          assignedTo={e.assignedTo}
+                        />
                       </div>
                     )}
                     {e.guestCount && (
@@ -295,6 +316,57 @@ function formatDate(iso: string): string {
     day: 'numeric',
     year: 'numeric',
   });
+}
+
+function FollowUpBadge({
+  date,
+  done,
+  assignedTo,
+}: {
+  date?: string;
+  done?: boolean;
+  assignedTo?: 'Steven' | 'Peter' | 'Both' | '';
+}) {
+  if (!date) {
+    return <span className="text-xs text-gray-400 italic">—</span>;
+  }
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const [y, m, d] = date.split('-').map(Number);
+  if (!y || !m || !d) return <span className="text-xs text-gray-400">{date}</span>;
+  const target = new Date(y, m - 1, d);
+  const diffDays = Math.round(
+    (target.getTime() - today.getTime()) / (1000 * 60 * 60 * 24)
+  );
+
+  let label = '';
+  let cls = '';
+  if (done) {
+    label = 'Done';
+    cls = 'bg-gray-100 text-gray-500 line-through';
+  } else if (diffDays < 0) {
+    label = `${Math.abs(diffDays)}d overdue`;
+    cls = 'bg-red-100 text-red-700 ring-1 ring-red-200';
+  } else if (diffDays === 0) {
+    label = 'Today';
+    cls = 'bg-amber-100 text-amber-800 ring-1 ring-amber-300 font-semibold';
+  } else if (diffDays <= 2) {
+    label = `In ${diffDays}d`;
+    cls = 'bg-yellow-50 text-yellow-800 ring-1 ring-yellow-200';
+  } else {
+    label = `In ${diffDays}d`;
+    cls = 'bg-gray-50 text-gray-600 ring-1 ring-gray-200';
+  }
+
+  return (
+    <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs ${cls}`}>
+      <span>🔔</span>
+      <span>{label}</span>
+      {assignedTo && !done && (
+        <span className="opacity-70">· {assignedTo}</span>
+      )}
+    </span>
+  );
 }
 
 function EmptyState({ hasEvents }: { hasEvents: boolean }) {

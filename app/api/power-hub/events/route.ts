@@ -24,6 +24,7 @@ const GITHUB_OWNER = 'CrockSpotCatering';
 const GITHUB_REPO = 'Crock-Spot-Website-and-Power-Hub';
 const GITHUB_BRANCH = 'main';
 const EVENTS_PATH = 'content/events.json';
+const SETTINGS_PATH = 'content/settings.json';
 
 type EventRecord = {
   id: string;
@@ -76,6 +77,17 @@ type EventRecord = {
   post_notes: boolean;
   // Status
   status: string;
+  // Follow-Up (Phase 1: captured; Phase 2: synced to GHL when webhook enabled)
+  nextFollowUpDate: string;
+  assignedTo: 'Steven' | 'Peter' | 'Both' | '';
+  followUpDone: boolean;
+  followUpLog: FollowUpLogEntry[];
+};
+
+type FollowUpLogEntry = {
+  at: string;
+  who: string;
+  note: string;
 };
 
 type EventsFile = { events: EventRecord[] };
@@ -149,6 +161,74 @@ async function writeEventsFile(data: EventsFile, sha: string, message: string) {
   return result;
 }
 
+// ─── Outbound webhook (Phase 2, dormant by default) ──────────────────────
+// Reads followUpWebhook config from content/settings.json. If enabled
+// and url is set, fires an event payload to that URL after a successful
+// save. Fire-and-forget: failures never block the save. This sits dark
+// until the team opts in via the Settings UI (also dormant for now).
+
+type FollowUpWebhookConfig = {
+  enabled: boolean;
+  url: string;
+  sharedSecret: string;
+};
+
+async function loadFollowUpWebhookConfig(): Promise<FollowUpWebhookConfig | null> {
+  try {
+    const endpoint = `/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${SETTINGS_PATH}?ref=${GITHUB_BRANCH}`;
+    const raw = await githubFetch(endpoint);
+    const content = Buffer.from(raw.content, 'base64').toString('utf-8');
+    const parsed = JSON.parse(content);
+    const cfg = parsed?.followUpWebhook;
+    if (!cfg || typeof cfg !== 'object') return null;
+    return {
+      enabled: cfg.enabled === true,
+      url: typeof cfg.url === 'string' ? cfg.url : '',
+      sharedSecret: typeof cfg.sharedSecret === 'string' ? cfg.sharedSecret : '',
+    };
+  } catch (err) {
+    console.error('Could not load follow-up webhook config:', err);
+    return null;
+  }
+}
+
+async function fireFollowUpWebhook(
+  action: 'created' | 'updated' | 'deleted',
+  event: EventRecord | { id: string }
+) {
+  const cfg = await loadFollowUpWebhookConfig();
+  if (!cfg || !cfg.enabled || !cfg.url) return; // dormant
+
+  // Only fire when the event has follow-up data worth syncing
+  if (action !== 'deleted') {
+    const full = event as EventRecord;
+    if (!full.nextFollowUpDate && (!full.followUpLog || full.followUpLog.length === 0)) {
+      return; // nothing follow-up-relevant to sync
+    }
+  }
+
+  try {
+    await fetch(cfg.url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        ...(cfg.sharedSecret
+          ? { 'X-CrockSpot-Signature': cfg.sharedSecret }
+          : {}),
+      },
+      body: JSON.stringify({
+        action,
+        source: 'crockspot-power-hub',
+        event,
+        firedAt: new Date().toISOString(),
+      }),
+    });
+  } catch (err) {
+    // Never let a webhook failure block a successful save.
+    console.error('Follow-up webhook fire failed:', err);
+  }
+}
+
 //------------------------------------------------------------------------------
 // Validation
 //------------------------------------------------------------------------------
@@ -197,7 +277,29 @@ function sanitizeEvent(input: Partial<EventRecord>): Omit<EventRecord, 'id' | 'c
     post_followup: bool(input.post_followup),
     post_notes: bool(input.post_notes),
     status: str(input.status) || 'New Lead',
+    nextFollowUpDate: str(input.nextFollowUpDate),
+    assignedTo: ((): EventRecord['assignedTo'] => {
+      const v = str(input.assignedTo);
+      return v === 'Peter' || v === 'Both' || v === 'Steven' || v === '' ? (v as EventRecord['assignedTo']) : 'Steven';
+    })(),
+    followUpDone: bool(input.followUpDone),
+    followUpLog: sanitizeLog(input.followUpLog),
   };
+}
+
+function sanitizeLog(input: unknown): FollowUpLogEntry[] {
+  if (!Array.isArray(input)) return [];
+  return input
+    .map((raw) => {
+      if (!raw || typeof raw !== 'object') return null;
+      const e = raw as Record<string, unknown>;
+      const at = typeof e.at === 'string' ? e.at : '';
+      const who = typeof e.who === 'string' ? e.who : '';
+      const note = typeof e.note === 'string' ? e.note : '';
+      if (!at || !note) return null;
+      return { at, who, note } as FollowUpLogEntry;
+    })
+    .filter((x): x is FollowUpLogEntry => x !== null);
 }
 
 //------------------------------------------------------------------------------
@@ -256,6 +358,9 @@ export async function POST(request: Request) {
     const label = record.clientName || record.contactName || 'new event';
     await writeEventsFile(next, sha, `Power Hub: add event sheet — ${label}`);
 
+    // Phase 2: opt-in outbound webhook (dormant unless settings.json says enabled)
+    fireFollowUpWebhook('created', record);
+
     return NextResponse.json({ event: record });
   } catch (error) {
     console.error('Events create error:', error);
@@ -296,6 +401,9 @@ export async function PUT(request: Request) {
     const label = updated.clientName || updated.contactName || existing.id;
     await writeEventsFile({ events: nextEvents }, sha, `Power Hub: update event sheet — ${label}`);
 
+    // Phase 2: opt-in outbound webhook (dormant unless settings.json says enabled)
+    fireFollowUpWebhook('updated', updated);
+
     return NextResponse.json({ event: updated });
   } catch (error) {
     console.error('Events update error:', error);
@@ -326,6 +434,9 @@ export async function DELETE(request: Request) {
     const nextEvents = data.events.filter((e) => e.id !== id);
     const label = target.clientName || target.contactName || id;
     await writeEventsFile({ events: nextEvents }, sha, `Power Hub: delete event sheet — ${label}`);
+
+    // Phase 2: opt-in outbound webhook (dormant unless settings.json says enabled)
+    fireFollowUpWebhook('deleted', { id: target.id });
 
     return NextResponse.json({ success: true, id });
   } catch (error) {
