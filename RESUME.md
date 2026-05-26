@@ -86,7 +86,8 @@ Voice: warm, professional, no hype.
 
 ### CMS
 - `/power-hub` (login)
-- `/power-hub/dashboard/events` — Event Intake Sheets (list, edit, print PDF)
+- `/power-hub/dashboard/events` — Event Intake Sheets (list, edit, print PDF) **+ Follow-Up tracking with conversation log**
+- `/power-hub/dashboard` — Dashboard with **Follow-Up Command Center** (Overdue / Today / This Week / Stalled)
 - `/power-hub/dashboard/content` — JSON content editor
 - `/power-hub/dashboard/media` — image library (GitHub-backed)
 - `/power-hub/dashboard/calendar` — calendar view (currently demo data only)
@@ -94,7 +95,7 @@ Voice: warm, professional, no hype.
 - `/power-hub/dashboard/settings` — AI providers, credentials
 
 ### API routes (`app/api/power-hub/*`)
-- `content` (read/write JSON) · `events` (CRUD intake sheets) · `documents` · `media` · `upload` · `ai` · `parse-document` · `credentials`
+- `content` (read/write JSON) · `events` (CRUD intake sheets, fires outbound webhook on save) · `events/webhook` (inbound from GHL — dormant until enabled in settings) · `documents` · `media` · `upload` · `ai` · `parse-document` · `credentials`
 
 ---
 
@@ -143,6 +144,12 @@ All page components import directly from these files. Editing a JSON file = edit
 - **Tracking:** Google Analytics / conversion pixels — not yet installed.
 - **Online ordering** integration — under consideration, not started.
 - **Team onboarding** — the 3 `[EXAMPLE]` events in `content/events.json` should be deleted by the team once they're comfortable with the feature.
+- **Follow-Up Phase 2 — GHL SMS workflow** — dormant scaffolding is in place (settings.json `followUpWebhook.enabled=false`, inbound + outbound webhooks coded). Next step is a coaching session for Brett to build the GHL workflow, then flip enabled=true. **Do not enable until Steven and Peter have explicitly opted in to being texted.**
+
+### Team
+- **Steven** — takes all leads, makes the Peter hand-off call ad-hoc (no documented rule yet)
+- **Peter** — receives Steven's hand-offs
+- **Mandy** — founder + Steven's wife; still on the website, still helps on big plated events, but **no longer in lead flow** (has her own catering company + GHL now). Don't include her in follow-up SMS routing.
 
 ---
 

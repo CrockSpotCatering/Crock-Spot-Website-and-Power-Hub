@@ -1,5 +1,86 @@
 # CrockSpot Session Log
 
+## May 26, 2026 (afternoon) — Session: Follow-Up system (sticky-note killer)
+
+### Goal
+Replace the team's sticky-note follow-up habit with something that finds them automatically. Steven takes all leads, hands off some to Peter; Mandy is no longer part of Crock Spot lead flow (she has her own catering company now). The team wasn't using their existing GHL account for follow-ups — so the goal was to build a system where the reminder finds them on the channel they already check (phone SMS) rather than requiring them to log into another tool.
+
+### Design decision: ship in two phases
+The SMS reminder side touches the founders' personal phones. Built **Phase 1** active and **Phase 2** dormant so the team can see the dashboard value before opting into being texted. No SMS fires until they say yes and the GHL workflow is built.
+
+### Phase 1 — Active (ships immediately)
+
+**Event Sheet — new 'Follow-Up' section** between Client Insights and Pre-Event Checklist:
+- `nextFollowUpDate` (date picker)
+- `assignedTo`: Steven | Peter | Both (Steven default — he takes all leads)
+- `followUpDone` (today's nudge complete?)
+- `followUpLog` (append-only timestamped conversation history; replaces single-textarea "notes" with a real audit trail attributed by author)
+
+**Events list view** — new "Follow-Up" column with color-coded badges (red overdue / amber today / yellow this week / gray done). Mobile cards show the same badge.
+
+**Dashboard "Follow-Up Command Center"** — the team's morning home base. Four cards (only shown when non-empty):
+- Overdue (red) — past `nextFollowUpDate`, not done
+- Today (amber) — due today
+- This Week (blue) — due within 7 days
+- Stalled Leads (gray) — open leads with no follow-up date and no update in 5+ days
+
+Skips Completed/Lost events. Shows 'Inbox zero' celebration when nothing is due. Each row links straight to the event sheet.
+
+### Phase 2 — Dormant scaffolding (ships dark, off by default)
+
+**`content/settings.json` — new `followUpWebhook` block:**
+```
+{ enabled: false, url: '', sharedSecret: '', lastSyncedAt: '', notes: '...' }
+```
+
+**Outbound webhook** (in `app/api/power-hub/events/route.ts`):
+- After every POST/PUT/DELETE save, `fireFollowUpWebhook()` reads `settings.json`
+- Only fires if `enabled=true` AND `url` is set AND there's follow-up data worth syncing
+- Sends `{ action, source, event, firedAt }` with `X-CrockSpot-Signature` header
+- Fire-and-forget — failures never block a save
+
+**Inbound webhook** — `POST /api/power-hub/events/webhook`:
+- Validates `X-CrockSpot-Signature` against the shared secret
+- Returns 503 if disabled in settings, 401 if signature mismatch
+- Accepts `action: 'done' | 'snooze' | 'booked' | 'lost'` + optional `snoozeDays` + optional `note`
+- 'done' → marks `followUpDone=true`
+- 'snooze N' → pushes `nextFollowUpDate` out by N days, resets done
+- 'booked' → sets `status='Booked'`
+- 'lost' → sets `status='Lost'`
+- Every action appends a log entry attributed to 'GHL (via SMS reply)'
+- `GET` on the same URL is a public health probe so you can sanity-check the URL from GHL before wiring it up: `{ ok, enabled, hasSecret, docs }`
+
+### Example events updated
+The 3 `[EXAMPLE]` events now have realistic timestamped follow-up logs so the Command Center is populated on first login:
+- **Aurora BBQ (Quoted)** — 3 log entries, `nextFollowUpDate=today` → lands in amber 'Today' card
+- **Front Range Tech (Booked)** — 4 log entries showing Steven→Peter hand-off, `nextFollowUpDate` in 3 days → 'This Week' card
+- **Garcia–Patel Wedding (Completed)** — 5 log entries telling the full lifecycle, no future follow-up
+
+### Commits This Session
+| Commit | Description |
+|--------|-------------|
+| `d1b5450` | feat(power-hub): Follow-Up system — capture today, sync to GHL later |
+| `d1617ad` | chore(power-hub): seed [EXAMPLE] events with realistic follow-up logs |
+
+### Verification
+- `npx next build` — green, both `/api/power-hub/events` and `/api/power-hub/events/webhook` routes registered
+- Dev server smoke test:
+  - `GET /power-hub/dashboard` → 200 (Follow-Up Command Center visible) ✅
+  - `GET /power-hub/dashboard/events` → 200 (new Follow-Up column) ✅
+  - `GET /power-hub/dashboard/events/new` → 200 (new Follow-Up section in form) ✅
+  - `GET /api/power-hub/events/webhook` → `{ ok: true, enabled: false, hasSecret: false }` (correct dormant state) ✅
+
+### What's NOT done (and intentionally so)
+- The GHL workflow itself — needs to be built **by Brett, clicking through the GHL UI**, with my step-by-step coaching, once the team confirms they want SMS reminders. Two reasons: audit trail (the workflow has Brett's name on it) and knowledge transfer (Brett can fix it later without me).
+- Adding any phone numbers to the system
+- Flipping `followUpWebhook.enabled` to `true` — stays false until the GHL workflow exists
+- Sending any test SMS to real phones
+
+### Next Session
+Walk Steven and Peter through the dashboard and the new Follow-Up section. If they say "yes, also text me on the day," we proceed with the GHL workflow build guide and flip `enabled=true`. Per-person opt-in.
+
+---
+
 ## May 26, 2026 — Session: Event Intake Sheets in Power Hub
 
 ### Goal
