@@ -8,6 +8,7 @@ import {
   Image as ImageIcon,
   Sparkles,
   Calendar,
+  ClipboardList,
   Settings,
   LogOut,
   ChefHat
@@ -15,6 +16,7 @@ import {
 
 const menuItems = [
   { name: 'Dashboard', href: '/power-hub/dashboard', icon: LayoutDashboard },
+  { name: 'Events', href: '/power-hub/dashboard/events', icon: ClipboardList },
   { name: 'Content', href: '/power-hub/dashboard/content', icon: FileText },
   { name: 'Media', href: '/power-hub/dashboard/media', icon: ImageIcon },
   { name: 'Calendar', href: '/power-hub/dashboard/calendar', icon: Calendar },
