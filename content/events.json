@@ -39,7 +39,27 @@
       "post_invoice": false,
       "post_followup": false,
       "post_notes": false,
-      "status": "Quoted"
+      "status": "Quoted",
+      "nextFollowUpDate": "2026-05-26",
+      "assignedTo": "Steven",
+      "followUpDone": false,
+      "followUpLog": [
+        {
+          "at": "2026-05-17T22:00:00Z",
+          "who": "Steven",
+          "note": "Got RFP from Janet. Reviewed scope — 300 guests, peanut-free constraint. Asked for venue walkthrough date."
+        },
+        {
+          "at": "2026-05-20T20:00:00Z",
+          "who": "Steven",
+          "note": "Walkthrough confirmed for next Tuesday. Janet says decision goes through her director, expect 2-week turnaround."
+        },
+        {
+          "at": "2026-05-23T23:00:00Z",
+          "who": "Steven",
+          "note": "Sent initial quote (2/pp). Janet replied she'll review with her director Friday."
+        }
+      ]
     },
     {
       "id": "evt_example_front_range_tech",
@@ -80,7 +100,32 @@
       "post_invoice": false,
       "post_followup": false,
       "post_notes": false,
-      "status": "Booked"
+      "status": "Booked",
+      "nextFollowUpDate": "2026-05-29",
+      "assignedTo": "Steven",
+      "followUpDone": false,
+      "followUpLog": [
+        {
+          "at": "2026-05-05T00:00:00Z",
+          "who": "Steven",
+          "note": "Marcus reached out about the holiday party again — third year in a row. Asked for same menu format with one new vegan dish."
+        },
+        {
+          "at": "2026-05-12T00:00:00Z",
+          "who": "Steven",
+          "note": "Quote sent and approved same day. 50% deposit received via ACH."
+        },
+        {
+          "at": "2026-05-19T00:00:00Z",
+          "who": "Peter",
+          "note": "Confirmed loading dock access with venue. Buzz 2x at the back."
+        },
+        {
+          "at": "2026-05-24T00:00:00Z",
+          "who": "Steven",
+          "note": "Final headcount locked at 150. Allergies: 3 shellfish, 6 vegetarian, 2 vegan."
+        }
+      ]
     },
     {
       "id": "evt_example_garcia_patel_wedding",
@@ -121,7 +166,37 @@
       "post_invoice": true,
       "post_followup": true,
       "post_notes": true,
-      "status": "Completed"
+      "status": "Completed",
+      "nextFollowUpDate": "",
+      "assignedTo": "Steven",
+      "followUpDone": true,
+      "followUpLog": [
+        {
+          "at": "2026-01-26T00:00:00Z",
+          "who": "Steven",
+          "note": "Elena referred by Marcus Lee. Wants a tasting before booking."
+        },
+        {
+          "at": "2026-02-05T00:00:00Z",
+          "who": "Steven",
+          "note": "Tasting went great. They loved the chimichurri shrimp and the tofu/quinoa option. Booking confirmed."
+        },
+        {
+          "at": "2026-03-22T00:00:00Z",
+          "who": "Peter",
+          "note": "Final menu locked. Confirmed tree-nut-free prep station for father of bride."
+        },
+        {
+          "at": "2026-03-29T05:00:00Z",
+          "who": "Steven",
+          "note": "Event day went beautifully — see Day-of Notes for the full story."
+        },
+        {
+          "at": "2026-03-31T00:00:00Z",
+          "who": "Steven",
+          "note": "Thank-you note sent. Logged anniversary date next March as potential repeat opportunity."
+        }
+      ]
     }
   ]
 }
