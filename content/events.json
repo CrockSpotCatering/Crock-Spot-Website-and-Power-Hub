@@ -1,3 +1,45 @@
 {
-  "events": []
+  "events": [
+    {
+      "eventType": "Corporate",
+      "clientStatus": "New Lead",
+      "clientName": "Test - Acme Robotics",
+      "contactName": "Wile E. Coyte",
+      "phone": "(303) 555-0199 ",
+      "email": "test+acme@thecrockspot.com",
+      "location": "History Colorado Center, 1200 Broadway, Denver",
+      "date": "2026-12-19",
+      "setupTime": "16:00",
+      "serveTime": "18:00",
+      "endTime": "21:00",
+      "guestCount": "125",
+      "serviceStyle": "Buffet",
+      "menu": "  1 Salt and Pepper Chicken\n   2 Savory Pulled Pork\n   3 Steamed Jasmine Rice\n   4 Cilantro Lime Rice\n   5 4 Bean Green Chili\n   6 Avocado Velvet\n   7 Chimichurri\n   8 Spicy Crema",
+      "chafers": "8 full size",
+      "servingUtensils": "Full set (tongs, ladles, spoons)",
+      "tables": "3 X 8 ft buffet tables",
+      "truck": "box Truck - Steven",
+      "tents": "Not needed (indoor)",
+      "otherEquipment": "Sterno × 12, table linens × 3",
+      "eventLead": "Mandy",
+      "supportStaff": "Peter + 2 Servers",
+      "pricingNotes": "1 $48/pp × 125 = $6,000 food\n   2 + $400 staffing (3 staff × 4hrs)\n   3 + $150 equipment\n   4 = $6,550 subtotal\n   5 + 18% service = $1,179\n   6 TOTAL: $7,729 — paid in full 11/15/26 (TEST ONLY)",
+      "keyNotes": "   1 TEST EVENT — DO NOT ACTUALLY CATER\n   2 2 guests are gluten-free (table 5)\n   3 1 vegan guest — extra Tofu and Sautéed Veggies\n   4 NO PORK at this event per client (remove Pulled Pork)\n   5 Loading dock entry — back of building, ring buzzer 2x",
+      "clientInsights": "  1 Referral from Denver Tech Council.\n   2 CEO is a long-time fan of The Spot Cafe.\n   3 Plans to book quarterly all-hands lunches if this goes well.\n   \n",
+      "cl_headcount": true,
+      "cl_menu": true,
+      "cl_equipment": false,
+      "cl_staff": false,
+      "cl_location": false,
+      "cl_invoice": true,
+      "dayOfNotes": "   1 Arrived 3:45 PM. Loading dock available as promised.\n   2 Final headcount bumped to 132 — covered with extra portions.",
+      "post_invoice": true,
+      "post_followup": false,
+      "post_notes": false,
+      "status": "Booked",
+      "id": "evt_mpmlvrfl_d8iwma",
+      "createdAt": "2026-05-26T12:22:58.209Z",
+      "updatedAt": "2026-05-26T12:22:58.209Z"
+    }
+  ]
 }
