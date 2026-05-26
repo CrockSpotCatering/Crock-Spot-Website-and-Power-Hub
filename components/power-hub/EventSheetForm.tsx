@@ -138,7 +138,9 @@ export default function EventSheetForm({
 
   const handlePrint = () => {
     if (typeof window !== 'undefined') {
-      window.print();
+      // Tiny delay so any open dropdowns/focus rings settle before the
+      // browser snapshots the page for the print preview.
+      setTimeout(() => window.print(), 50);
     }
   };
 
@@ -153,6 +155,15 @@ export default function EventSheetForm({
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-crock-dark via-crock-purple to-crock-dark print:bg-white print:min-h-0">
+      {/* ──────────────────────────────────────────────────────────
+          PRINT-ONLY VIEW
+          Renders the current form data as plain text so the PDF
+          actually contains the data. Inputs/textareas can't expand
+          on print, so we render a separate read-only document.
+          Hidden on screen, visible only via @media print.
+         ────────────────────────────────────────────────────────── */}
+      <EventSheetPrintView form={form} />
+
       {/* Top action bar — hidden on print */}
       <div className="print:hidden bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between sticky top-0 z-10">
         <Link
@@ -202,7 +213,7 @@ export default function EventSheetForm({
         </div>
       )}
 
-      <div className="max-w-5xl mx-auto px-4 py-8 print:p-0 print:max-w-none">
+      <div className="max-w-5xl mx-auto px-4 py-8 print:hidden">
         {/* Header (always visible — looks great in PDF too) */}
         <div className="mb-6 text-center print:mb-4">
           <div className="inline-block bg-crock-orange/20 border border-crock-orange/40 text-crock-orange px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider mb-3 print:hidden">
@@ -562,10 +573,222 @@ export default function EventSheetForm({
           body {
             background: white !important;
           }
+          /* Hide sidebar + any other dashboard chrome when printing */
+          aside,
+          nav {
+            display: none !important;
+          }
         }
       `}</style>
     </div>
   );
+}
+
+// ─── Print View ────────────────────────────────────────────────────
+// Mirrors the on-screen form's section layout but renders every value
+// as plain text. Hidden on screen (`hidden print:block`) so users
+// never see it directly — it's purely the PDF output.
+
+function EventSheetPrintView({ form }: { form: EventFormState }) {
+  const fmtDate = (iso: string) => {
+    if (!iso) return '';
+    const [y, m, d] = iso.split('-').map(Number);
+    if (!y || !m || !d) return iso;
+    return new Date(y, m - 1, d).toLocaleDateString('en-US', {
+      weekday: 'long',
+      month: 'long',
+      day: 'numeric',
+      year: 'numeric',
+    });
+  };
+
+  const fmtTime = (t: string) => {
+    if (!t) return '';
+    const [hh, mm] = t.split(':').map(Number);
+    if (Number.isNaN(hh)) return t;
+    const period = hh >= 12 ? 'PM' : 'AM';
+    const h12 = hh % 12 === 0 ? 12 : hh % 12;
+    return `${h12}:${String(mm || 0).padStart(2, '0')} ${period}`;
+  };
+
+  return (
+    <div className="hidden print:block text-black text-[11pt] leading-snug">
+      {/* Header */}
+      <div className="text-center mb-6 pb-4 border-b-2 border-black">
+        <h1 className="text-3xl font-bold tracking-wide">EVENT SHEET</h1>
+        <p className="italic text-sm mt-1">Let Us Crock Your World</p>
+      </div>
+
+      <PrintSection icon="📌" title="Event Overview">
+        <PrintGrid2>
+          <PrintRow label="Event Type" value={form.eventType} />
+          <PrintRow label="Client Status" value={form.clientStatus} />
+          <PrintRow label="Client / Company" value={form.clientName} />
+          <PrintRow label="Contact Name" value={form.contactName} />
+          <PrintRow label="Phone" value={form.phone} />
+          <PrintRow label="Email" value={form.email} />
+        </PrintGrid2>
+      </PrintSection>
+
+      <PrintSection icon="📍" title="Event Details">
+        <PrintRow label="Location / Venue" value={form.location} block />
+        <PrintGrid4>
+          <PrintRow label="Date" value={fmtDate(form.date)} />
+          <PrintRow label="Setup Time" value={fmtTime(form.setupTime)} />
+          <PrintRow label="Serve Time" value={fmtTime(form.serveTime)} />
+          <PrintRow label="End Time" value={fmtTime(form.endTime)} />
+        </PrintGrid4>
+      </PrintSection>
+
+      <PrintSection icon="👥" title="Service Details">
+        <PrintGrid2>
+          <PrintRow label="Guest Count" value={form.guestCount} />
+          <PrintRow label="Service Style" value={form.serviceStyle} />
+        </PrintGrid2>
+      </PrintSection>
+
+      <PrintSection icon="🥘" title="Menu">
+        <PrintBlock value={form.menu} />
+      </PrintSection>
+
+      <PrintSection icon="🚚" title="Equipment & Setup">
+        <PrintGrid3>
+          <PrintRow label="Chafers" value={form.chafers} />
+          <PrintRow label="Serving Utensils" value={form.servingUtensils} />
+          <PrintRow label="Tables" value={form.tables} />
+          <PrintRow label="Truck" value={form.truck} />
+          <PrintRow label="Tents" value={form.tents} />
+          <PrintRow label="Other" value={form.otherEquipment} />
+        </PrintGrid3>
+      </PrintSection>
+
+      <PrintSection icon="👨‍🍳" title="Staffing">
+        <PrintGrid2>
+          <PrintRow label="Event Lead" value={form.eventLead} />
+          <PrintRow label="Support Staff" value={form.supportStaff} />
+        </PrintGrid2>
+      </PrintSection>
+
+      <PrintSection icon="💰" title="Pricing Notes">
+        <PrintBlock value={form.pricingNotes} />
+      </PrintSection>
+
+      <PrintSection icon="⚠️" title="Key Notes — Read First" highlight>
+        <PrintBlock value={form.keyNotes} />
+      </PrintSection>
+
+      <PrintSection icon="🧠" title="Client Insights">
+        <PrintBlock value={form.clientInsights} />
+      </PrintSection>
+
+      <PrintSection icon="✅" title="Pre-Event Checklist">
+        <PrintCheck label="Headcount confirmed" value={form.cl_headcount} />
+        <PrintCheck label="Menu confirmed" value={form.cl_menu} />
+        <PrintCheck label="Equipment packed" value={form.cl_equipment} />
+        <PrintCheck label="Staff confirmed" value={form.cl_staff} />
+        <PrintCheck label="Location details reviewed" value={form.cl_location} />
+        <PrintCheck label="Invoice prepared" value={form.cl_invoice} />
+      </PrintSection>
+
+      <PrintSection icon="📝" title="Day-of Notes">
+        <PrintBlock value={form.dayOfNotes} />
+      </PrintSection>
+
+      <PrintSection icon="🏁" title="Post-Event">
+        <PrintCheck label="Invoice sent" value={form.post_invoice} />
+        <PrintCheck label="Follow-up sent" value={form.post_followup} />
+        <PrintCheck label="Notes saved for future" value={form.post_notes} />
+      </PrintSection>
+
+      <div className="mt-6 pt-3 border-t border-gray-400 flex items-center justify-between text-sm">
+        <div>
+          <span className="uppercase tracking-wider text-xs">Lead Status: </span>
+          <strong>{form.status || 'New Lead'}</strong>
+        </div>
+        <div className="italic text-xs">
+          Crock Spot · Let Us Crock Your World
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function PrintSection({
+  icon,
+  title,
+  children,
+  highlight,
+}: {
+  icon: string;
+  title: string;
+  children: React.ReactNode;
+  highlight?: boolean;
+}) {
+  return (
+    <div
+      className={`mb-4 break-inside-avoid ${
+        highlight ? 'border-l-4 border-black pl-3' : ''
+      }`}
+    >
+      <h2 className="text-base font-bold uppercase tracking-wider mb-2 border-b border-gray-400 pb-1">
+        <span className="mr-1">{icon}</span>
+        {title}
+      </h2>
+      {children}
+    </div>
+  );
+}
+
+function PrintRow({
+  label,
+  value,
+  block,
+}: {
+  label: string;
+  value: string;
+  block?: boolean;
+}) {
+  const display = value && value.trim() !== '' ? value : '—';
+  return (
+    <div className={block ? 'mb-1' : 'mb-0.5'}>
+      <span className="font-semibold">{label}:</span>{' '}
+      <span className={!value ? 'text-gray-400' : ''}>{display}</span>
+    </div>
+  );
+}
+
+function PrintBlock({ value }: { value: string }) {
+  const display = value && value.trim() !== '' ? value : '—';
+  return (
+    <div
+      className={`whitespace-pre-wrap ${
+        !value ? 'text-gray-400 italic' : ''
+      }`}
+    >
+      {display}
+    </div>
+  );
+}
+
+function PrintCheck({ label, value }: { label: string; value: boolean }) {
+  return (
+    <div className="flex items-center gap-2 mb-0.5">
+      <span className="inline-block w-4 h-4 border border-black text-center text-xs leading-4">
+        {value ? '✓' : ''}
+      </span>
+      <span>{label}</span>
+    </div>
+  );
+}
+
+function PrintGrid2({ children }: { children: React.ReactNode }) {
+  return <div className="grid grid-cols-2 gap-x-6 gap-y-0.5">{children}</div>;
+}
+function PrintGrid3({ children }: { children: React.ReactNode }) {
+  return <div className="grid grid-cols-3 gap-x-6 gap-y-0.5">{children}</div>;
+}
+function PrintGrid4({ children }: { children: React.ReactNode }) {
+  return <div className="grid grid-cols-4 gap-x-6 gap-y-0.5">{children}</div>;
 }
 
 // ─── Reusable bits ─────────────────────────────────────────────────
