@@ -58,9 +58,27 @@ At session start `gh` only had `BrettLechtenbrerg` logged in — the `CrockSpotC
 | `public/robots.txt` | modified — removed `Disallow: /intake` |
 | `app/intake/page.tsx` | deleted |
 
+### Post-build session work
+
+**End-to-end test on production (https://www.thecrockspot.com/power-hub):**
+Full lifecycle confirmed against the deployed site — create → save → list → search/filter → edit → print PDF → delete. Two issues surfaced and were fixed during testing:
+
+1. **Apparent "no redirect after save"** — user reported the screen didn't change after clicking Save. Investigation showed the redirect *was* happening (URL went from `/events/new` to `/events/evt_xxxx?saved=1` and the green flash + button labels confirmed edit mode), but edit mode visually looks identical to a prefilled new form, so the change wasn't obvious. No code change needed — just confirmed working as designed.
+
+2. **PDF was unreadable** — input/textarea elements only render their visible scroll area on print, so the saved PDF clipped every value. Fixed in commit `1ad446d` / `51fcbf2` by adding a dedicated `EventSheetPrintView` component (`hidden print:block`) that renders the live form data as plain text, formatted dates/times, and unicode ☐/☑ checkboxes. Live form is now `print:hidden` so the PDF shows only the print view. User confirmed: "The new pdf looks great."
+
+**Seeded 3 `[EXAMPLE]` events for team onboarding** (commit `933f07a`):
+- `[EXAMPLE] City of Aurora Community BBQ` — Government · Quoted (partial fields, lead in sales pipeline)
+- `[EXAMPLE] Front Range Tech Holiday Party` — Corporate · Booked (fully prepped upcoming event)
+- `[EXAMPLE] Garcia–Patel Wedding` — Wedding · Completed (post-event with day-of notes, full lifecycle)
+
+Each uses `(555) 555-01xx` phone, `example+*@thecrockspot.com` email, `[EXAMPLE]` prefix, and a 'This is an example record — delete anytime.' line in Key Notes. The team can delete all 3 in under a minute when they're ready for real intake.
+
+**Tagged `v1.0-stable`** — first stable release point. Restore with `git checkout v1.0-stable` (read-only) or `git reset --hard v1.0-stable` (destructive).
+
 ### Open Threads / Next Session Ideas
-- Tag a `v1.0-stable` rollback point now that Events shipped (RESUME.md flagged this).
-- Optional polish on Events: CSV export, calendar view of upcoming booked events, link from the existing `Calendar` tab (which is still demo-only `useState` data) into the real Events list.
+- Optional polish on Events: CSV export, calendar view of upcoming booked events, link from the existing `Calendar` tab (which is still demo-only `useState` data) into the real Events list, notifications when a new event is created.
+- Team onboarding: delete the 3 `[EXAMPLE]` events once the team is comfortable.
 - Still open from earlier: replace Unsplash heroes, partner logos for /community-partners, GoHighLevel notification actions, GA / tracking pixels, online ordering.
 
 ---

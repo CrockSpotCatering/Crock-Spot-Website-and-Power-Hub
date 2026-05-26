@@ -86,16 +86,15 @@ Voice: warm, professional, no hype.
 
 ### CMS
 - `/power-hub` (login)
+- `/power-hub/dashboard/events` — Event Intake Sheets (list, edit, print PDF)
 - `/power-hub/dashboard/content` — JSON content editor
 - `/power-hub/dashboard/media` — image library (GitHub-backed)
+- `/power-hub/dashboard/calendar` — calendar view (currently demo data only)
 - `/power-hub/dashboard/ai` — AI Assist (PDF / DOCX upload)
 - `/power-hub/dashboard/settings` — AI providers, credentials
 
-### Hidden / noindex
-- `/intake` — uncommitted client intake form (blocked in `public/robots.txt`)
-
 ### API routes (`app/api/power-hub/*`)
-- `content` (read/write JSON) · `documents` · `media` · `upload` · `ai` · `parse-document`
+- `content` (read/write JSON) · `events` (CRUD intake sheets) · `documents` · `media` · `upload` · `ai` · `parse-document` · `credentials`
 
 ---
 
@@ -115,6 +114,7 @@ Voice: warm, professional, no hype.
 | `footer.json` | Footer (company, links, social, awards) |
 | `privacy.json` · `terms.json` | Legal pages |
 | `documents.json` | AI Assist brand docs |
+| `events.json` | Event intake sheets (one per booked event) |
 | `settings.json` | AI provider + API keys |
 | `credentials.json` | Power Hub login (edit via Settings UI) |
 
@@ -127,18 +127,22 @@ All page components import directly from these files. Editing a JSON file = edit
 - **Source of truth:** `origin/main` on GitHub.
 - **Local working tree:** `~/dev/crockspot` only.
 - **Old corrupted copy:** `~/Documents/agent-girl/crockspot` (do not touch; should be renamed to `crockspot.OLD-DO-NOT-USE` and ignored).
-- **Rollback tags:** none yet. When we hit the next stable point, tag it `v1.0-stable` so we have a known-good restore point — mirrors how TSAI does it.
+- **Rollback tags:**
+  - `v1.0-stable` (May 26, 2026) — first stable release: site is live on thecrockspot.com, Power Hub CMS shipped, Event Intake Sheets feature complete (list / edit / print PDF / GitHub-backed storage), 3 seeded `[EXAMPLE]` events demonstrate the lifecycle.
+  - Restore with: `git checkout v1.0-stable` (read-only) or `git reset --hard v1.0-stable` (destructive).
+
 
 ---
 
 ## Active workstreams (things you may pick up)
 
-- **`/intake` route** — exists locally, not yet committed. Blocked from search in `robots.txt`. Decide: finish + promote, or commit hidden, or discard.
+- **Power Hub Events polish** — CSV export of all events, link the existing `/calendar` tab into real events data (currently demo `useState` only), notification when a new event is created.
 - **Replace remaining Unsplash hero images** with real client photos.
 - **Add partner logos** to `/community-partners`.
 - **Re-enable GoHighLevel notification actions** for real leads (currently scoped down).
 - **Tracking:** Google Analytics / conversion pixels — not yet installed.
 - **Online ordering** integration — under consideration, not started.
+- **Team onboarding** — the 3 `[EXAMPLE]` events in `content/events.json` should be deleted by the team once they're comfortable with the feature.
 
 ---
 
@@ -146,4 +150,6 @@ All page components import directly from these files. Editing a JSON file = edit
 
 - JSON-as-CMS: every page imports from `content/*.json`; Power Hub edits the same files via GitHub API → triggers Vercel rebuild.
 - Power Hub media: images live in the GitHub repo under `public/` and are managed through the GitHub Contents API from the CMS.
+- Power Hub records (Events): the same JSON-as-CMS pattern scales to record-style data. `content/events.json` holds an array, `app/api/power-hub/events/route.ts` exposes full CRUD via the GitHub Contents API (sha-checked updates, automatic commit history). No DB needed.
+- Print-to-PDF without a library: render a separate `hidden print:block` view containing the same data as plain text — inputs/textareas can't expand on print, so a dedicated print view is the reliable cross-browser path. See `EventSheetPrintView` in `components/power-hub/EventSheetForm.tsx`.
 - Hidden routes: block in `public/robots.txt`. If a route needs full noindex headers, add a per-route `layout.tsx` with `robots: { index: false }` in `metadata` (same pattern TSAI uses for hidden workshops).
