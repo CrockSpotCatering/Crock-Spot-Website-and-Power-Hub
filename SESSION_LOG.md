@@ -1,5 +1,70 @@
 # CrockSpot Session Log
 
+## May 26, 2026 — Session: Event Intake Sheets in Power Hub
+
+### Goal
+Give the CrockSpot team a permanent, searchable record of every booked event — replacing the existing paper `CrockSpot_Event-Sheet-Intake Form.docx` workflow with something that lives inside Power Hub, is easy to find later, and can be printed/saved as a PDF for use as a day-of checklist.
+
+### What Was Built
+
+**New Power Hub tab: Events**
+- Sidebar entry between Dashboard and Content (ClipboardList icon)
+- Three screens:
+  - `/power-hub/dashboard/events` — searchable list, status filter, desktop table + mobile cards
+  - `/power-hub/dashboard/events/new` — blank intake sheet
+  - `/power-hub/dashboard/events/[id]` — open, edit, delete, print/save-PDF
+
+**Storage**
+- `content/events.json` — single GitHub-backed JSON file (same JSON-as-CMS pattern as every other content file). Each save is a git commit; full history is preserved automatically.
+- `app/api/power-hub/events/route.ts` — CRUD via GitHub Contents API (GET list/single, POST create, PUT update, DELETE).
+
+**Form**
+- `components/power-hub/EventSheetForm.tsx` — shared, controlled form covering every field from the docx: Event Overview, Event Details, Service, Menu, Equipment, Staffing, Pricing Notes, Key Notes, Client Insights, Pre-Event Checklist, Day-of Notes, Post-Event, Status.
+- Print-optimized CSS (`@media print`) so the browser's native Print / Save-as-PDF dialog produces a clean printable sheet. No extra PDF library needed.
+
+**Removed**
+- `app/intake/page.tsx` — the older hidden phone-rep form that only `console.log`-ed submissions. Fully replaced by the Power Hub Events tab.
+- `Disallow: /intake` line in `public/robots.txt`.
+
+### Commits This Session
+| Commit | Description |
+|--------|-------------|
+| `5a65e80` | feat(power-hub): Event Intake Sheets — list, edit, print PDF |
+| `a64f480` | chore: remove standalone /intake route (replaced by Power Hub Events tab) |
+| `71d3fca` | feat: add hidden /intake phone-rep event intake form (carried over from prior session, now superseded by `5a65e80` + `a64f480`) |
+| `ac3a698` | docs: add RESUME.md (carried over from prior session) |
+
+### Verification
+- `npx next build` — green, no TS errors, all new routes present in the route table.
+- Dev server smoke test:
+  - `GET /power-hub/dashboard/events` → 200 ✅
+  - `GET /power-hub/dashboard/events/new` → 200 ✅
+  - `GET /intake` → 404 ✅ (route removed)
+  - `GET /robots.txt` → updated, `/intake` block gone ✅
+
+### GitHub Auth Note
+At session start `gh` only had `BrettLechtenbrerg` logged in — the `CrockSpotCatering` account had been logged out since the April session. Re-authed via `gh auth login --hostname github.com --git-protocol https --web`, then `gh auth switch -u CrockSpotCatering` and set local repo author to `CrockSpotCatering <CrockSpotCatering@users.noreply.github.com>` so future commits stay attributed correctly. RESUME.md rule respected — push was made as CrockSpotCatering.
+
+### Files Changed
+| File | Status |
+|------|--------|
+| `content/events.json` | new (empty seed `{ "events": [] }`) |
+| `app/api/power-hub/events/route.ts` | new — GET/POST/PUT/DELETE |
+| `components/power-hub/EventSheetForm.tsx` | new — shared form |
+| `app/power-hub/dashboard/events/page.tsx` | new — list view |
+| `app/power-hub/dashboard/events/new/page.tsx` | new — create |
+| `app/power-hub/dashboard/events/[id]/page.tsx` | new — edit/delete/print |
+| `components/power-hub/Sidebar.tsx` | modified — added Events tab |
+| `public/robots.txt` | modified — removed `Disallow: /intake` |
+| `app/intake/page.tsx` | deleted |
+
+### Open Threads / Next Session Ideas
+- Tag a `v1.0-stable` rollback point now that Events shipped (RESUME.md flagged this).
+- Optional polish on Events: CSV export, calendar view of upcoming booked events, link from the existing `Calendar` tab (which is still demo-only `useState` data) into the real Events list.
+- Still open from earlier: replace Unsplash heroes, partner logos for /community-partners, GoHighLevel notification actions, GA / tracking pixels, online ordering.
+
+---
+
 ## April 13, 2026 - Session: Menu Reordering & Power Hub CMS Enhancements
 
 ### What Was Done This Session
