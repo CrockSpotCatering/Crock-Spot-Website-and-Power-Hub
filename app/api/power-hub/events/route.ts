@@ -17,6 +17,7 @@
 //==============================================================================
 
 import { NextResponse } from 'next/server';
+import { buildActionUrl } from './webhook/route';
 
 const GITHUB_API = 'https://api.github.com';
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
@@ -194,7 +195,8 @@ async function loadFollowUpWebhookConfig(): Promise<FollowUpWebhookConfig | null
 
 async function fireFollowUpWebhook(
   action: 'created' | 'updated' | 'deleted',
-  event: EventRecord | { id: string }
+  event: EventRecord | { id: string },
+  request?: Request
 ) {
   const cfg = await loadFollowUpWebhookConfig();
   if (!cfg || !cfg.enabled || !cfg.url) return; // dormant
@@ -206,6 +208,21 @@ async function fireFollowUpWebhook(
       return; // nothing follow-up-relevant to sync
     }
   }
+
+  // Pre-bake one-click action links so GHL can drop them straight into the
+  // email template (Option A — signed URLs, no token expiry, never go stale).
+  // GHL never needs to know how to sign anything; we hand it ready-to-use URLs.
+  const baseUrl = pickBaseUrl(request);
+  const actionLinks =
+    action !== 'deleted' && cfg.sharedSecret
+      ? {
+          done: buildActionUrl(baseUrl, cfg.sharedSecret, event.id, 'done'),
+          snooze3: buildActionUrl(baseUrl, cfg.sharedSecret, event.id, 'snooze', 3),
+          snooze7: buildActionUrl(baseUrl, cfg.sharedSecret, event.id, 'snooze', 7),
+          booked: buildActionUrl(baseUrl, cfg.sharedSecret, event.id, 'booked'),
+          lost: buildActionUrl(baseUrl, cfg.sharedSecret, event.id, 'lost'),
+        }
+      : null;
 
   try {
     await fetch(cfg.url, {
@@ -220,6 +237,11 @@ async function fireFollowUpWebhook(
         action,
         source: 'crockspot-power-hub',
         event,
+        actionLinks,
+        powerHubUrl:
+          action !== 'deleted'
+            ? `${baseUrl}/power-hub/dashboard/events/${event.id}`
+            : null,
         firedAt: new Date().toISOString(),
       }),
     });
@@ -232,6 +254,23 @@ async function fireFollowUpWebhook(
 //------------------------------------------------------------------------------
 // Validation
 //------------------------------------------------------------------------------
+function pickBaseUrl(request?: Request): string {
+  // Prefer the public site URL so links stay clickable from any email client.
+  const fromEnv =
+    process.env.NEXT_PUBLIC_SITE_URL ||
+    (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : '');
+  if (fromEnv) return fromEnv.replace(/\/$/, '');
+  if (request) {
+    try {
+      const u = new URL(request.url);
+      return `${u.protocol}//${u.host}`;
+    } catch {
+      /* fall through */
+    }
+  }
+  return 'https://www.thecrockspot.com';
+}
+
 function newId() {
   // Short, sortable, collision-resistant enough for a single-tenant CMS
   return `evt_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 8)}`;
@@ -359,7 +398,7 @@ export async function POST(request: Request) {
     await writeEventsFile(next, sha, `Power Hub: add event sheet — ${label}`);
 
     // Phase 2: opt-in outbound webhook (dormant unless settings.json says enabled)
-    fireFollowUpWebhook('created', record);
+    fireFollowUpWebhook('created', record, request);
 
     return NextResponse.json({ event: record });
   } catch (error) {
@@ -402,7 +441,7 @@ export async function PUT(request: Request) {
     await writeEventsFile({ events: nextEvents }, sha, `Power Hub: update event sheet — ${label}`);
 
     // Phase 2: opt-in outbound webhook (dormant unless settings.json says enabled)
-    fireFollowUpWebhook('updated', updated);
+    fireFollowUpWebhook('updated', updated, request);
 
     return NextResponse.json({ event: updated });
   } catch (error) {
@@ -436,7 +475,7 @@ export async function DELETE(request: Request) {
     await writeEventsFile({ events: nextEvents }, sha, `Power Hub: delete event sheet — ${label}`);
 
     // Phase 2: opt-in outbound webhook (dormant unless settings.json says enabled)
-    fireFollowUpWebhook('deleted', { id: target.id });
+    fireFollowUpWebhook('deleted', { id: target.id }, request);
 
     return NextResponse.json({ success: true, id });
   } catch (error) {

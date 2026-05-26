@@ -10,6 +10,20 @@
     "url": "",
     "sharedSecret": "",
     "lastSyncedAt": "",
-    "notes": "Phase 2 — when enabled, every event save POSTs the event payload to this URL (typically a GoHighLevel inbound webhook). The sharedSecret is sent in the X-CrockSpot-Signature header so GHL can verify the request. Default: DISABLED."
+    "notes": "Phase 2 — when enabled, every event save POSTs the event payload (with pre-baked one-click action URLs in `actionLinks`) to this URL — typically a GoHighLevel inbound webhook that drops the data into an email template. The sharedSecret is sent in the X-CrockSpot-Signature header so GHL can verify the request, and is also used to HMAC-sign the action URLs so the team's email click-throughs are auth'd without anyone seeing a token. Default: DISABLED. Do not enable until Steven and Peter have opted in to receiving follow-up emails."
+  },
+  "followUpRecipients": {
+    "Steven": {
+      "email": "",
+      "smsPhone": "",
+      "preferredChannel": "email",
+      "optedIn": false
+    },
+    "Peter": {
+      "email": "",
+      "smsPhone": "",
+      "preferredChannel": "email",
+      "optedIn": false
+    }
   }
 }
