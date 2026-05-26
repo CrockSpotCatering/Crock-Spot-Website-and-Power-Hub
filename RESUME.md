@@ -144,7 +144,7 @@ All page components import directly from these files. Editing a JSON file = edit
 - **Tracking:** Google Analytics / conversion pixels — not yet installed.
 - **Online ordering** integration — under consideration, not started.
 - **Team onboarding** — the 3 `[EXAMPLE]` events in `content/events.json` should be deleted by the team once they're comfortable with the feature.
-- **Follow-Up Phase 2 — GHL SMS workflow** — dormant scaffolding is in place (settings.json `followUpWebhook.enabled=false`, inbound + outbound webhooks coded). Next step is a coaching session for Brett to build the GHL workflow, then flip enabled=true. **Do not enable until Steven and Peter have explicitly opted in to being texted.**
+- **Follow-Up Phase 2 — GHL email workflow** — dormant scaffolding is in place. The team prefers email over SMS, so Phase 2 uses **one-click signed URLs** dropped into a GHL-rendered email (no SMS keyword parsing, no expiry tokens). Outbound webhook payload includes pre-baked `actionLinks` (done / snooze3 / snooze7 / booked / lost) GHL pastes straight into the email body. Inbound webhook handles both JSON POST and GET click-through with HTML confirmation page. `content/settings.json` has `followUpWebhook.enabled=false` + a `followUpRecipients` block with Steven + Peter slots, each `optedIn: false` and `preferredChannel: 'email'`. **Do not enable until Steven and Peter have explicitly opted in to being emailed.**
 
 ### Team
 - **Steven** — takes all leads, makes the Peter hand-off call ad-hoc (no documented rule yet)

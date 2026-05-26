@@ -70,14 +70,32 @@ The 3 `[EXAMPLE]` events now have realistic timestamped follow-up logs so the Co
   - `GET /power-hub/dashboard/events/new` → 200 (new Follow-Up section in form) ✅
   - `GET /api/power-hub/events/webhook` → `{ ok: true, enabled: false, hasSecret: false }` (correct dormant state) ✅
 
+### Late-session pivot: email > SMS
+After Phase 1+2 shipped, Brett noted the team prefers email over text. The Phase 2 outbound payload didn't need to change (GHL chooses the channel), but the design got meaningfully simpler:
+
+**Replaced the SMS reply-keyword loop with one-click email buttons.**
+- GHL sends the team an email with action buttons (Done / Snooze 3d / Snooze 7d / Booked / Lost)
+- Each button is a signed URL pre-baked on our side and dropped into the email template by GHL
+- Click → our GET handler verifies the HMAC → applies the action → shows a Crock-Spot-branded confirmation page
+- **No tokens. No expiry. URLs work forever.** (Discussed and rejected token machinery as overkill for this audience and threat model — the worst case for a leaked link is toggling a status on an old event sheet that's already password-protected, recoverable from git.)
+
+New/changed files:
+- `app/api/power-hub/events/webhook/route.ts` — refactored. Now exports `computeSignature` / `verifySignature` / `buildActionUrl` and handles both POST (JSON) and GET (signed URL) modes. GET returns HTML so what arrives after an email click looks like a real success page.
+- `app/api/power-hub/events/route.ts` — outbound webhook payload now includes `actionLinks` (done / snooze3 / snooze7 / booked / lost) and `powerHubUrl`. GHL just pastes the URLs into the email template; no token logic on the GHL side.
+- `content/settings.json` — new `followUpRecipients` block with Steven + Peter, `preferredChannel: 'email'` default, `optedIn: false` so the system stays opt-in per person.
+
+**Unit-tested the crypto round-trip** (17 assertions, all pass): signature verify, tamper rejection on swapped eventId/action/snoozeDays/secret/sig, URL-builder edge cases. Smoke-tested the live server: dormant config returns friendly "Follow-ups are paused" HTML page (not a crash), health probe reports correct state.
+
+Commit: `d8e4f1c`.
+
 ### What's NOT done (and intentionally so)
-- The GHL workflow itself — needs to be built **by Brett, clicking through the GHL UI**, with my step-by-step coaching, once the team confirms they want SMS reminders. Two reasons: audit trail (the workflow has Brett's name on it) and knowledge transfer (Brett can fix it later without me).
-- Adding any phone numbers to the system
+- The GHL workflow itself — needs to be built **by Brett, clicking through the GHL UI**, with my step-by-step coaching, once the team confirms they want email reminders. Two reasons: audit trail (the workflow has Brett's name on it) and knowledge transfer (Brett can fix it later without me).
+- Adding any email addresses or phone numbers to `followUpRecipients` — the slots exist but stay empty until the team opts in
 - Flipping `followUpWebhook.enabled` to `true` — stays false until the GHL workflow exists
-- Sending any test SMS to real phones
+- Sending any test email to real addresses
 
 ### Next Session
-Walk Steven and Peter through the dashboard and the new Follow-Up section. If they say "yes, also text me on the day," we proceed with the GHL workflow build guide and flip `enabled=true`. Per-person opt-in.
+Walk Steven and Peter through the dashboard and the new Follow-Up section. If they say "yes, also email me on the day," we proceed with the GHL workflow build guide: an email template containing the pre-baked `actionLinks` from the webhook payload, sent on the `nextFollowUpDate` to the address recorded in `followUpRecipients`. Then flip `enabled=true`. Per-person opt-in.
 
 ---
 
