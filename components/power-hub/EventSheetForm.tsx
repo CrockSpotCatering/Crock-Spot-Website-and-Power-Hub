@@ -629,6 +629,49 @@ export default function EventSheetForm({
           </div>
         </form>
 
+        {/* Bottom action bar — mirrors the top sticky bar so the team
+            can save without scrolling back up after editing the last
+            section. Hidden on print. */}
+        <div className="print:hidden mt-6 bg-white border border-crock-gray-light/40 rounded-2xl shadow-lg px-5 py-4 flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-between gap-3">
+          <Link
+            href="/power-hub/dashboard/events"
+            className="flex items-center justify-center gap-2 text-gray-600 hover:text-gray-900 font-medium px-3 py-2"
+          >
+            <ArrowLeft size={18} />
+            Back to all events
+          </Link>
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+            {mode === 'edit' && onDelete && (
+              <button
+                type="button"
+                onClick={handleDelete}
+                disabled={deleting || saving}
+                className="flex items-center justify-center gap-2 px-4 py-2 border border-red-200 text-red-700 rounded-lg hover:bg-red-50 transition disabled:opacity-50"
+              >
+                <Trash2 size={16} />
+                {deleting ? 'Deleting…' : 'Delete'}
+              </button>
+            )}
+            <button
+              type="button"
+              onClick={handlePrint}
+              className="flex items-center justify-center gap-2 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition"
+            >
+              <Printer size={16} />
+              Print / Save PDF
+            </button>
+            <button
+              type="submit"
+              form="event-sheet-form"
+              disabled={saving || deleting}
+              className="flex items-center justify-center gap-2 px-5 py-2.5 bg-[#F49220] text-white font-semibold rounded-lg hover:bg-[#e08519] transition disabled:opacity-50 shadow-sm"
+            >
+              <Save size={16} />
+              {saving ? 'Saving…' : mode === 'create' ? 'Save event' : 'Save changes'}
+            </button>
+          </div>
+        </div>
+
         <div className="text-center mt-6 text-crock-yellow/60 text-xs print:hidden">
           Crock Spot · Internal · Saved to Power Hub
         </div>
