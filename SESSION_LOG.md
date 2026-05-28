@@ -1,5 +1,38 @@
 # CrockSpot Session Log
 
+## May 28, 2026 — Session: Event Sheet bottom action bar
+
+### Goal
+The team was using the Event Intake Sheets daily and loved them, but kept hitting the same friction: after editing the last sections (Day-of Notes, Post-Event, status change at the very bottom) they had to scroll all the way back to the top sticky bar to click Save — with a real fear of losing the input they just typed.
+
+### Change
+Added a mirrored bottom action bar in `components/power-hub/EventSheetForm.tsx`, rendered right after the closing `</form>` and before the small footer text. Same four actions as the top bar, same styling, same submit target (`form="event-sheet-form"`), so it's identical behavior — just reachable without scrolling.
+
+Layout:
+- **Back to all events** (left)
+- **Delete** — only in edit mode when `onDelete` is provided
+- **Print / Save PDF**
+- **Save event** / **Save changes** — orange primary, matches top bar exactly
+
+Mobile: stacks vertically with Save on top (`flex-col-reverse sm:flex-row`). Hidden on print like the top bar.
+
+### Why this was safe
+- The existing form already had `id="event-sheet-form"`, so a second `type="submit" form="event-sheet-form"` button just works — no state lifting, no new props, no parent changes.
+- Print/Delete handlers are already defined in the component; the new bar just reuses them.
+- `npx tsc --noEmit` clean.
+
+### Files changed
+- `components/power-hub/EventSheetForm.tsx` — +43 lines, new bottom action bar block.
+
+### Shipped
+- Commit `0e960aa` — "Event sheet: add bottom Save/Print/Delete bar"
+- Pushed to `origin/main` as `CrockSpotCatering`. Vercel auto-deployed.
+
+### Open follow-ups
+None from this change. Still queued from prior sessions: CSV export of events, wiring the calendar tab to real event data, notifications on new event creation, deleting the three seeded `[EXAMPLE]` events once the team is comfortable.
+
+---
+
 ## May 26, 2026 (late evening) — Session: Email deliverability — live test + root DMARC fix
 
 ### Goal
