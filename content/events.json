@@ -88,13 +88,13 @@
       "post_followup": false,
       "post_notes": false,
       "status": "New Lead",
-      "nextFollowUpDate": "2026-05-28",
+      "nextFollowUpDate": "2026-06-02",
       "assignedTo": "Steven",
       "followUpDone": false,
       "followUpLog": [],
       "id": "evt_mpodnztn_u1wymm",
       "createdAt": "2026-05-27T18:08:31.259Z",
-      "updatedAt": "2026-05-27T18:08:31.259Z"
+      "updatedAt": "2026-05-29T18:18:03.932Z"
     },
     {
       "id": "evt_example_aurora_bbq",
