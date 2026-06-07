@@ -187,67 +187,6 @@
       "updatedAt": "2026-05-29T18:18:03.932Z"
     },
     {
-      "id": "evt_example_aurora_bbq",
-      "createdAt": "2026-05-26T17:00:00.000Z",
-      "updatedAt": "2026-05-26T17:00:00.000Z",
-      "eventType": "Government",
-      "clientStatus": "New Lead",
-      "clientName": "[EXAMPLE] City of Aurora Community BBQ",
-      "contactName": "Janet Whitfield",
-      "phone": "(555) 555-0103",
-      "email": "example+aurora@thecrockspot.com",
-      "location": "Aurora Municipal Center Lawn — 15151 E Alameda Pkwy, Aurora",
-      "date": "2026-07-09",
-      "setupTime": "10:00",
-      "serveTime": "12:00",
-      "endTime": "15:00",
-      "guestCount": "300",
-      "serviceStyle": "Buffet",
-      "menu": "TBD — awaiting menu sign-off from City Parks & Rec.\nLikely two protein options, two starches, two sides, dessert.\nMust include vegetarian + gluten-free option.",
-      "chafers": "",
-      "servingUtensils": "",
-      "tables": "",
-      "truck": "",
-      "tents": "",
-      "otherEquipment": "",
-      "eventLead": "",
-      "supportStaff": "",
-      "pricingNotes": "Initial quote: $42/pp × 300 = $12,600 food\nStaffing + equipment TBD pending venue walkthrough.\nGovernment vendor terms — Net 30 invoicing.",
-      "keyNotes": "This is an example record — delete anytime.\n\nGovernment contract — formal RFP response required.\nMust be peanut-free for the full event (school district co-hosting).\nCity insurance certificate already on file.",
-      "clientInsights": "Repeat government client — booked the 2025 Summer Concert Series.\nJanet prefers email over phone.\nDecisions go through her director, so quote needs a 2-week turnaround for sign-off.",
-      "cl_headcount": false,
-      "cl_menu": false,
-      "cl_equipment": false,
-      "cl_staff": false,
-      "cl_location": false,
-      "cl_invoice": false,
-      "dayOfNotes": "",
-      "post_invoice": false,
-      "post_followup": false,
-      "post_notes": false,
-      "status": "Quoted",
-      "nextFollowUpDate": "2026-05-26",
-      "assignedTo": "Steven",
-      "followUpDone": false,
-      "followUpLog": [
-        {
-          "at": "2026-05-17T22:00:00Z",
-          "who": "Steven",
-          "note": "Got RFP from Janet. Reviewed scope — 300 guests, peanut-free constraint. Asked for venue walkthrough date."
-        },
-        {
-          "at": "2026-05-20T20:00:00Z",
-          "who": "Steven",
-          "note": "Walkthrough confirmed for next Tuesday. Janet says decision goes through her director, expect 2-week turnaround."
-        },
-        {
-          "at": "2026-05-23T23:00:00Z",
-          "who": "Steven",
-          "note": "Sent initial quote (2/pp). Janet replied she'll review with her director Friday."
-        }
-      ]
-    },
-    {
       "id": "evt_example_front_range_tech",
       "createdAt": "2026-05-26T17:00:00.000Z",
       "updatedAt": "2026-05-26T17:00:00.000Z",
