@@ -181,10 +181,16 @@
       "nextFollowUpDate": "2026-06-02",
       "assignedTo": "Steven",
       "followUpDone": false,
-      "followUpLog": [],
+      "followUpLog": [
+        {
+          "at": "2026-06-07T19:22:31.434Z",
+          "who": "Steven",
+          "note": "Peter was in touch with her the while steven was in California.  Steven will resume being the POC moving forward"
+        }
+      ],
       "id": "evt_mpodnztn_u1wymm",
       "createdAt": "2026-05-27T18:08:31.259Z",
-      "updatedAt": "2026-05-29T18:18:03.932Z"
+      "updatedAt": "2026-06-07T19:22:42.156Z"
     },
     {
       "id": "evt_example_front_range_tech",
