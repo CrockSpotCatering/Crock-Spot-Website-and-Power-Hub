@@ -193,9 +193,6 @@
       "updatedAt": "2026-06-07T19:26:20.062Z"
     },
     {
-      "id": "evt_example_front_range_tech",
-      "createdAt": "2026-05-26T17:00:00.000Z",
-      "updatedAt": "2026-05-26T17:00:00.000Z",
       "eventType": "Corporate",
       "clientStatus": "Repeat Client",
       "clientName": "[EXAMPLE] Front Range Tech Holiday Party",
@@ -234,7 +231,7 @@
       "status": "Booked",
       "nextFollowUpDate": "2026-05-29",
       "assignedTo": "Steven",
-      "followUpDone": false,
+      "followUpDone": true,
       "followUpLog": [
         {
           "at": "2026-05-05T00:00:00Z",
@@ -256,7 +253,10 @@
           "who": "Steven",
           "note": "Final headcount locked at 150. Allergies: 3 shellfish, 6 vegetarian, 2 vegan."
         }
-      ]
+      ],
+      "id": "evt_example_front_range_tech",
+      "createdAt": "2026-05-26T17:00:00.000Z",
+      "updatedAt": "2026-06-07T19:26:49.016Z"
     },
     {
       "id": "evt_example_garcia_patel_wedding",
