@@ -180,7 +180,7 @@
       "status": "New Lead",
       "nextFollowUpDate": "2026-06-02",
       "assignedTo": "Steven",
-      "followUpDone": false,
+      "followUpDone": true,
       "followUpLog": [
         {
           "at": "2026-06-07T19:22:31.434Z",
@@ -190,7 +190,7 @@
       ],
       "id": "evt_mpodnztn_u1wymm",
       "createdAt": "2026-05-27T18:08:31.259Z",
-      "updatedAt": "2026-06-07T19:22:42.156Z"
+      "updatedAt": "2026-06-07T19:26:20.062Z"
     },
     {
       "id": "evt_example_front_range_tech",
