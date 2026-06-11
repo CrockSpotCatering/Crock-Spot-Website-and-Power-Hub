@@ -69,7 +69,7 @@
       "eventLead": "Peter",
       "supportStaff": "",
       "pricingNotes": "",
-      "keyNotes": "Follow up with Janna by June 5th concerning menu and logistics,",
+      "keyNotes": "Send an invoice for $1000.",
       "clientInsights": "",
       "cl_headcount": false,
       "cl_menu": false,
@@ -82,13 +82,13 @@
       "post_followup": false,
       "post_notes": false,
       "status": "New Lead",
-      "nextFollowUpDate": "2026-06-04",
+      "nextFollowUpDate": "2026-06-12",
       "assignedTo": "Peter",
       "followUpDone": false,
       "followUpLog": [],
       "id": "evt_mpwpioa6_e6mkhj",
       "createdAt": "2026-06-02T14:02:27.819Z",
-      "updatedAt": "2026-06-02T14:02:27.819Z"
+      "updatedAt": "2026-06-11T13:20:01.464Z"
     },
     {
       "eventType": "Corporate",
