@@ -24,8 +24,8 @@
       "eventLead": "peter",
       "supportStaff": "?",
       "pricingNotes": "",
-      "keyNotes": "$1500 dollar minimum for this. Also a July 26 date. More info pending.",
-      "clientInsights": "",
+      "keyNotes": "$1500 dollar minimum for this. Also a July 26 date. More info pending.\nGet the rest of the requested doc sent over.",
+      "clientInsights": "u",
       "cl_headcount": false,
       "cl_menu": false,
       "cl_equipment": false,
@@ -37,13 +37,13 @@
       "post_followup": false,
       "post_notes": false,
       "status": "New Lead",
-      "nextFollowUpDate": "2026-06-12",
+      "nextFollowUpDate": "2026-06-15",
       "assignedTo": "Peter",
       "followUpDone": false,
       "followUpLog": [],
       "id": "evt_mpwq8x5p_a46q65",
       "createdAt": "2026-06-02T14:22:52.378Z",
-      "updatedAt": "2026-06-11T13:21:11.392Z"
+      "updatedAt": "2026-06-12T19:58:26.357Z"
     },
     {
       "eventType": "Food Truck",
