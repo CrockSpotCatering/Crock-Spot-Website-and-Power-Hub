@@ -126,14 +126,14 @@
       "post_invoice": false,
       "post_followup": false,
       "post_notes": false,
-      "status": "New Lead",
+      "status": "Completed",
       "nextFollowUpDate": "2026-06-26",
       "assignedTo": "Peter",
       "followUpDone": false,
       "followUpLog": [],
       "id": "evt_mpwq8x5p_a46q65",
       "createdAt": "2026-06-02T14:22:52.378Z",
-      "updatedAt": "2026-06-24T19:01:08.799Z"
+      "updatedAt": "2026-07-06T14:36:38.352Z"
     },
     {
       "eventType": "Food Truck",
